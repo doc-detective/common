@@ -207,10 +207,45 @@
       "default": {
         "send": true
       }
+    },
+    "environment": {
+      "$ref": "#/components/schemas/environment"
     }
   },
   "components": {
     "schemas": {
+      "environment": {
+        "type": "object",
+        "description": "Environment information for the system running Doc Detective.",
+        "readmeOnly": true,
+        "additionalProperties": false,
+        "required": ["platform"],
+        "properties": {
+          "workingDirectory": {
+            "description": "The current working directory of the process running Doc Detective.",
+            "type": "string"
+          },
+          "platform": {
+            "description": "The operating system type running Doc Detective.",
+            "type": "string",
+            "enum": [
+              "linux",
+              "mac",
+              "windows"
+            ]
+          },
+          "arch": {
+            "description": "The processor architecture of the system running Doc Detective.",
+            "type": "string",
+            "enum": [
+              "arm32",
+              "arm64",
+              "x32",
+              "x64"
+            ]
+          }
+        }
+      },
       "markupDefinition": {
         "type": "object",
         "properties": {
@@ -395,6 +430,12 @@
           }
         }
       ]
+    },
+    {
+      "environment": {
+        "platform": "windows",
+        "arch": "x64"
+      }
     }
   ]
 }
