@@ -12,6 +12,11 @@
       "description": "Identifier for the configuration.",
       "type": "string"
     },
+    "configPath": {
+      "description": "Path to the configuration file.",
+      "type": "string",
+      "readOnly": true
+    },
     "input": {
       "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
       "default": ".",
