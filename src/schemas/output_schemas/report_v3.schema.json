@@ -32,6 +32,10 @@
                 "type": "string",
                 "description": "Description of the test specification."
               },
+              "specPath": {
+                "type": "string",
+                "description": "Path to the test specification."
+              },
               "contentPath": {
                 "type": "string",
                 "description": "Path to the content that the specification is associated with."
