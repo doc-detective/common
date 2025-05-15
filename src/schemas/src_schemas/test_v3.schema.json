@@ -53,7 +53,7 @@
     },
     "contexts": {
       "title": "Resolved contexts",
-      "array": "array",
+      "type": "array",
       "readOnly": true,
       "description": "Resolved contexts to run the test in. This is a resolved version of the `runOn` property. It is not user-defined and should not be used in test specifications.",
       "items": {

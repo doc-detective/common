@@ -2196,6 +2196,12 @@
                                                                     "type": "string",
                                                                     "description": "URL or local path to the OpenAPI description."
                                                                   },
+                                                                  "definition": {
+                                                                    "type": "object",
+                                                                    "readOnly": true,
+                                                                    "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                                    "additionalProperties": true
+                                                                  },
                                                                   "operationId": {
                                                                     "type": "string",
                                                                     "description": "ID of the operation to use for the request."
@@ -2549,6 +2555,12 @@
                                                                     "descriptionPath": {
                                                                       "type": "string",
                                                                       "description": "URL or local path to the OpenAPI description."
+                                                                    },
+                                                                    "definition": {
+                                                                      "type": "object",
+                                                                      "readOnly": true,
+                                                                      "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                                      "additionalProperties": true
                                                                     },
                                                                     "operationId": {
                                                                       "type": "string",
@@ -5138,6 +5150,12 @@
                     "type": "string",
                     "description": "URL or local path to the OpenAPI description."
                   },
+                  "definition": {
+                    "type": "object",
+                    "readOnly": true,
+                    "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                    "additionalProperties": true
+                  },
                   "operationId": {
                     "type": "string",
                     "description": "ID of the operation to use for the request."
@@ -6913,6 +6931,12 @@
                                                       "type": "string",
                                                       "description": "URL or local path to the OpenAPI description."
                                                     },
+                                                    "definition": {
+                                                      "type": "object",
+                                                      "readOnly": true,
+                                                      "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                      "additionalProperties": true
+                                                    },
                                                     "operationId": {
                                                       "type": "string",
                                                       "description": "ID of the operation to use for the request."
@@ -7266,6 +7290,12 @@
                                                       "descriptionPath": {
                                                         "type": "string",
                                                         "description": "URL or local path to the OpenAPI description."
+                                                      },
+                                                      "definition": {
+                                                        "type": "object",
+                                                        "readOnly": true,
+                                                        "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                        "additionalProperties": true
                                                       },
                                                       "operationId": {
                                                         "type": "string",
