@@ -1,11 +1,17 @@
-name: Run tests
+name: Test (& Publish)
 
 on:
   push:
     branches:
       - main
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: 
+      - opened
+      - reopened
+      - synchronize
+  release:
+    types:
+      - published
   workflow_dispatch:
 
 jobs:
@@ -21,6 +27,7 @@ jobs:
           - 18
           - 20
           - 22
+          - 24
  
     steps:
       - uses: actions/checkout@v4
@@ -29,3 +36,35 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm test
+
+  publish-npm:
+    if: github.event_name == 'release' && github.event.action == 'published'
+    name: Publish to NPM
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+  update-docs:
+    name: Update documentation
+    needs: publish-npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Get package version
+        run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+        
+      - name: Trigger GitHub Action in doc-detective.github.io
+        run: |
+          curl -XPOST -H "Authorization: token ${{ secrets.DOCS_PERSONAL_ACCESS_TOKEN }}" \
+               -H "Accept: application/vnd.github.everest-preview+json" \
+               "https://api.github.com/repos/doc-detective/doc-detective.github.io/dispatches" \
+               -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
