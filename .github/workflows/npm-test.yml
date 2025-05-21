@@ -5,7 +5,7 @@ on:
     branches:
       - main
   pull_request:
-    types: 
+    types:
       - opened
       - reopened
       - synchronize
@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: 
+        os:
           - ubuntu-latest
           - windows-latest
           - macos-latest
@@ -28,13 +28,14 @@ jobs:
           - 20
           - 22
           - 24
- 
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
+      - run: npm run build
       - run: npm test
 
   publish-npm:
@@ -48,6 +49,7 @@ jobs:
         with:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
@@ -58,10 +60,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Get package version
         run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
-        
+
       - name: Trigger GitHub Action in doc-detective.github.io
         run: |
           curl -XPOST -H "Authorization: token ${{ secrets.DOCS_PERSONAL_ACCESS_TOKEN }}" \
