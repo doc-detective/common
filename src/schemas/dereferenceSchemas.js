@@ -67,30 +67,49 @@ async function dereferenceSchemas() {
   for (const file of files) {
     // console.log(`File: ${file}`)
     const filePath = path.resolve(`${inputDir}/${file}`);
-    // Load from file
-    let schema = fs.readFileSync(filePath).toString();
-    // Convert to JSON
-    schema = JSON.parse(schema);
-    // Set ID
-    schema.$id = `${filePath}`;
-    // Update references to current relative path
-    schema = updateRefPaths(schema);
-    // Write to file
-    fs.writeFileSync(`${buildDir}/${file}`, JSON.stringify(schema, null, 2));
+    const buildFilePath = path.resolve(`${buildDir}/${file}`);
+    try {
+      // Check if file exists
+      if (!fs.existsSync(filePath)) {
+        throw new Error(`File not found: ${filePath}`);
+      }
+      // Load schema
+      let schema = fs.readFileSync(filePath).toString();
+      schema = JSON.parse(schema);
+
+      // Update references to current relative path
+      schema.$id = `${filePath}`;
+      schema = updateRefPaths(schema);
+
+      // Write to build directory
+      fs.writeFileSync(buildFilePath, JSON.stringify(schema, null, 2));
+    } catch (err) {
+      console.error(`Error processing ${file}:`, err);
+    }
   }
   // Dereference schemas
   for await (const file of files) {
     const filePath = path.resolve(`${buildDir}/${file}`);
-    // Load from file
-    let schema = fs.readFileSync(filePath).toString();
-    // Convert to JSON
-    schema = JSON.parse(schema);
-    // Dereference schema
-    schema = await parser.dereference(schema);
-    // Delete $id attributes
-    schema = deleteDollarIds(schema);
-    // Write to file
-    fs.writeFileSync(`${outputDir}/${file}`, JSON.stringify(schema, null, 2));
+    const outputFilePath = path.resolve(`${outputDir}/${file}`);
+    try {
+      // Check if file exists
+      if (!fs.existsSync(filePath))
+        throw new Error(`File not found: ${filePath}`);
+
+      // Load schema
+      let schema = fs.readFileSync(filePath).toString();
+      schema = JSON.parse(schema);
+
+      // Dereference schema
+      schema = await parser.dereference(schema);
+      // Delete $id attributes
+      schema = deleteDollarIds(schema);
+
+      // Write to file
+      fs.writeFileSync(outputFilePath, JSON.stringify(schema, null, 2));
+    } catch (err) {
+      console.error(`Error processing ${file}:`, err);
+    }
   }
   // Build final schemas.json file
   const schemas = {};

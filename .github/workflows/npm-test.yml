@@ -37,8 +37,7 @@ jobs:
           cache-dependency-path: package-lock.json
           node-version: ${{ matrix.node }}
       - run: npm ci
-      - run: npm run build
-      - run: npm test
+      - run: npm run build  # Automatically run tests because of the `postbuild` script in package.json
 
   publish-npm:
     if: github.event_name == 'release' && github.event.action == 'published'
