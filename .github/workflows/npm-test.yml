@@ -51,11 +51,14 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm run build
+      - run: echo "NODE_AUTH_TOKEN is set"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
       - run: npm whoami
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+      - run: npm ci
+      - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
