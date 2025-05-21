@@ -4,7 +4,7 @@
   "description": "A collection of resolved tests ready to be performed.",
   "type": "object",
   "dynamicDefaults": {
-    "reportId": "uuid"
+    "resolvedTestsId": "uuid"
   },
   "properties": {
     "resolvedTestsId": {

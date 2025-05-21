@@ -4,7 +4,7 @@
   "description": "A collection of resolved tests ready to be performed.",
   "type": "object",
   "dynamicDefaults": {
-    "reportId": "uuid"
+    "resolvedTestsId": "uuid"
   },
   "properties": {
     "resolvedTestsId": {
@@ -5337,7 +5337,7 @@
         "environment": {
           "type": "object",
           "description": "Environment information for the system running Doc Detective.",
-          "readmeOnly": true,
+          "readOnly": true,
           "additionalProperties": false,
           "required": [
             "platform"
@@ -5374,7 +5374,7 @@
           "environment": {
             "type": "object",
             "description": "Environment information for the system running Doc Detective.",
-            "readmeOnly": true,
+            "readOnly": true,
             "additionalProperties": false,
             "required": [
               "platform"

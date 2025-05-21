@@ -5324,7 +5324,7 @@
     "environment": {
       "type": "object",
       "description": "Environment information for the system running Doc Detective.",
-      "readmeOnly": true,
+      "readOnly": true,
       "additionalProperties": false,
       "required": [
         "platform"
@@ -5361,7 +5361,7 @@
       "environment": {
         "type": "object",
         "description": "Environment information for the system running Doc Detective.",
-        "readmeOnly": true,
+        "readOnly": true,
         "additionalProperties": false,
         "required": [
           "platform"
