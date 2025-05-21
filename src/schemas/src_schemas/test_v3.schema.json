@@ -33,21 +33,7 @@
       }
     },
     "openApi": {
-      "type": "array",
-      "items": {
-        "allOf": [
-          {
-            "$ref": "openApi_v3.schema.json#"
-          },
-          {
-            "type": "object",
-            "not": {
-              "required": ["operationId"]
-            },
-            "required": ["name", "descriptionPath"]
-          }
-        ]
-      }
+      "$ref": "#/components/schemas/openApi"
     },
     "before": {
       "type": "string",
@@ -64,13 +50,63 @@
       "items": {
         "$ref": "step_v3.schema.json#"
       }
+    },
+    "contexts": {
+      "title": "Resolved contexts",
+      "type": "array",
+      "readOnly": true,
+      "description": "Resolved contexts to run the test in. This is a resolved version of the `runOn` property. It is not user-defined and should not be used in test specifications.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string",
+            "description": "Platform to run the test on. This is a resolved version of the `platforms` property."
+          },
+          "browser": {
+            "$ref": "context_v3.schema.json#/components/schemas/browser"
+          },
+          "openApi": {
+            "$ref": "#/components/schemas/openApi"
+          },
+          "steps": {
+            "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "step_v3.schema.json#"
+            }
+          }
+        }
+      }
     }
   },
   "dynamicDefaults": {
     "testId": "uuid"
   },
-  "required": ["steps"],
+  "anyOf": [{ "required": ["steps"] }, { "required": ["contexts"] }],
   "additionalProperties": false,
+  "components": {
+    "schemas": {
+      "openApi": {
+        "type": "array",
+        "items": {
+          "allOf": [
+            {
+              "$ref": "openApi_v3.schema.json#"
+            },
+            {
+              "type": "object",
+              "not": {
+                "required": ["operationId"]
+              },
+              "required": ["name", "descriptionPath"]
+            }
+          ]
+        }
+      }
+    }
+  },
   "examples": [
     {
       "steps": [

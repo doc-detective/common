@@ -33,6 +33,9 @@ async function resolvePaths({
     "loadVariables",
     "setup",
     "cleanup",
+    "configPath",
+    "beforeAny",
+    "afterAll",
     "mediaDirectory",
     "downloadDirectory",
     "descriptionPath",
@@ -50,6 +53,7 @@ async function resolvePaths({
     "cleanup",
     "savePath",
     "saveDirectory",
+    "specPath",
     "descriptionPath",
     "workingDirectory",
   ];

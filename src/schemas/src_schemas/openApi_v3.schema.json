@@ -22,6 +22,12 @@
     "descriptionPath": {
       "$ref": "#/components/schemas/descriptionPath"
     },
+    "definition": {
+      "type": "object",
+      "readOnly": true,
+      "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+      "additionalProperties": true
+    },
     "operationId": {
       "$ref": "#/components/schemas/operationId"
     },

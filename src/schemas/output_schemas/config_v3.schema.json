@@ -12,6 +12,11 @@
       "description": "Identifier for the configuration.",
       "type": "string"
     },
+    "configPath": {
+      "description": "Path to the configuration file.",
+      "type": "string",
+      "readOnly": true
+    },
     "input": {
       "description": "Path(s) to test specifications and documentation source files. May be paths to specific files or to directories to scan for files.",
       "default": ".",
@@ -2191,6 +2196,12 @@
                                                                     "type": "string",
                                                                     "description": "URL or local path to the OpenAPI description."
                                                                   },
+                                                                  "definition": {
+                                                                    "type": "object",
+                                                                    "readOnly": true,
+                                                                    "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                                    "additionalProperties": true
+                                                                  },
                                                                   "operationId": {
                                                                     "type": "string",
                                                                     "description": "ID of the operation to use for the request."
@@ -2544,6 +2555,12 @@
                                                                     "descriptionPath": {
                                                                       "type": "string",
                                                                       "description": "URL or local path to the OpenAPI description."
+                                                                    },
+                                                                    "definition": {
+                                                                      "type": "object",
+                                                                      "readOnly": true,
+                                                                      "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                                      "additionalProperties": true
                                                                     },
                                                                     "operationId": {
                                                                       "type": "string",
@@ -5133,6 +5150,12 @@
                     "type": "string",
                     "description": "URL or local path to the OpenAPI description."
                   },
+                  "definition": {
+                    "type": "object",
+                    "readOnly": true,
+                    "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                    "additionalProperties": true
+                  },
                   "operationId": {
                     "type": "string",
                     "description": "ID of the operation to use for the request."
@@ -5297,10 +5320,78 @@
       "default": {
         "send": true
       }
+    },
+    "environment": {
+      "type": "object",
+      "description": "Environment information for the system running Doc Detective.",
+      "readOnly": true,
+      "additionalProperties": false,
+      "required": [
+        "platform"
+      ],
+      "properties": {
+        "workingDirectory": {
+          "description": "The current working directory of the process running Doc Detective.",
+          "type": "string"
+        },
+        "platform": {
+          "description": "The operating system type running Doc Detective.",
+          "type": "string",
+          "enum": [
+            "linux",
+            "mac",
+            "windows"
+          ]
+        },
+        "arch": {
+          "description": "The processor architecture of the system running Doc Detective.",
+          "type": "string",
+          "enum": [
+            "arm32",
+            "arm64",
+            "x32",
+            "x64"
+          ]
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "environment": {
+        "type": "object",
+        "description": "Environment information for the system running Doc Detective.",
+        "readOnly": true,
+        "additionalProperties": false,
+        "required": [
+          "platform"
+        ],
+        "properties": {
+          "workingDirectory": {
+            "description": "The current working directory of the process running Doc Detective.",
+            "type": "string"
+          },
+          "platform": {
+            "description": "The operating system type running Doc Detective.",
+            "type": "string",
+            "enum": [
+              "linux",
+              "mac",
+              "windows"
+            ]
+          },
+          "arch": {
+            "description": "The processor architecture of the system running Doc Detective.",
+            "type": "string",
+            "enum": [
+              "arm32",
+              "arm64",
+              "x32",
+              "x64"
+            ]
+          }
+        }
+      },
       "markupDefinition": {
         "type": "object",
         "properties": {
@@ -6840,6 +6931,12 @@
                                                       "type": "string",
                                                       "description": "URL or local path to the OpenAPI description."
                                                     },
+                                                    "definition": {
+                                                      "type": "object",
+                                                      "readOnly": true,
+                                                      "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                      "additionalProperties": true
+                                                    },
                                                     "operationId": {
                                                       "type": "string",
                                                       "description": "ID of the operation to use for the request."
@@ -7193,6 +7290,12 @@
                                                       "descriptionPath": {
                                                         "type": "string",
                                                         "description": "URL or local path to the OpenAPI description."
+                                                      },
+                                                      "definition": {
+                                                        "type": "object",
+                                                        "readOnly": true,
+                                                        "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
+                                                        "additionalProperties": true
                                                       },
                                                       "operationId": {
                                                         "type": "string",
@@ -9677,6 +9780,12 @@
           }
         }
       ]
+    },
+    {
+      "environment": {
+        "platform": "windows",
+        "arch": "x64"
+      }
     }
   ]
 }
