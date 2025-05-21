@@ -40,7 +40,7 @@ jobs:
       - run: npm run build  # Automatically run tests because of the `postbuild` script in package.json
 
   publish-npm:
-    if: github.event_name == 'release' && github.event.action == 'published'
+    # if: github.event_name == 'release' && github.event.action == 'published'
     name: Publish to NPM
     needs: test
     runs-on: ubuntu-latest
