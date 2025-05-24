@@ -1,0 +1,69 @@
+formats:
+  - oas2
+  - oas3
+  - json-schema-draft4
+  - json-schema-draft6
+  - json-schema-draft7
+
+extends:
+  - spectral:oas
+  - spectral:asyncapi
+
+rules:
+  # Core structure validation
+  schema-required-title:
+    description: Schema must have a title
+    message: Schema must include a title to clearly identify its purpose
+    given: "$"
+    severity: error
+    recommended: true
+    then:
+      field: title
+      function: truthy
+
+  schema-required-description:
+    description: Schema should have a description
+    message: Schema should include a description explaining its purpose and usage
+    given: "$"
+    severity: warn
+    recommended: true
+    then:
+      field: description
+      function: truthy
+
+  # Schema best practices
+  schema-additional-properties-defined:
+    description: additionalProperties should be explicitly defined
+    message: additionalProperties should be explicitly set to true or false
+    given: "$..*[?(@.type === 'object' && !@.additionalProperties)]"
+    severity: warn
+    recommended: true
+    then:
+      function: falsy
+
+  schema-required-is-array:
+    description: required must be an array
+    message: The required field must be an array of required property names
+    given: "$..*[?(@.required)]"
+    severity: error
+    recommended: true
+    then:
+      field: required
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          items:
+            type: string
+
+  # Doc Detective specific rules
+  v3-schema-naming-conventions:
+    description: v3 schemas should follow naming conventions (name_v3.schema.json)
+    message: Schema file for v3 should follow naming convention (name_v3.schema.json)
+    severity: error
+    recommended: true
+    given: "$"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-zA-Z]+_v3\\.schema\\.json$"
