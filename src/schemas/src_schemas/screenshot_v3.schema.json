@@ -10,12 +10,15 @@
       "$ref": "#/components/schemas/object"
     },
     {
-      "type": "boolean"
+      "type": "boolean",
+      "title": "Capture screenshot",
+      "description": "If `true`, captures a screenshot. If `false`, doesn't capture a screenshot."
     }
   ],
   "components": {
     "schemas": {
       "path": {
+        "title": "Screenshot (simple)",
         "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
         "type": "string",
         "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -57,7 +60,7 @@
           "crop": {
             "anyOf": [
               {
-                "title": "Crop by element",
+                "title": "Crop by element (simple)",
                 "type": "string",
                 "description": "Display text or selector of the element to screenshot."
               },
@@ -67,7 +70,7 @@
             ]
           }
         },
-        "title": "Object"
+        "title": "Capture screenshot (detailed)"
       },
       "crop_element": {
         "title": "Crop by element (detailed)",
@@ -98,6 +101,7 @@
           "padding": {
             "anyOf": [
               {
+                "title": "Padding (simple)",
                 "type": "number",
                 "description": "Padding in pixels to add to the bounds of the element.",
                 "minimum": 0
@@ -130,7 +134,8 @@
             "minimum": 0
           }
         },
-        "title": "Padding"
+        "title": "Padding (detailed)",
+        "description": "Padding in pixels to add to the bounds of the element."
       }
     }
   },

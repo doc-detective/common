@@ -78,7 +78,7 @@
             }
           }
         },
-        "title": "Items"
+        "title": "Resolved context"
       }
     }
   },
@@ -118,7 +118,7 @@
                 "name",
                 "descriptionPath"
               ],
-              "title": "1"
+              "title": "OpenAPI description (test)"
             }
           ]
         }

@@ -4,7 +4,7 @@
   "description": "Perform a generic HTTP request, for example to an API.",
   "anyOf": [
     {
-      "title": "URL",
+      "title": "HTTP request (simple)",
       "type": "string",
       "description": "URL for the HTTP request.",
       "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -13,6 +13,7 @@
       ]
     },
     {
+      "title": "HTTP request (detailed)",
       "type": "object",
       "anyOf": [
         {
@@ -29,7 +30,7 @@
       "additionalProperties": false,
       "properties": {
         "url": {
-          "title": "URL",
+          "title": "HTTP request (simple)",
           "type": "string",
           "description": "URL for the HTTP request.",
           "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -86,7 +87,7 @@
                       "readOnly": true,
                       "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                       "additionalProperties": true,
-                      "title": "Definition"
+                      "title": "OpenAPI definition"
                     },
                     "operationId": {
                       "type": "string",
@@ -139,7 +140,7 @@
                       "additionalProperties": {
                         "type": "string"
                       },
-                      "title": "Headers"
+                      "title": "OpenAPI request headers"
                     }
                   },
                   "components": {
@@ -220,7 +221,7 @@
                   "required": [
                     "operationId"
                   ],
-                  "title": "1"
+                  "title": "OpenAPI definition (httpRequest)"
                 }
               ]
             }
@@ -272,7 +273,7 @@
               "additionalProperties": true,
               "properties": {},
               "default": {},
-              "title": "Headers"
+              "title": "Request headers"
             },
             "parameters": {
               "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -280,22 +281,27 @@
               "additionalProperties": true,
               "default": {},
               "properties": {},
-              "title": "Parameters"
+              "title": "Request parameters"
             },
             "body": {
               "description": "JSON object to include as the body of the HTTP request.",
               "anyOf": [
                 {
+                  "title": "Request body object",
+                  "description": "JSON object to include as the body of the HTTP request.",
                   "type": "object",
                   "additionalProperties": true,
-                  "properties": {},
-                  "title": "0"
+                  "properties": {}
                 },
                 {
+                  "title": "Request body array",
+                  "description": "JSON array to include as the body of the HTTP request.",
                   "type": "array",
                   "items": {}
                 },
                 {
+                  "title": "Request body string",
+                  "description": "String to include as the body of the HTTP request.",
                   "type": "string"
                 }
               ],
@@ -314,7 +320,7 @@
               "additionalProperties": true,
               "properties": {},
               "default": {},
-              "title": "Headers"
+              "title": "Response headers"
             },
             "body": {
               "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -323,13 +329,18 @@
                   "type": "object",
                   "additionalProperties": true,
                   "properties": {},
-                  "title": "0"
+                  "title": "Response body object",
+                  "description": "JSON key/value pairs expected in the response."
                 },
                 {
+                  "title": "Response body array",
+                  "description": "JSON array expected in the response.",
                   "type": "array",
                   "items": {}
                 },
                 {
+                  "title": "Response body string",
+                  "description": "String expected in the response.",
                   "type": "string"
                 }
               ],
@@ -368,14 +379,13 @@
           ],
           "default": "aboveVariation"
         }
-      },
-      "title": "Object"
+      }
     }
   ],
   "components": {
     "schemas": {
       "url": {
-        "title": "URL",
+        "title": "HTTP request (simple)",
         "type": "string",
         "description": "URL for the HTTP request.",
         "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -384,6 +394,7 @@
         ]
       },
       "object": {
+        "title": "HTTP request (detailed)",
         "type": "object",
         "anyOf": [
           {
@@ -400,7 +411,7 @@
         "additionalProperties": false,
         "properties": {
           "url": {
-            "title": "URL",
+            "title": "HTTP request (simple)",
             "type": "string",
             "description": "URL for the HTTP request.",
             "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -457,7 +468,7 @@
                         "readOnly": true,
                         "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                         "additionalProperties": true,
-                        "title": "Definition"
+                        "title": "OpenAPI definition"
                       },
                       "operationId": {
                         "type": "string",
@@ -510,7 +521,7 @@
                         "additionalProperties": {
                           "type": "string"
                         },
-                        "title": "Headers"
+                        "title": "OpenAPI request headers"
                       }
                     },
                     "components": {
@@ -591,7 +602,7 @@
                     "required": [
                       "operationId"
                     ],
-                    "title": "1"
+                    "title": "OpenAPI definition (httpRequest)"
                   }
                 ]
               }
@@ -643,7 +654,7 @@
                 "additionalProperties": true,
                 "properties": {},
                 "default": {},
-                "title": "Headers"
+                "title": "Request headers"
               },
               "parameters": {
                 "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -651,22 +662,27 @@
                 "additionalProperties": true,
                 "default": {},
                 "properties": {},
-                "title": "Parameters"
+                "title": "Request parameters"
               },
               "body": {
                 "description": "JSON object to include as the body of the HTTP request.",
                 "anyOf": [
                   {
+                    "title": "Request body object",
+                    "description": "JSON object to include as the body of the HTTP request.",
                     "type": "object",
                     "additionalProperties": true,
-                    "properties": {},
-                    "title": "0"
+                    "properties": {}
                   },
                   {
+                    "title": "Request body array",
+                    "description": "JSON array to include as the body of the HTTP request.",
                     "type": "array",
                     "items": {}
                   },
                   {
+                    "title": "Request body string",
+                    "description": "String to include as the body of the HTTP request.",
                     "type": "string"
                   }
                 ],
@@ -685,7 +701,7 @@
                 "additionalProperties": true,
                 "properties": {},
                 "default": {},
-                "title": "Headers"
+                "title": "Response headers"
               },
               "body": {
                 "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -694,13 +710,18 @@
                     "type": "object",
                     "additionalProperties": true,
                     "properties": {},
-                    "title": "0"
+                    "title": "Response body object",
+                    "description": "JSON key/value pairs expected in the response."
                   },
                   {
+                    "title": "Response body array",
+                    "description": "JSON array expected in the response.",
                     "type": "array",
                     "items": {}
                   },
                   {
+                    "title": "Response body string",
+                    "description": "String expected in the response.",
                     "type": "string"
                   }
                 ],
@@ -739,8 +760,7 @@
             ],
             "default": "aboveVariation"
           }
-        },
-        "title": "Object"
+        }
       }
     }
   },

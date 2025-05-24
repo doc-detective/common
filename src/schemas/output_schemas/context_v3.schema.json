@@ -88,7 +88,7 @@
                   "description": "Height of the browser window in pixels."
                 }
               },
-              "title": "Window"
+              "title": "Browser Window"
             },
             "viewport": {
               "type": "object",
@@ -104,7 +104,7 @@
                   "description": "Height of the viewport in pixels."
                 }
               },
-              "title": "Viewport"
+              "title": "Browser Viewport"
             }
           },
           "title": "Browser"
@@ -162,7 +162,7 @@
                         "description": "Height of the browser window in pixels."
                       }
                     },
-                    "title": "Window"
+                    "title": "Browser Window"
                   },
                   "viewport": {
                     "type": "object",
@@ -178,7 +178,7 @@
                         "description": "Height of the viewport in pixels."
                       }
                     },
-                    "title": "Viewport"
+                    "title": "Browser Viewport"
                   }
                 },
                 "title": "Browser"
@@ -248,7 +248,7 @@
                 "description": "Height of the browser window in pixels."
               }
             },
-            "title": "Window"
+            "title": "Browser Window"
           },
           "viewport": {
             "type": "object",
@@ -264,7 +264,7 @@
                 "description": "Height of the viewport in pixels."
               }
             },
-            "title": "Viewport"
+            "title": "Browser Viewport"
           }
         },
         "title": "Browser"

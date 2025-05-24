@@ -16,7 +16,7 @@
   "components": {
     "schemas": {
       "string": {
-        "title": "Find element (simple)",
+        "title": "Click element (simple)",
         "type": "string",
         "description": "Display text or selector of the element to find."
       },

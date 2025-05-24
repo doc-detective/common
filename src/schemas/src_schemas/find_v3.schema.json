@@ -65,7 +65,7 @@
                     "$ref": "click_v3.schema.json#/components/schemas/button"
                   }
                 },
-                "title": "1"
+                "title": "Find element and click"
               }
             ]
           },
@@ -82,7 +82,7 @@
                     "selector",
                     "elementText"
                   ],
-                  "title": "Not"
+                  "title": "Find element and type"
                 }
               }
             ]

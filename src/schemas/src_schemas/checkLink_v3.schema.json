@@ -12,6 +12,7 @@
   "components": {
     "schemas": {
       "string": {
+        "title": "Check link (detailed)",
         "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
         "type": "string",
         "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
@@ -20,6 +21,7 @@
         ]
       },
       "object": {
+        "title": "Check link (detailed)",
         "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
         "type": "object",
         "additionalProperties": false,
@@ -67,8 +69,7 @@
               308
             ]
           }
-        },
-        "title": "Object"
+        }
       }
     }
   },

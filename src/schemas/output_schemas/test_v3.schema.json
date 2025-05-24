@@ -116,7 +116,7 @@
                             "description": "Height of the browser window in pixels."
                           }
                         },
-                        "title": "Window"
+                        "title": "Browser Window"
                       },
                       "viewport": {
                         "type": "object",
@@ -132,7 +132,7 @@
                             "description": "Height of the viewport in pixels."
                           }
                         },
-                        "title": "Viewport"
+                        "title": "Browser Viewport"
                       }
                     },
                     "title": "Browser"
@@ -190,7 +190,7 @@
                                   "description": "Height of the browser window in pixels."
                                 }
                               },
-                              "title": "Window"
+                              "title": "Browser Window"
                             },
                             "viewport": {
                               "type": "object",
@@ -206,7 +206,7 @@
                                   "description": "Height of the viewport in pixels."
                                 }
                               },
-                              "title": "Viewport"
+                              "title": "Browser Viewport"
                             }
                           },
                           "title": "Browser"
@@ -276,7 +276,7 @@
                           "description": "Height of the browser window in pixels."
                         }
                       },
-                      "title": "Window"
+                      "title": "Browser Window"
                     },
                     "viewport": {
                       "type": "object",
@@ -292,7 +292,7 @@
                           "description": "Height of the viewport in pixels."
                         }
                       },
-                      "title": "Viewport"
+                      "title": "Browser Viewport"
                     }
                   },
                   "title": "Browser"
@@ -433,7 +433,7 @@
                 "readOnly": true,
                 "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                 "additionalProperties": true,
-                "title": "Definition"
+                "title": "OpenAPI definition"
               },
               "operationId": {
                 "type": "string",
@@ -486,7 +486,7 @@
                 "additionalProperties": {
                   "type": "string"
                 },
-                "title": "Headers"
+                "title": "OpenAPI request headers"
               }
             },
             "components": {
@@ -573,7 +573,7 @@
               "name",
               "descriptionPath"
             ],
-            "title": "1"
+            "title": "OpenAPI description (test)"
           }
         ]
       }
@@ -621,7 +621,7 @@
                       "description": "Runtime expression for a user-defined output value."
                     }
                   },
-                  "title": "Outputs"
+                  "title": "Outputs (step)"
                 },
                 "variables": {
                   "type": "object",
@@ -633,7 +633,7 @@
                       "description": "Runtime expression for a user-defined output value."
                     }
                   },
-                  "title": "Variables"
+                  "title": "Variables (step)"
                 }
               },
               "title": "Common"
@@ -656,7 +656,7 @@
                   "description": "Runtime expression for a user-defined output value."
                 }
               },
-              "title": "Outputs"
+              "title": "Outputs (step)"
             },
             "variables": {
               "type": "object",
@@ -668,7 +668,7 @@
                   "description": "Runtime expression for a user-defined output value."
                 }
               },
-              "title": "Variables"
+              "title": "Variables (step)"
             }
           }
         },
@@ -699,7 +699,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -711,7 +711,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -727,6 +727,7 @@
                     "title": "checkLink",
                     "anyOf": [
                       {
+                        "title": "Check link (detailed)",
                         "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                         "type": "string",
                         "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
@@ -735,6 +736,7 @@
                         ]
                       },
                       {
+                        "title": "Check link (detailed)",
                         "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                         "type": "object",
                         "additionalProperties": false,
@@ -782,13 +784,13 @@
                               308
                             ]
                           }
-                        },
-                        "title": "Object"
+                        }
                       }
                     ],
                     "components": {
                       "schemas": {
                         "string": {
+                          "title": "Check link (detailed)",
                           "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                           "type": "string",
                           "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
@@ -797,6 +799,7 @@
                           ]
                         },
                         "object": {
+                          "title": "Check link (detailed)",
                           "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                           "type": "object",
                           "additionalProperties": false,
@@ -844,8 +847,7 @@
                                 308
                               ]
                             }
-                          },
-                          "title": "Object"
+                          }
                         }
                       }
                     },
@@ -866,7 +868,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "checkLink"
               }
             ]
           },
@@ -896,7 +898,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -908,7 +910,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -925,7 +927,7 @@
                     "description": "Click or tap an element.",
                     "anyOf": [
                       {
-                        "title": "Find element (simple)",
+                        "title": "Click element (simple)",
                         "type": "string",
                         "description": "Display text or selector of the element to find."
                       },
@@ -971,7 +973,7 @@
                     "components": {
                       "schemas": {
                         "string": {
-                          "title": "Find element (simple)",
+                          "title": "Click element (simple)",
                           "type": "string",
                           "description": "Display text or selector of the element to find."
                         },
@@ -1036,7 +1038,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "click"
               }
             ]
           },
@@ -1066,7 +1068,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -1078,7 +1080,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -1143,7 +1145,7 @@
                                 "description": "Click or tap an element.",
                                 "anyOf": [
                                   {
-                                    "title": "Find element (simple)",
+                                    "title": "Click element (simple)",
                                     "type": "string",
                                     "description": "Display text or selector of the element to find."
                                   },
@@ -1189,7 +1191,7 @@
                                 "components": {
                                   "schemas": {
                                     "string": {
-                                      "title": "Find element (simple)",
+                                      "title": "Click element (simple)",
                                       "type": "string",
                                       "description": "Display text or selector of the element to find."
                                     },
@@ -1266,7 +1268,7 @@
                                     ]
                                   }
                                 },
-                                "title": "1"
+                                "title": "Find element and click"
                               }
                             ]
                           },
@@ -1279,6 +1281,7 @@
                                 "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                                 "anyOf": [
                                   {
+                                    "title": "Type keys (simple)",
                                     "description": "Sequence of keys to enter.",
                                     "anyOf": [
                                       {
@@ -1297,9 +1300,11 @@
                                     ]
                                   },
                                   {
+                                    "title": "Type keys (detailed)",
                                     "type": "object",
                                     "properties": {
                                       "keys": {
+                                        "title": "Type keys (simple)",
                                         "description": "Sequence of keys to enter.",
                                         "anyOf": [
                                           {
@@ -1330,13 +1335,13 @@
                                     "required": [
                                       "keys"
                                     ],
-                                    "additionalProperties": false,
-                                    "title": "Object"
+                                    "additionalProperties": false
                                   }
                                 ],
                                 "components": {
                                   "schemas": {
                                     "keys": {
+                                      "title": "Type keys (simple)",
                                       "description": "Sequence of keys to enter.",
                                       "anyOf": [
                                         {
@@ -1355,9 +1360,11 @@
                                       ]
                                     },
                                     "object": {
+                                      "title": "Type keys (detailed)",
                                       "type": "object",
                                       "properties": {
                                         "keys": {
+                                          "title": "Type keys (simple)",
                                           "description": "Sequence of keys to enter.",
                                           "anyOf": [
                                             {
@@ -1388,8 +1395,7 @@
                                       "required": [
                                         "keys"
                                       ],
-                                      "additionalProperties": false,
-                                      "title": "Object"
+                                      "additionalProperties": false
                                     }
                                   }
                                 },
@@ -1426,7 +1432,7 @@
                                     "selector",
                                     "elementText"
                                   ],
-                                  "title": "Not"
+                                  "title": "Find element and type"
                                 }
                               }
                             ]
@@ -1485,7 +1491,7 @@
                                   "description": "Click or tap an element.",
                                   "anyOf": [
                                     {
-                                      "title": "Find element (simple)",
+                                      "title": "Click element (simple)",
                                       "type": "string",
                                       "description": "Display text or selector of the element to find."
                                     },
@@ -1531,7 +1537,7 @@
                                   "components": {
                                     "schemas": {
                                       "string": {
-                                        "title": "Find element (simple)",
+                                        "title": "Click element (simple)",
                                         "type": "string",
                                         "description": "Display text or selector of the element to find."
                                       },
@@ -1608,7 +1614,7 @@
                                       ]
                                     }
                                   },
-                                  "title": "1"
+                                  "title": "Find element and click"
                                 }
                               ]
                             },
@@ -1621,6 +1627,7 @@
                                   "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                                   "anyOf": [
                                     {
+                                      "title": "Type keys (simple)",
                                       "description": "Sequence of keys to enter.",
                                       "anyOf": [
                                         {
@@ -1639,9 +1646,11 @@
                                       ]
                                     },
                                     {
+                                      "title": "Type keys (detailed)",
                                       "type": "object",
                                       "properties": {
                                         "keys": {
+                                          "title": "Type keys (simple)",
                                           "description": "Sequence of keys to enter.",
                                           "anyOf": [
                                             {
@@ -1672,13 +1681,13 @@
                                       "required": [
                                         "keys"
                                       ],
-                                      "additionalProperties": false,
-                                      "title": "Object"
+                                      "additionalProperties": false
                                     }
                                   ],
                                   "components": {
                                     "schemas": {
                                       "keys": {
+                                        "title": "Type keys (simple)",
                                         "description": "Sequence of keys to enter.",
                                         "anyOf": [
                                           {
@@ -1697,9 +1706,11 @@
                                         ]
                                       },
                                       "object": {
+                                        "title": "Type keys (detailed)",
                                         "type": "object",
                                         "properties": {
                                           "keys": {
+                                            "title": "Type keys (simple)",
                                             "description": "Sequence of keys to enter.",
                                             "anyOf": [
                                               {
@@ -1730,8 +1741,7 @@
                                         "required": [
                                           "keys"
                                         ],
-                                        "additionalProperties": false,
-                                        "title": "Object"
+                                        "additionalProperties": false
                                       }
                                     }
                                   },
@@ -1768,7 +1778,7 @@
                                       "selector",
                                       "elementText"
                                     ],
-                                    "title": "Not"
+                                    "title": "Find element and type"
                                   }
                                 }
                               ]
@@ -1812,7 +1822,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "find"
               }
             ]
           },
@@ -1842,7 +1852,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -1854,7 +1864,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -1870,6 +1880,7 @@
                     "title": "goTo",
                     "anyOf": [
                       {
+                        "title": "Go to URL (simple)",
                         "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
                         "type": "string",
                         "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
@@ -1901,12 +1912,13 @@
                             ]
                           }
                         },
-                        "title": "Object"
+                        "title": "Go to URL (detailed)"
                       }
                     ],
                     "components": {
                       "schemas": {
                         "string": {
+                          "title": "Go to URL (simple)",
                           "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
                           "type": "string",
                           "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
@@ -1938,7 +1950,7 @@
                               ]
                             }
                           },
-                          "title": "Object"
+                          "title": "Go to URL (detailed)"
                         }
                       }
                     },
@@ -1955,7 +1967,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "goTo"
               }
             ]
           },
@@ -1985,7 +1997,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -1997,7 +2009,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -2014,7 +2026,7 @@
                     "description": "Perform a generic HTTP request, for example to an API.",
                     "anyOf": [
                       {
-                        "title": "URL",
+                        "title": "HTTP request (simple)",
                         "type": "string",
                         "description": "URL for the HTTP request.",
                         "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -2023,6 +2035,7 @@
                         ]
                       },
                       {
+                        "title": "HTTP request (detailed)",
                         "type": "object",
                         "anyOf": [
                           {
@@ -2039,7 +2052,7 @@
                         "additionalProperties": false,
                         "properties": {
                           "url": {
-                            "title": "URL",
+                            "title": "HTTP request (simple)",
                             "type": "string",
                             "description": "URL for the HTTP request.",
                             "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -2096,7 +2109,7 @@
                                         "readOnly": true,
                                         "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                                         "additionalProperties": true,
-                                        "title": "Definition"
+                                        "title": "OpenAPI definition"
                                       },
                                       "operationId": {
                                         "type": "string",
@@ -2149,7 +2162,7 @@
                                         "additionalProperties": {
                                           "type": "string"
                                         },
-                                        "title": "Headers"
+                                        "title": "OpenAPI request headers"
                                       }
                                     },
                                     "components": {
@@ -2230,7 +2243,7 @@
                                     "required": [
                                       "operationId"
                                     ],
-                                    "title": "1"
+                                    "title": "OpenAPI definition (httpRequest)"
                                   }
                                 ]
                               }
@@ -2282,7 +2295,7 @@
                                 "additionalProperties": true,
                                 "properties": {},
                                 "default": {},
-                                "title": "Headers"
+                                "title": "Request headers"
                               },
                               "parameters": {
                                 "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -2290,22 +2303,27 @@
                                 "additionalProperties": true,
                                 "default": {},
                                 "properties": {},
-                                "title": "Parameters"
+                                "title": "Request parameters"
                               },
                               "body": {
                                 "description": "JSON object to include as the body of the HTTP request.",
                                 "anyOf": [
                                   {
+                                    "title": "Request body object",
+                                    "description": "JSON object to include as the body of the HTTP request.",
                                     "type": "object",
                                     "additionalProperties": true,
-                                    "properties": {},
-                                    "title": "0"
+                                    "properties": {}
                                   },
                                   {
+                                    "title": "Request body array",
+                                    "description": "JSON array to include as the body of the HTTP request.",
                                     "type": "array",
                                     "items": {}
                                   },
                                   {
+                                    "title": "Request body string",
+                                    "description": "String to include as the body of the HTTP request.",
                                     "type": "string"
                                   }
                                 ],
@@ -2324,7 +2342,7 @@
                                 "additionalProperties": true,
                                 "properties": {},
                                 "default": {},
-                                "title": "Headers"
+                                "title": "Response headers"
                               },
                               "body": {
                                 "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -2333,13 +2351,18 @@
                                     "type": "object",
                                     "additionalProperties": true,
                                     "properties": {},
-                                    "title": "0"
+                                    "title": "Response body object",
+                                    "description": "JSON key/value pairs expected in the response."
                                   },
                                   {
+                                    "title": "Response body array",
+                                    "description": "JSON array expected in the response.",
                                     "type": "array",
                                     "items": {}
                                   },
                                   {
+                                    "title": "Response body string",
+                                    "description": "String expected in the response.",
                                     "type": "string"
                                   }
                                 ],
@@ -2378,14 +2401,13 @@
                             ],
                             "default": "aboveVariation"
                           }
-                        },
-                        "title": "Object"
+                        }
                       }
                     ],
                     "components": {
                       "schemas": {
                         "url": {
-                          "title": "URL",
+                          "title": "HTTP request (simple)",
                           "type": "string",
                           "description": "URL for the HTTP request.",
                           "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -2394,6 +2416,7 @@
                           ]
                         },
                         "object": {
+                          "title": "HTTP request (detailed)",
                           "type": "object",
                           "anyOf": [
                             {
@@ -2410,7 +2433,7 @@
                           "additionalProperties": false,
                           "properties": {
                             "url": {
-                              "title": "URL",
+                              "title": "HTTP request (simple)",
                               "type": "string",
                               "description": "URL for the HTTP request.",
                               "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -2467,7 +2490,7 @@
                                           "readOnly": true,
                                           "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                                           "additionalProperties": true,
-                                          "title": "Definition"
+                                          "title": "OpenAPI definition"
                                         },
                                         "operationId": {
                                           "type": "string",
@@ -2520,7 +2543,7 @@
                                           "additionalProperties": {
                                             "type": "string"
                                           },
-                                          "title": "Headers"
+                                          "title": "OpenAPI request headers"
                                         }
                                       },
                                       "components": {
@@ -2601,7 +2624,7 @@
                                       "required": [
                                         "operationId"
                                       ],
-                                      "title": "1"
+                                      "title": "OpenAPI definition (httpRequest)"
                                     }
                                   ]
                                 }
@@ -2653,7 +2676,7 @@
                                   "additionalProperties": true,
                                   "properties": {},
                                   "default": {},
-                                  "title": "Headers"
+                                  "title": "Request headers"
                                 },
                                 "parameters": {
                                   "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -2661,22 +2684,27 @@
                                   "additionalProperties": true,
                                   "default": {},
                                   "properties": {},
-                                  "title": "Parameters"
+                                  "title": "Request parameters"
                                 },
                                 "body": {
                                   "description": "JSON object to include as the body of the HTTP request.",
                                   "anyOf": [
                                     {
+                                      "title": "Request body object",
+                                      "description": "JSON object to include as the body of the HTTP request.",
                                       "type": "object",
                                       "additionalProperties": true,
-                                      "properties": {},
-                                      "title": "0"
+                                      "properties": {}
                                     },
                                     {
+                                      "title": "Request body array",
+                                      "description": "JSON array to include as the body of the HTTP request.",
                                       "type": "array",
                                       "items": {}
                                     },
                                     {
+                                      "title": "Request body string",
+                                      "description": "String to include as the body of the HTTP request.",
                                       "type": "string"
                                     }
                                   ],
@@ -2695,7 +2723,7 @@
                                   "additionalProperties": true,
                                   "properties": {},
                                   "default": {},
-                                  "title": "Headers"
+                                  "title": "Response headers"
                                 },
                                 "body": {
                                   "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -2704,13 +2732,18 @@
                                       "type": "object",
                                       "additionalProperties": true,
                                       "properties": {},
-                                      "title": "0"
+                                      "title": "Response body object",
+                                      "description": "JSON key/value pairs expected in the response."
                                     },
                                     {
+                                      "title": "Response body array",
+                                      "description": "JSON array expected in the response.",
                                       "type": "array",
                                       "items": {}
                                     },
                                     {
+                                      "title": "Response body string",
+                                      "description": "String expected in the response.",
                                       "type": "string"
                                     }
                                   ],
@@ -2749,8 +2782,7 @@
                               ],
                               "default": "aboveVariation"
                             }
-                          },
-                          "title": "Object"
+                          }
                         }
                       }
                     },
@@ -2894,7 +2926,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "httpRequest"
               }
             ]
           },
@@ -2924,7 +2956,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -2936,7 +2968,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -2953,6 +2985,8 @@
                     "description": "Perform a native shell command.",
                     "anyOf": [
                       {
+                        "title": "Run shell command (simple)",
+                        "description": "Command to perform in the machine's default shell.",
                         "type": "string",
                         "transform": [
                           "trim"
@@ -3035,12 +3069,14 @@
                             "default": 60000
                           }
                         },
-                        "title": "Object"
+                        "title": "Run shell command (detailed)"
                       }
                     ],
                     "components": {
                       "schemas": {
                         "string": {
+                          "title": "Run shell command (simple)",
+                          "description": "Command to perform in the machine's default shell.",
                           "type": "string",
                           "transform": [
                             "trim"
@@ -3123,7 +3159,7 @@
                               "default": 60000
                             }
                           },
-                          "title": "Object"
+                          "title": "Run shell command (detailed)"
                         }
                       }
                     },
@@ -3180,7 +3216,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "runShell"
               }
             ]
           },
@@ -3210,7 +3246,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -3222,7 +3258,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -3324,7 +3360,7 @@
                             "default": 60000
                           }
                         },
-                        "title": "Object"
+                        "title": "Run code (detailed)"
                       }
                     ],
                     "components": {
@@ -3415,7 +3451,7 @@
                               "default": 60000
                             }
                           },
-                          "title": "Object"
+                          "title": "Run code (detailed)"
                         }
                       }
                     },
@@ -3456,7 +3492,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "runCode"
               }
             ]
           },
@@ -3486,7 +3522,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -3498,7 +3534,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -3515,6 +3551,7 @@
                     "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                     "anyOf": [
                       {
+                        "title": "Type keys (simple)",
                         "description": "Sequence of keys to enter.",
                         "anyOf": [
                           {
@@ -3533,9 +3570,11 @@
                         ]
                       },
                       {
+                        "title": "Type keys (detailed)",
                         "type": "object",
                         "properties": {
                           "keys": {
+                            "title": "Type keys (simple)",
                             "description": "Sequence of keys to enter.",
                             "anyOf": [
                               {
@@ -3566,13 +3605,13 @@
                         "required": [
                           "keys"
                         ],
-                        "additionalProperties": false,
-                        "title": "Object"
+                        "additionalProperties": false
                       }
                     ],
                     "components": {
                       "schemas": {
                         "keys": {
+                          "title": "Type keys (simple)",
                           "description": "Sequence of keys to enter.",
                           "anyOf": [
                             {
@@ -3591,9 +3630,11 @@
                           ]
                         },
                         "object": {
+                          "title": "Type keys (detailed)",
                           "type": "object",
                           "properties": {
                             "keys": {
+                              "title": "Type keys (simple)",
                               "description": "Sequence of keys to enter.",
                               "anyOf": [
                                 {
@@ -3624,8 +3665,7 @@
                           "required": [
                             "keys"
                           ],
-                          "additionalProperties": false,
-                          "title": "Object"
+                          "additionalProperties": false
                         }
                       }
                     },
@@ -3656,7 +3696,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "type"
               }
             ]
           },
@@ -3686,7 +3726,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -3698,7 +3738,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -3715,6 +3755,7 @@
                     "description": "Takes a screenshot in PNG format.",
                     "anyOf": [
                       {
+                        "title": "Screenshot (simple)",
                         "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                         "type": "string",
                         "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -3727,6 +3768,7 @@
                         "additionalProperties": false,
                         "properties": {
                           "path": {
+                            "title": "Screenshot (simple)",
                             "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                             "type": "string",
                             "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -3761,7 +3803,7 @@
                           "crop": {
                             "anyOf": [
                               {
-                                "title": "Crop by element",
+                                "title": "Crop by element (simple)",
                                 "type": "string",
                                 "description": "Display text or selector of the element to screenshot."
                               },
@@ -3794,6 +3836,7 @@
                                   "padding": {
                                     "anyOf": [
                                       {
+                                        "title": "Padding (simple)",
                                         "type": "number",
                                         "description": "Padding in pixels to add to the bounds of the element.",
                                         "minimum": 0
@@ -3819,7 +3862,8 @@
                                             "minimum": 0
                                           }
                                         },
-                                        "title": "Padding"
+                                        "title": "Padding (detailed)",
+                                        "description": "Padding in pixels to add to the bounds of the element."
                                       }
                                     ]
                                   }
@@ -3828,15 +3872,18 @@
                             ]
                           }
                         },
-                        "title": "Object"
+                        "title": "Capture screenshot (detailed)"
                       },
                       {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "title": "Capture screenshot",
+                        "description": "If `true`, captures a screenshot. If `false`, doesn't capture a screenshot."
                       }
                     ],
                     "components": {
                       "schemas": {
                         "path": {
+                          "title": "Screenshot (simple)",
                           "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                           "type": "string",
                           "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -3849,6 +3896,7 @@
                           "additionalProperties": false,
                           "properties": {
                             "path": {
+                              "title": "Screenshot (simple)",
                               "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                               "type": "string",
                               "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -3883,7 +3931,7 @@
                             "crop": {
                               "anyOf": [
                                 {
-                                  "title": "Crop by element",
+                                  "title": "Crop by element (simple)",
                                   "type": "string",
                                   "description": "Display text or selector of the element to screenshot."
                                 },
@@ -3916,6 +3964,7 @@
                                     "padding": {
                                       "anyOf": [
                                         {
+                                          "title": "Padding (simple)",
                                           "type": "number",
                                           "description": "Padding in pixels to add to the bounds of the element.",
                                           "minimum": 0
@@ -3941,7 +3990,8 @@
                                               "minimum": 0
                                             }
                                           },
-                                          "title": "Padding"
+                                          "title": "Padding (detailed)",
+                                          "description": "Padding in pixels to add to the bounds of the element."
                                         }
                                       ]
                                     }
@@ -3950,7 +4000,7 @@
                               ]
                             }
                           },
-                          "title": "Object"
+                          "title": "Capture screenshot (detailed)"
                         },
                         "crop_element": {
                           "title": "Crop by element (detailed)",
@@ -3981,6 +4031,7 @@
                             "padding": {
                               "anyOf": [
                                 {
+                                  "title": "Padding (simple)",
                                   "type": "number",
                                   "description": "Padding in pixels to add to the bounds of the element.",
                                   "minimum": 0
@@ -4006,7 +4057,8 @@
                                       "minimum": 0
                                     }
                                   },
-                                  "title": "Padding"
+                                  "title": "Padding (detailed)",
+                                  "description": "Padding in pixels to add to the bounds of the element."
                                 }
                               ]
                             }
@@ -4033,7 +4085,8 @@
                               "minimum": 0
                             }
                           },
-                          "title": "Padding"
+                          "title": "Padding (detailed)",
+                          "description": "Padding in pixels to add to the bounds of the element."
                         }
                       }
                     },
@@ -4074,7 +4127,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "screenshot"
               }
             ]
           },
@@ -4104,7 +4157,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -4116,7 +4169,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -4133,6 +4186,7 @@
                     "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
                     "anyOf": [
                       {
+                        "title": "Record (simple)",
                         "type": "string",
                         "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
                         "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
@@ -4167,15 +4221,18 @@
                             ]
                           }
                         },
-                        "title": "Object"
+                        "title": "Record (detailed)"
                       },
                       {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "title": "Record (boolean)",
+                        "description": "If `true`, records the current browser viewport. If `false`, doesn't record the current browser viewport."
                       }
                     ],
                     "components": {
                       "schemas": {
                         "string": {
+                          "title": "Record (simple)",
                           "type": "string",
                           "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
                           "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
@@ -4210,7 +4267,7 @@
                               ]
                             }
                           },
-                          "title": "Object"
+                          "title": "Record (detailed)"
                         }
                       }
                     },
@@ -4225,7 +4282,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "record"
               }
             ]
           },
@@ -4255,7 +4312,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -4267,7 +4324,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
@@ -4293,7 +4350,7 @@
                     ]
                   }
                 },
-                "title": "1"
+                "title": "stopRecord"
               }
             ]
           },
@@ -4323,7 +4380,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -4335,12 +4392,14 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
               },
               {
+                "title": "loadVariables",
+                "type": "object",
                 "required": [
                   "loadVariables"
                 ],
@@ -4384,7 +4443,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -4396,12 +4455,14 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 },
                 "title": "Common"
               },
               {
+                "title": "wait",
+                "type": "object",
                 "required": [
                   "wait"
                 ],
@@ -4413,9 +4474,11 @@
                     "default": 5000,
                     "anyOf": [
                       {
-                        "type": "number"
+                        "type": "number",
+                        "title": "Wait (simple)"
                       },
                       {
+                        "title": "Wait (environment variable)",
                         "type": "string",
                         "pattern": "(\\$[A-Za-z0-9_]+)",
                         "transform": [
@@ -4423,12 +4486,14 @@
                         ]
                       },
                       {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "title": "Wait (boolean)"
                       }
                     ],
                     "components": {
                       "schemas": {
                         "string": {
+                          "title": "Wait (environment variable)",
                           "type": "string",
                           "pattern": "(\\$[A-Za-z0-9_]+)",
                           "transform": [
@@ -4847,7 +4912,7 @@
                     "description": "Height of the browser window in pixels."
                   }
                 },
-                "title": "Window"
+                "title": "Browser Window"
               },
               "viewport": {
                 "type": "object",
@@ -4863,7 +4928,7 @@
                     "description": "Height of the viewport in pixels."
                   }
                 },
-                "title": "Viewport"
+                "title": "Browser Viewport"
               }
             },
             "title": "Browser"
@@ -4905,7 +4970,7 @@
                       "readOnly": true,
                       "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                       "additionalProperties": true,
-                      "title": "Definition"
+                      "title": "OpenAPI definition"
                     },
                     "operationId": {
                       "type": "string",
@@ -4958,7 +5023,7 @@
                       "additionalProperties": {
                         "type": "string"
                       },
-                      "title": "Headers"
+                      "title": "OpenAPI request headers"
                     }
                   },
                   "components": {
@@ -5045,7 +5110,7 @@
                     "name",
                     "descriptionPath"
                   ],
-                  "title": "1"
+                  "title": "OpenAPI description (test)"
                 }
               ]
             }
@@ -5085,7 +5150,7 @@
                             "description": "Runtime expression for a user-defined output value."
                           }
                         },
-                        "title": "Outputs"
+                        "title": "Outputs (step)"
                       },
                       "variables": {
                         "type": "object",
@@ -5097,7 +5162,7 @@
                             "description": "Runtime expression for a user-defined output value."
                           }
                         },
-                        "title": "Variables"
+                        "title": "Variables (step)"
                       }
                     },
                     "title": "Common"
@@ -5120,7 +5185,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Outputs"
+                    "title": "Outputs (step)"
                   },
                   "variables": {
                     "type": "object",
@@ -5132,7 +5197,7 @@
                         "description": "Runtime expression for a user-defined output value."
                       }
                     },
-                    "title": "Variables"
+                    "title": "Variables (step)"
                   }
                 }
               },
@@ -5163,7 +5228,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -5175,7 +5240,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -5191,6 +5256,7 @@
                           "title": "checkLink",
                           "anyOf": [
                             {
+                              "title": "Check link (detailed)",
                               "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                               "type": "string",
                               "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
@@ -5199,6 +5265,7 @@
                               ]
                             },
                             {
+                              "title": "Check link (detailed)",
                               "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                               "type": "object",
                               "additionalProperties": false,
@@ -5246,13 +5313,13 @@
                                     308
                                   ]
                                 }
-                              },
-                              "title": "Object"
+                              }
                             }
                           ],
                           "components": {
                             "schemas": {
                               "string": {
+                                "title": "Check link (detailed)",
                                 "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                                 "type": "string",
                                 "pattern": "(^(http://|https://|\\/).*|\\$[A-Za-z0-9_]+$)",
@@ -5261,6 +5328,7 @@
                                 ]
                               },
                               "object": {
+                                "title": "Check link (detailed)",
                                 "description": "Check if an HTTP or HTTPS URL returns an acceptable status code from a GET request.",
                                 "type": "object",
                                 "additionalProperties": false,
@@ -5308,8 +5376,7 @@
                                       308
                                     ]
                                   }
-                                },
-                                "title": "Object"
+                                }
                               }
                             }
                           },
@@ -5330,7 +5397,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "checkLink"
                     }
                   ]
                 },
@@ -5360,7 +5427,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -5372,7 +5439,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -5389,7 +5456,7 @@
                           "description": "Click or tap an element.",
                           "anyOf": [
                             {
-                              "title": "Find element (simple)",
+                              "title": "Click element (simple)",
                               "type": "string",
                               "description": "Display text or selector of the element to find."
                             },
@@ -5435,7 +5502,7 @@
                           "components": {
                             "schemas": {
                               "string": {
-                                "title": "Find element (simple)",
+                                "title": "Click element (simple)",
                                 "type": "string",
                                 "description": "Display text or selector of the element to find."
                               },
@@ -5500,7 +5567,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "click"
                     }
                   ]
                 },
@@ -5530,7 +5597,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -5542,7 +5609,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -5607,7 +5674,7 @@
                                       "description": "Click or tap an element.",
                                       "anyOf": [
                                         {
-                                          "title": "Find element (simple)",
+                                          "title": "Click element (simple)",
                                           "type": "string",
                                           "description": "Display text or selector of the element to find."
                                         },
@@ -5653,7 +5720,7 @@
                                       "components": {
                                         "schemas": {
                                           "string": {
-                                            "title": "Find element (simple)",
+                                            "title": "Click element (simple)",
                                             "type": "string",
                                             "description": "Display text or selector of the element to find."
                                           },
@@ -5730,7 +5797,7 @@
                                           ]
                                         }
                                       },
-                                      "title": "1"
+                                      "title": "Find element and click"
                                     }
                                   ]
                                 },
@@ -5743,6 +5810,7 @@
                                       "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                                       "anyOf": [
                                         {
+                                          "title": "Type keys (simple)",
                                           "description": "Sequence of keys to enter.",
                                           "anyOf": [
                                             {
@@ -5761,9 +5829,11 @@
                                           ]
                                         },
                                         {
+                                          "title": "Type keys (detailed)",
                                           "type": "object",
                                           "properties": {
                                             "keys": {
+                                              "title": "Type keys (simple)",
                                               "description": "Sequence of keys to enter.",
                                               "anyOf": [
                                                 {
@@ -5794,13 +5864,13 @@
                                           "required": [
                                             "keys"
                                           ],
-                                          "additionalProperties": false,
-                                          "title": "Object"
+                                          "additionalProperties": false
                                         }
                                       ],
                                       "components": {
                                         "schemas": {
                                           "keys": {
+                                            "title": "Type keys (simple)",
                                             "description": "Sequence of keys to enter.",
                                             "anyOf": [
                                               {
@@ -5819,9 +5889,11 @@
                                             ]
                                           },
                                           "object": {
+                                            "title": "Type keys (detailed)",
                                             "type": "object",
                                             "properties": {
                                               "keys": {
+                                                "title": "Type keys (simple)",
                                                 "description": "Sequence of keys to enter.",
                                                 "anyOf": [
                                                   {
@@ -5852,8 +5924,7 @@
                                             "required": [
                                               "keys"
                                             ],
-                                            "additionalProperties": false,
-                                            "title": "Object"
+                                            "additionalProperties": false
                                           }
                                         }
                                       },
@@ -5890,7 +5961,7 @@
                                           "selector",
                                           "elementText"
                                         ],
-                                        "title": "Not"
+                                        "title": "Find element and type"
                                       }
                                     }
                                   ]
@@ -5949,7 +6020,7 @@
                                         "description": "Click or tap an element.",
                                         "anyOf": [
                                           {
-                                            "title": "Find element (simple)",
+                                            "title": "Click element (simple)",
                                             "type": "string",
                                             "description": "Display text or selector of the element to find."
                                           },
@@ -5995,7 +6066,7 @@
                                         "components": {
                                           "schemas": {
                                             "string": {
-                                              "title": "Find element (simple)",
+                                              "title": "Click element (simple)",
                                               "type": "string",
                                               "description": "Display text or selector of the element to find."
                                             },
@@ -6072,7 +6143,7 @@
                                             ]
                                           }
                                         },
-                                        "title": "1"
+                                        "title": "Find element and click"
                                       }
                                     ]
                                   },
@@ -6085,6 +6156,7 @@
                                         "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                                         "anyOf": [
                                           {
+                                            "title": "Type keys (simple)",
                                             "description": "Sequence of keys to enter.",
                                             "anyOf": [
                                               {
@@ -6103,9 +6175,11 @@
                                             ]
                                           },
                                           {
+                                            "title": "Type keys (detailed)",
                                             "type": "object",
                                             "properties": {
                                               "keys": {
+                                                "title": "Type keys (simple)",
                                                 "description": "Sequence of keys to enter.",
                                                 "anyOf": [
                                                   {
@@ -6136,13 +6210,13 @@
                                             "required": [
                                               "keys"
                                             ],
-                                            "additionalProperties": false,
-                                            "title": "Object"
+                                            "additionalProperties": false
                                           }
                                         ],
                                         "components": {
                                           "schemas": {
                                             "keys": {
+                                              "title": "Type keys (simple)",
                                               "description": "Sequence of keys to enter.",
                                               "anyOf": [
                                                 {
@@ -6161,9 +6235,11 @@
                                               ]
                                             },
                                             "object": {
+                                              "title": "Type keys (detailed)",
                                               "type": "object",
                                               "properties": {
                                                 "keys": {
+                                                  "title": "Type keys (simple)",
                                                   "description": "Sequence of keys to enter.",
                                                   "anyOf": [
                                                     {
@@ -6194,8 +6270,7 @@
                                               "required": [
                                                 "keys"
                                               ],
-                                              "additionalProperties": false,
-                                              "title": "Object"
+                                              "additionalProperties": false
                                             }
                                           }
                                         },
@@ -6232,7 +6307,7 @@
                                             "selector",
                                             "elementText"
                                           ],
-                                          "title": "Not"
+                                          "title": "Find element and type"
                                         }
                                       }
                                     ]
@@ -6276,7 +6351,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "find"
                     }
                   ]
                 },
@@ -6306,7 +6381,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -6318,7 +6393,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -6334,6 +6409,7 @@
                           "title": "goTo",
                           "anyOf": [
                             {
+                              "title": "Go to URL (simple)",
                               "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
                               "type": "string",
                               "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
@@ -6365,12 +6441,13 @@
                                   ]
                                 }
                               },
-                              "title": "Object"
+                              "title": "Go to URL (detailed)"
                             }
                           ],
                           "components": {
                             "schemas": {
                               "string": {
+                                "title": "Go to URL (simple)",
                                 "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
                                 "type": "string",
                                 "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
@@ -6402,7 +6479,7 @@
                                     ]
                                   }
                                 },
-                                "title": "Object"
+                                "title": "Go to URL (detailed)"
                               }
                             }
                           },
@@ -6419,7 +6496,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "goTo"
                     }
                   ]
                 },
@@ -6449,7 +6526,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -6461,7 +6538,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -6478,7 +6555,7 @@
                           "description": "Perform a generic HTTP request, for example to an API.",
                           "anyOf": [
                             {
-                              "title": "URL",
+                              "title": "HTTP request (simple)",
                               "type": "string",
                               "description": "URL for the HTTP request.",
                               "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -6487,6 +6564,7 @@
                               ]
                             },
                             {
+                              "title": "HTTP request (detailed)",
                               "type": "object",
                               "anyOf": [
                                 {
@@ -6503,7 +6581,7 @@
                               "additionalProperties": false,
                               "properties": {
                                 "url": {
-                                  "title": "URL",
+                                  "title": "HTTP request (simple)",
                                   "type": "string",
                                   "description": "URL for the HTTP request.",
                                   "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -6560,7 +6638,7 @@
                                               "readOnly": true,
                                               "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                                               "additionalProperties": true,
-                                              "title": "Definition"
+                                              "title": "OpenAPI definition"
                                             },
                                             "operationId": {
                                               "type": "string",
@@ -6613,7 +6691,7 @@
                                               "additionalProperties": {
                                                 "type": "string"
                                               },
-                                              "title": "Headers"
+                                              "title": "OpenAPI request headers"
                                             }
                                           },
                                           "components": {
@@ -6694,7 +6772,7 @@
                                           "required": [
                                             "operationId"
                                           ],
-                                          "title": "1"
+                                          "title": "OpenAPI definition (httpRequest)"
                                         }
                                       ]
                                     }
@@ -6746,7 +6824,7 @@
                                       "additionalProperties": true,
                                       "properties": {},
                                       "default": {},
-                                      "title": "Headers"
+                                      "title": "Request headers"
                                     },
                                     "parameters": {
                                       "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -6754,22 +6832,27 @@
                                       "additionalProperties": true,
                                       "default": {},
                                       "properties": {},
-                                      "title": "Parameters"
+                                      "title": "Request parameters"
                                     },
                                     "body": {
                                       "description": "JSON object to include as the body of the HTTP request.",
                                       "anyOf": [
                                         {
+                                          "title": "Request body object",
+                                          "description": "JSON object to include as the body of the HTTP request.",
                                           "type": "object",
                                           "additionalProperties": true,
-                                          "properties": {},
-                                          "title": "0"
+                                          "properties": {}
                                         },
                                         {
+                                          "title": "Request body array",
+                                          "description": "JSON array to include as the body of the HTTP request.",
                                           "type": "array",
                                           "items": {}
                                         },
                                         {
+                                          "title": "Request body string",
+                                          "description": "String to include as the body of the HTTP request.",
                                           "type": "string"
                                         }
                                       ],
@@ -6788,7 +6871,7 @@
                                       "additionalProperties": true,
                                       "properties": {},
                                       "default": {},
-                                      "title": "Headers"
+                                      "title": "Response headers"
                                     },
                                     "body": {
                                       "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -6797,13 +6880,18 @@
                                           "type": "object",
                                           "additionalProperties": true,
                                           "properties": {},
-                                          "title": "0"
+                                          "title": "Response body object",
+                                          "description": "JSON key/value pairs expected in the response."
                                         },
                                         {
+                                          "title": "Response body array",
+                                          "description": "JSON array expected in the response.",
                                           "type": "array",
                                           "items": {}
                                         },
                                         {
+                                          "title": "Response body string",
+                                          "description": "String expected in the response.",
                                           "type": "string"
                                         }
                                       ],
@@ -6842,14 +6930,13 @@
                                   ],
                                   "default": "aboveVariation"
                                 }
-                              },
-                              "title": "Object"
+                              }
                             }
                           ],
                           "components": {
                             "schemas": {
                               "url": {
-                                "title": "URL",
+                                "title": "HTTP request (simple)",
                                 "type": "string",
                                 "description": "URL for the HTTP request.",
                                 "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -6858,6 +6945,7 @@
                                 ]
                               },
                               "object": {
+                                "title": "HTTP request (detailed)",
                                 "type": "object",
                                 "anyOf": [
                                   {
@@ -6874,7 +6962,7 @@
                                 "additionalProperties": false,
                                 "properties": {
                                   "url": {
-                                    "title": "URL",
+                                    "title": "HTTP request (simple)",
                                     "type": "string",
                                     "description": "URL for the HTTP request.",
                                     "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
@@ -6931,7 +7019,7 @@
                                                 "readOnly": true,
                                                 "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                                                 "additionalProperties": true,
-                                                "title": "Definition"
+                                                "title": "OpenAPI definition"
                                               },
                                               "operationId": {
                                                 "type": "string",
@@ -6984,7 +7072,7 @@
                                                 "additionalProperties": {
                                                   "type": "string"
                                                 },
-                                                "title": "Headers"
+                                                "title": "OpenAPI request headers"
                                               }
                                             },
                                             "components": {
@@ -7065,7 +7153,7 @@
                                             "required": [
                                               "operationId"
                                             ],
-                                            "title": "1"
+                                            "title": "OpenAPI definition (httpRequest)"
                                           }
                                         ]
                                       }
@@ -7117,7 +7205,7 @@
                                         "additionalProperties": true,
                                         "properties": {},
                                         "default": {},
-                                        "title": "Headers"
+                                        "title": "Request headers"
                                       },
                                       "parameters": {
                                         "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -7125,22 +7213,27 @@
                                         "additionalProperties": true,
                                         "default": {},
                                         "properties": {},
-                                        "title": "Parameters"
+                                        "title": "Request parameters"
                                       },
                                       "body": {
                                         "description": "JSON object to include as the body of the HTTP request.",
                                         "anyOf": [
                                           {
+                                            "title": "Request body object",
+                                            "description": "JSON object to include as the body of the HTTP request.",
                                             "type": "object",
                                             "additionalProperties": true,
-                                            "properties": {},
-                                            "title": "0"
+                                            "properties": {}
                                           },
                                           {
+                                            "title": "Request body array",
+                                            "description": "JSON array to include as the body of the HTTP request.",
                                             "type": "array",
                                             "items": {}
                                           },
                                           {
+                                            "title": "Request body string",
+                                            "description": "String to include as the body of the HTTP request.",
                                             "type": "string"
                                           }
                                         ],
@@ -7159,7 +7252,7 @@
                                         "additionalProperties": true,
                                         "properties": {},
                                         "default": {},
-                                        "title": "Headers"
+                                        "title": "Response headers"
                                       },
                                       "body": {
                                         "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -7168,13 +7261,18 @@
                                             "type": "object",
                                             "additionalProperties": true,
                                             "properties": {},
-                                            "title": "0"
+                                            "title": "Response body object",
+                                            "description": "JSON key/value pairs expected in the response."
                                           },
                                           {
+                                            "title": "Response body array",
+                                            "description": "JSON array expected in the response.",
                                             "type": "array",
                                             "items": {}
                                           },
                                           {
+                                            "title": "Response body string",
+                                            "description": "String expected in the response.",
                                             "type": "string"
                                           }
                                         ],
@@ -7213,8 +7311,7 @@
                                     ],
                                     "default": "aboveVariation"
                                   }
-                                },
-                                "title": "Object"
+                                }
                               }
                             }
                           },
@@ -7358,7 +7455,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "httpRequest"
                     }
                   ]
                 },
@@ -7388,7 +7485,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -7400,7 +7497,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -7417,6 +7514,8 @@
                           "description": "Perform a native shell command.",
                           "anyOf": [
                             {
+                              "title": "Run shell command (simple)",
+                              "description": "Command to perform in the machine's default shell.",
                               "type": "string",
                               "transform": [
                                 "trim"
@@ -7499,12 +7598,14 @@
                                   "default": 60000
                                 }
                               },
-                              "title": "Object"
+                              "title": "Run shell command (detailed)"
                             }
                           ],
                           "components": {
                             "schemas": {
                               "string": {
+                                "title": "Run shell command (simple)",
+                                "description": "Command to perform in the machine's default shell.",
                                 "type": "string",
                                 "transform": [
                                   "trim"
@@ -7587,7 +7688,7 @@
                                     "default": 60000
                                   }
                                 },
-                                "title": "Object"
+                                "title": "Run shell command (detailed)"
                               }
                             }
                           },
@@ -7644,7 +7745,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "runShell"
                     }
                   ]
                 },
@@ -7674,7 +7775,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -7686,7 +7787,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -7788,7 +7889,7 @@
                                   "default": 60000
                                 }
                               },
-                              "title": "Object"
+                              "title": "Run code (detailed)"
                             }
                           ],
                           "components": {
@@ -7879,7 +7980,7 @@
                                     "default": 60000
                                   }
                                 },
-                                "title": "Object"
+                                "title": "Run code (detailed)"
                               }
                             }
                           },
@@ -7920,7 +8021,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "runCode"
                     }
                   ]
                 },
@@ -7950,7 +8051,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -7962,7 +8063,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -7979,6 +8080,7 @@
                           "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                           "anyOf": [
                             {
+                              "title": "Type keys (simple)",
                               "description": "Sequence of keys to enter.",
                               "anyOf": [
                                 {
@@ -7997,9 +8099,11 @@
                               ]
                             },
                             {
+                              "title": "Type keys (detailed)",
                               "type": "object",
                               "properties": {
                                 "keys": {
+                                  "title": "Type keys (simple)",
                                   "description": "Sequence of keys to enter.",
                                   "anyOf": [
                                     {
@@ -8030,13 +8134,13 @@
                               "required": [
                                 "keys"
                               ],
-                              "additionalProperties": false,
-                              "title": "Object"
+                              "additionalProperties": false
                             }
                           ],
                           "components": {
                             "schemas": {
                               "keys": {
+                                "title": "Type keys (simple)",
                                 "description": "Sequence of keys to enter.",
                                 "anyOf": [
                                   {
@@ -8055,9 +8159,11 @@
                                 ]
                               },
                               "object": {
+                                "title": "Type keys (detailed)",
                                 "type": "object",
                                 "properties": {
                                   "keys": {
+                                    "title": "Type keys (simple)",
                                     "description": "Sequence of keys to enter.",
                                     "anyOf": [
                                       {
@@ -8088,8 +8194,7 @@
                                 "required": [
                                   "keys"
                                 ],
-                                "additionalProperties": false,
-                                "title": "Object"
+                                "additionalProperties": false
                               }
                             }
                           },
@@ -8120,7 +8225,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "type"
                     }
                   ]
                 },
@@ -8150,7 +8255,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -8162,7 +8267,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -8179,6 +8284,7 @@
                           "description": "Takes a screenshot in PNG format.",
                           "anyOf": [
                             {
+                              "title": "Screenshot (simple)",
                               "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                               "type": "string",
                               "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -8191,6 +8297,7 @@
                               "additionalProperties": false,
                               "properties": {
                                 "path": {
+                                  "title": "Screenshot (simple)",
                                   "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                   "type": "string",
                                   "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -8225,7 +8332,7 @@
                                 "crop": {
                                   "anyOf": [
                                     {
-                                      "title": "Crop by element",
+                                      "title": "Crop by element (simple)",
                                       "type": "string",
                                       "description": "Display text or selector of the element to screenshot."
                                     },
@@ -8258,6 +8365,7 @@
                                         "padding": {
                                           "anyOf": [
                                             {
+                                              "title": "Padding (simple)",
                                               "type": "number",
                                               "description": "Padding in pixels to add to the bounds of the element.",
                                               "minimum": 0
@@ -8283,7 +8391,8 @@
                                                   "minimum": 0
                                                 }
                                               },
-                                              "title": "Padding"
+                                              "title": "Padding (detailed)",
+                                              "description": "Padding in pixels to add to the bounds of the element."
                                             }
                                           ]
                                         }
@@ -8292,15 +8401,18 @@
                                   ]
                                 }
                               },
-                              "title": "Object"
+                              "title": "Capture screenshot (detailed)"
                             },
                             {
-                              "type": "boolean"
+                              "type": "boolean",
+                              "title": "Capture screenshot",
+                              "description": "If `true`, captures a screenshot. If `false`, doesn't capture a screenshot."
                             }
                           ],
                           "components": {
                             "schemas": {
                               "path": {
+                                "title": "Screenshot (simple)",
                                 "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                 "type": "string",
                                 "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -8313,6 +8425,7 @@
                                 "additionalProperties": false,
                                 "properties": {
                                   "path": {
+                                    "title": "Screenshot (simple)",
                                     "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
                                     "type": "string",
                                     "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
@@ -8347,7 +8460,7 @@
                                   "crop": {
                                     "anyOf": [
                                       {
-                                        "title": "Crop by element",
+                                        "title": "Crop by element (simple)",
                                         "type": "string",
                                         "description": "Display text or selector of the element to screenshot."
                                       },
@@ -8380,6 +8493,7 @@
                                           "padding": {
                                             "anyOf": [
                                               {
+                                                "title": "Padding (simple)",
                                                 "type": "number",
                                                 "description": "Padding in pixels to add to the bounds of the element.",
                                                 "minimum": 0
@@ -8405,7 +8519,8 @@
                                                     "minimum": 0
                                                   }
                                                 },
-                                                "title": "Padding"
+                                                "title": "Padding (detailed)",
+                                                "description": "Padding in pixels to add to the bounds of the element."
                                               }
                                             ]
                                           }
@@ -8414,7 +8529,7 @@
                                     ]
                                   }
                                 },
-                                "title": "Object"
+                                "title": "Capture screenshot (detailed)"
                               },
                               "crop_element": {
                                 "title": "Crop by element (detailed)",
@@ -8445,6 +8560,7 @@
                                   "padding": {
                                     "anyOf": [
                                       {
+                                        "title": "Padding (simple)",
                                         "type": "number",
                                         "description": "Padding in pixels to add to the bounds of the element.",
                                         "minimum": 0
@@ -8470,7 +8586,8 @@
                                             "minimum": 0
                                           }
                                         },
-                                        "title": "Padding"
+                                        "title": "Padding (detailed)",
+                                        "description": "Padding in pixels to add to the bounds of the element."
                                       }
                                     ]
                                   }
@@ -8497,7 +8614,8 @@
                                     "minimum": 0
                                   }
                                 },
-                                "title": "Padding"
+                                "title": "Padding (detailed)",
+                                "description": "Padding in pixels to add to the bounds of the element."
                               }
                             }
                           },
@@ -8538,7 +8656,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "screenshot"
                     }
                   ]
                 },
@@ -8568,7 +8686,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -8580,7 +8698,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -8597,6 +8715,7 @@
                           "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
                           "anyOf": [
                             {
+                              "title": "Record (simple)",
                               "type": "string",
                               "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
                               "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
@@ -8631,15 +8750,18 @@
                                   ]
                                 }
                               },
-                              "title": "Object"
+                              "title": "Record (detailed)"
                             },
                             {
-                              "type": "boolean"
+                              "type": "boolean",
+                              "title": "Record (boolean)",
+                              "description": "If `true`, records the current browser viewport. If `false`, doesn't record the current browser viewport."
                             }
                           ],
                           "components": {
                             "schemas": {
                               "string": {
+                                "title": "Record (simple)",
                                 "type": "string",
                                 "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
                                 "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
@@ -8674,7 +8796,7 @@
                                     ]
                                   }
                                 },
-                                "title": "Object"
+                                "title": "Record (detailed)"
                               }
                             }
                           },
@@ -8689,7 +8811,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "record"
                     }
                   ]
                 },
@@ -8719,7 +8841,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -8731,7 +8853,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
@@ -8757,7 +8879,7 @@
                           ]
                         }
                       },
-                      "title": "1"
+                      "title": "stopRecord"
                     }
                   ]
                 },
@@ -8787,7 +8909,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -8799,12 +8921,14 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
                     },
                     {
+                      "title": "loadVariables",
+                      "type": "object",
                       "required": [
                         "loadVariables"
                       ],
@@ -8848,7 +8972,7 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Outputs"
+                          "title": "Outputs (step)"
                         },
                         "variables": {
                           "type": "object",
@@ -8860,12 +8984,14 @@
                               "description": "Runtime expression for a user-defined output value."
                             }
                           },
-                          "title": "Variables"
+                          "title": "Variables (step)"
                         }
                       },
                       "title": "Common"
                     },
                     {
+                      "title": "wait",
+                      "type": "object",
                       "required": [
                         "wait"
                       ],
@@ -8877,9 +9003,11 @@
                           "default": 5000,
                           "anyOf": [
                             {
-                              "type": "number"
+                              "type": "number",
+                              "title": "Wait (simple)"
                             },
                             {
+                              "title": "Wait (environment variable)",
                               "type": "string",
                               "pattern": "(\\$[A-Za-z0-9_]+)",
                               "transform": [
@@ -8887,12 +9015,14 @@
                               ]
                             },
                             {
-                              "type": "boolean"
+                              "type": "boolean",
+                              "title": "Wait (boolean)"
                             }
                           ],
                           "components": {
                             "schemas": {
                               "string": {
+                                "title": "Wait (environment variable)",
                                 "type": "string",
                                 "pattern": "(\\$[A-Za-z0-9_]+)",
                                 "transform": [
@@ -9262,7 +9392,7 @@
             }
           }
         },
-        "title": "Items"
+        "title": "Resolved context"
       }
     }
   },
@@ -9321,7 +9451,7 @@
                   "readOnly": true,
                   "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
                   "additionalProperties": true,
-                  "title": "Definition"
+                  "title": "OpenAPI definition"
                 },
                 "operationId": {
                   "type": "string",
@@ -9374,7 +9504,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "title": "Headers"
+                  "title": "OpenAPI request headers"
                 }
               },
               "components": {
@@ -9461,7 +9591,7 @@
                 "name",
                 "descriptionPath"
               ],
-              "title": "1"
+              "title": "OpenAPI description (test)"
             }
           ]
         }

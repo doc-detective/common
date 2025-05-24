@@ -5,9 +5,11 @@
   "default": 5000,
   "anyOf": [
     {
-      "type": "number"
+      "type": "number",
+      "title": "Wait (simple)"
     },
     {
+      "title": "Wait (environment variable)",
       "type": "string",
       "pattern": "(\\$[A-Za-z0-9_]+)",
       "transform": [
@@ -15,12 +17,14 @@
       ]
     },
     {
-      "type": "boolean"
+      "type": "boolean",
+      "title": "Wait (boolean)"
     }
   ],
   "components": {
     "schemas": {
       "string": {
+        "title": "Wait (environment variable)",
         "type": "string",
         "pattern": "(\\$[A-Za-z0-9_]+)",
         "transform": [

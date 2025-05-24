@@ -123,7 +123,7 @@
             "anyOf": [
               {
                 "$comment": "Simple mode: Reference predefined templates by name.",
-                "title": "Predefined",
+                "title": "File type (predefined)",
                 "type": "string",
                 "enum": [
                   "markdown",
@@ -133,7 +133,7 @@
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
-                "title": "Custom",
+                "title": "File type (custom)",
                 "type": "object",
                 "required": [
                   "extensions"
@@ -175,7 +175,7 @@
                 }
               },
               {
-                "title": "Executable",
+                "title": "File type (executable)",
                 "$comment": "Executable mode: Convert executable inputs directly into tests.",
                 "type": "object",
                 "required": [
@@ -278,7 +278,7 @@
             ]
           }
         },
-        "title": "Environment"
+        "title": "Environment details"
       },
       "markupDefinition": {
         "type": "object",
@@ -322,7 +322,7 @@
             ]
           }
         },
-        "title": "Markupdefinition"
+        "title": "Markup definition"
       },
       "markupActionString": {
         "type": "string",
@@ -387,7 +387,7 @@
             ]
           }
         },
-        "title": "Inlinestatements"
+        "title": "Inline statement definition"
       },
       "stringOrArray": {
         "anyOf": [

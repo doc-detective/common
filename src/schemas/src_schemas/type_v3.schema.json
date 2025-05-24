@@ -13,6 +13,7 @@
   "components": {
     "schemas": {
       "keys": {
+        "title": "Type keys (simple)",
         "description": "Sequence of keys to enter.",
         "anyOf": [
           {
@@ -31,6 +32,7 @@
         ]
       },
       "object": {
+        "title": "Type keys (detailed)",
         "type": "object",
         "properties": {
           "keys": {
@@ -46,36 +48,23 @@
             "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
           }
         },
-        "required": [
-          "keys"
-        ],
-        "additionalProperties": false,
-        "title": "Object"
+        "required": ["keys"],
+        "additionalProperties": false
       }
     }
   },
   "examples": [
     "kittens",
-    [
-      "$ENTER$"
-    ],
-    [
-      "kittens",
-      "$ENTER$"
-    ],
+    ["$ENTER$"],
+    ["kittens", "$ENTER$"],
     {
       "keys": "kittens"
     },
     {
-      "keys": [
-        "$ENTER$"
-      ]
+      "keys": ["$ENTER$"]
     },
     {
-      "keys": [
-        "kittens",
-        "$ENTER$"
-      ],
+      "keys": ["kittens", "$ENTER$"],
       "inputDelay": 500
     }
   ]

@@ -4,7 +4,7 @@
   "description": "Click or tap an element.",
   "anyOf": [
     {
-      "title": "Find element (simple)",
+      "title": "Click element (simple)",
       "type": "string",
       "description": "Display text or selector of the element to find."
     },
@@ -50,7 +50,7 @@
   "components": {
     "schemas": {
       "string": {
-        "title": "Find element (simple)",
+        "title": "Click element (simple)",
         "type": "string",
         "description": "Display text or selector of the element to find."
       },

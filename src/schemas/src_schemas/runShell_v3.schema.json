@@ -13,6 +13,8 @@
   "components": {
     "schemas": {
       "string": {
+        "title": "Run shell command (simple)",
+        "description": "Command to perform in the machine's default shell.",
         "type": "string",
         "transform": [
           "trim"
@@ -95,7 +97,7 @@
             "default": 60000
           }
         },
-        "title": "Object"
+        "title": "Run shell command (detailed)"
       }
     }
   },

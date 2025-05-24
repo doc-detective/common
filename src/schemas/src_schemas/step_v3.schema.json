@@ -44,7 +44,7 @@
             "description": "Runtime expression for a user-defined output value."
           }
         },
-        "title": "Outputs"
+        "title": "Outputs (step)"
       },
       "variables": {
         "type": "object",
@@ -56,7 +56,7 @@
             "description": "Runtime expression for a user-defined output value."
           }
         },
-        "title": "Variables"
+        "title": "Variables (step)"
       }
     }
   },
@@ -76,7 +76,7 @@
               "$ref": "checkLink_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "checkLink"
         }
       ]
     },
@@ -95,7 +95,7 @@
               "$ref": "click_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "click"
         }
       ]
     },
@@ -114,7 +114,7 @@
               "$ref": "find_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "find"
         }
       ]
     },
@@ -133,7 +133,7 @@
               "$ref": "goTo_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "goTo"
         }
       ]
     },
@@ -152,7 +152,7 @@
               "$ref": "httpRequest_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "httpRequest"
         }
       ]
     },
@@ -171,7 +171,7 @@
               "$ref": "runShell_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "runShell"
         }
       ]
     },
@@ -190,7 +190,7 @@
               "$ref": "runCode_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "runCode"
         }
       ]
     },
@@ -209,7 +209,7 @@
               "$ref": "type_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "type"
         }
       ]
     },
@@ -228,7 +228,7 @@
               "$ref": "screenshot_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "screenshot"
         }
       ]
     },
@@ -247,7 +247,7 @@
               "$ref": "record_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "record"
         }
       ]
     },
@@ -266,7 +266,7 @@
               "$ref": "stopRecord_v3.schema.json#"
             }
           },
-          "title": "1"
+          "title": "stopRecord"
         }
       ]
     },
@@ -276,6 +276,8 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "title": "loadVariables",
+          "type": "object",
           "required": [
             "loadVariables"
           ],
@@ -293,6 +295,8 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "title": "wait",
+          "type": "object",
           "required": [
             "wait"
           ],

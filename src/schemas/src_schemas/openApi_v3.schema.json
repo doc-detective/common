@@ -31,7 +31,7 @@
       "readOnly": true,
       "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
       "additionalProperties": true,
-      "title": "Definition"
+      "title": "OpenAPI definition"
     },
     "operationId": {
       "$ref": "#/components/schemas/operationId"
@@ -83,7 +83,7 @@
       "additionalProperties": {
         "type": "string"
       },
-      "title": "Headers"
+      "title": "OpenAPI request headers"
     }
   },
   "components": {
