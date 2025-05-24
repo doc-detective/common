@@ -77,14 +77,26 @@
               "$ref": "step_v3.schema.json#"
             }
           }
-        }
+        },
+        "title": "Resolved context"
       }
     }
   },
   "dynamicDefaults": {
     "testId": "uuid"
   },
-  "anyOf": [{ "required": ["steps"] }, { "required": ["contexts"] }],
+  "anyOf": [
+    {
+      "required": [
+        "steps"
+      ]
+    },
+    {
+      "required": [
+        "contexts"
+      ]
+    }
+  ],
   "additionalProperties": false,
   "components": {
     "schemas": {
@@ -98,9 +110,15 @@
             {
               "type": "object",
               "not": {
-                "required": ["operationId"]
+                "required": [
+                  "operationId"
+                ]
               },
-              "required": ["name", "descriptionPath"]
+              "required": [
+                "name",
+                "descriptionPath"
+              ],
+              "title": "OpenAPI description (test)"
             }
           ]
         }
@@ -127,7 +145,10 @@
             "selector": "[title=Search]",
             "click": true,
             "type": {
-              "keys": ["shorthair cats", "$ENTER$"]
+              "keys": [
+                "shorthair cats",
+                "$ENTER$"
+              ]
             }
           }
         }
@@ -140,7 +161,9 @@
       "after": "cleanup.json",
       "runOn": [
         {
-          "platforms": ["linux"],
+          "platforms": [
+            "linux"
+          ],
           "browsers": {
             "name": "firefox",
             "window": {},
@@ -155,7 +178,9 @@
         {
           "runShell": {
             "command": "echo",
-            "args": ["$USER"],
+            "args": [
+              "$USER"
+            ],
             "maxVariation": 0,
             "overwrite": "aboveVariation"
           },
@@ -182,7 +207,10 @@
                 "job": "leader"
               }
             },
-            "statusCodes": [200, 201],
+            "statusCodes": [
+              200,
+              201
+            ],
             "maxVariation": 0,
             "overwrite": "aboveVariation"
           },
@@ -201,14 +229,18 @@
             "moveTo": true,
             "click": true,
             "type": {
-              "keys": ["shorthair cat"]
+              "keys": [
+                "shorthair cat"
+              ]
             }
           },
           "variables": {}
         },
         {
           "type": {
-            "keys": ["$ENTER$"]
+            "keys": [
+              "$ENTER$"
+            ]
           }
         },
         {

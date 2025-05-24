@@ -52,7 +52,7 @@
               "description": "Click or tap an element.",
               "anyOf": [
                 {
-                  "title": "Find element (simple)",
+                  "title": "Click element (simple)",
                   "type": "string",
                   "description": "Display text or selector of the element to find."
                 },
@@ -98,7 +98,7 @@
               "components": {
                 "schemas": {
                   "string": {
-                    "title": "Find element (simple)",
+                    "title": "Click element (simple)",
                     "type": "string",
                     "description": "Display text or selector of the element to find."
                   },
@@ -174,7 +174,8 @@
                     "middle"
                   ]
                 }
-              }
+              },
+              "title": "Find element and click"
             }
           ]
         },
@@ -187,6 +188,7 @@
               "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
               "anyOf": [
                 {
+                  "title": "Type keys (simple)",
                   "description": "Sequence of keys to enter.",
                   "anyOf": [
                     {
@@ -205,9 +207,11 @@
                   ]
                 },
                 {
+                  "title": "Type keys (detailed)",
                   "type": "object",
                   "properties": {
                     "keys": {
+                      "title": "Type keys (simple)",
                       "description": "Sequence of keys to enter.",
                       "anyOf": [
                         {
@@ -244,6 +248,7 @@
               "components": {
                 "schemas": {
                   "keys": {
+                    "title": "Type keys (simple)",
                     "description": "Sequence of keys to enter.",
                     "anyOf": [
                       {
@@ -262,9 +267,11 @@
                     ]
                   },
                   "object": {
+                    "title": "Type keys (detailed)",
                     "type": "object",
                     "properties": {
                       "keys": {
+                        "title": "Type keys (simple)",
                         "description": "Sequence of keys to enter.",
                         "anyOf": [
                           {
@@ -331,7 +338,8 @@
                 "required": [
                   "selector",
                   "elementText"
-                ]
+                ],
+                "title": "Find element and type"
               }
             }
           ]
@@ -390,7 +398,7 @@
                 "description": "Click or tap an element.",
                 "anyOf": [
                   {
-                    "title": "Find element (simple)",
+                    "title": "Click element (simple)",
                     "type": "string",
                     "description": "Display text or selector of the element to find."
                   },
@@ -436,7 +444,7 @@
                 "components": {
                   "schemas": {
                     "string": {
-                      "title": "Find element (simple)",
+                      "title": "Click element (simple)",
                       "type": "string",
                       "description": "Display text or selector of the element to find."
                     },
@@ -512,7 +520,8 @@
                       "middle"
                     ]
                   }
-                }
+                },
+                "title": "Find element and click"
               }
             ]
           },
@@ -525,6 +534,7 @@
                 "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
                 "anyOf": [
                   {
+                    "title": "Type keys (simple)",
                     "description": "Sequence of keys to enter.",
                     "anyOf": [
                       {
@@ -543,9 +553,11 @@
                     ]
                   },
                   {
+                    "title": "Type keys (detailed)",
                     "type": "object",
                     "properties": {
                       "keys": {
+                        "title": "Type keys (simple)",
                         "description": "Sequence of keys to enter.",
                         "anyOf": [
                           {
@@ -582,6 +594,7 @@
                 "components": {
                   "schemas": {
                     "keys": {
+                      "title": "Type keys (simple)",
                       "description": "Sequence of keys to enter.",
                       "anyOf": [
                         {
@@ -600,9 +613,11 @@
                       ]
                     },
                     "object": {
+                      "title": "Type keys (detailed)",
                       "type": "object",
                       "properties": {
                         "keys": {
+                          "title": "Type keys (simple)",
                           "description": "Sequence of keys to enter.",
                           "anyOf": [
                             {
@@ -669,7 +684,8 @@
                   "required": [
                     "selector",
                     "elementText"
-                  ]
+                  ],
+                  "title": "Find element and type"
                 }
               }
             ]

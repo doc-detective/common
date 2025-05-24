@@ -4,6 +4,7 @@
   "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
   "anyOf": [
     {
+      "title": "Type keys (simple)",
       "description": "Sequence of keys to enter.",
       "anyOf": [
         {
@@ -22,9 +23,11 @@
       ]
     },
     {
+      "title": "Type keys (detailed)",
       "type": "object",
       "properties": {
         "keys": {
+          "title": "Type keys (simple)",
           "description": "Sequence of keys to enter.",
           "anyOf": [
             {
@@ -61,6 +64,7 @@
   "components": {
     "schemas": {
       "keys": {
+        "title": "Type keys (simple)",
         "description": "Sequence of keys to enter.",
         "anyOf": [
           {
@@ -79,9 +83,11 @@
         ]
       },
       "object": {
+        "title": "Type keys (detailed)",
         "type": "object",
         "properties": {
           "keys": {
+            "title": "Type keys (simple)",
             "description": "Sequence of keys to enter.",
             "anyOf": [
               {

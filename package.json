@@ -1,6 +1,6 @@
 {
   "name": "doc-detective-common",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Shared components for Doc Detective projects.",
   "main": "src/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
     "chai": "^5.2.0",
-    "mocha": "^11.4.0",
+    "mocha": "^11.5.0",
     "sinon": "^20.0.0"
   },
   "dependencies": {

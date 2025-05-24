@@ -39,7 +39,10 @@
     "relativePathBase": {
       "description": "Whether paths should be interpreted as relative to the current working directory (`cwd`) or to the file in which they're specified (`file`).",
       "type": "string",
-      "enum": ["cwd", "file"],
+      "enum": [
+        "cwd",
+        "file"
+      ],
       "default": "file"
     },
     "loadVariables": {
@@ -93,7 +96,13 @@
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
       "type": "string",
-      "enum": ["silent", "error", "warning", "info", "debug"],
+      "enum": [
+        "silent",
+        "error",
+        "warning",
+        "info",
+        "debug"
+      ],
       "default": "info"
     },
     "runOn": {
@@ -101,7 +110,11 @@
     },
     "fileTypes": {
       "description": "Configuration for file types and their markup detection.",
-      "default": ["markdown", "asciidoc", "html"],
+      "default": [
+        "markdown",
+        "asciidoc",
+        "html"
+      ],
       "anyOf": [
         {
           "type": "array",
@@ -110,15 +123,21 @@
             "anyOf": [
               {
                 "$comment": "Simple mode: Reference predefined templates by name.",
-                "title": "Predefined",
+                "title": "File type (predefined)",
                 "type": "string",
-                "enum": ["markdown", "asciidoc", "html"]
+                "enum": [
+                  "markdown",
+                  "asciidoc",
+                  "html"
+                ]
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
-                "title": "Custom",
+                "title": "File type (custom)",
                 "type": "object",
-                "required": ["extensions"],
+                "required": [
+                  "extensions"
+                ],
                 "properties": {
                   "name": {
                     "description": "Name of the file type.",
@@ -128,7 +147,11 @@
                     "$comment": "In development",
                     "description": "Base template to extend.",
                     "type": "string",
-                    "enum": ["markdown", "asciidoc", "html"]
+                    "enum": [
+                      "markdown",
+                      "asciidoc",
+                      "html"
+                    ]
                   },
                   "extensions": {
                     "description": "File extensions to use with type.",
@@ -145,15 +168,19 @@
                     "description": "Markup definitions for the file type.",
                     "type": "array",
                     "minItems": 1,
-                    "items": { "$ref": "#/components/schemas/markupDefinition" }
+                    "items": {
+                      "$ref": "#/components/schemas/markupDefinition"
+                    }
                   }
                 }
               },
               {
-                "title": "Executable",
+                "title": "File type (executable)",
                 "$comment": "Executable mode: Convert executable inputs directly into tests.",
                 "type": "object",
-                "required": ["extensions"],
+                "required": [
+                  "extensions"
+                ],
                 "properties": {
                   "extensions": {
                     "description": "File extensions to use with type.",
@@ -186,7 +213,8 @@
         "openApi": {
           "$ref": "test_v3.schema.json#/properties/openApi"
         }
-      }
+      },
+      "title": "Integrations options"
     },
     "telemetry": {
       "description": "Options around sending telemetry for Doc Detective usage.",
@@ -203,10 +231,13 @@
           "type": "string"
         }
       },
-      "required": ["send"],
+      "required": [
+        "send"
+      ],
       "default": {
         "send": true
-      }
+      },
+      "title": "Telemetry options"
     },
     "environment": {
       "$ref": "#/components/schemas/environment"
@@ -219,7 +250,9 @@
         "description": "Environment information for the system running Doc Detective.",
         "readOnly": true,
         "additionalProperties": false,
-        "required": ["platform"],
+        "required": [
+          "platform"
+        ],
         "properties": {
           "workingDirectory": {
             "description": "The current working directory of the process running Doc Detective.",
@@ -244,7 +277,8 @@
               "x64"
             ]
           }
-        }
+        },
+        "title": "Environment details"
       },
       "markupDefinition": {
         "type": "object",
@@ -279,13 +313,16 @@
                     {
                       "$ref": "#/components/schemas/markupActionString"
                     },
-                    { "$ref": "step_v3.schema.json#" }
+                    {
+                      "$ref": "step_v3.schema.json#"
+                    }
                   ]
                 }
               }
             ]
           }
-        }
+        },
+        "title": "Markup definition"
       },
       "markupActionString": {
         "type": "string",
@@ -349,7 +386,8 @@
               }
             ]
           }
-        }
+        },
+        "title": "Inline statement definition"
       },
       "stringOrArray": {
         "anyOf": [
@@ -374,13 +412,19 @@
       "output": ".",
       "recursive": true,
       "loadVariables": ".env",
-      "fileTypes": ["markdown"]
+      "fileTypes": [
+        "markdown"
+      ]
     },
     {
       "fileTypes": [
         {
           "extends": "markdown",
-          "extensions": ["md", "markdown", "mdx"],
+          "extensions": [
+            "md",
+            "markdown",
+            "mdx"
+          ],
           "inlineStatements": {
             "testStart": "<!--\\s*testStart\\s*(.*?)\\s*-->",
             "testEnd": "<!-- testEnd -->",

@@ -3,6 +3,7 @@
   "title": "goTo",
   "anyOf": [
     {
+      "title": "Go to URL (simple)",
       "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
       "type": "string",
       "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
@@ -33,12 +34,14 @@
             "trim"
           ]
         }
-      }
+      },
+      "title": "Go to URL (detailed)"
     }
   ],
   "components": {
     "schemas": {
       "string": {
+        "title": "Go to URL (simple)",
         "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
         "type": "string",
         "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
@@ -69,7 +72,8 @@
               "trim"
             ]
           }
-        }
+        },
+        "title": "Go to URL (detailed)"
       }
     }
   },

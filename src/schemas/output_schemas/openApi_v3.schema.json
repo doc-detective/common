@@ -30,7 +30,8 @@
       "type": "object",
       "readOnly": true,
       "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "title": "OpenAPI definition"
     },
     "operationId": {
       "type": "string",
@@ -82,7 +83,8 @@
       "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
       "additionalProperties": {
         "type": "string"
-      }
+      },
+      "title": "OpenAPI request headers"
     }
   },
   "components": {

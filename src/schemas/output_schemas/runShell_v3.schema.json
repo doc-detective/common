@@ -4,6 +4,8 @@
   "description": "Perform a native shell command.",
   "anyOf": [
     {
+      "title": "Run shell command (simple)",
+      "description": "Command to perform in the machine's default shell.",
       "type": "string",
       "transform": [
         "trim"
@@ -85,12 +87,15 @@
           "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
           "default": 60000
         }
-      }
+      },
+      "title": "Run shell command (detailed)"
     }
   ],
   "components": {
     "schemas": {
       "string": {
+        "title": "Run shell command (simple)",
+        "description": "Command to perform in the machine's default shell.",
         "type": "string",
         "transform": [
           "trim"
@@ -172,7 +177,8 @@
             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
             "default": 60000
           }
-        }
+        },
+        "title": "Run shell command (detailed)"
       }
     }
   },

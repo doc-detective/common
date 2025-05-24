@@ -87,7 +87,8 @@
                   "type": "integer",
                   "description": "Height of the browser window in pixels."
                 }
-              }
+              },
+              "title": "Browser Window"
             },
             "viewport": {
               "type": "object",
@@ -102,9 +103,11 @@
                   "type": "integer",
                   "description": "Height of the viewport in pixels."
                 }
-              }
+              },
+              "title": "Browser Viewport"
             }
-          }
+          },
+          "title": "Browser"
         },
         {
           "type": "array",
@@ -158,7 +161,8 @@
                         "type": "integer",
                         "description": "Height of the browser window in pixels."
                       }
-                    }
+                    },
+                    "title": "Browser Window"
                   },
                   "viewport": {
                     "type": "object",
@@ -173,9 +177,11 @@
                         "type": "integer",
                         "description": "Height of the viewport in pixels."
                       }
-                    }
+                    },
+                    "title": "Browser Viewport"
                   }
-                }
+                },
+                "title": "Browser"
               }
             ]
           }
@@ -241,7 +247,8 @@
                 "type": "integer",
                 "description": "Height of the browser window in pixels."
               }
-            }
+            },
+            "title": "Browser Window"
           },
           "viewport": {
             "type": "object",
@@ -256,9 +263,11 @@
                 "type": "integer",
                 "description": "Height of the viewport in pixels."
               }
-            }
+            },
+            "title": "Browser Viewport"
           }
-        }
+        },
+        "title": "Browser"
       }
     }
   },

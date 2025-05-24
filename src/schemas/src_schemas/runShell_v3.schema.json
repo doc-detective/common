@@ -13,12 +13,18 @@
   "components": {
     "schemas": {
       "string": {
+        "title": "Run shell command (simple)",
+        "description": "Command to perform in the machine's default shell.",
         "type": "string",
-        "transform": ["trim"]
+        "transform": [
+          "trim"
+        ]
       },
       "object": {
         "type": "object",
-        "required": ["command"],
+        "required": [
+          "command"
+        ],
         "additionalProperties": false,
         "properties": {
           "command": {
@@ -52,7 +58,9 @@
                 }
               ]
             },
-            "default": [0]
+            "default": [
+              0
+            ]
           },
           "stdio": {
             "type": "string",
@@ -76,7 +84,11 @@
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing output at `path` if it exists.\nIf `aboveVariation`, overwrites the existing output at `path` if the difference between the new output and the existing output is greater than `maxVariation`.",
-            "enum": ["true", "false", "aboveVariation"],
+            "enum": [
+              "true",
+              "false",
+              "aboveVariation"
+            ],
             "default": "aboveVariation"
           },
           "timeout": {
@@ -84,41 +96,55 @@
             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
             "default": 60000
           }
-        }
+        },
+        "title": "Run shell command (detailed)"
       }
     }
   },
-
   "examples": [
     "docker run hello-world",
     {
       "command": "echo",
-      "args": ["$USER"]
+      "args": [
+        "$USER"
+      ]
     },
     {
       "command": "echo",
-      "args": ["hello-world"]
+      "args": [
+        "hello-world"
+      ]
     },
     {
       "command": "docker run hello-world",
       "timeout": 20000,
-      "exitCodes": [0],
+      "exitCodes": [
+        0
+      ],
       "stdio": "Hello from Docker!"
     },
     {
       "command": "false",
-      "exitCodes": [1]
+      "exitCodes": [
+        1
+      ]
     },
     {
       "command": "echo",
-      "args": ["setup"],
-      "exitCodes": [0],
+      "args": [
+        "setup"
+      ],
+      "exitCodes": [
+        0
+      ],
       "stdio": "/.*?/"
     },
     {
       "command": "docker run hello-world",
       "workingDirectory": ".",
-      "exitCodes": [0],
+      "exitCodes": [
+        0
+      ],
       "stdio": "Hello from Docker!",
       "path": "docker-output.txt",
       "directory": "output",

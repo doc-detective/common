@@ -3,5 +3,7 @@
   "title": "loadVariables",
   "type": "string",
   "description": "Load environment variables from the specified `.env` file.",
-  "examples": [".env"]
+  "examples": [
+    ".env"
+  ]
 }

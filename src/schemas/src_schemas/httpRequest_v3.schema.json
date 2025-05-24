@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",  
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "httpRequest",
   "description": "Perform a generic HTTP request, for example to an API.",
   "anyOf": [
@@ -13,20 +13,27 @@
   "components": {
     "schemas": {
       "url": {
-        "title": "URL",
+        "title": "HTTP request (simple)",
         "type": "string",
         "description": "URL for the HTTP request.",
         "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
-        "transform": ["trim"]
+        "transform": [
+          "trim"
+        ]
       },
       "object": {
+        "title": "HTTP request (detailed)",
         "type": "object",
         "anyOf": [
           {
-            "required": ["url"]
+            "required": [
+              "url"
+            ]
           },
           {
-            "required": ["openApi"]
+            "required": [
+              "openApi"
+            ]
           }
         ],
         "additionalProperties": false,
@@ -54,7 +61,10 @@
                   },
                   {
                     "type": "object",
-                    "required": ["operationId"]
+                    "required": [
+                      "operationId"
+                    ],
+                    "title": "OpenAPI definition (httpRequest)"
                   }
                 ]
               }
@@ -70,13 +80,25 @@
                 }
               ]
             },
-            "default": [200, 201]
+            "default": [
+              200,
+              201
+            ]
           },
           "method": {
             "type": "string",
             "description": "Method of the HTTP request",
-            "enum": ["get", "put", "post", "patch", "delete"],
-            "transform": ["trim", "toEnumCase"],
+            "enum": [
+              "get",
+              "put",
+              "post",
+              "patch",
+              "delete"
+            ],
+            "transform": [
+              "trim",
+              "toEnumCase"
+            ],
             "default": "get"
           },
           "timeout": {
@@ -93,34 +115,43 @@
                 "type": "object",
                 "additionalProperties": true,
                 "properties": {},
-                "default": {}
+                "default": {},
+                "title": "Request headers"
               },
               "parameters": {
                 "description": "URL parameters to include in the HTTP request, in key/value format.",
                 "type": "object",
                 "additionalProperties": true,
                 "default": {},
-                "properties": {}
+                "properties": {},
+                "title": "Request parameters"
               },
               "body": {
                 "description": "JSON object to include as the body of the HTTP request.",
                 "anyOf": [
                   {
+                    "title": "Request body object",
+                    "description": "JSON object to include as the body of the HTTP request.",
                     "type": "object",
                     "additionalProperties": true,
                     "properties": {}
                   },
                   {
+                    "title": "Request body array",
+                    "description": "JSON array to include as the body of the HTTP request.",
                     "type": "array",
                     "items": {}
                   },
                   {
+                    "title": "Request body string",
+                    "description": "String to include as the body of the HTTP request.",
                     "type": "string"
                   }
                 ],
                 "default": {}
               }
-            }
+            },
+            "title": "Request"
           },
           "response": {
             "type": "object",
@@ -131,7 +162,8 @@
                 "type": "object",
                 "additionalProperties": true,
                 "properties": {},
-                "default": {}
+                "default": {},
+                "title": "Response headers"
               },
               "body": {
                 "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -139,19 +171,26 @@
                   {
                     "type": "object",
                     "additionalProperties": true,
-                    "properties": {}
+                    "properties": {},
+                    "title": "Response body object",
+                    "description": "JSON key/value pairs expected in the response."
                   },
                   {
+                    "title": "Response body array",
+                    "description": "JSON array expected in the response.",
                     "type": "array",
                     "items": {}
                   },
                   {
+                    "title": "Response body string",
+                    "description": "String expected in the response.",
                     "type": "string"
                   }
                 ],
                 "default": {}
               }
-            }
+            },
+            "title": "Response"
           },
           "allowAdditionalFields": {
             "type": "boolean",
@@ -176,7 +215,11 @@
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing output at `path` if it exists.\nIf `aboveVariation`, overwrites the existing output at `path` if the difference between the new output and the existing output is greater than `maxVariation`.",
-            "enum": ["true", "false", "aboveVariation"],
+            "enum": [
+              "true",
+              "false",
+              "aboveVariation"
+            ],
             "default": "aboveVariation"
           }
         }
@@ -213,7 +256,10 @@
           "job": "leader"
         }
       },
-      "statusCodes": [200, 201]
+      "statusCodes": [
+        200,
+        201
+      ]
     },
     {
       "url": "https://www.api-server.com",
@@ -238,7 +284,9 @@
           "header": "value"
         }
       },
-      "statusCodes": [200]
+      "statusCodes": [
+        200
+      ]
     },
     {
       "url": "https://reqres.in/api/users",
@@ -255,7 +303,10 @@
           "job": "leader"
         }
       },
-      "statusCodes": [200, 201],
+      "statusCodes": [
+        200,
+        201
+      ],
       "path": "response.json",
       "directory": "media",
       "maxVariation": 0.05,

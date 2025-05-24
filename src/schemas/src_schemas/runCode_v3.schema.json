@@ -11,12 +11,19 @@
     "schemas": {
       "object": {
         "type": "object",
-        "required": ["code", "language"],
+        "required": [
+          "code",
+          "language"
+        ],
         "properties": {
           "language": {
             "type": "string",
             "description": "Language of the code to run.",
-            "enum": ["python", "bash", "javascript"]
+            "enum": [
+              "python",
+              "bash",
+              "javascript"
+            ]
           },
           "code": {
             "description": "Code to run.",
@@ -49,7 +56,9 @@
                 }
               ]
             },
-            "default": [0]
+            "default": [
+              0
+            ]
           },
           "stdio": {
             "type": "string",
@@ -73,7 +82,11 @@
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing output at `path` if it exists.\nIf `aboveVariation`, overwrites the existing output at `path` if the difference between the new output and the existing output is greater than `maxVariation`.",
-            "enum": ["true", "false", "aboveVariation"],
+            "enum": [
+              "true",
+              "false",
+              "aboveVariation"
+            ],
             "default": "aboveVariation"
           },
           "timeout": {
@@ -81,7 +94,8 @@
             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
             "default": 60000
           }
-        }
+        },
+        "title": "Run code (detailed)"
       }
     }
   },
@@ -94,19 +108,25 @@
       "language": "bash",
       "code": "docker run hello-world",
       "timeout": 20000,
-      "exitCodes": [0],
+      "exitCodes": [
+        0
+      ],
       "stdio": "Hello from Docker!"
     },
     {
       "language": "javascript",
       "code": "return false",
-      "exitCodes": [1]
+      "exitCodes": [
+        1
+      ]
     },
     {
       "language": "python",
       "code": "print('Hello from Python')",
       "workingDirectory": ".",
-      "exitCodes": [0],
+      "exitCodes": [
+        0
+      ],
       "stdio": "Hello from Python!",
       "path": "python-output.txt",
       "directory": "output",

@@ -4,6 +4,7 @@
   "description": "Start recording the current browser viewport. Must be followed by a `stopRecord` step. Only runs in Chrome browsers when they are visible. Supported extensions: [ '.mp4', '.webm', '.gif' ]",
   "anyOf": [
     {
+      "title": "Record (simple)",
       "type": "string",
       "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
       "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
@@ -37,15 +38,19 @@
             "false"
           ]
         }
-      }
+      },
+      "title": "Record (detailed)"
     },
     {
-      "type": "boolean"
+      "type": "boolean",
+      "title": "Record (boolean)",
+      "description": "If `true`, records the current browser viewport. If `false`, doesn't record the current browser viewport."
     }
   ],
   "components": {
     "schemas": {
       "string": {
+        "title": "Record (simple)",
         "type": "string",
         "description": "File path of the recording. Supports the `.mp4`, `.webm`, and `.gif` extensions. If not specified, the file name is the ID of the step, and the extension is `.mp4`.",
         "pattern": "([A-Za-z0-9_-]*\\.(mp4|webm|gif)$|\\$[A-Za-z0-9_]+)",
@@ -79,7 +84,8 @@
               "false"
             ]
           }
-        }
+        },
+        "title": "Record (detailed)"
       }
     }
   },
