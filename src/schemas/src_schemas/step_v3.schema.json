@@ -23,7 +23,8 @@
           "variables": {
             "$ref": "#/components/schemas/variables"
           }
-        }
+        },
+        "title": "Common"
       },
       "stepId": {
         "type": "string",
@@ -42,7 +43,8 @@
             "type": "string",
             "description": "Runtime expression for a user-defined output value."
           }
-        }
+        },
+        "title": "Outputs"
       },
       "variables": {
         "type": "object",
@@ -53,7 +55,8 @@
             "type": "string",
             "description": "Runtime expression for a user-defined output value."
           }
-        }
+        },
+        "title": "Variables"
       }
     }
   },
@@ -65,12 +68,15 @@
         },
         {
           "type": "object",
-          "required": ["checkLink"],
+          "required": [
+            "checkLink"
+          ],
           "properties": {
             "checkLink": {
               "$ref": "checkLink_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -81,12 +87,15 @@
         },
         {
           "type": "object",
-          "required": ["click"],
+          "required": [
+            "click"
+          ],
           "properties": {
             "click": {
               "$ref": "click_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -97,12 +106,15 @@
         },
         {
           "type": "object",
-          "required": ["find"],
+          "required": [
+            "find"
+          ],
           "properties": {
             "find": {
               "$ref": "find_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -113,12 +125,15 @@
         },
         {
           "type": "object",
-          "required": ["goTo"],
+          "required": [
+            "goTo"
+          ],
           "properties": {
             "goTo": {
               "$ref": "goTo_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -129,12 +144,15 @@
         },
         {
           "type": "object",
-          "required": ["httpRequest"],
+          "required": [
+            "httpRequest"
+          ],
           "properties": {
             "httpRequest": {
               "$ref": "httpRequest_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -145,12 +163,15 @@
         },
         {
           "type": "object",
-          "required": ["runShell"],
+          "required": [
+            "runShell"
+          ],
           "properties": {
             "runShell": {
               "$ref": "runShell_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -161,12 +182,15 @@
         },
         {
           "type": "object",
-          "required": ["runCode"],
+          "required": [
+            "runCode"
+          ],
           "properties": {
             "runCode": {
               "$ref": "runCode_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -177,12 +201,15 @@
         },
         {
           "type": "object",
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "properties": {
             "type": {
               "$ref": "type_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -193,12 +220,15 @@
         },
         {
           "type": "object",
-          "required": ["screenshot"],
+          "required": [
+            "screenshot"
+          ],
           "properties": {
             "screenshot": {
               "$ref": "screenshot_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -209,12 +239,15 @@
         },
         {
           "type": "object",
-          "required": ["record"],
+          "required": [
+            "record"
+          ],
           "properties": {
             "record": {
               "$ref": "record_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -225,12 +258,15 @@
         },
         {
           "type": "object",
-          "required": ["stopRecord"],
+          "required": [
+            "stopRecord"
+          ],
           "properties": {
             "stopRecord": {
               "$ref": "stopRecord_v3.schema.json#"
             }
-          }
+          },
+          "title": "1"
         }
       ]
     },
@@ -240,7 +276,9 @@
           "$ref": "#/components/schemas/common"
         },
         {
-          "required": ["loadVariables"],
+          "required": [
+            "loadVariables"
+          ],
           "properties": {
             "loadVariables": {
               "$ref": "loadVariables_v3.schema.json#"
@@ -255,7 +293,9 @@
           "$ref": "#/components/schemas/common"
         },
         {
-          "required": ["wait"],
+          "required": [
+            "wait"
+          ],
           "properties": {
             "wait": {
               "$ref": "wait_v3.schema.json#"
@@ -288,7 +328,9 @@
       "stepId": "status-code",
       "checkLink": {
         "url": "https://www.google.com",
-        "statusCodes": [200]
+        "statusCodes": [
+          200
+        ]
       }
     },
     {
@@ -307,7 +349,9 @@
         "language": "python",
         "code": "print('Hello from Python')",
         "workingDirectory": ".",
-        "exitCodes": [0],
+        "exitCodes": [
+          0
+        ],
         "stdio": "Hello from Python!",
         "path": "python-output.txt",
         "directory": "output",
@@ -318,9 +362,15 @@
     {
       "stopRecord": true
     },
-    { "screenshot": true },
-    { "screenshot": "image.png" },
-    { "screenshot": "static/images/image.png" },
+    {
+      "screenshot": true
+    },
+    {
+      "screenshot": "image.png"
+    },
+    {
+      "screenshot": "static/images/image.png"
+    },
     {
       "screenshot": "/User/manny/projects/doc-detective/static/images/image.png"
     },
@@ -359,9 +409,15 @@
         }
       }
     },
-    { "record": true },
-    { "record": "video.mp4" },
-    { "record": "static/media/video.mp4" },
+    {
+      "record": true
+    },
+    {
+      "record": "video.mp4"
+    },
+    {
+      "record": "static/media/video.mp4"
+    },
     {
       "record": "/User/manny/projects/doc-detective/static/media/video.mp4"
     },
@@ -372,7 +428,9 @@
         "overwrite": true
       }
     },
-    { "loadVariables": "variables.env" },
+    {
+      "loadVariables": "variables.env"
+    },
     {
       "find": {
         "$ref": "find_v3.schema.json#/examples/0"

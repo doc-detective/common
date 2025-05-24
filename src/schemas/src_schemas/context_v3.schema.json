@@ -39,8 +39,12 @@
           "type": "array",
           "items": {
             "anyOf": [
-              { "$ref": "#/components/schemas/browserName" },
-              { "$ref": "#/components/schemas/browser" }
+              {
+                "$ref": "#/components/schemas/browserName"
+              },
+              {
+                "$ref": "#/components/schemas/browser"
+              }
             ]
           }
         }
@@ -51,18 +55,29 @@
     "schemas": {
       "platform": {
         "type": "string",
-        "enum": ["linux", "mac", "windows"]
+        "enum": [
+          "linux",
+          "mac",
+          "windows"
+        ]
       },
       "browserName": {
         "type": "string",
         "description": "Name of the browser.",
-        "enum": ["chrome", "firefox", "safari", "webkit"],
+        "enum": [
+          "chrome",
+          "firefox",
+          "safari",
+          "webkit"
+        ],
         "$comment": "`safari` is just a shortcut for `webkit`. Included for visibility and to reduce questions."
       },
       "browser": {
         "type": "object",
         "description": "Browser configuration.",
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -86,7 +101,8 @@
                 "type": "integer",
                 "description": "Height of the browser window in pixels."
               }
-            }
+            },
+            "title": "Window"
           },
           "viewport": {
             "type": "object",
@@ -101,9 +117,11 @@
                 "type": "integer",
                 "description": "Height of the viewport in pixels."
               }
-            }
+            },
+            "title": "Viewport"
           }
-        }
+        },
+        "title": "Browser"
       }
     }
   },
@@ -113,8 +131,16 @@
       "browsers": "chrome"
     },
     {
-      "platforms": ["windows", "mac", "linux"],
-      "browsers": ["chrome", "firefox", "webkit"]
+      "platforms": [
+        "windows",
+        "mac",
+        "linux"
+      ],
+      "browsers": [
+        "chrome",
+        "firefox",
+        "webkit"
+      ]
     },
     {
       "browsers": {
@@ -134,14 +160,21 @@
       ]
     },
     {
-      "platforms": ["mac", "linux"],
+      "platforms": [
+        "mac",
+        "linux"
+      ],
       "browsers": {
         "name": "chrome",
         "headless": true
       }
     },
     {
-      "platforms": ["windows", "mac", "linux"],
+      "platforms": [
+        "windows",
+        "mac",
+        "linux"
+      ],
       "browsers": [
         {
           "name": "chrome",

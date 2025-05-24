@@ -19,11 +19,17 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "anyOf": [{ "$ref": "spec_v3.schema.json#" }]
+        "anyOf": [
+          {
+            "$ref": "spec_v3.schema.json#"
+          }
+        ]
       }
     }
   },
-  "required": ["specs"],
+  "required": [
+    "specs"
+  ],
   "examples": [
     {
       "config": {
@@ -38,7 +44,11 @@
         "fileTypes": [
           {
             "name": "markdown",
-            "extensions": ["md", "markdown", "mdx"],
+            "extensions": [
+              "md",
+              "markdown",
+              "mdx"
+            ],
             "inlineStatements": {
               "testStart": [
                 "{\\/\\*\\s*test\\s+?([\\s\\S]*?)\\s*\\*\\/}",
@@ -71,62 +81,105 @@
                 "regex": [
                   "(?<!\\!)\\[[^\\]]+\\]\\(\\s*(https?:\\/\\/[^\\s)]+)(?:\\s+\"[^\"]*\")?\\s*\\)"
                 ],
-                "actions": ["checkLink"]
+                "actions": [
+                  "checkLink"
+                ]
               },
               {
                 "name": "clickOnscreenText",
                 "regex": [
                   "\\b(?:[Cc]lick|[Tt]ap|[Ll]eft-click|[Cc]hoose|[Ss]elect|[Cc]heck)\\b\\s+\\*\\*((?:(?!\\*\\*).)+)\\*\\*"
                 ],
-                "actions": ["click"]
+                "actions": [
+                  "click"
+                ]
               },
               {
                 "name": "findOnscreenText",
-                "regex": ["\\*\\*((?:(?!\\*\\*).)+)\\*\\*"],
-                "actions": ["find"]
+                "regex": [
+                  "\\*\\*((?:(?!\\*\\*).)+)\\*\\*"
+                ],
+                "actions": [
+                  "find"
+                ]
               },
               {
                 "name": "goToUrl",
                 "regex": [
                   "\\b(?:[Gg]o\\s+to|[Oo]pen|[Nn]avigate\\s+to|[Vv]isit|[Aa]ccess|[Pp]roceed\\s+to|[Ll]aunch)\\b\\s+\\[[^\\]]+\\]\\(\\s*(https?:\\/\\/[^\\s)]+)(?:\\s+\"[^\"]*\")?\\s*\\)"
                 ],
-                "actions": ["goTo"]
+                "actions": [
+                  "goTo"
+                ]
               },
               {
                 "name": "screenshotImage",
                 "regex": [
                   "!\\[[^\\]]*\\]\\(\\s*([^\\s)]+)(?:\\s+\"[^\"]*\")?\\s*\\)\\s*\\{(?=[^}]*\\.screenshot)[^}]*\\}"
                 ],
-                "actions": ["screenshot"]
+                "actions": [
+                  "screenshot"
+                ]
               },
               {
                 "name": "typeText",
-                "regex": ["\\b(?:press|enter|type)\\b\\s+\"([^\"]+)\""],
-                "actions": ["type"]
+                "regex": [
+                  "\\b(?:press|enter|type)\\b\\s+\"([^\"]+)\""
+                ],
+                "actions": [
+                  "type"
+                ]
               }
             ]
           },
           {
             "name": "asciidoc",
-            "extensions": ["adoc", "asciidoc", "asc"],
+            "extensions": [
+              "adoc",
+              "asciidoc",
+              "asc"
+            ],
             "inlineStatements": {
-              "testStart": ["\\/\\/\\s+\\(\\s*test\\s+([\\s\\S]*?)\\s*\\)"],
-              "testEnd": ["\\/\\/\\s+\\(\\s*test end\\s*\\)"],
-              "ignoreStart": ["\\/\\/\\s+\\(\\s*test ignore start\\s*\\)"],
-              "ignoreEnd": ["\\/\\/\\s+\\(\\s*test ignore end\\s*\\)"],
-              "step": ["\\/\\/\\s+\\(\\s*step\\s+([\\s\\S]*?)\\s*\\)"]
+              "testStart": [
+                "\\/\\/\\s+\\(\\s*test\\s+([\\s\\S]*?)\\s*\\)"
+              ],
+              "testEnd": [
+                "\\/\\/\\s+\\(\\s*test end\\s*\\)"
+              ],
+              "ignoreStart": [
+                "\\/\\/\\s+\\(\\s*test ignore start\\s*\\)"
+              ],
+              "ignoreEnd": [
+                "\\/\\/\\s+\\(\\s*test ignore end\\s*\\)"
+              ],
+              "step": [
+                "\\/\\/\\s+\\(\\s*step\\s+([\\s\\S]*?)\\s*\\)"
+              ]
             },
             "markup": []
           },
           {
             "name": "html",
-            "extensions": ["html", "htm"],
+            "extensions": [
+              "html",
+              "htm"
+            ],
             "inlineStatements": {
-              "testStart": ["<!--\\s*test\\s+?([\\s\\S]*?)\\s*-->"],
-              "testEnd": ["<!--\\s*test end\\s*([\\s\\S]*?)\\s*-->"],
-              "ignoreStart": ["<!--\\s*test ignore start\\s*-->"],
-              "ignoreEnd": ["<!--\\s*test ignore end\\s*-->"],
-              "step": ["<!--\\s*step\\s+?([\\s\\S]*?)\\s*-->"]
+              "testStart": [
+                "<!--\\s*test\\s+?([\\s\\S]*?)\\s*-->"
+              ],
+              "testEnd": [
+                "<!--\\s*test end\\s*([\\s\\S]*?)\\s*-->"
+              ],
+              "ignoreStart": [
+                "<!--\\s*test ignore start\\s*-->"
+              ],
+              "ignoreEnd": [
+                "<!--\\s*test ignore end\\s*-->"
+              ],
+              "step": [
+                "<!--\\s*step\\s+?([\\s\\S]*?)\\s*-->"
+              ]
             },
             "markup": []
           }

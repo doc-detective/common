@@ -134,7 +134,8 @@
                                       "type": "integer",
                                       "description": "Height of the browser window in pixels."
                                     }
-                                  }
+                                  },
+                                  "title": "Window"
                                 },
                                 "viewport": {
                                   "type": "object",
@@ -149,9 +150,11 @@
                                       "type": "integer",
                                       "description": "Height of the viewport in pixels."
                                     }
-                                  }
+                                  },
+                                  "title": "Viewport"
                                 }
-                              }
+                              },
+                              "title": "Browser"
                             },
                             {
                               "type": "array",
@@ -205,7 +208,8 @@
                                             "type": "integer",
                                             "description": "Height of the browser window in pixels."
                                           }
-                                        }
+                                        },
+                                        "title": "Window"
                                       },
                                       "viewport": {
                                         "type": "object",
@@ -220,9 +224,11 @@
                                             "type": "integer",
                                             "description": "Height of the viewport in pixels."
                                           }
-                                        }
+                                        },
+                                        "title": "Viewport"
                                       }
-                                    }
+                                    },
+                                    "title": "Browser"
                                   }
                                 ]
                               }
@@ -288,7 +294,8 @@
                                     "type": "integer",
                                     "description": "Height of the browser window in pixels."
                                   }
-                                }
+                                },
+                                "title": "Window"
                               },
                               "viewport": {
                                 "type": "object",
@@ -303,9 +310,11 @@
                                     "type": "integer",
                                     "description": "Height of the viewport in pixels."
                                   }
-                                }
+                                },
+                                "title": "Viewport"
                               }
-                            }
+                            },
+                            "title": "Browser"
                           }
                         }
                       },
@@ -442,7 +451,8 @@
                           "type": "object",
                           "readOnly": true,
                           "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                          "additionalProperties": true
+                          "additionalProperties": true,
+                          "title": "Definition"
                         },
                         "operationId": {
                           "type": "string",
@@ -494,7 +504,8 @@
                           "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                           "additionalProperties": {
                             "type": "string"
-                          }
+                          },
+                          "title": "Headers"
                         }
                       },
                       "components": {
@@ -580,7 +591,8 @@
                       "required": [
                         "name",
                         "descriptionPath"
-                      ]
+                      ],
+                      "title": "1"
                     }
                   ]
                 }
@@ -708,7 +720,8 @@
                                                 "type": "integer",
                                                 "description": "Height of the browser window in pixels."
                                               }
-                                            }
+                                            },
+                                            "title": "Window"
                                           },
                                           "viewport": {
                                             "type": "object",
@@ -723,9 +736,11 @@
                                                 "type": "integer",
                                                 "description": "Height of the viewport in pixels."
                                               }
-                                            }
+                                            },
+                                            "title": "Viewport"
                                           }
-                                        }
+                                        },
+                                        "title": "Browser"
                                       },
                                       {
                                         "type": "array",
@@ -779,7 +794,8 @@
                                                       "type": "integer",
                                                       "description": "Height of the browser window in pixels."
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Window"
                                                 },
                                                 "viewport": {
                                                   "type": "object",
@@ -794,9 +810,11 @@
                                                       "type": "integer",
                                                       "description": "Height of the viewport in pixels."
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Viewport"
                                                 }
-                                              }
+                                              },
+                                              "title": "Browser"
                                             }
                                           ]
                                         }
@@ -862,7 +880,8 @@
                                               "type": "integer",
                                               "description": "Height of the browser window in pixels."
                                             }
-                                          }
+                                          },
+                                          "title": "Window"
                                         },
                                         "viewport": {
                                           "type": "object",
@@ -877,9 +896,11 @@
                                               "type": "integer",
                                               "description": "Height of the viewport in pixels."
                                             }
-                                          }
+                                          },
+                                          "title": "Viewport"
                                         }
-                                      }
+                                      },
+                                      "title": "Browser"
                                     }
                                   }
                                 },
@@ -1016,7 +1037,8 @@
                                     "type": "object",
                                     "readOnly": true,
                                     "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                    "additionalProperties": true
+                                    "additionalProperties": true,
+                                    "title": "Definition"
                                   },
                                   "operationId": {
                                     "type": "string",
@@ -1068,7 +1090,8 @@
                                     "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                     "additionalProperties": {
                                       "type": "string"
-                                    }
+                                    },
+                                    "title": "Headers"
                                   }
                                 },
                                 "components": {
@@ -1154,7 +1177,8 @@
                                 "required": [
                                   "name",
                                   "descriptionPath"
-                                ]
+                                ],
+                                "title": "1"
                               }
                             ]
                           }
@@ -1201,7 +1225,8 @@
                                           "type": "string",
                                           "description": "Runtime expression for a user-defined output value."
                                         }
-                                      }
+                                      },
+                                      "title": "Outputs"
                                     },
                                     "variables": {
                                       "type": "object",
@@ -1212,9 +1237,11 @@
                                           "type": "string",
                                           "description": "Runtime expression for a user-defined output value."
                                         }
-                                      }
+                                      },
+                                      "title": "Variables"
                                     }
-                                  }
+                                  },
+                                  "title": "Common"
                                 },
                                 "stepId": {
                                   "type": "string",
@@ -1233,7 +1260,8 @@
                                       "type": "string",
                                       "description": "Runtime expression for a user-defined output value."
                                     }
-                                  }
+                                  },
+                                  "title": "Outputs"
                                 },
                                 "variables": {
                                   "type": "object",
@@ -1244,7 +1272,8 @@
                                       "type": "string",
                                       "description": "Runtime expression for a user-defined output value."
                                     }
-                                  }
+                                  },
+                                  "title": "Variables"
                                 }
                               }
                             },
@@ -1274,7 +1303,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -1285,9 +1315,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -1355,7 +1387,8 @@
                                                   308
                                                 ]
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           }
                                         ],
                                         "components": {
@@ -1416,7 +1449,8 @@
                                                     308
                                                   ]
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -1436,7 +1470,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -1465,7 +1500,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -1476,9 +1512,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -1602,7 +1640,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -1631,7 +1670,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -1642,9 +1682,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -1828,7 +1870,8 @@
                                                           "middle"
                                                         ]
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "1"
                                                   }
                                                 ]
                                               },
@@ -1892,7 +1935,8 @@
                                                         "required": [
                                                           "keys"
                                                         ],
-                                                        "additionalProperties": false
+                                                        "additionalProperties": false,
+                                                        "title": "Object"
                                                       }
                                                     ],
                                                     "components": {
@@ -1949,7 +1993,8 @@
                                                           "required": [
                                                             "keys"
                                                           ],
-                                                          "additionalProperties": false
+                                                          "additionalProperties": false,
+                                                          "title": "Object"
                                                         }
                                                       }
                                                     },
@@ -1985,7 +2030,8 @@
                                                       "required": [
                                                         "selector",
                                                         "elementText"
-                                                      ]
+                                                      ],
+                                                      "title": "Not"
                                                     }
                                                   }
                                                 ]
@@ -2166,7 +2212,8 @@
                                                             "middle"
                                                           ]
                                                         }
-                                                      }
+                                                      },
+                                                      "title": "1"
                                                     }
                                                   ]
                                                 },
@@ -2230,7 +2277,8 @@
                                                           "required": [
                                                             "keys"
                                                           ],
-                                                          "additionalProperties": false
+                                                          "additionalProperties": false,
+                                                          "title": "Object"
                                                         }
                                                       ],
                                                       "components": {
@@ -2287,7 +2335,8 @@
                                                             "required": [
                                                               "keys"
                                                             ],
-                                                            "additionalProperties": false
+                                                            "additionalProperties": false,
+                                                            "title": "Object"
                                                           }
                                                         }
                                                       },
@@ -2323,7 +2372,8 @@
                                                         "required": [
                                                           "selector",
                                                           "elementText"
-                                                        ]
+                                                        ],
+                                                        "title": "Not"
                                                       }
                                                     }
                                                   ]
@@ -2366,7 +2416,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -2395,7 +2446,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -2406,9 +2458,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -2451,7 +2505,8 @@
                                                   "trim"
                                                 ]
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           }
                                         ],
                                         "components": {
@@ -2487,7 +2542,8 @@
                                                     "trim"
                                                   ]
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -2503,7 +2559,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -2532,7 +2589,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -2543,9 +2601,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -2640,7 +2700,8 @@
                                                             "type": "object",
                                                             "readOnly": true,
                                                             "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                                            "additionalProperties": true
+                                                            "additionalProperties": true,
+                                                            "title": "Definition"
                                                           },
                                                           "operationId": {
                                                             "type": "string",
@@ -2692,7 +2753,8 @@
                                                             "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                                             "additionalProperties": {
                                                               "type": "string"
-                                                            }
+                                                            },
+                                                            "title": "Headers"
                                                           }
                                                         },
                                                         "components": {
@@ -2772,7 +2834,8 @@
                                                         "type": "object",
                                                         "required": [
                                                           "operationId"
-                                                        ]
+                                                        ],
+                                                        "title": "1"
                                                       }
                                                     ]
                                                   }
@@ -2823,14 +2886,16 @@
                                                     "type": "object",
                                                     "additionalProperties": true,
                                                     "properties": {},
-                                                    "default": {}
+                                                    "default": {},
+                                                    "title": "Headers"
                                                   },
                                                   "parameters": {
                                                     "description": "URL parameters to include in the HTTP request, in key/value format.",
                                                     "type": "object",
                                                     "additionalProperties": true,
                                                     "default": {},
-                                                    "properties": {}
+                                                    "properties": {},
+                                                    "title": "Parameters"
                                                   },
                                                   "body": {
                                                     "description": "JSON object to include as the body of the HTTP request.",
@@ -2838,7 +2903,8 @@
                                                       {
                                                         "type": "object",
                                                         "additionalProperties": true,
-                                                        "properties": {}
+                                                        "properties": {},
+                                                        "title": "0"
                                                       },
                                                       {
                                                         "type": "array",
@@ -2850,7 +2916,8 @@
                                                     ],
                                                     "default": {}
                                                   }
-                                                }
+                                                },
+                                                "title": "Request"
                                               },
                                               "response": {
                                                 "type": "object",
@@ -2861,7 +2928,8 @@
                                                     "type": "object",
                                                     "additionalProperties": true,
                                                     "properties": {},
-                                                    "default": {}
+                                                    "default": {},
+                                                    "title": "Headers"
                                                   },
                                                   "body": {
                                                     "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -2869,7 +2937,8 @@
                                                       {
                                                         "type": "object",
                                                         "additionalProperties": true,
-                                                        "properties": {}
+                                                        "properties": {},
+                                                        "title": "0"
                                                       },
                                                       {
                                                         "type": "array",
@@ -2881,7 +2950,8 @@
                                                     ],
                                                     "default": {}
                                                   }
-                                                }
+                                                },
+                                                "title": "Response"
                                               },
                                               "allowAdditionalFields": {
                                                 "type": "boolean",
@@ -2913,7 +2983,8 @@
                                                 ],
                                                 "default": "aboveVariation"
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           }
                                         ],
                                         "components": {
@@ -3000,7 +3071,8 @@
                                                               "type": "object",
                                                               "readOnly": true,
                                                               "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                                              "additionalProperties": true
+                                                              "additionalProperties": true,
+                                                              "title": "Definition"
                                                             },
                                                             "operationId": {
                                                               "type": "string",
@@ -3052,7 +3124,8 @@
                                                               "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                                               "additionalProperties": {
                                                                 "type": "string"
-                                                              }
+                                                              },
+                                                              "title": "Headers"
                                                             }
                                                           },
                                                           "components": {
@@ -3132,7 +3205,8 @@
                                                           "type": "object",
                                                           "required": [
                                                             "operationId"
-                                                          ]
+                                                          ],
+                                                          "title": "1"
                                                         }
                                                       ]
                                                     }
@@ -3183,14 +3257,16 @@
                                                       "type": "object",
                                                       "additionalProperties": true,
                                                       "properties": {},
-                                                      "default": {}
+                                                      "default": {},
+                                                      "title": "Headers"
                                                     },
                                                     "parameters": {
                                                       "description": "URL parameters to include in the HTTP request, in key/value format.",
                                                       "type": "object",
                                                       "additionalProperties": true,
                                                       "default": {},
-                                                      "properties": {}
+                                                      "properties": {},
+                                                      "title": "Parameters"
                                                     },
                                                     "body": {
                                                       "description": "JSON object to include as the body of the HTTP request.",
@@ -3198,7 +3274,8 @@
                                                         {
                                                           "type": "object",
                                                           "additionalProperties": true,
-                                                          "properties": {}
+                                                          "properties": {},
+                                                          "title": "0"
                                                         },
                                                         {
                                                           "type": "array",
@@ -3210,7 +3287,8 @@
                                                       ],
                                                       "default": {}
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Request"
                                                 },
                                                 "response": {
                                                   "type": "object",
@@ -3221,7 +3299,8 @@
                                                       "type": "object",
                                                       "additionalProperties": true,
                                                       "properties": {},
-                                                      "default": {}
+                                                      "default": {},
+                                                      "title": "Headers"
                                                     },
                                                     "body": {
                                                       "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -3229,7 +3308,8 @@
                                                         {
                                                           "type": "object",
                                                           "additionalProperties": true,
-                                                          "properties": {}
+                                                          "properties": {},
+                                                          "title": "0"
                                                         },
                                                         {
                                                           "type": "array",
@@ -3241,7 +3321,8 @@
                                                       ],
                                                       "default": {}
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Response"
                                                 },
                                                 "allowAdditionalFields": {
                                                   "type": "boolean",
@@ -3273,7 +3354,8 @@
                                                   ],
                                                   "default": "aboveVariation"
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -3416,7 +3498,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -3445,7 +3528,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -3456,9 +3540,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -3553,7 +3639,8 @@
                                                 "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                 "default": 60000
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           }
                                         ],
                                         "components": {
@@ -3640,7 +3727,8 @@
                                                   "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                   "default": 60000
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -3696,7 +3784,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -3725,7 +3814,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -3736,9 +3826,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -3836,7 +3928,8 @@
                                                 "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                 "default": 60000
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           }
                                         ],
                                         "components": {
@@ -3926,7 +4019,8 @@
                                                   "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                   "default": 60000
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -3966,7 +4060,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -3995,7 +4090,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -4006,9 +4102,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -4073,7 +4171,8 @@
                                             "required": [
                                               "keys"
                                             ],
-                                            "additionalProperties": false
+                                            "additionalProperties": false,
+                                            "title": "Object"
                                           }
                                         ],
                                         "components": {
@@ -4130,7 +4229,8 @@
                                               "required": [
                                                 "keys"
                                               ],
-                                              "additionalProperties": false
+                                              "additionalProperties": false,
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -4160,7 +4260,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -4189,7 +4290,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -4200,9 +4302,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -4319,7 +4423,8 @@
                                                                 "type": "number",
                                                                 "minimum": 0
                                                               }
-                                                            }
+                                                            },
+                                                            "title": "Padding"
                                                           }
                                                         ]
                                                       }
@@ -4327,7 +4432,8 @@
                                                   }
                                                 ]
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           },
                                           {
                                             "type": "boolean"
@@ -4439,7 +4545,8 @@
                                                                   "type": "number",
                                                                   "minimum": 0
                                                                 }
-                                                              }
+                                                              },
+                                                              "title": "Padding"
                                                             }
                                                           ]
                                                         }
@@ -4447,7 +4554,8 @@
                                                     }
                                                   ]
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             },
                                             "crop_element": {
                                               "title": "Crop by element (detailed)",
@@ -4502,7 +4610,8 @@
                                                           "type": "number",
                                                           "minimum": 0
                                                         }
-                                                      }
+                                                      },
+                                                      "title": "Padding"
                                                     }
                                                   ]
                                                 }
@@ -4528,7 +4637,8 @@
                                                   "type": "number",
                                                   "minimum": 0
                                                 }
-                                              }
+                                              },
+                                              "title": "Padding"
                                             }
                                           }
                                         },
@@ -4568,7 +4678,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -4597,7 +4708,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -4608,9 +4720,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -4657,7 +4771,8 @@
                                                   "false"
                                                 ]
                                               }
-                                            }
+                                            },
+                                            "title": "Object"
                                           },
                                           {
                                             "type": "boolean"
@@ -4699,7 +4814,8 @@
                                                     "false"
                                                   ]
                                                 }
-                                              }
+                                              },
+                                              "title": "Object"
                                             }
                                           }
                                         },
@@ -4713,7 +4829,8 @@
                                           }
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -4742,7 +4859,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -4753,9 +4871,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "type": "object",
@@ -4777,7 +4897,8 @@
                                           true
                                         ]
                                       }
-                                    }
+                                    },
+                                    "title": "1"
                                   }
                                 ]
                               },
@@ -4806,7 +4927,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -4817,9 +4939,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "required": [
@@ -4864,7 +4988,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -4875,9 +5000,11 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
-                                    }
+                                    },
+                                    "title": "Common"
                                   },
                                   {
                                     "required": [
@@ -5324,7 +5451,8 @@
                                         "type": "integer",
                                         "description": "Height of the browser window in pixels."
                                       }
-                                    }
+                                    },
+                                    "title": "Window"
                                   },
                                   "viewport": {
                                     "type": "object",
@@ -5339,9 +5467,11 @@
                                         "type": "integer",
                                         "description": "Height of the viewport in pixels."
                                       }
-                                    }
+                                    },
+                                    "title": "Viewport"
                                   }
-                                }
+                                },
+                                "title": "Browser"
                               },
                               "openApi": {
                                 "type": "array",
@@ -5379,7 +5509,8 @@
                                           "type": "object",
                                           "readOnly": true,
                                           "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                          "additionalProperties": true
+                                          "additionalProperties": true,
+                                          "title": "Definition"
                                         },
                                         "operationId": {
                                           "type": "string",
@@ -5431,7 +5562,8 @@
                                           "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                           "additionalProperties": {
                                             "type": "string"
-                                          }
+                                          },
+                                          "title": "Headers"
                                         }
                                       },
                                       "components": {
@@ -5517,7 +5649,8 @@
                                       "required": [
                                         "name",
                                         "descriptionPath"
-                                      ]
+                                      ],
+                                      "title": "1"
                                     }
                                   ]
                                 }
@@ -5556,7 +5689,8 @@
                                                 "type": "string",
                                                 "description": "Runtime expression for a user-defined output value."
                                               }
-                                            }
+                                            },
+                                            "title": "Outputs"
                                           },
                                           "variables": {
                                             "type": "object",
@@ -5567,9 +5701,11 @@
                                                 "type": "string",
                                                 "description": "Runtime expression for a user-defined output value."
                                               }
-                                            }
+                                            },
+                                            "title": "Variables"
                                           }
-                                        }
+                                        },
+                                        "title": "Common"
                                       },
                                       "stepId": {
                                         "type": "string",
@@ -5588,7 +5724,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Outputs"
                                       },
                                       "variables": {
                                         "type": "object",
@@ -5599,7 +5736,8 @@
                                             "type": "string",
                                             "description": "Runtime expression for a user-defined output value."
                                           }
-                                        }
+                                        },
+                                        "title": "Variables"
                                       }
                                     }
                                   },
@@ -5629,7 +5767,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -5640,9 +5779,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -5710,7 +5851,8 @@
                                                         308
                                                       ]
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 }
                                               ],
                                               "components": {
@@ -5771,7 +5913,8 @@
                                                           308
                                                         ]
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -5791,7 +5934,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -5820,7 +5964,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -5831,9 +5976,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -5957,7 +6104,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -5986,7 +6134,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -5997,9 +6146,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -6183,7 +6334,8 @@
                                                                 "middle"
                                                               ]
                                                             }
-                                                          }
+                                                          },
+                                                          "title": "1"
                                                         }
                                                       ]
                                                     },
@@ -6247,7 +6399,8 @@
                                                               "required": [
                                                                 "keys"
                                                               ],
-                                                              "additionalProperties": false
+                                                              "additionalProperties": false,
+                                                              "title": "Object"
                                                             }
                                                           ],
                                                           "components": {
@@ -6304,7 +6457,8 @@
                                                                 "required": [
                                                                   "keys"
                                                                 ],
-                                                                "additionalProperties": false
+                                                                "additionalProperties": false,
+                                                                "title": "Object"
                                                               }
                                                             }
                                                           },
@@ -6340,7 +6494,8 @@
                                                             "required": [
                                                               "selector",
                                                               "elementText"
-                                                            ]
+                                                            ],
+                                                            "title": "Not"
                                                           }
                                                         }
                                                       ]
@@ -6521,7 +6676,8 @@
                                                                   "middle"
                                                                 ]
                                                               }
-                                                            }
+                                                            },
+                                                            "title": "1"
                                                           }
                                                         ]
                                                       },
@@ -6585,7 +6741,8 @@
                                                                 "required": [
                                                                   "keys"
                                                                 ],
-                                                                "additionalProperties": false
+                                                                "additionalProperties": false,
+                                                                "title": "Object"
                                                               }
                                                             ],
                                                             "components": {
@@ -6642,7 +6799,8 @@
                                                                   "required": [
                                                                     "keys"
                                                                   ],
-                                                                  "additionalProperties": false
+                                                                  "additionalProperties": false,
+                                                                  "title": "Object"
                                                                 }
                                                               }
                                                             },
@@ -6678,7 +6836,8 @@
                                                               "required": [
                                                                 "selector",
                                                                 "elementText"
-                                                              ]
+                                                              ],
+                                                              "title": "Not"
                                                             }
                                                           }
                                                         ]
@@ -6721,7 +6880,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -6750,7 +6910,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -6761,9 +6922,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -6806,7 +6969,8 @@
                                                         "trim"
                                                       ]
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 }
                                               ],
                                               "components": {
@@ -6842,7 +7006,8 @@
                                                           "trim"
                                                         ]
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -6858,7 +7023,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -6887,7 +7053,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -6898,9 +7065,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -6995,7 +7164,8 @@
                                                                   "type": "object",
                                                                   "readOnly": true,
                                                                   "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                                                  "additionalProperties": true
+                                                                  "additionalProperties": true,
+                                                                  "title": "Definition"
                                                                 },
                                                                 "operationId": {
                                                                   "type": "string",
@@ -7047,7 +7217,8 @@
                                                                   "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                                                   "additionalProperties": {
                                                                     "type": "string"
-                                                                  }
+                                                                  },
+                                                                  "title": "Headers"
                                                                 }
                                                               },
                                                               "components": {
@@ -7127,7 +7298,8 @@
                                                               "type": "object",
                                                               "required": [
                                                                 "operationId"
-                                                              ]
+                                                              ],
+                                                              "title": "1"
                                                             }
                                                           ]
                                                         }
@@ -7178,14 +7350,16 @@
                                                           "type": "object",
                                                           "additionalProperties": true,
                                                           "properties": {},
-                                                          "default": {}
+                                                          "default": {},
+                                                          "title": "Headers"
                                                         },
                                                         "parameters": {
                                                           "description": "URL parameters to include in the HTTP request, in key/value format.",
                                                           "type": "object",
                                                           "additionalProperties": true,
                                                           "default": {},
-                                                          "properties": {}
+                                                          "properties": {},
+                                                          "title": "Parameters"
                                                         },
                                                         "body": {
                                                           "description": "JSON object to include as the body of the HTTP request.",
@@ -7193,7 +7367,8 @@
                                                             {
                                                               "type": "object",
                                                               "additionalProperties": true,
-                                                              "properties": {}
+                                                              "properties": {},
+                                                              "title": "0"
                                                             },
                                                             {
                                                               "type": "array",
@@ -7205,7 +7380,8 @@
                                                           ],
                                                           "default": {}
                                                         }
-                                                      }
+                                                      },
+                                                      "title": "Request"
                                                     },
                                                     "response": {
                                                       "type": "object",
@@ -7216,7 +7392,8 @@
                                                           "type": "object",
                                                           "additionalProperties": true,
                                                           "properties": {},
-                                                          "default": {}
+                                                          "default": {},
+                                                          "title": "Headers"
                                                         },
                                                         "body": {
                                                           "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -7224,7 +7401,8 @@
                                                             {
                                                               "type": "object",
                                                               "additionalProperties": true,
-                                                              "properties": {}
+                                                              "properties": {},
+                                                              "title": "0"
                                                             },
                                                             {
                                                               "type": "array",
@@ -7236,7 +7414,8 @@
                                                           ],
                                                           "default": {}
                                                         }
-                                                      }
+                                                      },
+                                                      "title": "Response"
                                                     },
                                                     "allowAdditionalFields": {
                                                       "type": "boolean",
@@ -7268,7 +7447,8 @@
                                                       ],
                                                       "default": "aboveVariation"
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 }
                                               ],
                                               "components": {
@@ -7355,7 +7535,8 @@
                                                                     "type": "object",
                                                                     "readOnly": true,
                                                                     "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                                                    "additionalProperties": true
+                                                                    "additionalProperties": true,
+                                                                    "title": "Definition"
                                                                   },
                                                                   "operationId": {
                                                                     "type": "string",
@@ -7407,7 +7588,8 @@
                                                                     "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                                                     "additionalProperties": {
                                                                       "type": "string"
-                                                                    }
+                                                                    },
+                                                                    "title": "Headers"
                                                                   }
                                                                 },
                                                                 "components": {
@@ -7487,7 +7669,8 @@
                                                                 "type": "object",
                                                                 "required": [
                                                                   "operationId"
-                                                                ]
+                                                                ],
+                                                                "title": "1"
                                                               }
                                                             ]
                                                           }
@@ -7538,14 +7721,16 @@
                                                             "type": "object",
                                                             "additionalProperties": true,
                                                             "properties": {},
-                                                            "default": {}
+                                                            "default": {},
+                                                            "title": "Headers"
                                                           },
                                                           "parameters": {
                                                             "description": "URL parameters to include in the HTTP request, in key/value format.",
                                                             "type": "object",
                                                             "additionalProperties": true,
                                                             "default": {},
-                                                            "properties": {}
+                                                            "properties": {},
+                                                            "title": "Parameters"
                                                           },
                                                           "body": {
                                                             "description": "JSON object to include as the body of the HTTP request.",
@@ -7553,7 +7738,8 @@
                                                               {
                                                                 "type": "object",
                                                                 "additionalProperties": true,
-                                                                "properties": {}
+                                                                "properties": {},
+                                                                "title": "0"
                                                               },
                                                               {
                                                                 "type": "array",
@@ -7565,7 +7751,8 @@
                                                             ],
                                                             "default": {}
                                                           }
-                                                        }
+                                                        },
+                                                        "title": "Request"
                                                       },
                                                       "response": {
                                                         "type": "object",
@@ -7576,7 +7763,8 @@
                                                             "type": "object",
                                                             "additionalProperties": true,
                                                             "properties": {},
-                                                            "default": {}
+                                                            "default": {},
+                                                            "title": "Headers"
                                                           },
                                                           "body": {
                                                             "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -7584,7 +7772,8 @@
                                                               {
                                                                 "type": "object",
                                                                 "additionalProperties": true,
-                                                                "properties": {}
+                                                                "properties": {},
+                                                                "title": "0"
                                                               },
                                                               {
                                                                 "type": "array",
@@ -7596,7 +7785,8 @@
                                                             ],
                                                             "default": {}
                                                           }
-                                                        }
+                                                        },
+                                                        "title": "Response"
                                                       },
                                                       "allowAdditionalFields": {
                                                         "type": "boolean",
@@ -7628,7 +7818,8 @@
                                                         ],
                                                         "default": "aboveVariation"
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -7771,7 +7962,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -7800,7 +7992,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -7811,9 +8004,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -7908,7 +8103,8 @@
                                                       "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                       "default": 60000
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 }
                                               ],
                                               "components": {
@@ -7995,7 +8191,8 @@
                                                         "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                         "default": 60000
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -8051,7 +8248,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -8080,7 +8278,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -8091,9 +8290,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -8191,7 +8392,8 @@
                                                       "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                       "default": 60000
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 }
                                               ],
                                               "components": {
@@ -8281,7 +8483,8 @@
                                                         "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                                         "default": 60000
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -8321,7 +8524,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -8350,7 +8554,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -8361,9 +8566,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -8428,7 +8635,8 @@
                                                   "required": [
                                                     "keys"
                                                   ],
-                                                  "additionalProperties": false
+                                                  "additionalProperties": false,
+                                                  "title": "Object"
                                                 }
                                               ],
                                               "components": {
@@ -8485,7 +8693,8 @@
                                                     "required": [
                                                       "keys"
                                                     ],
-                                                    "additionalProperties": false
+                                                    "additionalProperties": false,
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -8515,7 +8724,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -8544,7 +8754,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -8555,9 +8766,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -8674,7 +8887,8 @@
                                                                       "type": "number",
                                                                       "minimum": 0
                                                                     }
-                                                                  }
+                                                                  },
+                                                                  "title": "Padding"
                                                                 }
                                                               ]
                                                             }
@@ -8682,7 +8896,8 @@
                                                         }
                                                       ]
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 },
                                                 {
                                                   "type": "boolean"
@@ -8794,7 +9009,8 @@
                                                                         "type": "number",
                                                                         "minimum": 0
                                                                       }
-                                                                    }
+                                                                    },
+                                                                    "title": "Padding"
                                                                   }
                                                                 ]
                                                               }
@@ -8802,7 +9018,8 @@
                                                           }
                                                         ]
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   },
                                                   "crop_element": {
                                                     "title": "Crop by element (detailed)",
@@ -8857,7 +9074,8 @@
                                                                 "type": "number",
                                                                 "minimum": 0
                                                               }
-                                                            }
+                                                            },
+                                                            "title": "Padding"
                                                           }
                                                         ]
                                                       }
@@ -8883,7 +9101,8 @@
                                                         "type": "number",
                                                         "minimum": 0
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Padding"
                                                   }
                                                 }
                                               },
@@ -8923,7 +9142,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -8952,7 +9172,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -8963,9 +9184,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -9012,7 +9235,8 @@
                                                         "false"
                                                       ]
                                                     }
-                                                  }
+                                                  },
+                                                  "title": "Object"
                                                 },
                                                 {
                                                   "type": "boolean"
@@ -9054,7 +9278,8 @@
                                                           "false"
                                                         ]
                                                       }
-                                                    }
+                                                    },
+                                                    "title": "Object"
                                                   }
                                                 }
                                               },
@@ -9068,7 +9293,8 @@
                                                 }
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -9097,7 +9323,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -9108,9 +9335,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "type": "object",
@@ -9132,7 +9361,8 @@
                                                 true
                                               ]
                                             }
-                                          }
+                                          },
+                                          "title": "1"
                                         }
                                       ]
                                     },
@@ -9161,7 +9391,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -9172,9 +9403,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "required": [
@@ -9219,7 +9452,8 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Outputs"
                                             },
                                             "variables": {
                                               "type": "object",
@@ -9230,9 +9464,11 @@
                                                   "type": "string",
                                                   "description": "Runtime expression for a user-defined output value."
                                                 }
-                                              }
+                                              },
+                                              "title": "Variables"
                                             }
-                                          }
+                                          },
+                                          "title": "Common"
                                         },
                                         {
                                           "required": [
@@ -9630,7 +9866,8 @@
                                   ]
                                 }
                               }
-                            }
+                            },
+                            "title": "Items"
                           }
                         }
                       },
@@ -9688,7 +9925,8 @@
                                       "type": "object",
                                       "readOnly": true,
                                       "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-                                      "additionalProperties": true
+                                      "additionalProperties": true,
+                                      "title": "Definition"
                                     },
                                     "operationId": {
                                       "type": "string",
@@ -9740,7 +9978,8 @@
                                       "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
                                       "additionalProperties": {
                                         "type": "string"
-                                      }
+                                      },
+                                      "title": "Headers"
                                     }
                                   },
                                   "components": {
@@ -9826,7 +10065,8 @@
                                   "required": [
                                     "name",
                                     "descriptionPath"
-                                  ]
+                                  ],
+                                  "title": "1"
                                 }
                               ]
                             }

@@ -33,11 +33,17 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "anyOf": [{ "$ref": "test_v3.schema.json#" }]
+        "anyOf": [
+          {
+            "$ref": "test_v3.schema.json#"
+          }
+        ]
       }
     }
   },
-  "required": ["tests"],
+  "required": [
+    "tests"
+  ],
   "examples": [
     {
       "tests": [
@@ -56,7 +62,10 @@
       "specId": "Do all the things! - Spec",
       "runOn": [
         {
-          "platforms": ["windows", "mac"],
+          "platforms": [
+            "windows",
+            "mac"
+          ],
           "browsers": {
             "name": "firefox",
             "window": {},
@@ -81,7 +90,9 @@
             {
               "runShell": {
                 "command": "echo",
-                "args": ["$USER"],
+                "args": [
+                  "$USER"
+                ],
                 "maxVariation": 0,
                 "overwrite": "aboveVariation"
               },
@@ -108,7 +119,10 @@
                     "job": "leader"
                   }
                 },
-                "statusCodes": [200, 201],
+                "statusCodes": [
+                  200,
+                  201
+                ],
                 "maxVariation": 0,
                 "overwrite": "aboveVariation"
               },
@@ -127,14 +141,18 @@
                 "moveTo": true,
                 "click": true,
                 "type": {
-                  "keys": ["shorthair cat"]
+                  "keys": [
+                    "shorthair cat"
+                  ]
                 }
               },
               "variables": {}
             },
             {
               "type": {
-                "keys": ["$ENTER$"]
+                "keys": [
+                  "$ENTER$"
+                ]
               }
             },
             {

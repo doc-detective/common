@@ -15,11 +15,17 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "anyOf": [{ "$ref": "spec_v3.schema.json#" }]
+        "anyOf": [
+          {
+            "$ref": "spec_v3.schema.json#"
+          }
+        ]
       }
     }
   },
-  "required": ["specs"],
+  "required": [
+    "specs"
+  ],
   "examples": [
     {
       "specs": [

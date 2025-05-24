@@ -55,7 +55,8 @@
       "required": [
         "keys"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "Object"
     }
   ],
   "components": {
@@ -112,7 +113,8 @@
         "required": [
           "keys"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "title": "Object"
       }
     }
   },

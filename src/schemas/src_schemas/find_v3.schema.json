@@ -22,10 +22,14 @@
         "type": "object",
         "anyOf": [
           {
-            "required": ["selector"]
+            "required": [
+              "selector"
+            ]
           },
           {
-            "required": ["elementText"]
+            "required": [
+              "elementText"
+            ]
           }
         ],
         "additionalProperties": false,
@@ -60,7 +64,8 @@
                   "button": {
                     "$ref": "click_v3.schema.json#/components/schemas/button"
                   }
-                }
+                },
+                "title": "1"
               }
             ]
           },
@@ -73,7 +78,11 @@
               {
                 "not": {
                   "type": "object",
-                  "required": ["selector", "elementText"]
+                  "required": [
+                    "selector",
+                    "elementText"
+                  ],
+                  "title": "Not"
                 }
               }
             ]
@@ -108,7 +117,9 @@
       "moveTo": true,
       "click": true,
       "type": {
-        "keys": ["shorthair cat"],
+        "keys": [
+          "shorthair cat"
+        ],
         "inputDelay": 100
       }
     }

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",  
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "httpRequest",
   "description": "Perform a generic HTTP request, for example to an API.",
   "anyOf": [
@@ -17,16 +17,22 @@
         "type": "string",
         "description": "URL for the HTTP request.",
         "pattern": "(^(http://|https://).*|\\$[A-Za-z0-9_]+)",
-        "transform": ["trim"]
+        "transform": [
+          "trim"
+        ]
       },
       "object": {
         "type": "object",
         "anyOf": [
           {
-            "required": ["url"]
+            "required": [
+              "url"
+            ]
           },
           {
-            "required": ["openApi"]
+            "required": [
+              "openApi"
+            ]
           }
         ],
         "additionalProperties": false,
@@ -54,7 +60,10 @@
                   },
                   {
                     "type": "object",
-                    "required": ["operationId"]
+                    "required": [
+                      "operationId"
+                    ],
+                    "title": "1"
                   }
                 ]
               }
@@ -70,13 +79,25 @@
                 }
               ]
             },
-            "default": [200, 201]
+            "default": [
+              200,
+              201
+            ]
           },
           "method": {
             "type": "string",
             "description": "Method of the HTTP request",
-            "enum": ["get", "put", "post", "patch", "delete"],
-            "transform": ["trim", "toEnumCase"],
+            "enum": [
+              "get",
+              "put",
+              "post",
+              "patch",
+              "delete"
+            ],
+            "transform": [
+              "trim",
+              "toEnumCase"
+            ],
             "default": "get"
           },
           "timeout": {
@@ -93,14 +114,16 @@
                 "type": "object",
                 "additionalProperties": true,
                 "properties": {},
-                "default": {}
+                "default": {},
+                "title": "Headers"
               },
               "parameters": {
                 "description": "URL parameters to include in the HTTP request, in key/value format.",
                 "type": "object",
                 "additionalProperties": true,
                 "default": {},
-                "properties": {}
+                "properties": {},
+                "title": "Parameters"
               },
               "body": {
                 "description": "JSON object to include as the body of the HTTP request.",
@@ -108,7 +131,8 @@
                   {
                     "type": "object",
                     "additionalProperties": true,
-                    "properties": {}
+                    "properties": {},
+                    "title": "0"
                   },
                   {
                     "type": "array",
@@ -120,7 +144,8 @@
                 ],
                 "default": {}
               }
-            }
+            },
+            "title": "Request"
           },
           "response": {
             "type": "object",
@@ -131,7 +156,8 @@
                 "type": "object",
                 "additionalProperties": true,
                 "properties": {},
-                "default": {}
+                "default": {},
+                "title": "Headers"
               },
               "body": {
                 "description": "JSON object expected in the response. If one or more key/value pairs aren't present in the response, the step fails.",
@@ -139,7 +165,8 @@
                   {
                     "type": "object",
                     "additionalProperties": true,
-                    "properties": {}
+                    "properties": {},
+                    "title": "0"
                   },
                   {
                     "type": "array",
@@ -151,7 +178,8 @@
                 ],
                 "default": {}
               }
-            }
+            },
+            "title": "Response"
           },
           "allowAdditionalFields": {
             "type": "boolean",
@@ -176,10 +204,15 @@
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing output at `path` if it exists.\nIf `aboveVariation`, overwrites the existing output at `path` if the difference between the new output and the existing output is greater than `maxVariation`.",
-            "enum": ["true", "false", "aboveVariation"],
+            "enum": [
+              "true",
+              "false",
+              "aboveVariation"
+            ],
             "default": "aboveVariation"
           }
-        }
+        },
+        "title": "Object"
       }
     }
   },
@@ -213,7 +246,10 @@
           "job": "leader"
         }
       },
-      "statusCodes": [200, 201]
+      "statusCodes": [
+        200,
+        201
+      ]
     },
     {
       "url": "https://www.api-server.com",
@@ -238,7 +274,9 @@
           "header": "value"
         }
       },
-      "statusCodes": [200]
+      "statusCodes": [
+        200
+      ]
     },
     {
       "url": "https://reqres.in/api/users",
@@ -255,7 +293,10 @@
           "job": "leader"
         }
       },
-      "statusCodes": [200, 201],
+      "statusCodes": [
+        200,
+        201
+      ],
       "path": "response.json",
       "directory": "media",
       "maxVariation": 0.05,

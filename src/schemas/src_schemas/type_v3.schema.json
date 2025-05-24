@@ -46,23 +46,36 @@
             "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
           }
         },
-        "required": ["keys"],
-        "additionalProperties": false
+        "required": [
+          "keys"
+        ],
+        "additionalProperties": false,
+        "title": "Object"
       }
     }
   },
   "examples": [
     "kittens",
-    ["$ENTER$"],
-    ["kittens", "$ENTER$"],
+    [
+      "$ENTER$"
+    ],
+    [
+      "kittens",
+      "$ENTER$"
+    ],
     {
       "keys": "kittens"
     },
     {
-      "keys": ["$ENTER$"]
+      "keys": [
+        "$ENTER$"
+      ]
     },
     {
-      "keys": ["kittens", "$ENTER$"],
+      "keys": [
+        "kittens",
+        "$ENTER$"
+      ],
       "inputDelay": 500
     }
   ]

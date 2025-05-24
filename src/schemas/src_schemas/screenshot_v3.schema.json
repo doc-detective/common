@@ -19,7 +19,9 @@
         "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
         "type": "string",
         "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
-        "transform": ["trim"]
+        "transform": [
+          "trim"
+        ]
       },
       "object": {
         "type": "object",
@@ -31,7 +33,9 @@
           "directory": {
             "type": "string",
             "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
-            "transform": ["trim"]
+            "transform": [
+              "trim"
+            ]
           },
           "maxVariation": {
             "type": "number",
@@ -43,7 +47,11 @@
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
-            "enum": ["true", "false", "aboveVariation"],
+            "enum": [
+              "true",
+              "false",
+              "aboveVariation"
+            ],
             "default": "aboveVariation"
           },
           "crop": {
@@ -58,7 +66,8 @@
               }
             ]
           }
-        }
+        },
+        "title": "Object"
       },
       "crop_element": {
         "title": "Crop by element (detailed)",
@@ -67,10 +76,14 @@
         "additionalProperties": false,
         "anyOf": [
           {
-            "required": ["selector"]
+            "required": [
+              "selector"
+            ]
           },
           {
-            "required": ["elementText"]
+            "required": [
+              "elementText"
+            ]
           }
         ],
         "properties": {
@@ -100,11 +113,24 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "top": { "type": "number", "minimum": 0 },
-          "right": { "type": "number", "minimum": 0 },
-          "bottom": { "type": "number", "minimum": 0 },
-          "left": { "type": "number", "minimum": 0 }
-        }
+          "top": {
+            "type": "number",
+            "minimum": 0
+          },
+          "right": {
+            "type": "number",
+            "minimum": 0
+          },
+          "bottom": {
+            "type": "number",
+            "minimum": 0
+          },
+          "left": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "title": "Padding"
       }
     }
   },

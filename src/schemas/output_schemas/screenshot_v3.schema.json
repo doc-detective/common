@@ -107,7 +107,8 @@
                           "type": "number",
                           "minimum": 0
                         }
-                      }
+                      },
+                      "title": "Padding"
                     }
                   ]
                 }
@@ -115,7 +116,8 @@
             }
           ]
         }
-      }
+      },
+      "title": "Object"
     },
     {
       "type": "boolean"
@@ -227,7 +229,8 @@
                             "type": "number",
                             "minimum": 0
                           }
-                        }
+                        },
+                        "title": "Padding"
                       }
                     ]
                   }
@@ -235,7 +238,8 @@
               }
             ]
           }
-        }
+        },
+        "title": "Object"
       },
       "crop_element": {
         "title": "Crop by element (detailed)",
@@ -290,7 +294,8 @@
                     "type": "number",
                     "minimum": 0
                   }
-                }
+                },
+                "title": "Padding"
               }
             ]
           }
@@ -316,7 +321,8 @@
             "type": "number",
             "minimum": 0
           }
-        }
+        },
+        "title": "Padding"
       }
     }
   },

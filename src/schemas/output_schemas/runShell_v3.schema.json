@@ -85,7 +85,8 @@
           "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
           "default": 60000
         }
-      }
+      },
+      "title": "Object"
     }
   ],
   "components": {
@@ -172,7 +173,8 @@
             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
             "default": 60000
           }
-        }
+        },
+        "title": "Object"
       }
     }
   },

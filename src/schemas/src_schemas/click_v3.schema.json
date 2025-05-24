@@ -23,17 +23,25 @@
       "button": {
         "description": "Kind of click to perform.",
         "type": "string",
-        "enum": ["left", "right", "middle"]
+        "enum": [
+          "left",
+          "right",
+          "middle"
+        ]
       },
       "object": {
         "title": "Click element (detailed)",
         "type": "object",
         "anyOf": [
           {
-            "required": ["selector"]
+            "required": [
+              "selector"
+            ]
           },
           {
-            "required": ["elementText"]
+            "required": [
+              "elementText"
+            ]
           }
         ],
         "properties": {

@@ -174,7 +174,8 @@
                     "middle"
                   ]
                 }
-              }
+              },
+              "title": "1"
             }
           ]
         },
@@ -238,7 +239,8 @@
                   "required": [
                     "keys"
                   ],
-                  "additionalProperties": false
+                  "additionalProperties": false,
+                  "title": "Object"
                 }
               ],
               "components": {
@@ -295,7 +297,8 @@
                     "required": [
                       "keys"
                     ],
-                    "additionalProperties": false
+                    "additionalProperties": false,
+                    "title": "Object"
                   }
                 }
               },
@@ -331,7 +334,8 @@
                 "required": [
                   "selector",
                   "elementText"
-                ]
+                ],
+                "title": "Not"
               }
             }
           ]
@@ -512,7 +516,8 @@
                       "middle"
                     ]
                   }
-                }
+                },
+                "title": "1"
               }
             ]
           },
@@ -576,7 +581,8 @@
                     "required": [
                       "keys"
                     ],
-                    "additionalProperties": false
+                    "additionalProperties": false,
+                    "title": "Object"
                   }
                 ],
                 "components": {
@@ -633,7 +639,8 @@
                       "required": [
                         "keys"
                       ],
-                      "additionalProperties": false
+                      "additionalProperties": false,
+                      "title": "Object"
                     }
                   }
                 },
@@ -669,7 +676,8 @@
                   "required": [
                     "selector",
                     "elementText"
-                  ]
+                  ],
+                  "title": "Not"
                 }
               }
             ]

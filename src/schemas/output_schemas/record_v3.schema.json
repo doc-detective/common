@@ -37,7 +37,8 @@
             "false"
           ]
         }
-      }
+      },
+      "title": "Object"
     },
     {
       "type": "boolean"
@@ -79,7 +80,8 @@
               "false"
             ]
           }
-        }
+        },
+        "title": "Object"
       }
     }
   },

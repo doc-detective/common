@@ -8,10 +8,14 @@
   "additionalProperties": false,
   "anyOf": [
     {
-      "required": ["descriptionPath"]
+      "required": [
+        "descriptionPath"
+      ]
     },
     {
-      "required": ["operationId"]
+      "required": [
+        "operationId"
+      ]
     }
   ],
   "properties": {
@@ -26,7 +30,8 @@
       "type": "object",
       "readOnly": true,
       "description": "OpenAPI definition object loaded from the `descriptionPath`. This is a resolved version of the OpenAPI description and should not be user-defined.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "title": "Definition"
     },
     "operationId": {
       "$ref": "#/components/schemas/operationId"
@@ -38,7 +43,12 @@
     "validateAgainstSchema": {
       "type": "string",
       "description": "Validates the request and/or response against the schema in the OpenAPI description. If the request or response doesn't match the schema, the step fails.",
-      "enum": ["request", "response", "both", "none"],
+      "enum": [
+        "request",
+        "response",
+        "both",
+        "none"
+      ],
       "default": "both"
     },
     "mockResponse": {
@@ -50,9 +60,16 @@
       "description": "Response code to use for validation, examples, and status code checking. If the response code doesn't match, the step fails. `statusCodes` overrides this value when specified."
     },
     "useExample": {
-      "type": ["string"],
+      "type": [
+        "string"
+      ],
       "description": "Uses the example from the OpenAPI description as the request and response data. If the request or response has multiple examples, specify `exampleKey`. If `statusCode` isn't specified, uses the first defined response code. `requestData`, `requestParams`, and `requestHeaders` override portions of request examples when specified. `responseData` overrides portions of response examples when specified.",
-      "enum": ["request", "response", "both", "none"],
+      "enum": [
+        "request",
+        "response",
+        "both",
+        "none"
+      ],
       "default": "none"
     },
     "exampleKey": {
@@ -65,7 +82,8 @@
       "description": "Request headers to add to requests. For example, to set `Authorization` headers for all requests from the specified OpenAPI document. If specified in both a config and a step, the step value overrides the config value.",
       "additionalProperties": {
         "type": "string"
-      }
+      },
+      "title": "Headers"
     }
   },
   "components": {

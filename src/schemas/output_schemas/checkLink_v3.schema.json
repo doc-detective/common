@@ -58,7 +58,8 @@
             308
           ]
         }
-      }
+      },
+      "title": "Object"
     }
   ],
   "components": {
@@ -119,7 +120,8 @@
               308
             ]
           }
-        }
+        },
+        "title": "Object"
       }
     }
   },
