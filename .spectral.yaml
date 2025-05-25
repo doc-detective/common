@@ -82,23 +82,6 @@ rules:
         schema:
           type: object
 
-  schema-type-is-string:
-    description: type must be a string or array
-    message: The type field must be a string or array of strings
-    given: "$..*[?(@.type)]"
-    severity: error
-    recommended: true
-    then:
-      field: type
-      function: schema
-      functionOptions:
-        schema:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-
   # Doc Detective specific rules
   v3-property-description:
     description: Properties should have descriptions
