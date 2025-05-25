@@ -35,6 +35,7 @@
       "items": {
         "anyOf": [
           {
+            "type": "object",
             "$ref": "test_v3.schema.json#"
           }
         ]

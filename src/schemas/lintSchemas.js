@@ -5,6 +5,12 @@ const { bundleAndLoadRuleset } = require("@stoplight/spectral-ruleset-bundler/wi
 const { createHttpAndFileResolver } = require("@stoplight/spectral-ref-resolver");
 const { DiagnosticSeverity } = require("@stoplight/spectral-core");
 
+// Import node-fetch and assign to global.fetch if it doesn't exist
+const fetch = require('node-fetch');
+if (!global.fetch) {
+  global.fetch = fetch;
+}
+
 /**
  * Lints JSON schema files using Spectral with a configured ruleset.
  * 

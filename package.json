@@ -7,8 +7,8 @@
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
     "build": "npm run dereferenceSchemas",
     "postbuild": "npm run test",
-    "test": "mocha",
-    "lint:schemas": "node ./src/schemas/lintSchemas.js",
+    "test": "npm run lint:schemas || true && mocha",
+    "lint:schemas": "spectral lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\"",
     "spectral": "spectral lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\""
   },
   "repository": {
@@ -38,6 +38,7 @@
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
     "axios": "^1.9.0",
+    "node-fetch": "^3.3.2",
     "uuid": "^11.1.0",
     "yaml": "^2.8.0"
   }
