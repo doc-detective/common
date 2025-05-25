@@ -6,9 +6,9 @@ const { createHttpAndFileResolver } = require("@stoplight/spectral-ref-resolver"
 const { DiagnosticSeverity } = require("@stoplight/spectral-core");
 
 // Import node-fetch and assign to global.fetch if it doesn't exist
-const fetch = require('node-fetch');
+const nodeFetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 if (!global.fetch) {
-  global.fetch = fetch;
+  global.fetch = nodeFetch;
 }
 
 /**

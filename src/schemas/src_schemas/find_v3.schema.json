@@ -7,6 +7,7 @@
       "$ref": "#/components/schemas/string"
     },
     {
+      "type": "object",
       "$ref": "#/components/schemas/object"
     }
   ],
@@ -71,6 +72,7 @@
           },
           "type": {
             "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`type`](type). To type in the element, make the element active with the `click` parameter.",
+            "type": ["object", "string"],
             "allOf": [
               {
                 "$ref": "type_v3.schema.json#"
@@ -117,6 +119,7 @@
       "moveTo": true,
       "click": true,
       "type": {
+        "type": "object",
         "keys": [
           "shorthair cat"
         ],
