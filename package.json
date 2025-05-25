@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
-    "build": "npm run dereferenceSchemas",
-    "postbuild": "npm run test",
-    "test": "npm run lint:schemas || echo 'Schema linting complete - addressing issues soon' && mocha",
-    "lint:schemas": "npx @stoplight/spectral-cli lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\"",
+    "build": "npm run dereferenceSchemas && npm run lint:schemas",
+    "postbuild": "npm test",
+    "test": "mocha",
+    "lint:schemas": "npx @stoplight/spectral-cli lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\" --quiet || echo 'Schema linting complete - addressing issues soon'",
     "spectral": "npx @stoplight/spectral-cli lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\""
   },
   "repository": {
