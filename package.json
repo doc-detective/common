@@ -9,7 +9,7 @@
     "postbuild": "npm run test",
     "test": "mocha",
     "lint:schemas": "node ./src/schemas/lintSchemas.js",
-    "spectral": "spectral lint -r ./.spectral-cli.yaml \"./src/schemas/src_schemas/*_v3.schema.json\""
+    "spectral": "spectral lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\""
   },
   "repository": {
     "type": "git",

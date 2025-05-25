@@ -10,7 +10,7 @@ describe('Spectral schema linting', function() {
     try {
       const results = await lintSchemas({
         schemasDir: path.resolve(`${__dirname}/../src/schemas/src_schemas`),
-        rulesetPath: path.resolve(`${__dirname}/../.spectral.js`),
+        rulesetPath: path.resolve(`${__dirname}/../.spectral.yaml`),
         v3Only: true
       });
       

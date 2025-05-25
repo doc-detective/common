@@ -9,6 +9,8 @@ extends:
   - spectral:oas
   - spectral:asyncapi
 
+functionsDir: "./spectral-functions"
+
 rules:
   # Core structure validation
   schema-required-title:
@@ -31,15 +33,26 @@ rules:
       field: description
       function: truthy
 
+  schema-required-schema:
+    description: Schema must have $schema
+    message: Schema must include a $schema property to indicate the schema version
+    given: "$"
+    severity: error
+    recommended: true
+    then:
+      field: "$schema"
+      function: truthy
+
   # Schema best practices
   schema-additional-properties-defined:
     description: additionalProperties should be explicitly defined
     message: additionalProperties should be explicitly set to true or false
-    given: "$..*[?(@.type === 'object' && !@.additionalProperties)]"
+    given: "$..*[?(@.type === 'object')]"
     severity: warn
     recommended: true
     then:
-      function: falsy
+      field: additionalProperties
+      function: truthy
 
   schema-required-is-array:
     description: required must be an array
@@ -56,7 +69,57 @@ rules:
           items:
             type: string
 
+  schema-properties-are-objects:
+    description: properties must be objects
+    message: The properties field must be an object
+    given: "$..*[?(@.properties)]"
+    severity: error
+    recommended: true
+    then:
+      field: properties
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  schema-type-is-string:
+    description: type must be a string or array
+    message: The type field must be a string or array of strings
+    given: "$..*[?(@.type)]"
+    severity: error
+    recommended: true
+    then:
+      field: type
+      function: schema
+      functionOptions:
+        schema:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+
   # Doc Detective specific rules
+  v3-property-description:
+    description: Properties should have descriptions
+    message: All properties should have description fields
+    given: "$.properties.*"
+    severity: warn
+    recommended: true
+    then:
+      field: description
+      function: truthy
+
+  v3-examples-required:
+    description: Schema should have examples
+    message: Schema should include at least one example
+    given: "$"
+    severity: warn
+    recommended: true
+    then:
+      field: examples
+      function: truthy
+
   v3-schema-naming-conventions:
     description: v3 schemas should follow naming conventions (name_v3.schema.json)
     message: Schema file for v3 should follow naming convention (name_v3.schema.json)

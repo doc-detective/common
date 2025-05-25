@@ -20,10 +20,7 @@ npm run spectral
 
 ## Understanding the Rules
 
-The Spectral ruleset is configured in two files:
-
-- `.spectral.yaml` - Basic YAML configuration
-- `.spectral.js` - Advanced JavaScript configuration with more complex rules
+The Spectral ruleset is configured in `.spectral.yaml`, which provides a consistent configuration used by both the CLI and programmatic interfaces.
 
 Rules are categorized as:
 
@@ -53,21 +50,19 @@ Our ruleset enforces:
 
 ## Creating Custom Rules
 
-To create custom rules, modify the `.spectral.js` file. Each rule follows this structure:
+Custom functions can be added to the `spectral-functions` directory and referenced in the `.spectral.yaml` file. Each rule follows this structure:
 
-```js
-'rule-name': {
-  description: 'Description of the rule',
-  message: 'Message shown when rule is violated',
-  given: '$.path.to.evaluate', // JSONPath of where to apply rule
-  severity: 'error', // or 'warn', 'info', 'hint'
-  recommended: true,
-  then: {
-    field: 'fieldName', // Field to check
-    function: 'functionName', // Validation function to apply
-    functionOptions: {} // Options for the function
-  }
-}
+```yaml
+rule-name:
+  description: 'Description of the rule'
+  message: 'Message shown when rule is violated'
+  given: '$.path.to.evaluate' # JSONPath of where to apply rule
+  severity: error # or warn, info, hint
+  recommended: true
+  then:
+    field: fieldName # Field to check
+    function: functionName # Validation function to apply
+    functionOptions: {} # Options for the function
 ```
 
 ## Programmatic Usage
@@ -80,7 +75,6 @@ const { lintSchemas } = require('doc-detective-common');
 async function validateSchemas() {
   const results = await lintSchemas({
     schemasDir: './path/to/schemas',
-    rulesetPath: './path/to/.spectral.js',
     v3Only: true // Only validate v3 schemas
   });
   
