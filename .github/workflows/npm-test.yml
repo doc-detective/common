@@ -51,12 +51,6 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
           registry-url: https://registry.npmjs.org/
-      - run: echo "NODE_AUTH_TOKEN is set"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
-      - run: npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
       - run: npm ci
       - run: npm run build
       - run: npm publish
@@ -64,40 +58,43 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
 
   update-downstream:
-    name: Update docs
+    name: Update downstream packages
     needs: publish-npm
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Get package version
-        run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+        id: get_version
+        run: |
+          # Extract the version from package.json and set it as an environment variable
+          echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
 
       - name: Update `doc-detective`
         run: |
           curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
                 -H "Accept: application/vnd.github.everest-preview+json" \
                 "https://api.github.com/repos/doc-detective/doc-detective/dispatches" \
-                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ steps.get_version.outputs.version }}"} }'
 
       - name: Update `resolver`
         run: |
           curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
                 -H "Accept: application/vnd.github.everest-preview+json" \
                 "https://api.github.com/repos/doc-detective/resolver/dispatches" \
-                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ steps.get_version.outputs.version }}"} }'
 
       - name: Update `core`
         run: |
           curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
                 -H "Accept: application/vnd.github.everest-preview+json" \
                 "https://api.github.com/repos/doc-detective/core/dispatches" \
-                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ steps.get_version.outputs.version }}"} }'
 
       - name: Update docs
         run: |
           curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
                -H "Accept: application/vnd.github.everest-preview+json" \
                "https://api.github.com/repos/doc-detective/doc-detective.github.io/dispatches" \
-               -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+               -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ steps.get_version.outputs.version }}"} }'
 
