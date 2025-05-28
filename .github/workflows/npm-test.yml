@@ -33,11 +33,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: package-lock.json
           node-version: ${{ matrix.node }}
       - run: npm ci
-      - run: npm run build  # Automatically run tests because of the `postbuild` script in package.json
+      - run: npm run build # Automatically run tests because of the `postbuild` script in package.json
 
   publish-npm:
     if: github.event_name == 'release' && github.event.action == 'published'
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: package-lock.json
           registry-url: https://registry.npmjs.org/
       - run: echo "NODE_AUTH_TOKEN is set"
@@ -63,8 +63,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
 
-  update-docs:
-    name: Update documentation
+  update-downstream:
+    name: Update docs
     needs: publish-npm
     runs-on: ubuntu-latest
     steps:
@@ -73,9 +73,31 @@ jobs:
       - name: Get package version
         run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
 
-      - name: Trigger GitHub Action in doc-detective.github.io
+      - name: Update `doc-detective`
         run: |
-          curl -XPOST -H "Authorization: token ${{ secrets.DOCS_PERSONAL_ACCESS_TOKEN }}" \
+          curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
+                -H "Accept: application/vnd.github.everest-preview+json" \
+                "https://api.github.com/repos/doc-detective/doc-detective/dispatches" \
+                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+
+      - name: Update `resolver`
+        run: |
+          curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
+                -H "Accept: application/vnd.github.everest-preview+json" \
+                "https://api.github.com/repos/doc-detective/resolver/dispatches" \
+                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+
+      - name: Update `core`
+        run: |
+          curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
+                -H "Accept: application/vnd.github.everest-preview+json" \
+                "https://api.github.com/repos/doc-detective/core/dispatches" \
+                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+
+      - name: Update docs
+        run: |
+          curl -XPOST -H "Authorization: token ${{ secrets.DD_DEP_UPDATE_TOKEN }}" \
                -H "Accept: application/vnd.github.everest-preview+json" \
                "https://api.github.com/repos/doc-detective/doc-detective.github.io/dispatches" \
                -d '{"event_type": "update-common-package-event", "client_payload": {"version": "${{ env.VERSION }}"} }'
+
