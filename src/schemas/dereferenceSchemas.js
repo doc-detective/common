@@ -16,17 +16,11 @@ const fs = require("fs");
 async function dereferenceSchemas() {
   const inputDir = path.resolve(`${__dirname}/src_schemas`);
   const buildDir = path.resolve(`${__dirname}/build`);
-  fs.mkdir(buildDir, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdirSync(buildDir, { recursive: true });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
-  fs.mkdir(outputDir, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdirSync(outputDir, { recursive: true });
   const distDir = path.resolve(__dirname, `../../dist/schemas`);
-  fs.mkdir(distDir, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdirSync(distDir, { recursive: true });
 
   // List of schema files to process
   // These files should be present in the input directory
