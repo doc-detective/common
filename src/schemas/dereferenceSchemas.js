@@ -20,6 +20,16 @@ async function dereferenceSchemas() {
     if (err) throw err;
   });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
+  fs.mkdir(outputDir, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+  const distDir = path.resolve(__dirname, `../../dist/schemas`);
+  fs.mkdir(distDir, { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+
+  // List of schema files to process
+  // These files should be present in the input directory
   const files = [
     // v3 schemas
     "checkLink_v3.schema.json",
@@ -63,9 +73,11 @@ async function dereferenceSchemas() {
     "typeKeys_v2.schema.json",
     "wait_v2.schema.json",
   ];
+
   // Update schema reference paths
+  console.log("Updating schema reference paths...");
   for (const file of files) {
-    // console.log(`File: ${file}`)
+    console.log(`File: ${file}`)
     const filePath = path.resolve(`${inputDir}/${file}`);
     const buildFilePath = path.resolve(`${buildDir}/${file}`);
     try {
@@ -87,8 +99,11 @@ async function dereferenceSchemas() {
       console.error(`Error processing ${file}:`, err);
     }
   }
+
   // Dereference schemas
+  console.log("Dereferencing schemas...");
   for await (const file of files) {
+    console.log(`Processing file: ${file}`);
     const filePath = path.resolve(`${buildDir}/${file}`);
     const outputFilePath = path.resolve(`${outputDir}/${file}`);
     try {
@@ -112,6 +127,7 @@ async function dereferenceSchemas() {
     }
   }
   // Build final schemas.json file
+  console.log("Building schemas.json file...");
   const schemas = {};
   files.forEach(async (file) => {
     const key = file.replace(".schema.json", "");
@@ -129,6 +145,38 @@ async function dereferenceSchemas() {
   // fs.rm(buildDir, { recursive: true }, (err) => {
   //   if (err) throw err;
   // });
+
+  // Publish select output schemas to the schemas directory
+  const publishedSchemas = [
+    "checkLink_v3.schema.json",
+    "click_v3.schema.json",
+    "config_v3.schema.json",
+    "context_v3.schema.json",
+    "find_v3.schema.json",
+    "goTo_v3.schema.json",
+    "loadVariables_v3.schema.json",
+    "httpRequest_v3.schema.json",
+    "openApi_v3.schema.json",
+    "record_v3.schema.json",
+    "resolvedTests_v3.schema.json",
+    "report_v3.schema.json",
+    "runCode_v3.schema.json",
+    "runShell_v3.schema.json",
+    "screenshot_v3.schema.json",
+    "spec_v3.schema.json",
+    "step_v3.schema.json",
+    "stopRecord_v3.schema.json",
+    "test_v3.schema.json",
+    "type_v3.schema.json",
+    "wait_v3.schema.json",
+  ];
+  console.log("Publishing schemas to dist/schemas directory...");
+  publishedSchemas.forEach((file) => {
+    console.log(`Publishing file: ${file}`);
+    const srcPath = path.resolve(`${outputDir}/${file}`);
+    const destPath = path.resolve(`${distDir}/${file}`);
+    fs.copyFileSync(srcPath, destPath);
+  });
 }
 
 // Prepend app-root path to referenced relative paths
