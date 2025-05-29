@@ -10,7 +10,7 @@
       "description": "JSON Schema for this object.",
       "type": "string",
       "enum": [
-        "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/spec_v3.schema.json"
+        "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/spec_v3.schema.json"
       ]
     },
     "specId": {
@@ -48,7 +48,7 @@
                 "description": "JSON Schema for this object.",
                 "type": "string",
                 "enum": [
-                  "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/context_v3.schema.json"
+                  "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/context_v3.schema.json"
                 ]
               },
               "contextId": {
@@ -641,7 +641,7 @@
                           "description": "JSON Schema for this object.",
                           "type": "string",
                           "enum": [
-                            "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/context_v3.schema.json"
+                            "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/context_v3.schema.json"
                           ]
                         },
                         "contextId": {
@@ -1215,7 +1215,7 @@
                             "description": "JSON Schema for this object.",
                             "type": "string",
                             "enum": [
-                              "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                              "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                             ]
                           },
                           "stepId": {
@@ -1257,7 +1257,7 @@
                         "description": "JSON Schema for this object.",
                         "type": "string",
                         "enum": [
-                          "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                          "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                         ]
                       },
                       "stepId": {
@@ -1307,7 +1307,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -1513,7 +1513,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -1690,7 +1690,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -2481,7 +2481,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -2633,7 +2633,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -3599,7 +3599,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -3896,7 +3896,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -4179,7 +4179,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -4390,7 +4390,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -4828,7 +4828,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -4990,7 +4990,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -5065,7 +5065,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -5135,7 +5135,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -5849,7 +5849,7 @@
                                   "description": "JSON Schema for this object.",
                                   "type": "string",
                                   "enum": [
-                                    "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                    "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                   ]
                                 },
                                 "stepId": {
@@ -5891,7 +5891,7 @@
                               "description": "JSON Schema for this object.",
                               "type": "string",
                               "enum": [
-                                "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                               ]
                             },
                             "stepId": {
@@ -5941,7 +5941,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -6147,7 +6147,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -6324,7 +6324,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -7115,7 +7115,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -7267,7 +7267,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -8233,7 +8233,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -8530,7 +8530,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -8813,7 +8813,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -9024,7 +9024,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -9462,7 +9462,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -9624,7 +9624,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -9699,7 +9699,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
@@ -9769,7 +9769,7 @@
                                     "description": "JSON Schema for this object.",
                                     "type": "string",
                                     "enum": [
-                                      "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+                                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
                                     ]
                                   },
                                   "stepId": {
