@@ -140,36 +140,25 @@ async function dereferenceSchemas() {
   //   if (err) throw err;
   // });
 
-  // Publish select output schemas to the schemas directory
-  const publishedSchemas = [
-    "checkLink_v3.schema.json",
-    "click_v3.schema.json",
-    "config_v3.schema.json",
-    "context_v3.schema.json",
-    "find_v3.schema.json",
-    "goTo_v3.schema.json",
-    "loadVariables_v3.schema.json",
-    "httpRequest_v3.schema.json",
-    "openApi_v3.schema.json",
-    "record_v3.schema.json",
-    "resolvedTests_v3.schema.json",
-    "report_v3.schema.json",
-    "runCode_v3.schema.json",
-    "runShell_v3.schema.json",
-    "screenshot_v3.schema.json",
-    "spec_v3.schema.json",
-    "step_v3.schema.json",
-    "stopRecord_v3.schema.json",
-    "test_v3.schema.json",
-    "type_v3.schema.json",
-    "wait_v3.schema.json",
-  ];
+  // Publish v3 schemas to distribution directory
+  const publishedSchemas = files.filter(file => file.includes('_v3.schema.json'));
+
   console.log("Publishing schemas to dist/schemas directory...");
   publishedSchemas.forEach((file) => {
-    console.log(`Publishing file: ${file}`);
-    const srcPath = path.resolve(`${outputDir}/${file}`);
-    const destPath = path.resolve(`${distDir}/${file}`);
-    fs.copyFileSync(srcPath, destPath);
+    try {
+      console.log(`Publishing file: ${file}`);
+      const srcPath = path.resolve(`${outputDir}/${file}`);
+      const destPath = path.resolve(`${distDir}/${file}`);
+
+      // Verify source file exists before copying
+      if (!fs.existsSync(srcPath)) {
+        throw new Error(`Source file not found: ${srcPath}`);
+      }
+
+      fs.copyFileSync(srcPath, destPath);
+    } catch (err) {
+      console.error(`Error publishing ${file}:`, err);
+    }
   });
 }
 
