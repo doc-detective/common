@@ -8,6 +8,13 @@
     "contextId": "uuid"
   },
   "properties": {
+    "$schema": {
+      "description": "JSON Schema for this object.",
+      "type": "string",
+      "enum": [
+        "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/context_v3.schema.json"
+      ]
+    },
     "contextId": {
       "type": "string",
       "description": "Unique identifier for the context."
