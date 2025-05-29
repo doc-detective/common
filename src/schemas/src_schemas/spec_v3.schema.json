@@ -6,6 +6,13 @@
     "specId": "uuid"
   },
   "properties": {
+    "$schema": {
+      "description": "JSON Schema for this object.",
+      "type": "string",
+      "enum": [
+        "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/spec_v3.schema.json"
+      ]
+    },
     "specId": {
       "type": "string",
       "description": "Unique identifier for the test specification."

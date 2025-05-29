@@ -11,6 +11,9 @@
           "stepId": "uuid"
         },
         "properties": {
+          "$schema": {
+            "$ref": "#/components/schemas/$schema"
+          },
           "stepId": {
             "$ref": "#/components/schemas/stepId"
           },
@@ -25,6 +28,13 @@
           }
         },
         "title": "Common"
+      },
+      "$schema": {
+        "description": "JSON Schema for this object.",
+        "type": "string",
+        "enum": [
+          "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/step_v3.schema.json"
+        ]
       },
       "stepId": {
         "type": "string",
@@ -68,9 +78,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "checkLink"
-          ],
+          "required": ["checkLink"],
           "properties": {
             "checkLink": {
               "$ref": "checkLink_v3.schema.json#"
@@ -87,9 +95,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "click"
-          ],
+          "required": ["click"],
           "properties": {
             "click": {
               "$ref": "click_v3.schema.json#"
@@ -106,9 +112,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "find"
-          ],
+          "required": ["find"],
           "properties": {
             "find": {
               "$ref": "find_v3.schema.json#"
@@ -125,9 +129,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "goTo"
-          ],
+          "required": ["goTo"],
           "properties": {
             "goTo": {
               "$ref": "goTo_v3.schema.json#"
@@ -144,9 +146,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "httpRequest"
-          ],
+          "required": ["httpRequest"],
           "properties": {
             "httpRequest": {
               "$ref": "httpRequest_v3.schema.json#"
@@ -163,9 +163,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "runShell"
-          ],
+          "required": ["runShell"],
           "properties": {
             "runShell": {
               "$ref": "runShell_v3.schema.json#"
@@ -182,9 +180,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "runCode"
-          ],
+          "required": ["runCode"],
           "properties": {
             "runCode": {
               "$ref": "runCode_v3.schema.json#"
@@ -201,9 +197,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "type"
-          ],
+          "required": ["type"],
           "properties": {
             "type": {
               "$ref": "type_v3.schema.json#"
@@ -220,9 +214,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "screenshot"
-          ],
+          "required": ["screenshot"],
           "properties": {
             "screenshot": {
               "$ref": "screenshot_v3.schema.json#"
@@ -239,9 +231,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "record"
-          ],
+          "required": ["record"],
           "properties": {
             "record": {
               "$ref": "record_v3.schema.json#"
@@ -258,9 +248,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "stopRecord"
-          ],
+          "required": ["stopRecord"],
           "properties": {
             "stopRecord": {
               "$ref": "stopRecord_v3.schema.json#"
@@ -278,9 +266,7 @@
         {
           "title": "loadVariables",
           "type": "object",
-          "required": [
-            "loadVariables"
-          ],
+          "required": ["loadVariables"],
           "properties": {
             "loadVariables": {
               "$ref": "loadVariables_v3.schema.json#"
@@ -297,9 +283,7 @@
         {
           "title": "wait",
           "type": "object",
-          "required": [
-            "wait"
-          ],
+          "required": ["wait"],
           "properties": {
             "wait": {
               "$ref": "wait_v3.schema.json#"
@@ -332,9 +316,7 @@
       "stepId": "status-code",
       "checkLink": {
         "url": "https://www.google.com",
-        "statusCodes": [
-          200
-        ]
+        "statusCodes": [200]
       }
     },
     {
@@ -353,9 +335,7 @@
         "language": "python",
         "code": "print('Hello from Python')",
         "workingDirectory": ".",
-        "exitCodes": [
-          0
-        ],
+        "exitCodes": [0],
         "stdio": "Hello from Python!",
         "path": "python-output.txt",
         "directory": "output",

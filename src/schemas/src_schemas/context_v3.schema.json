@@ -8,6 +8,13 @@
     "contextId": "uuid"
   },
   "properties": {
+    "$schema": {
+      "description": "JSON Schema for this object.",
+      "type": "string",
+      "enum": [
+        "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/context_v3.schema.json"
+      ]
+    },
     "contextId": {
       "type": "string",
       "description": "Unique identifier for the context."
@@ -55,29 +62,18 @@
     "schemas": {
       "platform": {
         "type": "string",
-        "enum": [
-          "linux",
-          "mac",
-          "windows"
-        ]
+        "enum": ["linux", "mac", "windows"]
       },
       "browserName": {
         "type": "string",
         "description": "Name of the browser.",
-        "enum": [
-          "chrome",
-          "firefox",
-          "safari",
-          "webkit"
-        ],
+        "enum": ["chrome", "firefox", "safari", "webkit"],
         "$comment": "`safari` is just a shortcut for `webkit`. Included for visibility and to reduce questions."
       },
       "browser": {
         "type": "object",
         "description": "Browser configuration.",
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "additionalProperties": false,
         "properties": {
           "name": {
@@ -131,16 +127,8 @@
       "browsers": "chrome"
     },
     {
-      "platforms": [
-        "windows",
-        "mac",
-        "linux"
-      ],
-      "browsers": [
-        "chrome",
-        "firefox",
-        "webkit"
-      ]
+      "platforms": ["windows", "mac", "linux"],
+      "browsers": ["chrome", "firefox", "webkit"]
     },
     {
       "browsers": {
@@ -160,21 +148,14 @@
       ]
     },
     {
-      "platforms": [
-        "mac",
-        "linux"
-      ],
+      "platforms": ["mac", "linux"],
       "browsers": {
         "name": "chrome",
         "headless": true
       }
     },
     {
-      "platforms": [
-        "windows",
-        "mac",
-        "linux"
-      ],
+      "platforms": ["windows", "mac", "linux"],
       "browsers": [
         {
           "name": "chrome",

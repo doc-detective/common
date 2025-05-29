@@ -16,10 +16,14 @@ const fs = require("fs");
 async function dereferenceSchemas() {
   const inputDir = path.resolve(`${__dirname}/src_schemas`);
   const buildDir = path.resolve(`${__dirname}/build`);
-  fs.mkdir(buildDir, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdirSync(buildDir, { recursive: true });
   const outputDir = path.resolve(`${__dirname}/output_schemas`);
+  fs.mkdirSync(outputDir, { recursive: true });
+  const distDir = path.resolve(__dirname, `../../dist/schemas`);
+  fs.mkdirSync(distDir, { recursive: true });
+
+  // List of schema files to process
+  // These files should be present in the input directory
   const files = [
     // v3 schemas
     "checkLink_v3.schema.json",
@@ -63,9 +67,11 @@ async function dereferenceSchemas() {
     "typeKeys_v2.schema.json",
     "wait_v2.schema.json",
   ];
+
   // Update schema reference paths
+  console.log("Updating schema reference paths...");
   for (const file of files) {
-    // console.log(`File: ${file}`)
+    console.log(`File: ${file}`)
     const filePath = path.resolve(`${inputDir}/${file}`);
     const buildFilePath = path.resolve(`${buildDir}/${file}`);
     try {
@@ -87,8 +93,11 @@ async function dereferenceSchemas() {
       console.error(`Error processing ${file}:`, err);
     }
   }
+
   // Dereference schemas
+  console.log("Dereferencing schemas...");
   for await (const file of files) {
+    console.log(`Processing file: ${file}`);
     const filePath = path.resolve(`${buildDir}/${file}`);
     const outputFilePath = path.resolve(`${outputDir}/${file}`);
     try {
@@ -112,6 +121,7 @@ async function dereferenceSchemas() {
     }
   }
   // Build final schemas.json file
+  console.log("Building schemas.json file...");
   const schemas = {};
   files.forEach(async (file) => {
     const key = file.replace(".schema.json", "");
@@ -129,6 +139,27 @@ async function dereferenceSchemas() {
   // fs.rm(buildDir, { recursive: true }, (err) => {
   //   if (err) throw err;
   // });
+
+  // Publish v3 schemas to distribution directory
+  const publishedSchemas = files.filter(file => file.includes('_v3.schema.json'));
+
+  console.log("Publishing schemas to dist/schemas directory...");
+  publishedSchemas.forEach((file) => {
+    try {
+      console.log(`Publishing file: ${file}`);
+      const srcPath = path.resolve(`${outputDir}/${file}`);
+      const destPath = path.resolve(`${distDir}/${file}`);
+
+      // Verify source file exists before copying
+      if (!fs.existsSync(srcPath)) {
+        throw new Error(`Source file not found: ${srcPath}`);
+      }
+
+      fs.copyFileSync(srcPath, destPath);
+    } catch (err) {
+      console.error(`Error publishing ${file}:`, err);
+    }
+  });
 }
 
 // Prepend app-root path to referenced relative paths

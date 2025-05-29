@@ -8,6 +8,13 @@
     "configId": "uuid"
   },
   "properties": {
+    "$schema": {
+      "description": "JSON Schema for this object.",
+      "type": "string",
+      "enum": [
+        "https://raw.githubusercontent.com/doc-detective/common/main/dist/schemas/config_v3.schema.json"
+      ]
+    },
     "configId": {
       "description": "Identifier for the configuration.",
       "type": "string"
