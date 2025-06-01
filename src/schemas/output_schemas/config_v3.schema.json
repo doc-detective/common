@@ -2504,12 +2504,22 @@
                                                         "additionalProperties": false,
                                                         "properties": {
                                                           "headers": {
-                                                            "description": "Headers to include in the HTTP request, in key/value format.",
-                                                            "type": "object",
-                                                            "additionalProperties": true,
-                                                            "properties": {},
+                                                            "description": "Headers to include in the HTTP request.",
                                                             "default": {},
-                                                            "title": "Request headers"
+                                                            "anyOf": [
+                                                              {
+                                                                "title": "Request headers (object)",
+                                                                "description": "Headers to include in the HTTP request, in key/value format.",
+                                                                "type": "object",
+                                                                "additionalProperties": true,
+                                                                "properties": {}
+                                                              },
+                                                              {
+                                                                "title": "Request headers (string)",
+                                                                "description": "Headers to include in the HTTP request, as return-separated values. For example, `Content-Type: application/json\nAuthorization: Bearer token`.",
+                                                                "type": "string"
+                                                              }
+                                                            ]
                                                           },
                                                           "parameters": {
                                                             "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -2520,23 +2530,23 @@
                                                             "title": "Request parameters"
                                                           },
                                                           "body": {
-                                                            "description": "JSON object to include as the body of the HTTP request.",
+                                                            "description": "The body of the HTTP request.",
                                                             "anyOf": [
                                                               {
-                                                                "title": "Request body object",
+                                                                "title": "Request body (object)",
                                                                 "description": "JSON object to include as the body of the HTTP request.",
                                                                 "type": "object",
                                                                 "additionalProperties": true,
                                                                 "properties": {}
                                                               },
                                                               {
-                                                                "title": "Request body array",
+                                                                "title": "Request body (array)",
                                                                 "description": "JSON array to include as the body of the HTTP request.",
                                                                 "type": "array",
                                                                 "items": {}
                                                               },
                                                               {
-                                                                "title": "Request body string",
+                                                                "title": "Request body (string)",
                                                                 "description": "String to include as the body of the HTTP request.",
                                                                 "type": "string"
                                                               }
@@ -2885,12 +2895,22 @@
                                                           "additionalProperties": false,
                                                           "properties": {
                                                             "headers": {
-                                                              "description": "Headers to include in the HTTP request, in key/value format.",
-                                                              "type": "object",
-                                                              "additionalProperties": true,
-                                                              "properties": {},
+                                                              "description": "Headers to include in the HTTP request.",
                                                               "default": {},
-                                                              "title": "Request headers"
+                                                              "anyOf": [
+                                                                {
+                                                                  "title": "Request headers (object)",
+                                                                  "description": "Headers to include in the HTTP request, in key/value format.",
+                                                                  "type": "object",
+                                                                  "additionalProperties": true,
+                                                                  "properties": {}
+                                                                },
+                                                                {
+                                                                  "title": "Request headers (string)",
+                                                                  "description": "Headers to include in the HTTP request, as return-separated values. For example, `Content-Type: application/json\nAuthorization: Bearer token`.",
+                                                                  "type": "string"
+                                                                }
+                                                              ]
                                                             },
                                                             "parameters": {
                                                               "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -2901,23 +2921,23 @@
                                                               "title": "Request parameters"
                                                             },
                                                             "body": {
-                                                              "description": "JSON object to include as the body of the HTTP request.",
+                                                              "description": "The body of the HTTP request.",
                                                               "anyOf": [
                                                                 {
-                                                                  "title": "Request body object",
+                                                                  "title": "Request body (object)",
                                                                   "description": "JSON object to include as the body of the HTTP request.",
                                                                   "type": "object",
                                                                   "additionalProperties": true,
                                                                   "properties": {}
                                                                 },
                                                                 {
-                                                                  "title": "Request body array",
+                                                                  "title": "Request body (array)",
                                                                   "description": "JSON array to include as the body of the HTTP request.",
                                                                   "type": "array",
                                                                   "items": {}
                                                                 },
                                                                 {
-                                                                  "title": "Request body string",
+                                                                  "title": "Request body (string)",
                                                                   "description": "String to include as the body of the HTTP request.",
                                                                   "type": "string"
                                                                 }
@@ -3135,6 +3155,13 @@
                                                       "headers": {
                                                         "Authorization": "Bearer $TOKEN"
                                                       }
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://www.api-server.com",
+                                                    "method": "post",
+                                                    "request": {
+                                                      "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                                     }
                                                   }
                                                 ]
@@ -7526,12 +7553,22 @@
                                           "additionalProperties": false,
                                           "properties": {
                                             "headers": {
-                                              "description": "Headers to include in the HTTP request, in key/value format.",
-                                              "type": "object",
-                                              "additionalProperties": true,
-                                              "properties": {},
+                                              "description": "Headers to include in the HTTP request.",
                                               "default": {},
-                                              "title": "Request headers"
+                                              "anyOf": [
+                                                {
+                                                  "title": "Request headers (object)",
+                                                  "description": "Headers to include in the HTTP request, in key/value format.",
+                                                  "type": "object",
+                                                  "additionalProperties": true,
+                                                  "properties": {}
+                                                },
+                                                {
+                                                  "title": "Request headers (string)",
+                                                  "description": "Headers to include in the HTTP request, as return-separated values. For example, `Content-Type: application/json\nAuthorization: Bearer token`.",
+                                                  "type": "string"
+                                                }
+                                              ]
                                             },
                                             "parameters": {
                                               "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -7542,23 +7579,23 @@
                                               "title": "Request parameters"
                                             },
                                             "body": {
-                                              "description": "JSON object to include as the body of the HTTP request.",
+                                              "description": "The body of the HTTP request.",
                                               "anyOf": [
                                                 {
-                                                  "title": "Request body object",
+                                                  "title": "Request body (object)",
                                                   "description": "JSON object to include as the body of the HTTP request.",
                                                   "type": "object",
                                                   "additionalProperties": true,
                                                   "properties": {}
                                                 },
                                                 {
-                                                  "title": "Request body array",
+                                                  "title": "Request body (array)",
                                                   "description": "JSON array to include as the body of the HTTP request.",
                                                   "type": "array",
                                                   "items": {}
                                                 },
                                                 {
-                                                  "title": "Request body string",
+                                                  "title": "Request body (string)",
                                                   "description": "String to include as the body of the HTTP request.",
                                                   "type": "string"
                                                 }
@@ -7907,12 +7944,22 @@
                                             "additionalProperties": false,
                                             "properties": {
                                               "headers": {
-                                                "description": "Headers to include in the HTTP request, in key/value format.",
-                                                "type": "object",
-                                                "additionalProperties": true,
-                                                "properties": {},
+                                                "description": "Headers to include in the HTTP request.",
                                                 "default": {},
-                                                "title": "Request headers"
+                                                "anyOf": [
+                                                  {
+                                                    "title": "Request headers (object)",
+                                                    "description": "Headers to include in the HTTP request, in key/value format.",
+                                                    "type": "object",
+                                                    "additionalProperties": true,
+                                                    "properties": {}
+                                                  },
+                                                  {
+                                                    "title": "Request headers (string)",
+                                                    "description": "Headers to include in the HTTP request, as return-separated values. For example, `Content-Type: application/json\nAuthorization: Bearer token`.",
+                                                    "type": "string"
+                                                  }
+                                                ]
                                               },
                                               "parameters": {
                                                 "description": "URL parameters to include in the HTTP request, in key/value format.",
@@ -7923,23 +7970,23 @@
                                                 "title": "Request parameters"
                                               },
                                               "body": {
-                                                "description": "JSON object to include as the body of the HTTP request.",
+                                                "description": "The body of the HTTP request.",
                                                 "anyOf": [
                                                   {
-                                                    "title": "Request body object",
+                                                    "title": "Request body (object)",
                                                     "description": "JSON object to include as the body of the HTTP request.",
                                                     "type": "object",
                                                     "additionalProperties": true,
                                                     "properties": {}
                                                   },
                                                   {
-                                                    "title": "Request body array",
+                                                    "title": "Request body (array)",
                                                     "description": "JSON array to include as the body of the HTTP request.",
                                                     "type": "array",
                                                     "items": {}
                                                   },
                                                   {
-                                                    "title": "Request body string",
+                                                    "title": "Request body (string)",
                                                     "description": "String to include as the body of the HTTP request.",
                                                     "type": "string"
                                                   }
@@ -8157,6 +8204,13 @@
                                         "headers": {
                                           "Authorization": "Bearer $TOKEN"
                                         }
+                                      }
+                                    },
+                                    {
+                                      "url": "https://www.api-server.com",
+                                      "method": "post",
+                                      "request": {
+                                        "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                       }
                                     }
                                   ]
