@@ -12,6 +12,7 @@
       "description": "Unique identifier for the resolved tests."
     },
     "config": {
+      "type": "object",
       "$ref": "config_v3.schema.json#"
     },
     "specs": {

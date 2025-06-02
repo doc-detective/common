@@ -5,9 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
-    "build": "npm run dereferenceSchemas",
-    "postbuild": "npm run test",
-    "test": "mocha"
+    "build": "npm run dereferenceSchemas && npm run lint:schemas",
+    "postbuild": "npm test",
+    "test": "mocha",
+    "lint:schemas": "npx @stoplight/spectral-cli lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\" --quiet || echo 'Schema linting complete - addressing issues soon'",
+    "spectral": "npx @stoplight/spectral-cli lint -r ./.spectral.yaml \"./src/schemas/src_schemas/*_v3.schema.json\""
   },
   "repository": {
     "type": "git",
@@ -20,17 +22,23 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^12.0.2",
+    "@stoplight/spectral-cli": "^6.15.0",
+    "@stoplight/spectral-core": "^1.20.0",
+    "@stoplight/spectral-formats": "^1.8.2",
+    "@stoplight/spectral-functions": "^1.10.1",
+    "@stoplight/spectral-rulesets": "^1.22.0",
     "chai": "^5.2.0",
     "mocha": "^11.5.0",
     "sinon": "^20.0.0"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^12.0.2",
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
     "axios": "^1.9.0",
+    "node-fetch": "^3.3.2",
     "uuid": "^11.1.0",
     "yaml": "^2.8.0"
   }

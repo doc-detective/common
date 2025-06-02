@@ -1302,8 +1302,8 @@
                                                     "description": "Display text or selector of the element to find."
                                                   },
                                                   {
-                                                    "title": "Find element (detailed)",
                                                     "type": "object",
+                                                    "title": "Find element (detailed)",
                                                     "anyOf": [
                                                       {
                                                         "required": [
@@ -1474,11 +1474,20 @@
                                                       },
                                                       "type": {
                                                         "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`type`](type). To type in the element, make the element active with the `click` parameter.",
+                                                        "type": [
+                                                          "object",
+                                                          "string"
+                                                        ],
                                                         "allOf": [
                                                           {
                                                             "$schema": "http://json-schema.org/draft-07/schema#",
                                                             "title": "typeKeys",
                                                             "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
+                                                            "type": [
+                                                              "object",
+                                                              "string",
+                                                              "array"
+                                                            ],
                                                             "anyOf": [
                                                               {
                                                                 "title": "Type keys (simple)",
@@ -1820,11 +1829,20 @@
                                                         },
                                                         "type": {
                                                           "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`type`](type). To type in the element, make the element active with the `click` parameter.",
+                                                          "type": [
+                                                            "object",
+                                                            "string"
+                                                          ],
                                                           "allOf": [
                                                             {
                                                               "$schema": "http://json-schema.org/draft-07/schema#",
                                                               "title": "typeKeys",
                                                               "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
+                                                              "type": [
+                                                                "object",
+                                                                "string",
+                                                                "array"
+                                                              ],
                                                               "anyOf": [
                                                                 {
                                                                   "title": "Type keys (simple)",
@@ -2013,6 +2031,7 @@
                                                     "moveTo": true,
                                                     "click": true,
                                                     "type": {
+                                                      "type": "object",
                                                       "keys": [
                                                         "shorthair cat"
                                                       ],
@@ -3811,6 +3830,11 @@
                                                 "$schema": "http://json-schema.org/draft-07/schema#",
                                                 "title": "typeKeys",
                                                 "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
+                                                "type": [
+                                                  "object",
+                                                  "string",
+                                                  "array"
+                                                ],
                                                 "anyOf": [
                                                   {
                                                     "title": "Type keys (simple)",
@@ -4970,6 +4994,7 @@
                                           "moveTo": true,
                                           "click": true,
                                           "type": {
+                                            "type": "object",
                                             "keys": [
                                               "shorthair cat"
                                             ],
@@ -6351,8 +6376,8 @@
                                       "description": "Display text or selector of the element to find."
                                     },
                                     {
-                                      "title": "Find element (detailed)",
                                       "type": "object",
+                                      "title": "Find element (detailed)",
                                       "anyOf": [
                                         {
                                           "required": [
@@ -6523,11 +6548,20 @@
                                         },
                                         "type": {
                                           "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`type`](type). To type in the element, make the element active with the `click` parameter.",
+                                          "type": [
+                                            "object",
+                                            "string"
+                                          ],
                                           "allOf": [
                                             {
                                               "$schema": "http://json-schema.org/draft-07/schema#",
                                               "title": "typeKeys",
                                               "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
+                                              "type": [
+                                                "object",
+                                                "string",
+                                                "array"
+                                              ],
                                               "anyOf": [
                                                 {
                                                   "title": "Type keys (simple)",
@@ -6869,11 +6903,20 @@
                                           },
                                           "type": {
                                             "description": "Type keys after finding the element. Either a string or an object with a `keys` field as defined in [`type`](type). To type in the element, make the element active with the `click` parameter.",
+                                            "type": [
+                                              "object",
+                                              "string"
+                                            ],
                                             "allOf": [
                                               {
                                                 "$schema": "http://json-schema.org/draft-07/schema#",
                                                 "title": "typeKeys",
                                                 "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
+                                                "type": [
+                                                  "object",
+                                                  "string",
+                                                  "array"
+                                                ],
                                                 "anyOf": [
                                                   {
                                                     "title": "Type keys (simple)",
@@ -7062,6 +7105,7 @@
                                       "moveTo": true,
                                       "click": true,
                                       "type": {
+                                        "type": "object",
                                         "keys": [
                                           "shorthair cat"
                                         ],
@@ -8860,6 +8904,11 @@
                                   "$schema": "http://json-schema.org/draft-07/schema#",
                                   "title": "typeKeys",
                                   "description": "Type keys. To type special keys, begin and end the string with `$` and use the special key's keyword. For example, to type the Escape key, enter `$ESCAPE$`.",
+                                  "type": [
+                                    "object",
+                                    "string",
+                                    "array"
+                                  ],
                                   "anyOf": [
                                     {
                                       "title": "Type keys (simple)",
@@ -10019,6 +10068,7 @@
                             "moveTo": true,
                             "click": true,
                             "type": {
+                              "type": "object",
                               "keys": [
                                 "shorthair cat"
                               ],
