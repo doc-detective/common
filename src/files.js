@@ -59,18 +59,25 @@ async function readFile({ fileURLOrPath }) {
     }
   }
 
-  // Parse based on file content, and return either object or string
-  try {
-    // Try to parse as JSON
-    return JSON.parse(content);
-  } catch (error) {
+  // Parse based on file extension
+  const ext = fileURLOrPath.split('.').pop().toLowerCase();
+
+  if (ext === "json") {
     try {
-      // Try to parse as YAML
-      return YAML.parse(content);
+      return JSON.parse(content);
     } catch (error) {
-      // Return raw content if not JSON or YAML
+      console.warn(`Failed to parse JSON: ${error.message}`);
       return content;
     }
+  } else if (ext === "yaml" || ext === "yml") {
+    try {
+      return YAML.parse(content);
+    } catch (error) {
+      console.warn(`Failed to parse YAML: ${error.message}`);
+      return content;
+    }
+  } else {
+    return content;
   }
 }
 
