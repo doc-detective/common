@@ -126,7 +126,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
       if (check(validationObject)) return key;
     });
     if (!matchedSchemaKey) {
-      result.errors = `Invalid object`;
+      result.errors = `Invalid object: ${check.errors}.`;
       result.object = object;
       result.valid = false;
       return result;
