@@ -551,8 +551,17 @@
                     "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
                     "title": "File type (custom)",
                     "type": "object",
-                    "required": [
-                      "extensions"
+                    "anyOf": [
+                      {
+                        "required": [
+                          "extensions"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "extends"
+                        ]
+                      }
                     ],
                     "properties": {
                       "name": {
@@ -560,7 +569,6 @@
                         "type": "string"
                       },
                       "extends": {
-                        "$comment": "In development",
                         "description": "Base template to extend.",
                         "type": "string",
                         "enum": [
