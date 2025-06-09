@@ -103,6 +103,10 @@
       "enum": ["silent", "error", "warning", "info", "debug"],
       "default": "info"
     },
+    "allowUnsafeMarkup": {
+      "type": "boolean",
+      "description": "Whether or not to run potentially unsafe markup detected in input files."
+    },
     "runOn": {
       "$ref": "test_v3.schema.json#/properties/runOn"
     },
@@ -265,6 +269,11 @@
                 "$ref": "#/components/schemas/stringOrArray"
               }
             ]
+          },
+          "unsafe": {
+            "description": "If `true`, identifies this markup as potentially unsafe to be executed.",
+            "type": "boolean",
+            "default": false
           },
           "batchMatches": {
             "description": "If `true`, all matches are combined into a single string.",

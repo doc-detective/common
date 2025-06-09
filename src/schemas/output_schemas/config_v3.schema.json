@@ -129,6 +129,10 @@
       ],
       "default": "info"
     },
+    "allowUnsafeMarkup": {
+      "type": "boolean",
+      "description": "Whether or not to run potentially unsafe markup detected in input files."
+    },
     "runOn": {
       "type": "array",
       "description": "Contexts to run the test in. Overrides contexts defined at the config and spec levels.",
@@ -714,6 +718,11 @@
                               ]
                             }
                           ]
+                        },
+                        "unsafe": {
+                          "description": "If `true`, identifies this markup as potentially unsafe to be executed.",
+                          "type": "boolean",
+                          "default": false
                         },
                         "batchMatches": {
                           "description": "If `true`, all matches are combined into a single string.",
@@ -5763,6 +5772,11 @@
                 ]
               }
             ]
+          },
+          "unsafe": {
+            "description": "If `true`, identifies this markup as potentially unsafe to be executed.",
+            "type": "boolean",
+            "default": false
           },
           "batchMatches": {
             "description": "If `true`, all matches are combined into a single string.",
