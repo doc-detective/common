@@ -16,6 +16,11 @@
       "type": "string",
       "description": "Path to the content that the test is associated with."
     },
+    "unsafe": {
+      "type": "boolean",
+      "description": "Whether or not the test is may be unsafe. Unsafe tests may perform actions that could modify the system or environment in unexpected ways.",
+      "default": false
+    },
     "detectSteps": {
       "type": "boolean",
       "description": "Whether or not to detect steps in input files based on markup regex.",
@@ -9903,6 +9908,7 @@
       "description": "This test includes every property across all actions.",
       "before": "setup.json",
       "after": "cleanup.json",
+      "unsafe": true,
       "runOn": [
         {
           "platforms": [
