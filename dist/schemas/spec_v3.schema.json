@@ -619,7 +619,7 @@
               },
               "unsafe": {
                 "type": "boolean",
-                "description": "Whether or not the test is may be unsafe. Unsafe tests may perform actions that could modify the system or environment in unexpected ways.",
+                "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
                 "default": false
               },
               "detectSteps": {
@@ -1231,6 +1231,11 @@
                             "type": "string",
                             "description": "Description of the step."
                           },
+                          "unsafe": {
+                            "type": "boolean",
+                            "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                            "default": false
+                          },
                           "outputs": {
                             "type": "object",
                             "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -1272,6 +1277,11 @@
                       "description": {
                         "type": "string",
                         "description": "Description of the step."
+                      },
+                      "unsafe": {
+                        "type": "boolean",
+                        "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                        "default": false
                       },
                       "outputs": {
                         "type": "object",
@@ -1322,6 +1332,11 @@
                             "description": {
                               "type": "string",
                               "description": "Description of the step."
+                            },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
                             },
                             "outputs": {
                               "type": "object",
@@ -1529,6 +1544,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -1705,6 +1725,11 @@
                             "description": {
                               "type": "string",
                               "description": "Description of the step."
+                            },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
                             },
                             "outputs": {
                               "type": "object",
@@ -2497,6 +2522,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -2648,6 +2678,11 @@
                             "description": {
                               "type": "string",
                               "description": "Description of the step."
+                            },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
                             },
                             "outputs": {
                               "type": "object",
@@ -3642,6 +3677,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -3939,6 +3979,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -4222,6 +4267,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -4432,6 +4482,11 @@
                             "description": {
                               "type": "string",
                               "description": "Description of the step."
+                            },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
                             },
                             "outputs": {
                               "type": "object",
@@ -4871,6 +4926,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -5033,6 +5093,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -5108,6 +5173,11 @@
                               "type": "string",
                               "description": "Description of the step."
                             },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
+                            },
                             "outputs": {
                               "type": "object",
                               "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -5177,6 +5247,11 @@
                             "description": {
                               "type": "string",
                               "description": "Description of the step."
+                            },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
                             },
                             "outputs": {
                               "type": "object",
@@ -5860,6 +5935,11 @@
                         ]
                       }
                     },
+                    "unsafe": {
+                      "type": "boolean",
+                      "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                      "default": false
+                    },
                     "steps": {
                       "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
                       "type": "array",
@@ -5891,6 +5971,11 @@
                                 "description": {
                                   "type": "string",
                                   "description": "Description of the step."
+                                },
+                                "unsafe": {
+                                  "type": "boolean",
+                                  "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "default": false
                                 },
                                 "outputs": {
                                   "type": "object",
@@ -5933,6 +6018,11 @@
                             "description": {
                               "type": "string",
                               "description": "Description of the step."
+                            },
+                            "unsafe": {
+                              "type": "boolean",
+                              "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                              "default": false
                             },
                             "outputs": {
                               "type": "object",
@@ -5983,6 +6073,11 @@
                                   "description": {
                                     "type": "string",
                                     "description": "Description of the step."
+                                  },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
                                   },
                                   "outputs": {
                                     "type": "object",
@@ -6190,6 +6285,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -6366,6 +6466,11 @@
                                   "description": {
                                     "type": "string",
                                     "description": "Description of the step."
+                                  },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
                                   },
                                   "outputs": {
                                     "type": "object",
@@ -7158,6 +7263,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -7309,6 +7419,11 @@
                                   "description": {
                                     "type": "string",
                                     "description": "Description of the step."
+                                  },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
                                   },
                                   "outputs": {
                                     "type": "object",
@@ -8303,6 +8418,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -8600,6 +8720,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -8883,6 +9008,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -9093,6 +9223,11 @@
                                   "description": {
                                     "type": "string",
                                     "description": "Description of the step."
+                                  },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
                                   },
                                   "outputs": {
                                     "type": "object",
@@ -9532,6 +9667,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -9694,6 +9834,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -9769,6 +9914,11 @@
                                     "type": "string",
                                     "description": "Description of the step."
                                   },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
+                                  },
                                   "outputs": {
                                     "type": "object",
                                     "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
@@ -9838,6 +9988,11 @@
                                   "description": {
                                     "type": "string",
                                     "description": "Description of the step."
+                                  },
+                                  "unsafe": {
+                                    "type": "boolean",
+                                    "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                    "default": false
                                   },
                                   "outputs": {
                                     "type": "object",

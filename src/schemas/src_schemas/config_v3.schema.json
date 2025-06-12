@@ -270,11 +270,6 @@
               }
             ]
           },
-          "unsafe": {
-            "description": "If `true`, identifies this markup as potentially unsafe to be executed.",
-            "type": "boolean",
-            "default": false
-          },
           "batchMatches": {
             "description": "If `true`, all matches are combined into a single string.",
             "type": "boolean",
