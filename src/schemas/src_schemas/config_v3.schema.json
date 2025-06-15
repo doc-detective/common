@@ -46,10 +46,7 @@
     "relativePathBase": {
       "description": "Whether paths should be interpreted as relative to the current working directory (`cwd`) or to the file in which they're specified (`file`).",
       "type": "string",
-      "enum": [
-        "cwd",
-        "file"
-      ],
+      "enum": ["cwd", "file"],
       "default": "file"
     },
     "loadVariables": {
@@ -103,25 +100,19 @@
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
       "type": "string",
-      "enum": [
-        "silent",
-        "error",
-        "warning",
-        "info",
-        "debug"
-      ],
+      "enum": ["silent", "error", "warning", "info", "debug"],
       "default": "info"
+    },
+    "allowUnsafeMarkup": {
+      "type": "boolean",
+      "description": "Whether or not to run potentially unsafe markup detected in input files."
     },
     "runOn": {
       "$ref": "test_v3.schema.json#/properties/runOn"
     },
     "fileTypes": {
       "description": "Configuration for file types and their markup detection.",
-      "default": [
-        "markdown",
-        "asciidoc",
-        "html"
-      ],
+      "default": ["markdown", "asciidoc", "html"],
       "anyOf": [
         {
           "type": "array",
@@ -132,18 +123,15 @@
                 "$comment": "Simple mode: Reference predefined templates by name.",
                 "title": "File type (predefined)",
                 "type": "string",
-                "enum": [
-                  "markdown",
-                  "asciidoc",
-                  "html"
-                ]
+                "enum": ["markdown", "asciidoc", "html"]
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
                 "title": "File type (custom)",
                 "type": "object",
-                "required": [
-                  "extensions"
+                "anyOf": [
+                  { "required": ["extensions"] },
+                  { "required": ["extends"] }
                 ],
                 "properties": {
                   "name": {
@@ -151,14 +139,9 @@
                     "type": "string"
                   },
                   "extends": {
-                    "$comment": "In development",
                     "description": "Base template to extend.",
                     "type": "string",
-                    "enum": [
-                      "markdown",
-                      "asciidoc",
-                      "html"
-                    ]
+                    "enum": ["markdown", "asciidoc", "html"]
                   },
                   "extensions": {
                     "description": "File extensions to use with type.",
@@ -185,9 +168,7 @@
                 "title": "File type (executable)",
                 "$comment": "Executable mode: Convert executable inputs directly into tests.",
                 "type": "object",
-                "required": [
-                  "extensions"
-                ],
+                "required": ["extensions"],
                 "properties": {
                   "extensions": {
                     "description": "File extensions to use with type.",
@@ -238,9 +219,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "send"
-      ],
+      "required": ["send"],
       "default": {
         "send": true
       },
@@ -257,9 +236,7 @@
         "description": "Environment information for the system running Doc Detective.",
         "readOnly": true,
         "additionalProperties": false,
-        "required": [
-          "platform"
-        ],
+        "required": ["platform"],
         "properties": {
           "workingDirectory": {
             "description": "The current working directory of the process running Doc Detective.",
@@ -268,21 +245,12 @@
           "platform": {
             "description": "The operating system type running Doc Detective.",
             "type": "string",
-            "enum": [
-              "linux",
-              "mac",
-              "windows"
-            ]
+            "enum": ["linux", "mac", "windows"]
           },
           "arch": {
             "description": "The processor architecture of the system running Doc Detective.",
             "type": "string",
-            "enum": [
-              "arm32",
-              "arm64",
-              "x32",
-              "x64"
-            ]
+            "enum": ["arm32", "arm64", "x32", "x64"]
           }
         },
         "title": "Environment details"
@@ -419,19 +387,13 @@
       "output": ".",
       "recursive": true,
       "loadVariables": ".env",
-      "fileTypes": [
-        "markdown"
-      ]
+      "fileTypes": ["markdown"]
     },
     {
       "fileTypes": [
         {
           "extends": "markdown",
-          "extensions": [
-            "md",
-            "markdown",
-            "mdx"
-          ],
+          "extensions": ["md", "markdown", "mdx"],
           "inlineStatements": {
             "testStart": "<!--\\s*testStart\\s*(.*?)\\s*-->",
             "testEnd": "<!-- testEnd -->",

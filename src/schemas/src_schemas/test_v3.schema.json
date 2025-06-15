@@ -16,6 +16,11 @@
       "type": "string",
       "description": "Path to the content that the test is associated with."
     },
+    "unsafe": {
+      "type": "boolean",
+      "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+      "default": false
+    },
     "detectSteps": {
       "type": "boolean",
       "description": "Whether or not to detect steps in input files based on markup regex.",
@@ -69,6 +74,11 @@
           "openApi": {
             "$ref": "#/components/schemas/openApi"
           },
+          "unsafe": {
+            "type": "boolean",
+            "description": "Whether or not the test or step is may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+            "default": false
+          },
           "steps": {
             "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
             "type": "array",
@@ -87,14 +97,10 @@
   },
   "anyOf": [
     {
-      "required": [
-        "steps"
-      ]
+      "required": ["steps"]
     },
     {
-      "required": [
-        "contexts"
-      ]
+      "required": ["contexts"]
     }
   ],
   "additionalProperties": false,
@@ -110,14 +116,9 @@
             {
               "type": "object",
               "not": {
-                "required": [
-                  "operationId"
-                ]
+                "required": ["operationId"]
               },
-              "required": [
-                "name",
-                "descriptionPath"
-              ],
+              "required": ["name", "descriptionPath"],
               "title": "OpenAPI description (test)"
             }
           ]
@@ -145,10 +146,7 @@
             "selector": "[title=Search]",
             "click": true,
             "type": {
-              "keys": [
-                "shorthair cats",
-                "$ENTER$"
-              ]
+              "keys": ["shorthair cats", "$ENTER$"]
             }
           }
         }
@@ -159,11 +157,10 @@
       "description": "This test includes every property across all actions.",
       "before": "setup.json",
       "after": "cleanup.json",
+      "unsafe": true,
       "runOn": [
         {
-          "platforms": [
-            "linux"
-          ],
+          "platforms": ["linux"],
           "browsers": {
             "name": "firefox",
             "window": {},
@@ -178,9 +175,7 @@
         {
           "runShell": {
             "command": "echo",
-            "args": [
-              "$USER"
-            ],
+            "args": ["$USER"],
             "maxVariation": 0,
             "overwrite": "aboveVariation"
           },
@@ -207,10 +202,7 @@
                 "job": "leader"
               }
             },
-            "statusCodes": [
-              200,
-              201
-            ],
+            "statusCodes": [200, 201],
             "maxVariation": 0,
             "overwrite": "aboveVariation"
           },
@@ -229,18 +221,14 @@
             "moveTo": true,
             "click": true,
             "type": {
-              "keys": [
-                "shorthair cat"
-              ]
+              "keys": ["shorthair cat"]
             }
           },
           "variables": {}
         },
         {
           "type": {
-            "keys": [
-              "$ENTER$"
-            ]
+            "keys": ["$ENTER$"]
           }
         },
         {
