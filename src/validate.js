@@ -353,14 +353,7 @@ function transformToSchemaKey({
       object: transformedObject,
     });
     if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors
-        .map(
-          (error) =>
-            `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
-        )
-        .join(", ")}`);
+      throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
   } else if (targetSchema === "config_v3") {
@@ -453,14 +446,7 @@ function transformToSchemaKey({
       object: transformedObject,
     });
     if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors
-        .map(
-          (error) =>
-            `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
-        )
-        .join(", ")}`);
+      throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
   } else if (targetSchema === "context_v3") {
@@ -488,14 +474,7 @@ function transformToSchemaKey({
       object: transformedObject,
     });
     if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors
-        .map(
-          (error) =>
-            `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
-        )
-        .join(", ")}`);
+      throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
   } else if (targetSchema === "openApi_v3") {
@@ -511,14 +490,7 @@ function transformToSchemaKey({
       object: transformedObject,
     });
     if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors
-        .map(
-          (error) =>
-            `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
-        )
-        .join(", ")}`);
+      throw new Error(`Invalid object: ${result.errors}`);
     }
     return transformedObject;
   } else if (targetSchema === "spec_v3") {
@@ -557,14 +529,7 @@ function transformToSchemaKey({
       object: transformedObject,
     });
     if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors
-        .map(
-          (error) =>
-            `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
-        )
-        .join(", ")}`);
+      throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
   } else if (targetSchema === "test_v3") {
@@ -606,14 +571,7 @@ function transformToSchemaKey({
       object: transformedObject,
     });
     if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors
-        .map(
-          (error) =>
-            `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
-        )
-        .join(", ")}`);
+      throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
   }
