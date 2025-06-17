@@ -11,7 +11,6 @@ The **Auto Dev Release** workflow automatically:
 3. **Bumps the dev version** (e.g., `3.1.0-dev.1` → `3.1.0-dev.2`)
 4. **Publishes to npm** with the `dev` tag
 5. **Creates git tags** for version tracking
-6. **Creates GitHub releases** marked as development versions
 
 ## 📋 Prerequisites
 
@@ -150,7 +149,6 @@ You can manually trigger the workflow:
 ✅ Version bumped: 3.1.0-dev.1 → 3.1.0-dev.2
 ✅ Published to npm with tag 'dev'
 ✅ Git tag 'v3.1.0-dev.2' created and pushed
-✅ GitHub release created
 ```
 
 ### Skipped Execution
