@@ -117,9 +117,9 @@
       "description": "Whether or not to detect steps in input files based on defined markup.",
       "default": true
     },
-    "allowUnsafeTests": {
+    "allowUnsafeSteps": {
       "type": "boolean",
-      "description": "Whether or not to run potentially unsafe tests, such as those that execute shell commands or run code."
+      "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
     },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
@@ -797,7 +797,7 @@
                                             },
                                             "unsafe": {
                                               "type": "boolean",
-                                              "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                              "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                               "default": false
                                             },
                                             "outputs": {
@@ -844,7 +844,7 @@
                                         },
                                         "unsafe": {
                                           "type": "boolean",
-                                          "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                          "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                           "default": false
                                         },
                                         "outputs": {
@@ -899,7 +899,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -1110,7 +1110,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -1292,7 +1292,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -2088,7 +2088,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -2245,7 +2245,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -3243,7 +3243,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -3545,7 +3545,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -3833,7 +3833,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -4049,7 +4049,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -4492,7 +4492,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -4659,7 +4659,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -4739,7 +4739,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -4814,7 +4814,7 @@
                                               },
                                               "unsafe": {
                                                 "type": "boolean",
-                                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                                 "default": false
                                               },
                                               "outputs": {
@@ -5921,7 +5921,7 @@
                               },
                               "unsafe": {
                                 "type": "boolean",
-                                "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                 "default": false
                               },
                               "outputs": {
@@ -5968,7 +5968,7 @@
                           },
                           "unsafe": {
                             "type": "boolean",
-                            "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                            "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                             "default": false
                           },
                           "outputs": {
@@ -6023,7 +6023,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -6234,7 +6234,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -6416,7 +6416,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -7212,7 +7212,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -7369,7 +7369,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -8367,7 +8367,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -8669,7 +8669,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -8957,7 +8957,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -9173,7 +9173,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -9616,7 +9616,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -9783,7 +9783,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -9863,7 +9863,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {
@@ -9938,7 +9938,7 @@
                                 },
                                 "unsafe": {
                                   "type": "boolean",
-                                  "description": "Whether or not the test or step may be unsafe. Unsafe tests and steps may perform actions that could modify the system or environment in unexpected ways. Tests that contain unsafe steps are only performed within Docker containers or if unsafe tests are enabled with the `allowUnsafeTests` config property or the `--unsafe` flag.",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
                                   "default": false
                                 },
                                 "outputs": {

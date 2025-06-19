@@ -97,9 +97,9 @@
       "description": "Whether or not to detect steps in input files based on defined markup.",
       "default": true
     },
-    "allowUnsafeTests": {
+    "allowUnsafeSteps": {
       "type": "boolean",
-      "description": "Whether or not to run potentially unsafe tests, such as those that execute shell commands or run code."
+      "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
     },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
