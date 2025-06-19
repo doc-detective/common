@@ -11,7 +11,7 @@ on:
 jobs:
   auto-dev-release:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     # Skip if this is a release commit or docs-only changes
     if: |
       !contains(github.event.head_commit.message, '[skip ci]') &&
