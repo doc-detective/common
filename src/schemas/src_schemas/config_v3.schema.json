@@ -225,6 +225,15 @@
       },
       "title": "Telemetry options"
     },
+    "concurrentRunners": {
+      "type": ["integer", "boolean"],
+      "default": 1,
+      "minimum": 1,
+      "description": "Number of concurrent test runners. Set to true to use CPU core count (capped at 4).",
+      "not": {
+        "const": false
+      }
+    },
     "environment": {
       "$ref": "#/components/schemas/environment"
     }
@@ -449,6 +458,15 @@
         "platform": "windows",
         "arch": "x64"
       }
+    },
+    {
+      "concurrentRunners": 1
+    },
+    {
+      "concurrentRunners": true
+    },
+    {
+      "concurrentRunners": 4
     }
   ]
 }
