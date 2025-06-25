@@ -236,6 +236,19 @@
     },
     "environment": {
       "$ref": "#/components/schemas/environment"
+    },
+    "debug": {
+      "description": "Enable debugging mode. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging.",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "enum": ["stepThrough"]
+        }
+      ],
+      "default": false
     }
   },
   "components": {
@@ -467,6 +480,15 @@
     },
     {
       "concurrentRunners": 4
+    },
+    {
+      "debug": false
+    },
+    {
+      "debug": true
+    },
+    {
+      "debug": "stepThrough"
     }
   ]
 }

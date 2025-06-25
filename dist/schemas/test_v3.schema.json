@@ -653,6 +653,11 @@
                     }
                   },
                   "title": "Variables (step)"
+                },
+                "breakpoint": {
+                  "type": "boolean",
+                  "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                  "default": false
                 }
               },
               "title": "Common"
@@ -700,6 +705,11 @@
                 }
               },
               "title": "Variables (step)"
+            },
+            "breakpoint": {
+              "type": "boolean",
+              "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+              "default": false
             }
           }
         },
@@ -755,6 +765,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -966,6 +981,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -1148,6 +1168,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -1944,6 +1969,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -2101,6 +2131,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -3099,6 +3134,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -3401,6 +3441,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -3689,6 +3734,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -3905,6 +3955,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -4348,6 +4403,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -4515,6 +4575,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -4595,6 +4660,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -4670,6 +4740,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 },
                 "title": "Common"
@@ -5072,6 +5147,16 @@
                 }
               }
             }
+          },
+          {
+            "stepId": "breakpoint-example",
+            "description": "Step with breakpoint enabled",
+            "goTo": "https://www.example.com",
+            "breakpoint": true
+          },
+          {
+            "checkLink": "https://www.google.com",
+            "breakpoint": false
           }
         ]
       }
@@ -5389,6 +5474,11 @@
                           }
                         },
                         "title": "Variables (step)"
+                      },
+                      "breakpoint": {
+                        "type": "boolean",
+                        "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                        "default": false
                       }
                     },
                     "title": "Common"
@@ -5436,6 +5526,11 @@
                       }
                     },
                     "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
                   }
                 }
               },
@@ -5491,6 +5586,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -5702,6 +5802,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -5884,6 +5989,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -6680,6 +6790,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -6837,6 +6952,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -7835,6 +7955,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -8137,6 +8262,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -8425,6 +8555,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -8641,6 +8776,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -9084,6 +9224,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -9251,6 +9396,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -9331,6 +9481,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -9406,6 +9561,11 @@
                             }
                           },
                           "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
                         }
                       },
                       "title": "Common"
@@ -9808,6 +9968,16 @@
                       }
                     }
                   }
+                },
+                {
+                  "stepId": "breakpoint-example",
+                  "description": "Step with breakpoint enabled",
+                  "goTo": "https://www.example.com",
+                  "breakpoint": true
+                },
+                {
+                  "checkLink": "https://www.google.com",
+                  "breakpoint": false
                 }
               ]
             }
