@@ -41,6 +41,7 @@ jobs:
       - run: npm run build # Automatically run tests because of the `postbuild` script in package.json
   
   threat-assessment:
+    if: github.event_name == 'release' && github.event.action == 'published'
     name: Threat Assessment
     runs-on: ubuntu-latest
     needs: test
