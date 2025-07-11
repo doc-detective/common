@@ -78,12 +78,7 @@ jobs:
           rl-submit-only: false
           artifact-to-scan: ${{ steps.build.outputs.scanfile }}
           report-path: report
-          rl-package-url: common/Releases@${{ steps.get_version.outputs.version }}-assess.0
-      - name: Output and archive scan report
-        if: success() || failure()
-        run: |
-          echo "The status is: '${{ steps.rl-scan.outputs.status }}'"
-          echo "The description is: '${{ steps.rl-scan.outputs.description }}'"
+          rl-package-url: common/Releases@${{ steps.get_version.outputs.version }}
       - name: Archive scan report
         if: success() || failure()
         uses: actions/upload-artifact@v4
