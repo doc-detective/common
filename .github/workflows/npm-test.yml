@@ -39,6 +39,40 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm run build # Automatically run tests because of the `postbuild` script in package.json
+  
+  threat-assessment:
+    name: Threat Assessment
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get package version
+        id: get_version
+        run: |
+          # Extract the version from package.json and set it as an environment variable
+          echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
+
+      # Create an archive of the package
+      - id: build
+        run: |
+          npm pack
+          # Capture the path of the generated tarball
+          echo "scanfile=$(ls *.tgz)" >> $GITHUB_OUTPUT
+      # Use the rl-scanner-cloud-composite action
+      - name: Scan build artifact on the Portal
+        id: rl-scan
+        env:
+          RLPORTAL_ACCESS_TOKEN: ${{ secrets.RLPORTAL_ACCESS_TOKEN }}
+        uses: reversinglabs/gh-action-rl-scanner-cloud-composite@v1
+        with:
+          rl-verbose: true
+          rl-portal-server: trial
+          rl-portal-org: Trial
+          rl-portal-group: OSS-MannySilva
+          rl-timeout: 20
+          rl-submit-only: false
+          artifact-to-scan: ${{ steps.build.outputs.scanfile }}
+          rl-package-url: common/Releases@${{ steps.get_version.outputs.version }}-assess.0
 
   publish-npm:
     if: github.event_name == 'release' && github.event.action == 'published'
