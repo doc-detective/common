@@ -60,7 +60,7 @@ jobs:
         run: mkdir -p build report
       - id: build
         run: |
-          npm pack
+          npm pack --pack-destination build
           # Capture the path of the generated tarball
           echo "scanfile=$(ls build/*.tgz)" >> $GITHUB_OUTPUT
       # Use the rl-scanner-cloud-composite action
