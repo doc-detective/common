@@ -53,11 +53,12 @@ jobs:
           echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
 
       # Create an archive of the package
+      - run: mkdir -p build
       - id: build
         run: |
           npm pack
           # Capture the path of the generated tarball
-          echo "scanfile=$(ls *.tgz)" >> $GITHUB_OUTPUT
+          echo "scanfile=$(ls build/*.tgz)" >> $GITHUB_OUTPUT
       # Use the rl-scanner-cloud-composite action
       - name: Scan build artifact on the Portal
         id: rl-scan
@@ -73,6 +74,11 @@ jobs:
           rl-submit-only: false
           artifact-to-scan: ${{ steps.build.outputs.scanfile }}
           rl-package-url: common/Releases@${{ steps.get_version.outputs.version }}-assess.0
+      - name: Output scan status
+        if: success() || failure()
+        run: |
+          echo "The status is: '${{ steps.rl-scan.outputs.status }}'"
+          echo "The description is: '${{ steps.rl-scan.outputs.description }}'"
 
   publish-npm:
     if: github.event_name == 'release' && github.event.action == 'published'
