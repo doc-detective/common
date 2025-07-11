@@ -53,7 +53,11 @@ jobs:
           echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_OUTPUT
 
       # Create an archive of the package
-      - run: mkdir -p build
+      - name: Set Current Date Time
+        run: |
+          echo "DT_NOW=$(date +%Y%m%d-%H%M%S)" >> ${GITHUB_ENV}
+      - name: Create directories
+        run: mkdir -p build report
       - id: build
         run: |
           npm pack
@@ -73,12 +77,19 @@ jobs:
           rl-timeout: 20
           rl-submit-only: false
           artifact-to-scan: ${{ steps.build.outputs.scanfile }}
+          report-path: report
           rl-package-url: common/Releases@${{ steps.get_version.outputs.version }}-assess.0
-      - name: Output scan status
+      - name: Output and archive scan report
         if: success() || failure()
         run: |
           echo "The status is: '${{ steps.rl-scan.outputs.status }}'"
           echo "The description is: '${{ steps.rl-scan.outputs.description }}'"
+      - name: Archive scan report
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rl-scan-report-${{ env.DT_NOW }}
+          path: report
 
   publish-npm:
     if: github.event_name == 'release' && github.event.action == 'published'
