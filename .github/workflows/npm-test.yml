@@ -78,7 +78,7 @@ jobs:
           rl-submit-only: false
           artifact-to-scan: ${{ steps.build.outputs.scanfile }}
           report-path: report
-          rl-package-url: common/Releases@${{ steps.get_version.outputs.version }}
+          rl-package-url: common/releases@${{ steps.get_version.outputs.version }}
       - name: Archive scan report
         if: success() || failure()
         uses: actions/upload-artifact@v4
