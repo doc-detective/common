@@ -4750,6 +4750,471 @@
                 "title": "Common"
               },
               {
+                "title": "saveCookie",
+                "type": "object",
+                "required": [
+                  "saveCookie"
+                ],
+                "properties": {
+                  "saveCookie": {
+                    "$schema": "http://json-schema.org/draft-07/schema#",
+                    "title": "saveCookie",
+                    "description": "Save browser cookies to a file.",
+                    "anyOf": [
+                      {
+                        "title": "Save all cookies (simple)",
+                        "type": "string",
+                        "description": "File path to save cookies to."
+                      },
+                      {
+                        "title": "Save cookies (detailed)",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "path": {
+                            "type": "string",
+                            "description": "File path to save cookies to, relative to `directory`. If not specified, the file name is the ID of the step with a `.json` extension.",
+                            "pattern": "([A-Za-z0-9_-]*\\.(json|JSON)$|\\$[A-Za-z0-9_]+)"
+                          },
+                          "directory": {
+                            "type": "string",
+                            "description": "Directory to save the cookie file. If the directory doesn't exist, creates the directory."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of a specific cookie to save. If not specified, saves all cookies for the current domain."
+                          },
+                          "domain": {
+                            "type": "string",
+                            "description": "Domain to save cookies from. If not specified, uses the current page's domain."
+                          },
+                          "overwrite": {
+                            "type": "boolean",
+                            "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                            "default": false
+                          }
+                        },
+                        "required": []
+                      }
+                    ],
+                    "components": {
+                      "schemas": {
+                        "string": {
+                          "title": "Save all cookies (simple)",
+                          "type": "string",
+                          "description": "File path to save cookies to."
+                        },
+                        "object": {
+                          "title": "Save cookies (detailed)",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "description": "File path to save cookies to, relative to `directory`. If not specified, the file name is the ID of the step with a `.json` extension.",
+                              "pattern": "([A-Za-z0-9_-]*\\.(json|JSON)$|\\$[A-Za-z0-9_]+)"
+                            },
+                            "directory": {
+                              "type": "string",
+                              "description": "Directory to save the cookie file. If the directory doesn't exist, creates the directory."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Name of a specific cookie to save. If not specified, saves all cookies for the current domain."
+                            },
+                            "domain": {
+                              "type": "string",
+                              "description": "Domain to save cookies from. If not specified, uses the current page's domain."
+                            },
+                            "overwrite": {
+                              "type": "boolean",
+                              "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                              "default": false
+                            }
+                          },
+                          "required": []
+                        }
+                      }
+                    },
+                    "examples": [
+                      "cookies.json",
+                      {
+                        "path": "session-cookies.json"
+                      },
+                      {
+                        "path": "session-cookies.json",
+                        "directory": "data"
+                      },
+                      {
+                        "path": "auth-cookie.json",
+                        "name": "session_token",
+                        "overwrite": true
+                      },
+                      {
+                        "path": "domain-cookies.json",
+                        "domain": "example.com",
+                        "directory": "data",
+                        "overwrite": false
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "dynamicDefaults": {
+                  "stepId": "uuid"
+                },
+                "properties": {
+                  "$schema": {
+                    "description": "JSON Schema for this object.",
+                    "type": "string",
+                    "enum": [
+                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                    ]
+                  },
+                  "stepId": {
+                    "type": "string",
+                    "description": "ID of the step."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the step."
+                  },
+                  "unsafe": {
+                    "type": "boolean",
+                    "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                    "default": false
+                  },
+                  "outputs": {
+                    "type": "object",
+                    "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Outputs (step)"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "description": "Environment variables to set from user-defined expressions.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
+                  }
+                },
+                "title": "Common"
+              },
+              {
+                "title": "loadCookie",
+                "type": "object",
+                "required": [
+                  "loadCookie"
+                ],
+                "properties": {
+                  "loadCookie": {
+                    "$schema": "http://json-schema.org/draft-07/schema#",
+                    "title": "loadCookie",
+                    "description": "Load cookies from a file or set cookies directly.",
+                    "anyOf": [
+                      {
+                        "title": "Load cookies from file (simple)",
+                        "type": "string",
+                        "description": "File path to load cookies from."
+                      },
+                      {
+                        "title": "Load/set cookies (detailed)",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "path": {
+                            "type": "string",
+                            "description": "File path to load cookies from. If specified, loads cookies from the file. Cannot be used with `cookies` property."
+                          },
+                          "cookies": {
+                            "type": "array",
+                            "description": "Array of cookie objects to set directly. Cannot be used with `path` property.",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string",
+                                  "description": "Name of the cookie."
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "description": "Value of the cookie."
+                                },
+                                "domain": {
+                                  "type": "string",
+                                  "description": "Domain for the cookie. If not specified, uses the current page's domain."
+                                },
+                                "path": {
+                                  "type": "string",
+                                  "description": "Path for the cookie.",
+                                  "default": "/"
+                                },
+                                "expires": {
+                                  "type": "integer",
+                                  "description": "Expiration time as Unix timestamp. If not specified, cookie is a session cookie."
+                                },
+                                "httpOnly": {
+                                  "type": "boolean",
+                                  "description": "Whether the cookie is HTTP only.",
+                                  "default": false
+                                },
+                                "secure": {
+                                  "type": "boolean",
+                                  "description": "Whether the cookie requires secure connection.",
+                                  "default": false
+                                },
+                                "sameSite": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Strict",
+                                    "Lax",
+                                    "None"
+                                  ],
+                                  "description": "SameSite attribute for the cookie."
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "value"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "domain": {
+                            "type": "string",
+                            "description": "Default domain to use when loading cookies from file that don't specify a domain."
+                          }
+                        },
+                        "anyOf": [
+                          {
+                            "required": [
+                              "path"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "cookies"
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "components": {
+                      "schemas": {
+                        "string": {
+                          "title": "Load cookies from file (simple)",
+                          "type": "string",
+                          "description": "File path to load cookies from."
+                        },
+                        "object": {
+                          "title": "Load/set cookies (detailed)",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "description": "File path to load cookies from. If specified, loads cookies from the file. Cannot be used with `cookies` property."
+                            },
+                            "cookies": {
+                              "type": "array",
+                              "description": "Array of cookie objects to set directly. Cannot be used with `path` property.",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "description": "Name of the cookie."
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "description": "Value of the cookie."
+                                  },
+                                  "domain": {
+                                    "type": "string",
+                                    "description": "Domain for the cookie. If not specified, uses the current page's domain."
+                                  },
+                                  "path": {
+                                    "type": "string",
+                                    "description": "Path for the cookie.",
+                                    "default": "/"
+                                  },
+                                  "expires": {
+                                    "type": "integer",
+                                    "description": "Expiration time as Unix timestamp. If not specified, cookie is a session cookie."
+                                  },
+                                  "httpOnly": {
+                                    "type": "boolean",
+                                    "description": "Whether the cookie is HTTP only.",
+                                    "default": false
+                                  },
+                                  "secure": {
+                                    "type": "boolean",
+                                    "description": "Whether the cookie requires secure connection.",
+                                    "default": false
+                                  },
+                                  "sameSite": {
+                                    "type": "string",
+                                    "enum": [
+                                      "Strict",
+                                      "Lax",
+                                      "None"
+                                    ],
+                                    "description": "SameSite attribute for the cookie."
+                                  }
+                                },
+                                "required": [
+                                  "name",
+                                  "value"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "domain": {
+                              "type": "string",
+                              "description": "Default domain to use when loading cookies from file that don't specify a domain."
+                            }
+                          },
+                          "anyOf": [
+                            {
+                              "required": [
+                                "path"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "cookies"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "examples": [
+                      "cookies.json",
+                      {
+                        "path": "session-cookies.json"
+                      },
+                      {
+                        "path": "auth-cookies.json",
+                        "domain": "example.com"
+                      },
+                      {
+                        "cookies": [
+                          {
+                            "name": "session_token",
+                            "value": "abc123",
+                            "domain": "example.com"
+                          }
+                        ]
+                      },
+                      {
+                        "cookies": [
+                          {
+                            "name": "auth_token",
+                            "value": "xyz789",
+                            "domain": "api.example.com",
+                            "path": "/api",
+                            "expires": 1672531200,
+                            "httpOnly": true,
+                            "secure": true,
+                            "sameSite": "Strict"
+                          },
+                          {
+                            "name": "preference",
+                            "value": "dark_mode",
+                            "domain": "example.com"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "dynamicDefaults": {
+                  "stepId": "uuid"
+                },
+                "properties": {
+                  "$schema": {
+                    "description": "JSON Schema for this object.",
+                    "type": "string",
+                    "enum": [
+                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                    ]
+                  },
+                  "stepId": {
+                    "type": "string",
+                    "description": "ID of the step."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the step."
+                  },
+                  "unsafe": {
+                    "type": "boolean",
+                    "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                    "default": false
+                  },
+                  "outputs": {
+                    "type": "object",
+                    "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Outputs (step)"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "description": "Environment variables to set from user-defined expressions.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
+                  }
+                },
+                "title": "Common"
+              },
+              {
                 "title": "wait",
                 "type": "object",
                 "required": [
@@ -4927,6 +5392,34 @@
           },
           {
             "loadVariables": "variables.env"
+          },
+          {
+            "saveCookie": "cookies.json"
+          },
+          {
+            "saveCookie": {
+              "path": "session-cookies.json",
+              "directory": "data"
+            }
+          },
+          {
+            "loadCookie": "cookies.json"
+          },
+          {
+            "loadCookie": {
+              "path": "session-cookies.json"
+            }
+          },
+          {
+            "loadCookie": {
+              "cookies": [
+                {
+                  "name": "session_token",
+                  "value": "abc123",
+                  "domain": "example.com"
+                }
+              ]
+            }
           },
           {
             "find": "Find me!"
@@ -9571,6 +10064,471 @@
                       "title": "Common"
                     },
                     {
+                      "title": "saveCookie",
+                      "type": "object",
+                      "required": [
+                        "saveCookie"
+                      ],
+                      "properties": {
+                        "saveCookie": {
+                          "$schema": "http://json-schema.org/draft-07/schema#",
+                          "title": "saveCookie",
+                          "description": "Save browser cookies to a file.",
+                          "anyOf": [
+                            {
+                              "title": "Save all cookies (simple)",
+                              "type": "string",
+                              "description": "File path to save cookies to."
+                            },
+                            {
+                              "title": "Save cookies (detailed)",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "description": "File path to save cookies to, relative to `directory`. If not specified, the file name is the ID of the step with a `.json` extension.",
+                                  "pattern": "([A-Za-z0-9_-]*\\.(json|JSON)$|\\$[A-Za-z0-9_]+)"
+                                },
+                                "directory": {
+                                  "type": "string",
+                                  "description": "Directory to save the cookie file. If the directory doesn't exist, creates the directory."
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "Name of a specific cookie to save. If not specified, saves all cookies for the current domain."
+                                },
+                                "domain": {
+                                  "type": "string",
+                                  "description": "Domain to save cookies from. If not specified, uses the current page's domain."
+                                },
+                                "overwrite": {
+                                  "type": "boolean",
+                                  "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                                  "default": false
+                                }
+                              },
+                              "required": []
+                            }
+                          ],
+                          "components": {
+                            "schemas": {
+                              "string": {
+                                "title": "Save all cookies (simple)",
+                                "type": "string",
+                                "description": "File path to save cookies to."
+                              },
+                              "object": {
+                                "title": "Save cookies (detailed)",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "description": "File path to save cookies to, relative to `directory`. If not specified, the file name is the ID of the step with a `.json` extension.",
+                                    "pattern": "([A-Za-z0-9_-]*\\.(json|JSON)$|\\$[A-Za-z0-9_]+)"
+                                  },
+                                  "directory": {
+                                    "type": "string",
+                                    "description": "Directory to save the cookie file. If the directory doesn't exist, creates the directory."
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "Name of a specific cookie to save. If not specified, saves all cookies for the current domain."
+                                  },
+                                  "domain": {
+                                    "type": "string",
+                                    "description": "Domain to save cookies from. If not specified, uses the current page's domain."
+                                  },
+                                  "overwrite": {
+                                    "type": "boolean",
+                                    "description": "If `true`, overwrites the existing file at `path` if it exists.",
+                                    "default": false
+                                  }
+                                },
+                                "required": []
+                              }
+                            }
+                          },
+                          "examples": [
+                            "cookies.json",
+                            {
+                              "path": "session-cookies.json"
+                            },
+                            {
+                              "path": "session-cookies.json",
+                              "directory": "data"
+                            },
+                            {
+                              "path": "auth-cookie.json",
+                              "name": "session_token",
+                              "overwrite": true
+                            },
+                            {
+                              "path": "domain-cookies.json",
+                              "domain": "example.com",
+                              "directory": "data",
+                              "overwrite": false
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "dynamicDefaults": {
+                        "stepId": "uuid"
+                      },
+                      "properties": {
+                        "$schema": {
+                          "description": "JSON Schema for this object.",
+                          "type": "string",
+                          "enum": [
+                            "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                          ]
+                        },
+                        "stepId": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "unsafe": {
+                          "type": "boolean",
+                          "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                          "default": false
+                        },
+                        "outputs": {
+                          "type": "object",
+                          "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Outputs (step)"
+                        },
+                        "variables": {
+                          "type": "object",
+                          "description": "Environment variables to set from user-defined expressions.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
+                        }
+                      },
+                      "title": "Common"
+                    },
+                    {
+                      "title": "loadCookie",
+                      "type": "object",
+                      "required": [
+                        "loadCookie"
+                      ],
+                      "properties": {
+                        "loadCookie": {
+                          "$schema": "http://json-schema.org/draft-07/schema#",
+                          "title": "loadCookie",
+                          "description": "Load cookies from a file or set cookies directly.",
+                          "anyOf": [
+                            {
+                              "title": "Load cookies from file (simple)",
+                              "type": "string",
+                              "description": "File path to load cookies from."
+                            },
+                            {
+                              "title": "Load/set cookies (detailed)",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "path": {
+                                  "type": "string",
+                                  "description": "File path to load cookies from. If specified, loads cookies from the file. Cannot be used with `cookies` property."
+                                },
+                                "cookies": {
+                                  "type": "array",
+                                  "description": "Array of cookie objects to set directly. Cannot be used with `path` property.",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "description": "Name of the cookie."
+                                      },
+                                      "value": {
+                                        "type": "string",
+                                        "description": "Value of the cookie."
+                                      },
+                                      "domain": {
+                                        "type": "string",
+                                        "description": "Domain for the cookie. If not specified, uses the current page's domain."
+                                      },
+                                      "path": {
+                                        "type": "string",
+                                        "description": "Path for the cookie.",
+                                        "default": "/"
+                                      },
+                                      "expires": {
+                                        "type": "integer",
+                                        "description": "Expiration time as Unix timestamp. If not specified, cookie is a session cookie."
+                                      },
+                                      "httpOnly": {
+                                        "type": "boolean",
+                                        "description": "Whether the cookie is HTTP only.",
+                                        "default": false
+                                      },
+                                      "secure": {
+                                        "type": "boolean",
+                                        "description": "Whether the cookie requires secure connection.",
+                                        "default": false
+                                      },
+                                      "sameSite": {
+                                        "type": "string",
+                                        "enum": [
+                                          "Strict",
+                                          "Lax",
+                                          "None"
+                                        ],
+                                        "description": "SameSite attribute for the cookie."
+                                      }
+                                    },
+                                    "required": [
+                                      "name",
+                                      "value"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                },
+                                "domain": {
+                                  "type": "string",
+                                  "description": "Default domain to use when loading cookies from file that don't specify a domain."
+                                }
+                              },
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "path"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "cookies"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "components": {
+                            "schemas": {
+                              "string": {
+                                "title": "Load cookies from file (simple)",
+                                "type": "string",
+                                "description": "File path to load cookies from."
+                              },
+                              "object": {
+                                "title": "Load/set cookies (detailed)",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "path": {
+                                    "type": "string",
+                                    "description": "File path to load cookies from. If specified, loads cookies from the file. Cannot be used with `cookies` property."
+                                  },
+                                  "cookies": {
+                                    "type": "array",
+                                    "description": "Array of cookie objects to set directly. Cannot be used with `path` property.",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "description": "Name of the cookie."
+                                        },
+                                        "value": {
+                                          "type": "string",
+                                          "description": "Value of the cookie."
+                                        },
+                                        "domain": {
+                                          "type": "string",
+                                          "description": "Domain for the cookie. If not specified, uses the current page's domain."
+                                        },
+                                        "path": {
+                                          "type": "string",
+                                          "description": "Path for the cookie.",
+                                          "default": "/"
+                                        },
+                                        "expires": {
+                                          "type": "integer",
+                                          "description": "Expiration time as Unix timestamp. If not specified, cookie is a session cookie."
+                                        },
+                                        "httpOnly": {
+                                          "type": "boolean",
+                                          "description": "Whether the cookie is HTTP only.",
+                                          "default": false
+                                        },
+                                        "secure": {
+                                          "type": "boolean",
+                                          "description": "Whether the cookie requires secure connection.",
+                                          "default": false
+                                        },
+                                        "sameSite": {
+                                          "type": "string",
+                                          "enum": [
+                                            "Strict",
+                                            "Lax",
+                                            "None"
+                                          ],
+                                          "description": "SameSite attribute for the cookie."
+                                        }
+                                      },
+                                      "required": [
+                                        "name",
+                                        "value"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  },
+                                  "domain": {
+                                    "type": "string",
+                                    "description": "Default domain to use when loading cookies from file that don't specify a domain."
+                                  }
+                                },
+                                "anyOf": [
+                                  {
+                                    "required": [
+                                      "path"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "cookies"
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "examples": [
+                            "cookies.json",
+                            {
+                              "path": "session-cookies.json"
+                            },
+                            {
+                              "path": "auth-cookies.json",
+                              "domain": "example.com"
+                            },
+                            {
+                              "cookies": [
+                                {
+                                  "name": "session_token",
+                                  "value": "abc123",
+                                  "domain": "example.com"
+                                }
+                              ]
+                            },
+                            {
+                              "cookies": [
+                                {
+                                  "name": "auth_token",
+                                  "value": "xyz789",
+                                  "domain": "api.example.com",
+                                  "path": "/api",
+                                  "expires": 1672531200,
+                                  "httpOnly": true,
+                                  "secure": true,
+                                  "sameSite": "Strict"
+                                },
+                                {
+                                  "name": "preference",
+                                  "value": "dark_mode",
+                                  "domain": "example.com"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "dynamicDefaults": {
+                        "stepId": "uuid"
+                      },
+                      "properties": {
+                        "$schema": {
+                          "description": "JSON Schema for this object.",
+                          "type": "string",
+                          "enum": [
+                            "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                          ]
+                        },
+                        "stepId": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "unsafe": {
+                          "type": "boolean",
+                          "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                          "default": false
+                        },
+                        "outputs": {
+                          "type": "object",
+                          "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Outputs (step)"
+                        },
+                        "variables": {
+                          "type": "object",
+                          "description": "Environment variables to set from user-defined expressions.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
+                        }
+                      },
+                      "title": "Common"
+                    },
+                    {
                       "title": "wait",
                       "type": "object",
                       "required": [
@@ -9748,6 +10706,34 @@
                 },
                 {
                   "loadVariables": "variables.env"
+                },
+                {
+                  "saveCookie": "cookies.json"
+                },
+                {
+                  "saveCookie": {
+                    "path": "session-cookies.json",
+                    "directory": "data"
+                  }
+                },
+                {
+                  "loadCookie": "cookies.json"
+                },
+                {
+                  "loadCookie": {
+                    "path": "session-cookies.json"
+                  }
+                },
+                {
+                  "loadCookie": {
+                    "cookies": [
+                      {
+                        "name": "session_token",
+                        "value": "abc123",
+                        "domain": "example.com"
+                      }
+                    ]
+                  }
                 },
                 {
                   "find": "Find me!"

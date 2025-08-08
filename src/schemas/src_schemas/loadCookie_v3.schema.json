@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "loadCookie",
+  "description": "Load cookies from a file or set cookies directly.",
+  "anyOf": [
+    {
+      "title": "Load cookies from file (simple)",
+      "type": "string",
+      "description": "File path to load cookies from."
+    },
+    {
+      "title": "Load/set cookies (detailed)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "File path to load cookies from. If specified, loads cookies from the file. Cannot be used with `cookies` property."
+        },
+        "cookies": {
+          "type": "array",
+          "description": "Array of cookie objects to set directly. Cannot be used with `path` property.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the cookie."
+              },
+              "value": {
+                "type": "string",
+                "description": "Value of the cookie."
+              },
+              "domain": {
+                "type": "string",
+                "description": "Domain for the cookie. If not specified, uses the current page's domain."
+              },
+              "path": {
+                "type": "string",
+                "description": "Path for the cookie.",
+                "default": "/"
+              },
+              "expires": {
+                "type": "integer",
+                "description": "Expiration time as Unix timestamp. If not specified, cookie is a session cookie."
+              },
+              "httpOnly": {
+                "type": "boolean",
+                "description": "Whether the cookie is HTTP only.",
+                "default": false
+              },
+              "secure": {
+                "type": "boolean",
+                "description": "Whether the cookie requires secure connection.",
+                "default": false
+              },
+              "sameSite": {
+                "type": "string",
+                "enum": ["Strict", "Lax", "None"],
+                "description": "SameSite attribute for the cookie."
+              }
+            },
+            "required": ["name", "value"],
+            "additionalProperties": false
+          }
+        },
+        "domain": {
+          "type": "string",
+          "description": "Default domain to use when loading cookies from file that don't specify a domain."
+        }
+      },
+      "anyOf": [
+        {
+          "required": ["path"]
+        },
+        {
+          "required": ["cookies"]
+        }
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "string": {
+        "title": "Load cookies from file (simple)",
+        "type": "string",
+        "description": "File path to load cookies from."
+      },
+      "object": {
+        "title": "Load/set cookies (detailed)",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path to load cookies from. If specified, loads cookies from the file. Cannot be used with `cookies` property."
+          },
+          "cookies": {
+            "type": "array",
+            "description": "Array of cookie objects to set directly. Cannot be used with `path` property.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the cookie."
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Value of the cookie."
+                },
+                "domain": {
+                  "type": "string",
+                  "description": "Domain for the cookie. If not specified, uses the current page's domain."
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Path for the cookie.",
+                  "default": "/"
+                },
+                "expires": {
+                  "type": "integer",
+                  "description": "Expiration time as Unix timestamp. If not specified, cookie is a session cookie."
+                },
+                "httpOnly": {
+                  "type": "boolean",
+                  "description": "Whether the cookie is HTTP only.",
+                  "default": false
+                },
+                "secure": {
+                  "type": "boolean",
+                  "description": "Whether the cookie requires secure connection.",
+                  "default": false
+                },
+                "sameSite": {
+                  "type": "string",
+                  "enum": ["Strict", "Lax", "None"],
+                  "description": "SameSite attribute for the cookie."
+                }
+              },
+              "required": ["name", "value"],
+              "additionalProperties": false
+            }
+          },
+          "domain": {
+            "type": "string",
+            "description": "Default domain to use when loading cookies from file that don't specify a domain."
+          }
+        },
+        "anyOf": [
+          {
+            "required": ["path"]
+          },
+          {
+            "required": ["cookies"]
+          }
+        ]
+      }
+    }
+  },
+  "examples": [
+    "cookies.json",
+    {
+      "path": "session-cookies.json"
+    },
+    {
+      "path": "auth-cookies.json",
+      "domain": "example.com"
+    },
+    {
+      "cookies": [
+        {
+          "name": "session_token",
+          "value": "abc123",
+          "domain": "example.com"
+        }
+      ]
+    },
+    {
+      "cookies": [
+        {
+          "name": "auth_token",
+          "value": "xyz789",
+          "domain": "api.example.com",
+          "path": "/api",
+          "expires": 1672531200,
+          "httpOnly": true,
+          "secure": true,
+          "sameSite": "Strict"
+        },
+        {
+          "name": "preference",
+          "value": "dark_mode",
+          "domain": "example.com"
+        }
+      ]
+    }
+  ]
+}

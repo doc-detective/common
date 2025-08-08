@@ -297,6 +297,40 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "title": "saveCookie",
+          "type": "object",
+          "required": ["saveCookie"],
+          "properties": {
+            "saveCookie": {
+              "$ref": "saveCookie_v3.schema.json#"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "title": "loadCookie",
+          "type": "object",
+          "required": ["loadCookie"],
+          "properties": {
+            "loadCookie": {
+              "$ref": "loadCookie_v3.schema.json#"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
           "title": "wait",
           "type": "object",
           "required": ["wait"],
@@ -430,6 +464,34 @@
     },
     {
       "loadVariables": "variables.env"
+    },
+    {
+      "saveCookie": "cookies.json"
+    },
+    {
+      "saveCookie": {
+        "path": "session-cookies.json",
+        "directory": "data"
+      }
+    },
+    {
+      "loadCookie": "cookies.json"
+    },
+    {
+      "loadCookie": {
+        "path": "session-cookies.json"
+      }
+    },
+    {
+      "loadCookie": {
+        "cookies": [
+          {
+            "name": "session_token",
+            "value": "abc123",
+            "domain": "example.com"
+          }
+        ]
+      }
     },
     {
       "find": {

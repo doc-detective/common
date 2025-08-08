@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "saveCookie",
+  "description": "Save browser cookies to a file.",
+  "anyOf": [
+    {
+      "title": "Save all cookies (simple)",
+      "type": "string",
+      "description": "File path to save cookies to."
+    },
+    {
+      "title": "Save cookies (detailed)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "File path to save cookies to, relative to `directory`. If not specified, the file name is the ID of the step with a `.json` extension.",
+          "pattern": "([A-Za-z0-9_-]*\\.(json|JSON)$|\\$[A-Za-z0-9_]+)"
+        },
+        "directory": {
+          "type": "string",
+          "description": "Directory to save the cookie file. If the directory doesn't exist, creates the directory."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a specific cookie to save. If not specified, saves all cookies for the current domain."
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain to save cookies from. If not specified, uses the current page's domain."
+        },
+        "overwrite": {
+          "type": "boolean",
+          "description": "If `true`, overwrites the existing file at `path` if it exists.",
+          "default": false
+        }
+      },
+      "required": []
+    }
+  ],
+  "components": {
+    "schemas": {
+      "string": {
+        "title": "Save all cookies (simple)",
+        "type": "string",
+        "description": "File path to save cookies to."
+      },
+      "object": {
+        "title": "Save cookies (detailed)",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path to save cookies to, relative to `directory`. If not specified, the file name is the ID of the step with a `.json` extension.",
+            "pattern": "([A-Za-z0-9_-]*\\.(json|JSON)$|\\$[A-Za-z0-9_]+)"
+          },
+          "directory": {
+            "type": "string",
+            "description": "Directory to save the cookie file. If the directory doesn't exist, creates the directory."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of a specific cookie to save. If not specified, saves all cookies for the current domain."
+          },
+          "domain": {
+            "type": "string",
+            "description": "Domain to save cookies from. If not specified, uses the current page's domain."
+          },
+          "overwrite": {
+            "type": "boolean",
+            "description": "If `true`, overwrites the existing file at `path` if it exists.",
+            "default": false
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  "examples": [
+    "cookies.json",
+    {
+      "path": "session-cookies.json"
+    },
+    {
+      "path": "session-cookies.json",
+      "directory": "data"
+    },
+    {
+      "path": "auth-cookie.json",
+      "name": "session_token",
+      "overwrite": true
+    },
+    {
+      "path": "domain-cookies.json",
+      "domain": "example.com",
+      "directory": "data",
+      "overwrite": false
+    }
+  ]
+}
