@@ -24889,6 +24889,20 @@
                     ]
                   }
                 },
+                "debug": {
+                  "description": "Enable debugging mode for this specification. Overrides the debug setting from config level. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this specification.",
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "stepThrough"
+                      ]
+                    }
+                  ]
+                },
                 "tests": {
                   "description": "[Tests](test) to perform.",
                   "type": "array",
@@ -25489,6 +25503,20 @@
                           "after": {
                             "type": "string",
                             "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
+                          },
+                          "debug": {
+                            "description": "Enable debugging mode for this test. Overrides the debug setting from config and spec levels. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this test.",
+                            "anyOf": [
+                              {
+                                "type": "boolean"
+                              },
+                              {
+                                "type": "string",
+                                "enum": [
+                                  "stepThrough"
+                                ]
+                              }
+                            ]
                           },
                           "steps": {
                             "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
@@ -35247,6 +35275,41 @@
                               }
                             ],
                             "detectSteps": true
+                          },
+                          {
+                            "testId": "debug-test-basic",
+                            "description": "Test with debug mode enabled",
+                            "debug": true,
+                            "steps": [
+                              {
+                                "checkLink": "https://www.google.com"
+                              }
+                            ]
+                          },
+                          {
+                            "testId": "debug-test-step-through",
+                            "description": "Test with step-through debug mode",
+                            "debug": "stepThrough",
+                            "steps": [
+                              {
+                                "goTo": "https://www.google.com"
+                              },
+                              {
+                                "find": {
+                                  "selector": "[name='q']"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "testId": "debug-test-disabled",
+                            "description": "Test with debug mode explicitly disabled",
+                            "debug": false,
+                            "steps": [
+                              {
+                                "checkLink": "https://www.google.com"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -35409,6 +35472,53 @@
                             "overwrite": "aboveVariation"
                           },
                           "variables": {}
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "specId": "debug-spec-basic",
+                  "description": "Specification with debug mode enabled",
+                  "debug": true,
+                  "tests": [
+                    {
+                      "steps": [
+                        {
+                          "checkLink": "https://www.google.com"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "specId": "debug-spec-step-through",
+                  "description": "Specification with step-through debug mode",
+                  "debug": "stepThrough",
+                  "tests": [
+                    {
+                      "steps": [
+                        {
+                          "goTo": "https://www.google.com"
+                        },
+                        {
+                          "find": {
+                            "selector": "[name='q']"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "specId": "debug-spec-disabled",
+                  "description": "Specification with debug mode explicitly disabled",
+                  "debug": false,
+                  "tests": [
+                    {
+                      "steps": [
+                        {
+                          "checkLink": "https://www.google.com"
                         }
                       ]
                     }
@@ -36241,6 +36351,20 @@
                     ]
                   }
                 },
+                "debug": {
+                  "description": "Enable debugging mode for this specification. Overrides the debug setting from config level. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this specification.",
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "stepThrough"
+                      ]
+                    }
+                  ]
+                },
                 "tests": {
                   "description": "[Tests](test) to perform.",
                   "type": "array",
@@ -36841,6 +36965,20 @@
                           "after": {
                             "type": "string",
                             "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
+                          },
+                          "debug": {
+                            "description": "Enable debugging mode for this test. Overrides the debug setting from config and spec levels. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this test.",
+                            "anyOf": [
+                              {
+                                "type": "boolean"
+                              },
+                              {
+                                "type": "string",
+                                "enum": [
+                                  "stepThrough"
+                                ]
+                              }
+                            ]
                           },
                           "steps": {
                             "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
@@ -46599,6 +46737,41 @@
                               }
                             ],
                             "detectSteps": true
+                          },
+                          {
+                            "testId": "debug-test-basic",
+                            "description": "Test with debug mode enabled",
+                            "debug": true,
+                            "steps": [
+                              {
+                                "checkLink": "https://www.google.com"
+                              }
+                            ]
+                          },
+                          {
+                            "testId": "debug-test-step-through",
+                            "description": "Test with step-through debug mode",
+                            "debug": "stepThrough",
+                            "steps": [
+                              {
+                                "goTo": "https://www.google.com"
+                              },
+                              {
+                                "find": {
+                                  "selector": "[name='q']"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "testId": "debug-test-disabled",
+                            "description": "Test with debug mode explicitly disabled",
+                            "debug": false,
+                            "steps": [
+                              {
+                                "checkLink": "https://www.google.com"
+                              }
+                            ]
                           }
                         ]
                       }
@@ -46761,6 +46934,53 @@
                             "overwrite": "aboveVariation"
                           },
                           "variables": {}
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "specId": "debug-spec-basic",
+                  "description": "Specification with debug mode enabled",
+                  "debug": true,
+                  "tests": [
+                    {
+                      "steps": [
+                        {
+                          "checkLink": "https://www.google.com"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "specId": "debug-spec-step-through",
+                  "description": "Specification with step-through debug mode",
+                  "debug": "stepThrough",
+                  "tests": [
+                    {
+                      "steps": [
+                        {
+                          "goTo": "https://www.google.com"
+                        },
+                        {
+                          "find": {
+                            "selector": "[name='q']"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "specId": "debug-spec-disabled",
+                  "description": "Specification with debug mode explicitly disabled",
+                  "debug": false,
+                  "tests": [
+                    {
+                      "steps": [
+                        {
+                          "checkLink": "https://www.google.com"
                         }
                       ]
                     }
@@ -48376,6 +48596,20 @@
           ]
         }
       },
+      "debug": {
+        "description": "Enable debugging mode for this specification. Overrides the debug setting from config level. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this specification.",
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "stepThrough"
+            ]
+          }
+        ]
+      },
       "tests": {
         "description": "[Tests](test) to perform.",
         "type": "array",
@@ -48976,6 +49210,20 @@
                 "after": {
                   "type": "string",
                   "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
+                },
+                "debug": {
+                  "description": "Enable debugging mode for this test. Overrides the debug setting from config and spec levels. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this test.",
+                  "anyOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "stepThrough"
+                      ]
+                    }
+                  ]
                 },
                 "steps": {
                   "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
@@ -58734,6 +58982,41 @@
                     }
                   ],
                   "detectSteps": true
+                },
+                {
+                  "testId": "debug-test-basic",
+                  "description": "Test with debug mode enabled",
+                  "debug": true,
+                  "steps": [
+                    {
+                      "checkLink": "https://www.google.com"
+                    }
+                  ]
+                },
+                {
+                  "testId": "debug-test-step-through",
+                  "description": "Test with step-through debug mode",
+                  "debug": "stepThrough",
+                  "steps": [
+                    {
+                      "goTo": "https://www.google.com"
+                    },
+                    {
+                      "find": {
+                        "selector": "[name='q']"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "testId": "debug-test-disabled",
+                  "description": "Test with debug mode explicitly disabled",
+                  "debug": false,
+                  "steps": [
+                    {
+                      "checkLink": "https://www.google.com"
+                    }
+                  ]
                 }
               ]
             }
@@ -58896,6 +59179,53 @@
                   "overwrite": "aboveVariation"
                 },
                 "variables": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "specId": "debug-spec-basic",
+        "description": "Specification with debug mode enabled",
+        "debug": true,
+        "tests": [
+          {
+            "steps": [
+              {
+                "checkLink": "https://www.google.com"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "specId": "debug-spec-step-through",
+        "description": "Specification with step-through debug mode",
+        "debug": "stepThrough",
+        "tests": [
+          {
+            "steps": [
+              {
+                "goTo": "https://www.google.com"
+              },
+              {
+                "find": {
+                  "selector": "[name='q']"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "specId": "debug-spec-disabled",
+        "description": "Specification with debug mode explicitly disabled",
+        "debug": false,
+        "tests": [
+          {
+            "steps": [
+              {
+                "checkLink": "https://www.google.com"
               }
             ]
           }
@@ -64074,6 +64404,20 @@
       "after": {
         "type": "string",
         "description": "Path to a test specification to perform after this test, while maintaining this test's context. Useful for cleaning up testing environments. Only the `steps` property is used from the first test in the cleanup spec."
+      },
+      "debug": {
+        "description": "Enable debugging mode for this test. Overrides the debug setting from config and spec levels. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this test.",
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "stepThrough"
+            ]
+          }
+        ]
       },
       "steps": {
         "description": "Steps to perform as part of the test. Performed in the sequence defined. If one or more actions fail, the test fails. By default, if a step fails, the test stops and the remaining steps are not executed.",
@@ -73832,6 +74176,41 @@
           }
         ],
         "detectSteps": true
+      },
+      {
+        "testId": "debug-test-basic",
+        "description": "Test with debug mode enabled",
+        "debug": true,
+        "steps": [
+          {
+            "checkLink": "https://www.google.com"
+          }
+        ]
+      },
+      {
+        "testId": "debug-test-step-through",
+        "description": "Test with step-through debug mode",
+        "debug": "stepThrough",
+        "steps": [
+          {
+            "goTo": "https://www.google.com"
+          },
+          {
+            "find": {
+              "selector": "[name='q']"
+            }
+          }
+        ]
+      },
+      {
+        "testId": "debug-test-disabled",
+        "description": "Test with debug mode explicitly disabled",
+        "debug": false,
+        "steps": [
+          {
+            "checkLink": "https://www.google.com"
+          }
+        ]
       }
     ]
   },
