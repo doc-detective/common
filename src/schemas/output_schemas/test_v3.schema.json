@@ -10399,6 +10399,17 @@
           "checkLink": "https://www.google.com"
         }
       ]
+    },
+    {
+      "testId": "critical-test",
+      "description": "Test with debug mode and step breakpoints",
+      "debug": "stepThrough",
+      "steps": [
+        {
+          "checkLink": "https://api.example.com",
+          "breakpoint": true
+        }
+      ]
     }
   ]
 }
