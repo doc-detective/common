@@ -4585,6 +4585,254 @@
                                           {
                                             "type": "object",
                                             "required": [
+                                              "saveCookie"
+                                            ],
+                                            "properties": {
+                                              "saveCookie": {
+                                                "$schema": "http://json-schema.org/draft-07/schema#",
+                                                "title": "saveCookie",
+                                                "description": "Save a specific browser cookie to a file or environment variable for later reuse.",
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string",
+                                                    "title": "Cookie name",
+                                                    "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
+                                                    "pattern": "^[A-Za-z0-9_.-]+$",
+                                                    "transform": [
+                                                      "trim"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "type": "object",
+                                                    "additionalProperties": false,
+                                                    "properties": {
+                                                      "name": {
+                                                        "type": "string",
+                                                        "title": "Cookie name",
+                                                        "description": "Name of the specific cookie to save.",
+                                                        "pattern": "^[A-Za-z0-9_.-]+$",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "variable": {
+                                                        "type": "string",
+                                                        "title": "Environment variable name",
+                                                        "description": "Environment variable name to store the cookie as JSON string.",
+                                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "path": {
+                                                        "type": "string",
+                                                        "title": "Cookie file path",
+                                                        "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
+                                                        "pattern": "([A-Za-z0-9_.-]*\\.(txt|cookies)$|\\$[A-Za-z0-9_]+)",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "directory": {
+                                                        "type": "string",
+                                                        "title": "Directory path",
+                                                        "description": "Directory to save the cookie file. If not specified, uses output directory.",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "overwrite": {
+                                                        "type": "string",
+                                                        "title": "Overwrite existing file",
+                                                        "description": "Whether to overwrite existing cookie file.",
+                                                        "enum": [
+                                                          "true",
+                                                          "false"
+                                                        ],
+                                                        "default": "false"
+                                                      },
+                                                      "domain": {
+                                                        "type": "string",
+                                                        "title": "Cookie domain",
+                                                        "description": "Specific domain to filter the cookie by (optional).",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "name"
+                                                    ],
+                                                    "title": "Save cookie (detailed)"
+                                                  }
+                                                ],
+                                                "components": {
+                                                  "schemas": {
+                                                    "string": {
+                                                      "type": "string",
+                                                      "title": "Cookie name",
+                                                      "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
+                                                      "pattern": "^[A-Za-z0-9_.-]+$",
+                                                      "transform": [
+                                                        "trim"
+                                                      ]
+                                                    },
+                                                    "object": {
+                                                      "type": "object",
+                                                      "additionalProperties": false,
+                                                      "properties": {
+                                                        "name": {
+                                                          "type": "string",
+                                                          "title": "Cookie name",
+                                                          "description": "Name of the specific cookie to save.",
+                                                          "pattern": "^[A-Za-z0-9_.-]+$",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "variable": {
+                                                          "type": "string",
+                                                          "title": "Environment variable name",
+                                                          "description": "Environment variable name to store the cookie as JSON string.",
+                                                          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "path": {
+                                                          "type": "string",
+                                                          "title": "Cookie file path",
+                                                          "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
+                                                          "pattern": "([A-Za-z0-9_.-]*\\.(txt|cookies)$|\\$[A-Za-z0-9_]+)",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "directory": {
+                                                          "type": "string",
+                                                          "title": "Directory path",
+                                                          "description": "Directory to save the cookie file. If not specified, uses output directory.",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "overwrite": {
+                                                          "type": "string",
+                                                          "title": "Overwrite existing file",
+                                                          "description": "Whether to overwrite existing cookie file.",
+                                                          "enum": [
+                                                            "true",
+                                                            "false"
+                                                          ],
+                                                          "default": "false"
+                                                        },
+                                                        "domain": {
+                                                          "type": "string",
+                                                          "title": "Cookie domain",
+                                                          "description": "Specific domain to filter the cookie by (optional).",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "name"
+                                                      ],
+                                                      "title": "Save cookie (detailed)"
+                                                    }
+                                                  }
+                                                },
+                                                "examples": [
+                                                  "session_token",
+                                                  {
+                                                    "name": "auth_cookie",
+                                                    "path": "auth-cookie.txt"
+                                                  },
+                                                  {
+                                                    "name": "session_token",
+                                                    "variable": "SESSION_TOKEN"
+                                                  },
+                                                  {
+                                                    "name": "user_session",
+                                                    "path": "user-session.txt",
+                                                    "directory": "./test-data",
+                                                    "overwrite": "true"
+                                                  },
+                                                  {
+                                                    "name": "login_token",
+                                                    "path": "login-token.txt",
+                                                    "domain": "app.example.com"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "title": "saveCookie"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "allOf": [
+                                          {
+                                            "type": "object",
+                                            "dynamicDefaults": {
+                                              "stepId": "uuid"
+                                            },
+                                            "properties": {
+                                              "$schema": {
+                                                "description": "JSON Schema for this object.",
+                                                "type": "string",
+                                                "enum": [
+                                                  "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                                                ]
+                                              },
+                                              "stepId": {
+                                                "type": "string",
+                                                "description": "ID of the step."
+                                              },
+                                              "description": {
+                                                "type": "string",
+                                                "description": "Description of the step."
+                                              },
+                                              "unsafe": {
+                                                "type": "boolean",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                                                "default": false
+                                              },
+                                              "outputs": {
+                                                "type": "object",
+                                                "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                                                "default": {},
+                                                "patternProperties": {
+                                                  "^[A-Za-z0-9_]+$": {
+                                                    "type": "string",
+                                                    "description": "Runtime expression for a user-defined output value."
+                                                  }
+                                                },
+                                                "title": "Outputs (step)"
+                                              },
+                                              "variables": {
+                                                "type": "object",
+                                                "description": "Environment variables to set from user-defined expressions.",
+                                                "default": {},
+                                                "patternProperties": {
+                                                  "^[A-Za-z0-9_]+$": {
+                                                    "type": "string",
+                                                    "description": "Runtime expression for a user-defined output value."
+                                                  }
+                                                },
+                                                "title": "Variables (step)"
+                                              },
+                                              "breakpoint": {
+                                                "type": "boolean",
+                                                "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                                                "default": false
+                                              }
+                                            },
+                                            "title": "Common"
+                                          },
+                                          {
+                                            "type": "object",
+                                            "required": [
                                               "record"
                                             ],
                                             "properties": {
@@ -4920,6 +5168,220 @@
                                             "title": "Common"
                                           },
                                           {
+                                            "title": "loadCookie",
+                                            "type": "object",
+                                            "required": [
+                                              "loadCookie"
+                                            ],
+                                            "properties": {
+                                              "loadCookie": {
+                                                "$schema": "http://json-schema.org/draft-07/schema#",
+                                                "title": "loadCookie",
+                                                "description": "Load a specific cookie from a file or environment variable into the browser.",
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string",
+                                                    "title": "Cookie name or file path",
+                                                    "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                                    "transform": [
+                                                      "trim"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "type": "object",
+                                                    "additionalProperties": false,
+                                                    "properties": {
+                                                      "name": {
+                                                        "type": "string",
+                                                        "title": "Cookie name",
+                                                        "description": "Name of the specific cookie to load.",
+                                                        "pattern": "^[A-Za-z0-9_.-]+$",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "variable": {
+                                                        "type": "string",
+                                                        "title": "Environment variable name",
+                                                        "description": "Environment variable name containing the cookie as JSON string.",
+                                                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "path": {
+                                                        "type": "string",
+                                                        "title": "Cookie file path",
+                                                        "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "directory": {
+                                                        "type": "string",
+                                                        "title": "Directory path",
+                                                        "description": "Directory containing the cookie file.",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      },
+                                                      "domain": {
+                                                        "type": "string",
+                                                        "title": "Cookie domain",
+                                                        "description": "Specific domain to filter the cookie by when loading from multi-cookie file (optional).",
+                                                        "transform": [
+                                                          "trim"
+                                                        ]
+                                                      }
+                                                    },
+                                                    "title": "Load cookie (detailed)"
+                                                  }
+                                                ],
+                                                "components": {
+                                                  "schemas": {
+                                                    "string": {
+                                                      "type": "string",
+                                                      "title": "Cookie name or file path",
+                                                      "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                                      "transform": [
+                                                        "trim"
+                                                      ]
+                                                    },
+                                                    "object": {
+                                                      "type": "object",
+                                                      "additionalProperties": false,
+                                                      "properties": {
+                                                        "name": {
+                                                          "type": "string",
+                                                          "title": "Cookie name",
+                                                          "description": "Name of the specific cookie to load.",
+                                                          "pattern": "^[A-Za-z0-9_.-]+$",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "variable": {
+                                                          "type": "string",
+                                                          "title": "Environment variable name",
+                                                          "description": "Environment variable name containing the cookie as JSON string.",
+                                                          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "path": {
+                                                          "type": "string",
+                                                          "title": "Cookie file path",
+                                                          "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "directory": {
+                                                          "type": "string",
+                                                          "title": "Directory path",
+                                                          "description": "Directory containing the cookie file.",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        },
+                                                        "domain": {
+                                                          "type": "string",
+                                                          "title": "Cookie domain",
+                                                          "description": "Specific domain to filter the cookie by when loading from multi-cookie file (optional).",
+                                                          "transform": [
+                                                            "trim"
+                                                          ]
+                                                        }
+                                                      },
+                                                      "title": "Load cookie (detailed)"
+                                                    }
+                                                  }
+                                                },
+                                                "examples": [
+                                                  "session_token",
+                                                  "./test-data/auth-session.txt",
+                                                  {
+                                                    "name": "auth_cookie",
+                                                    "variable": "AUTH_COOKIE"
+                                                  },
+                                                  {
+                                                    "name": "session_token",
+                                                    "path": "session-token.txt",
+                                                    "directory": "./test-data"
+                                                  },
+                                                  {
+                                                    "name": "user_session",
+                                                    "path": "saved-cookies.txt",
+                                                    "domain": "app.example.com"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "allOf": [
+                                          {
+                                            "type": "object",
+                                            "dynamicDefaults": {
+                                              "stepId": "uuid"
+                                            },
+                                            "properties": {
+                                              "$schema": {
+                                                "description": "JSON Schema for this object.",
+                                                "type": "string",
+                                                "enum": [
+                                                  "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                                                ]
+                                              },
+                                              "stepId": {
+                                                "type": "string",
+                                                "description": "ID of the step."
+                                              },
+                                              "description": {
+                                                "type": "string",
+                                                "description": "Description of the step."
+                                              },
+                                              "unsafe": {
+                                                "type": "boolean",
+                                                "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                                                "default": false
+                                              },
+                                              "outputs": {
+                                                "type": "object",
+                                                "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                                                "default": {},
+                                                "patternProperties": {
+                                                  "^[A-Za-z0-9_]+$": {
+                                                    "type": "string",
+                                                    "description": "Runtime expression for a user-defined output value."
+                                                  }
+                                                },
+                                                "title": "Outputs (step)"
+                                              },
+                                              "variables": {
+                                                "type": "object",
+                                                "description": "Environment variables to set from user-defined expressions.",
+                                                "default": {},
+                                                "patternProperties": {
+                                                  "^[A-Za-z0-9_]+$": {
+                                                    "type": "string",
+                                                    "description": "Runtime expression for a user-defined output value."
+                                                  }
+                                                },
+                                                "title": "Variables (step)"
+                                              },
+                                              "breakpoint": {
+                                                "type": "boolean",
+                                                "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                                                "default": false
+                                              }
+                                            },
+                                            "title": "Common"
+                                          },
+                                          {
                                             "title": "wait",
                                             "type": "object",
                                             "required": [
@@ -5097,6 +5559,27 @@
                                       },
                                       {
                                         "loadVariables": "variables.env"
+                                      },
+                                      {
+                                        "saveCookie": "session_token"
+                                      },
+                                      {
+                                        "saveCookie": {
+                                          "name": "auth_cookie",
+                                          "path": "auth-session.txt",
+                                          "directory": "./test-data",
+                                          "overwrite": "true"
+                                        }
+                                      },
+                                      {
+                                        "loadCookie": "session_token"
+                                      },
+                                      {
+                                        "loadCookie": {
+                                          "name": "auth_cookie",
+                                          "path": "auth-session.txt",
+                                          "directory": "./test-data"
+                                        }
                                       },
                                       {
                                         "find": "Find me!"
@@ -9821,6 +10304,254 @@
                             {
                               "type": "object",
                               "required": [
+                                "saveCookie"
+                              ],
+                              "properties": {
+                                "saveCookie": {
+                                  "$schema": "http://json-schema.org/draft-07/schema#",
+                                  "title": "saveCookie",
+                                  "description": "Save a specific browser cookie to a file or environment variable for later reuse.",
+                                  "anyOf": [
+                                    {
+                                      "type": "string",
+                                      "title": "Cookie name",
+                                      "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
+                                      "pattern": "^[A-Za-z0-9_.-]+$",
+                                      "transform": [
+                                        "trim"
+                                      ]
+                                    },
+                                    {
+                                      "type": "object",
+                                      "additionalProperties": false,
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "title": "Cookie name",
+                                          "description": "Name of the specific cookie to save.",
+                                          "pattern": "^[A-Za-z0-9_.-]+$",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "variable": {
+                                          "type": "string",
+                                          "title": "Environment variable name",
+                                          "description": "Environment variable name to store the cookie as JSON string.",
+                                          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "path": {
+                                          "type": "string",
+                                          "title": "Cookie file path",
+                                          "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
+                                          "pattern": "([A-Za-z0-9_.-]*\\.(txt|cookies)$|\\$[A-Za-z0-9_]+)",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "string",
+                                          "title": "Directory path",
+                                          "description": "Directory to save the cookie file. If not specified, uses output directory.",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "overwrite": {
+                                          "type": "string",
+                                          "title": "Overwrite existing file",
+                                          "description": "Whether to overwrite existing cookie file.",
+                                          "enum": [
+                                            "true",
+                                            "false"
+                                          ],
+                                          "default": "false"
+                                        },
+                                        "domain": {
+                                          "type": "string",
+                                          "title": "Cookie domain",
+                                          "description": "Specific domain to filter the cookie by (optional).",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "name"
+                                      ],
+                                      "title": "Save cookie (detailed)"
+                                    }
+                                  ],
+                                  "components": {
+                                    "schemas": {
+                                      "string": {
+                                        "type": "string",
+                                        "title": "Cookie name",
+                                        "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
+                                        "pattern": "^[A-Za-z0-9_.-]+$",
+                                        "transform": [
+                                          "trim"
+                                        ]
+                                      },
+                                      "object": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                          "name": {
+                                            "type": "string",
+                                            "title": "Cookie name",
+                                            "description": "Name of the specific cookie to save.",
+                                            "pattern": "^[A-Za-z0-9_.-]+$",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "variable": {
+                                            "type": "string",
+                                            "title": "Environment variable name",
+                                            "description": "Environment variable name to store the cookie as JSON string.",
+                                            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "path": {
+                                            "type": "string",
+                                            "title": "Cookie file path",
+                                            "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
+                                            "pattern": "([A-Za-z0-9_.-]*\\.(txt|cookies)$|\\$[A-Za-z0-9_]+)",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "directory": {
+                                            "type": "string",
+                                            "title": "Directory path",
+                                            "description": "Directory to save the cookie file. If not specified, uses output directory.",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "overwrite": {
+                                            "type": "string",
+                                            "title": "Overwrite existing file",
+                                            "description": "Whether to overwrite existing cookie file.",
+                                            "enum": [
+                                              "true",
+                                              "false"
+                                            ],
+                                            "default": "false"
+                                          },
+                                          "domain": {
+                                            "type": "string",
+                                            "title": "Cookie domain",
+                                            "description": "Specific domain to filter the cookie by (optional).",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "name"
+                                        ],
+                                        "title": "Save cookie (detailed)"
+                                      }
+                                    }
+                                  },
+                                  "examples": [
+                                    "session_token",
+                                    {
+                                      "name": "auth_cookie",
+                                      "path": "auth-cookie.txt"
+                                    },
+                                    {
+                                      "name": "session_token",
+                                      "variable": "SESSION_TOKEN"
+                                    },
+                                    {
+                                      "name": "user_session",
+                                      "path": "user-session.txt",
+                                      "directory": "./test-data",
+                                      "overwrite": "true"
+                                    },
+                                    {
+                                      "name": "login_token",
+                                      "path": "login-token.txt",
+                                      "domain": "app.example.com"
+                                    }
+                                  ]
+                                }
+                              },
+                              "title": "saveCookie"
+                            }
+                          ]
+                        },
+                        {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "dynamicDefaults": {
+                                "stepId": "uuid"
+                              },
+                              "properties": {
+                                "$schema": {
+                                  "description": "JSON Schema for this object.",
+                                  "type": "string",
+                                  "enum": [
+                                    "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                                  ]
+                                },
+                                "stepId": {
+                                  "type": "string",
+                                  "description": "ID of the step."
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "description": "Description of the step."
+                                },
+                                "unsafe": {
+                                  "type": "boolean",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                                  "default": false
+                                },
+                                "outputs": {
+                                  "type": "object",
+                                  "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                                  "default": {},
+                                  "patternProperties": {
+                                    "^[A-Za-z0-9_]+$": {
+                                      "type": "string",
+                                      "description": "Runtime expression for a user-defined output value."
+                                    }
+                                  },
+                                  "title": "Outputs (step)"
+                                },
+                                "variables": {
+                                  "type": "object",
+                                  "description": "Environment variables to set from user-defined expressions.",
+                                  "default": {},
+                                  "patternProperties": {
+                                    "^[A-Za-z0-9_]+$": {
+                                      "type": "string",
+                                      "description": "Runtime expression for a user-defined output value."
+                                    }
+                                  },
+                                  "title": "Variables (step)"
+                                },
+                                "breakpoint": {
+                                  "type": "boolean",
+                                  "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                                  "default": false
+                                }
+                              },
+                              "title": "Common"
+                            },
+                            {
+                              "type": "object",
+                              "required": [
                                 "record"
                               ],
                               "properties": {
@@ -10156,6 +10887,220 @@
                               "title": "Common"
                             },
                             {
+                              "title": "loadCookie",
+                              "type": "object",
+                              "required": [
+                                "loadCookie"
+                              ],
+                              "properties": {
+                                "loadCookie": {
+                                  "$schema": "http://json-schema.org/draft-07/schema#",
+                                  "title": "loadCookie",
+                                  "description": "Load a specific cookie from a file or environment variable into the browser.",
+                                  "anyOf": [
+                                    {
+                                      "type": "string",
+                                      "title": "Cookie name or file path",
+                                      "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                      "transform": [
+                                        "trim"
+                                      ]
+                                    },
+                                    {
+                                      "type": "object",
+                                      "additionalProperties": false,
+                                      "properties": {
+                                        "name": {
+                                          "type": "string",
+                                          "title": "Cookie name",
+                                          "description": "Name of the specific cookie to load.",
+                                          "pattern": "^[A-Za-z0-9_.-]+$",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "variable": {
+                                          "type": "string",
+                                          "title": "Environment variable name",
+                                          "description": "Environment variable name containing the cookie as JSON string.",
+                                          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "path": {
+                                          "type": "string",
+                                          "title": "Cookie file path",
+                                          "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "directory": {
+                                          "type": "string",
+                                          "title": "Directory path",
+                                          "description": "Directory containing the cookie file.",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        },
+                                        "domain": {
+                                          "type": "string",
+                                          "title": "Cookie domain",
+                                          "description": "Specific domain to filter the cookie by when loading from multi-cookie file (optional).",
+                                          "transform": [
+                                            "trim"
+                                          ]
+                                        }
+                                      },
+                                      "title": "Load cookie (detailed)"
+                                    }
+                                  ],
+                                  "components": {
+                                    "schemas": {
+                                      "string": {
+                                        "type": "string",
+                                        "title": "Cookie name or file path",
+                                        "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                        "transform": [
+                                          "trim"
+                                        ]
+                                      },
+                                      "object": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                          "name": {
+                                            "type": "string",
+                                            "title": "Cookie name",
+                                            "description": "Name of the specific cookie to load.",
+                                            "pattern": "^[A-Za-z0-9_.-]+$",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "variable": {
+                                            "type": "string",
+                                            "title": "Environment variable name",
+                                            "description": "Environment variable name containing the cookie as JSON string.",
+                                            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "path": {
+                                            "type": "string",
+                                            "title": "Cookie file path",
+                                            "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "directory": {
+                                            "type": "string",
+                                            "title": "Directory path",
+                                            "description": "Directory containing the cookie file.",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          },
+                                          "domain": {
+                                            "type": "string",
+                                            "title": "Cookie domain",
+                                            "description": "Specific domain to filter the cookie by when loading from multi-cookie file (optional).",
+                                            "transform": [
+                                              "trim"
+                                            ]
+                                          }
+                                        },
+                                        "title": "Load cookie (detailed)"
+                                      }
+                                    }
+                                  },
+                                  "examples": [
+                                    "session_token",
+                                    "./test-data/auth-session.txt",
+                                    {
+                                      "name": "auth_cookie",
+                                      "variable": "AUTH_COOKIE"
+                                    },
+                                    {
+                                      "name": "session_token",
+                                      "path": "session-token.txt",
+                                      "directory": "./test-data"
+                                    },
+                                    {
+                                      "name": "user_session",
+                                      "path": "saved-cookies.txt",
+                                      "domain": "app.example.com"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "dynamicDefaults": {
+                                "stepId": "uuid"
+                              },
+                              "properties": {
+                                "$schema": {
+                                  "description": "JSON Schema for this object.",
+                                  "type": "string",
+                                  "enum": [
+                                    "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                                  ]
+                                },
+                                "stepId": {
+                                  "type": "string",
+                                  "description": "ID of the step."
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "description": "Description of the step."
+                                },
+                                "unsafe": {
+                                  "type": "boolean",
+                                  "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                                  "default": false
+                                },
+                                "outputs": {
+                                  "type": "object",
+                                  "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                                  "default": {},
+                                  "patternProperties": {
+                                    "^[A-Za-z0-9_]+$": {
+                                      "type": "string",
+                                      "description": "Runtime expression for a user-defined output value."
+                                    }
+                                  },
+                                  "title": "Outputs (step)"
+                                },
+                                "variables": {
+                                  "type": "object",
+                                  "description": "Environment variables to set from user-defined expressions.",
+                                  "default": {},
+                                  "patternProperties": {
+                                    "^[A-Za-z0-9_]+$": {
+                                      "type": "string",
+                                      "description": "Runtime expression for a user-defined output value."
+                                    }
+                                  },
+                                  "title": "Variables (step)"
+                                },
+                                "breakpoint": {
+                                  "type": "boolean",
+                                  "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                                  "default": false
+                                }
+                              },
+                              "title": "Common"
+                            },
+                            {
                               "title": "wait",
                               "type": "object",
                               "required": [
@@ -10333,6 +11278,27 @@
                         },
                         {
                           "loadVariables": "variables.env"
+                        },
+                        {
+                          "saveCookie": "session_token"
+                        },
+                        {
+                          "saveCookie": {
+                            "name": "auth_cookie",
+                            "path": "auth-session.txt",
+                            "directory": "./test-data",
+                            "overwrite": "true"
+                          }
+                        },
+                        {
+                          "loadCookie": "session_token"
+                        },
+                        {
+                          "loadCookie": {
+                            "name": "auth_cookie",
+                            "path": "auth-session.txt",
+                            "directory": "./test-data"
+                          }
                         },
                         {
                           "find": "Find me!"
