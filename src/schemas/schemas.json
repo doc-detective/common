@@ -5946,7 +5946,7 @@
                                             "name": "auth_cookie",
                                             "path": "auth-session.txt",
                                             "directory": "./test-data",
-                                            "overwrite": "true"
+                                            "overwrite": true
                                           }
                                         },
                                         {
@@ -11781,7 +11781,7 @@
                               "name": "auth_cookie",
                               "path": "auth-session.txt",
                               "directory": "./test-data",
-                              "overwrite": "true"
+                              "overwrite": true
                             }
                           },
                           {
@@ -20571,7 +20571,7 @@
                                                 "name": "auth_cookie",
                                                 "path": "auth-session.txt",
                                                 "directory": "./test-data",
-                                                "overwrite": "true"
+                                                "overwrite": true
                                               }
                                             },
                                             {
@@ -26406,7 +26406,7 @@
                                   "name": "auth_cookie",
                                   "path": "auth-session.txt",
                                   "directory": "./test-data",
-                                  "overwrite": "true"
+                                  "overwrite": true
                                 }
                               },
                               {
@@ -33012,7 +33012,7 @@
                                     "name": "auth_cookie",
                                     "path": "auth-session.txt",
                                     "directory": "./test-data",
-                                    "overwrite": "true"
+                                    "overwrite": true
                                   }
                                 },
                                 {
@@ -38428,7 +38428,7 @@
                                           "name": "auth_cookie",
                                           "path": "auth-session.txt",
                                           "directory": "./test-data",
-                                          "overwrite": "true"
+                                          "overwrite": true
                                         }
                                       },
                                       {
@@ -45554,7 +45554,7 @@
                                     "name": "auth_cookie",
                                     "path": "auth-session.txt",
                                     "directory": "./test-data",
-                                    "overwrite": "true"
+                                    "overwrite": true
                                   }
                                 },
                                 {
@@ -50970,7 +50970,7 @@
                                           "name": "auth_cookie",
                                           "path": "auth-session.txt",
                                           "directory": "./test-data",
-                                          "overwrite": "true"
+                                          "overwrite": true
                                         }
                                       },
                                       {
@@ -59106,7 +59106,7 @@
                           "name": "auth_cookie",
                           "path": "auth-session.txt",
                           "directory": "./test-data",
-                          "overwrite": "true"
+                          "overwrite": true
                         }
                       },
                       {
@@ -64522,7 +64522,7 @@
                                 "name": "auth_cookie",
                                 "path": "auth-session.txt",
                                 "directory": "./test-data",
-                                "overwrite": "true"
+                                "overwrite": true
                               }
                             },
                             {
@@ -70218,7 +70218,7 @@
           "name": "auth_cookie",
           "path": "auth-session.txt",
           "directory": "./test-data",
-          "overwrite": "true"
+          "overwrite": true
         }
       },
       {
@@ -75989,7 +75989,7 @@
                 "name": "auth_cookie",
                 "path": "auth-session.txt",
                 "directory": "./test-data",
-                "overwrite": "true"
+                "overwrite": true
               }
             },
             {
@@ -81405,7 +81405,7 @@
                       "name": "auth_cookie",
                       "path": "auth-session.txt",
                       "directory": "./test-data",
-                      "overwrite": "true"
+                      "overwrite": true
                     }
                   },
                   {
