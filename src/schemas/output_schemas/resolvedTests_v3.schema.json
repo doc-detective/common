@@ -4614,7 +4614,7 @@
                                                         "type": "string",
                                                         "title": "Cookie name",
                                                         "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                                        "pattern": "^[A-Za-z0-9_.-]+$",
+                                                        "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                         "transform": [
                                                           "trim"
                                                         ]
@@ -4697,10 +4697,22 @@
                                                               "variable"
                                                             ],
                                                             "not": {
-                                                              "required": [
-                                                                "path",
-                                                                "directory",
-                                                                "overwrite"
+                                                              "anyOf": [
+                                                                {
+                                                                  "required": [
+                                                                    "path"
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "required": [
+                                                                    "directory"
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "required": [
+                                                                    "overwrite"
+                                                                  ]
+                                                                }
                                                               ]
                                                             }
                                                           }
@@ -4714,7 +4726,7 @@
                                                           "type": "string",
                                                           "title": "Cookie name",
                                                           "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                                          "pattern": "^[A-Za-z0-9_.-]+$",
+                                                          "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                           "transform": [
                                                             "trim"
                                                           ]
@@ -4797,10 +4809,22 @@
                                                                 "variable"
                                                               ],
                                                               "not": {
-                                                                "required": [
-                                                                  "path",
-                                                                  "directory",
-                                                                  "overwrite"
+                                                                "anyOf": [
+                                                                  {
+                                                                    "required": [
+                                                                      "path"
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "required": [
+                                                                      "directory"
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "required": [
+                                                                      "overwrite"
+                                                                    ]
+                                                                  }
                                                                 ]
                                                               }
                                                             }
@@ -5250,6 +5274,7 @@
                                                         "type": "string",
                                                         "title": "Cookie name or file path",
                                                         "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                                        "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                         "transform": [
                                                           "trim"
                                                         ]
@@ -5276,8 +5301,17 @@
                                                               "variable"
                                                             ],
                                                             "not": {
-                                                              "required": [
-                                                                "path"
+                                                              "anyOf": [
+                                                                {
+                                                                  "required": [
+                                                                    "path"
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "required": [
+                                                                    "directory"
+                                                                  ]
+                                                                }
                                                               ]
                                                             }
                                                           }
@@ -5341,6 +5375,7 @@
                                                           "type": "string",
                                                           "title": "Cookie name or file path",
                                                           "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                                          "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                           "transform": [
                                                             "trim"
                                                           ]
@@ -5367,8 +5402,17 @@
                                                                 "variable"
                                                               ],
                                                               "not": {
-                                                                "required": [
-                                                                  "path"
+                                                                "anyOf": [
+                                                                  {
+                                                                    "required": [
+                                                                      "path"
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "required": [
+                                                                      "directory"
+                                                                    ]
+                                                                  }
                                                                 ]
                                                               }
                                                             }
@@ -10449,7 +10493,7 @@
                                           "type": "string",
                                           "title": "Cookie name",
                                           "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                          "pattern": "^[A-Za-z0-9_.-]+$",
+                                          "pattern": "^[A-Za-z0-9_./\\-]+$",
                                           "transform": [
                                             "trim"
                                           ]
@@ -10532,10 +10576,22 @@
                                                 "variable"
                                               ],
                                               "not": {
-                                                "required": [
-                                                  "path",
-                                                  "directory",
-                                                  "overwrite"
+                                                "anyOf": [
+                                                  {
+                                                    "required": [
+                                                      "path"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "directory"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "overwrite"
+                                                    ]
+                                                  }
                                                 ]
                                               }
                                             }
@@ -10549,7 +10605,7 @@
                                             "type": "string",
                                             "title": "Cookie name",
                                             "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                            "pattern": "^[A-Za-z0-9_.-]+$",
+                                            "pattern": "^[A-Za-z0-9_./\\-]+$",
                                             "transform": [
                                               "trim"
                                             ]
@@ -10632,10 +10688,22 @@
                                                   "variable"
                                                 ],
                                                 "not": {
-                                                  "required": [
-                                                    "path",
-                                                    "directory",
-                                                    "overwrite"
+                                                  "anyOf": [
+                                                    {
+                                                      "required": [
+                                                        "path"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "directory"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "overwrite"
+                                                      ]
+                                                    }
                                                   ]
                                                 }
                                               }
@@ -11085,6 +11153,7 @@
                                           "type": "string",
                                           "title": "Cookie name or file path",
                                           "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                          "pattern": "^[A-Za-z0-9_./\\-]+$",
                                           "transform": [
                                             "trim"
                                           ]
@@ -11111,8 +11180,17 @@
                                                 "variable"
                                               ],
                                               "not": {
-                                                "required": [
-                                                  "path"
+                                                "anyOf": [
+                                                  {
+                                                    "required": [
+                                                      "path"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "directory"
+                                                    ]
+                                                  }
                                                 ]
                                               }
                                             }
@@ -11176,6 +11254,7 @@
                                             "type": "string",
                                             "title": "Cookie name or file path",
                                             "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                            "pattern": "^[A-Za-z0-9_./\\-]+$",
                                             "transform": [
                                               "trim"
                                             ]
@@ -11202,8 +11281,17 @@
                                                   "variable"
                                                 ],
                                                 "not": {
-                                                  "required": [
-                                                    "path"
+                                                  "anyOf": [
+                                                    {
+                                                      "required": [
+                                                        "path"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "directory"
+                                                      ]
+                                                    }
                                                   ]
                                                 }
                                               }
@@ -17055,7 +17143,7 @@
                                             "type": "string",
                                             "title": "Cookie name",
                                             "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                            "pattern": "^[A-Za-z0-9_.-]+$",
+                                            "pattern": "^[A-Za-z0-9_./\\-]+$",
                                             "transform": [
                                               "trim"
                                             ]
@@ -17138,10 +17226,22 @@
                                                   "variable"
                                                 ],
                                                 "not": {
-                                                  "required": [
-                                                    "path",
-                                                    "directory",
-                                                    "overwrite"
+                                                  "anyOf": [
+                                                    {
+                                                      "required": [
+                                                        "path"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "directory"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "overwrite"
+                                                      ]
+                                                    }
                                                   ]
                                                 }
                                               }
@@ -17155,7 +17255,7 @@
                                               "type": "string",
                                               "title": "Cookie name",
                                               "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                              "pattern": "^[A-Za-z0-9_.-]+$",
+                                              "pattern": "^[A-Za-z0-9_./\\-]+$",
                                               "transform": [
                                                 "trim"
                                               ]
@@ -17238,10 +17338,22 @@
                                                     "variable"
                                                   ],
                                                   "not": {
-                                                    "required": [
-                                                      "path",
-                                                      "directory",
-                                                      "overwrite"
+                                                    "anyOf": [
+                                                      {
+                                                        "required": [
+                                                          "path"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "directory"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "overwrite"
+                                                        ]
+                                                      }
                                                     ]
                                                   }
                                                 }
@@ -17691,6 +17803,7 @@
                                             "type": "string",
                                             "title": "Cookie name or file path",
                                             "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                            "pattern": "^[A-Za-z0-9_./\\-]+$",
                                             "transform": [
                                               "trim"
                                             ]
@@ -17717,8 +17830,17 @@
                                                   "variable"
                                                 ],
                                                 "not": {
-                                                  "required": [
-                                                    "path"
+                                                  "anyOf": [
+                                                    {
+                                                      "required": [
+                                                        "path"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "directory"
+                                                      ]
+                                                    }
                                                   ]
                                                 }
                                               }
@@ -17782,6 +17904,7 @@
                                               "type": "string",
                                               "title": "Cookie name or file path",
                                               "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                              "pattern": "^[A-Za-z0-9_./\\-]+$",
                                               "transform": [
                                                 "trim"
                                               ]
@@ -17808,8 +17931,17 @@
                                                     "variable"
                                                   ],
                                                   "not": {
-                                                    "required": [
-                                                      "path"
+                                                    "anyOf": [
+                                                      {
+                                                        "required": [
+                                                          "path"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "directory"
+                                                        ]
+                                                      }
                                                     ]
                                                   }
                                                 }
@@ -22471,7 +22603,7 @@
                                                   "type": "string",
                                                   "title": "Cookie name",
                                                   "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                                  "pattern": "^[A-Za-z0-9_.-]+$",
+                                                  "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                   "transform": [
                                                     "trim"
                                                   ]
@@ -22554,10 +22686,22 @@
                                                         "variable"
                                                       ],
                                                       "not": {
-                                                        "required": [
-                                                          "path",
-                                                          "directory",
-                                                          "overwrite"
+                                                        "anyOf": [
+                                                          {
+                                                            "required": [
+                                                              "path"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "directory"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "overwrite"
+                                                            ]
+                                                          }
                                                         ]
                                                       }
                                                     }
@@ -22571,7 +22715,7 @@
                                                     "type": "string",
                                                     "title": "Cookie name",
                                                     "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
-                                                    "pattern": "^[A-Za-z0-9_.-]+$",
+                                                    "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                     "transform": [
                                                       "trim"
                                                     ]
@@ -22654,10 +22798,22 @@
                                                           "variable"
                                                         ],
                                                         "not": {
-                                                          "required": [
-                                                            "path",
-                                                            "directory",
-                                                            "overwrite"
+                                                          "anyOf": [
+                                                            {
+                                                              "required": [
+                                                                "path"
+                                                              ]
+                                                            },
+                                                            {
+                                                              "required": [
+                                                                "directory"
+                                                              ]
+                                                            },
+                                                            {
+                                                              "required": [
+                                                                "overwrite"
+                                                              ]
+                                                            }
                                                           ]
                                                         }
                                                       }
@@ -23107,6 +23263,7 @@
                                                   "type": "string",
                                                   "title": "Cookie name or file path",
                                                   "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                                  "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                   "transform": [
                                                     "trim"
                                                   ]
@@ -23133,8 +23290,17 @@
                                                         "variable"
                                                       ],
                                                       "not": {
-                                                        "required": [
-                                                          "path"
+                                                        "anyOf": [
+                                                          {
+                                                            "required": [
+                                                              "path"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "directory"
+                                                            ]
+                                                          }
                                                         ]
                                                       }
                                                     }
@@ -23198,6 +23364,7 @@
                                                     "type": "string",
                                                     "title": "Cookie name or file path",
                                                     "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                                                    "pattern": "^[A-Za-z0-9_./\\-]+$",
                                                     "transform": [
                                                       "trim"
                                                     ]
@@ -23224,8 +23391,17 @@
                                                           "variable"
                                                         ],
                                                         "not": {
-                                                          "required": [
-                                                            "path"
+                                                          "anyOf": [
+                                                            {
+                                                              "required": [
+                                                                "path"
+                                                              ]
+                                                            },
+                                                            {
+                                                              "required": [
+                                                                "directory"
+                                                              ]
+                                                            }
                                                           ]
                                                         }
                                                       }

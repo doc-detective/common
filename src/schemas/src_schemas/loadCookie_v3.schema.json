@@ -16,6 +16,7 @@
         "type": "string",
         "title": "Cookie name or file path",
         "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+        "pattern": "^[A-Za-z0-9_./\\-]+$",
         "transform": ["trim"]
       },
       "object": {
@@ -32,7 +33,14 @@
           {
             "required": ["variable"],
             "not": {
-              "required": ["path"]
+              "anyOf": [
+                {
+                  "required": ["path"]
+                },
+                {
+                  "required": ["directory"]
+                }
+              ]
             }
           }
         ],
