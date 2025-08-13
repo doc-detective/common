@@ -68,7 +68,6 @@
             "type": "string",
             "title": "Cookie file path",
             "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
-            "pattern": "^(?:[A-Za-z0-9_.-]+\\.(?:txt|cookies)|\\$[A-Za-z_][A-Za-z0-9_]*)$",
             "transform": ["trim"]
           },
           "directory": {
@@ -91,9 +90,14 @@
   "examples": [
     "session_token",
     "./test-data/auth-session.txt",
+    "test_env_cookie",
     {
       "name": "auth_cookie",
       "variable": "AUTH_COOKIE"
+    },
+    {
+      "name": "test_cookie",
+      "path": "test-cookie.txt"
     },
     {
       "name": "session_token",
