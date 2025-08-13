@@ -16,6 +16,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "$schema": {
+          "description": "Optional self-describing schema URI for linters",
+          "type": "string",
+          "format": "uri-reference"
+        },
         "name": {
           "type": "string",
           "title": "Cookie name",
@@ -38,7 +43,7 @@
           "type": "string",
           "title": "Cookie file path",
           "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
-          "pattern": "([A-Za-z0-9_.-]*\\.(txt|cookies)$|\\$[A-Za-z0-9_]+)",
+          "pattern": "^(?:[A-Za-z0-9_.-]+\\.(?:txt|cookies)|\\$[A-Za-z_][A-Za-z0-9_]*)$",
           "transform": [
             "trim"
           ]
@@ -52,14 +57,10 @@
           ]
         },
         "overwrite": {
-          "type": "string",
+          "type": "boolean",
           "title": "Overwrite existing file",
           "description": "Whether to overwrite existing cookie file.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "default": "false"
+          "default": false
         },
         "domain": {
           "type": "string",
@@ -72,6 +73,30 @@
       },
       "required": [
         "name"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "path"
+          ],
+          "not": {
+            "required": [
+              "variable"
+            ]
+          }
+        },
+        {
+          "required": [
+            "variable"
+          ],
+          "not": {
+            "required": [
+              "path",
+              "directory",
+              "overwrite"
+            ]
+          }
+        }
       ],
       "title": "Save cookie (detailed)"
     }
@@ -91,6 +116,11 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "$schema": {
+            "description": "Optional self-describing schema URI for linters",
+            "type": "string",
+            "format": "uri-reference"
+          },
           "name": {
             "type": "string",
             "title": "Cookie name",
@@ -113,7 +143,7 @@
             "type": "string",
             "title": "Cookie file path",
             "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
-            "pattern": "([A-Za-z0-9_.-]*\\.(txt|cookies)$|\\$[A-Za-z0-9_]+)",
+            "pattern": "^(?:[A-Za-z0-9_.-]+\\.(?:txt|cookies)|\\$[A-Za-z_][A-Za-z0-9_]*)$",
             "transform": [
               "trim"
             ]
@@ -127,14 +157,10 @@
             ]
           },
           "overwrite": {
-            "type": "string",
+            "type": "boolean",
             "title": "Overwrite existing file",
             "description": "Whether to overwrite existing cookie file.",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "default": "false"
+            "default": false
           },
           "domain": {
             "type": "string",
@@ -147,6 +173,30 @@
         },
         "required": [
           "name"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "path"
+            ],
+            "not": {
+              "required": [
+                "variable"
+              ]
+            }
+          },
+          {
+            "required": [
+              "variable"
+            ],
+            "not": {
+              "required": [
+                "path",
+                "directory",
+                "overwrite"
+              ]
+            }
+          }
         ],
         "title": "Save cookie (detailed)"
       }
@@ -166,7 +216,7 @@
       "name": "user_session",
       "path": "user-session.txt",
       "directory": "./test-data",
-      "overwrite": "true"
+      "overwrite": true
     },
     {
       "name": "login_token",

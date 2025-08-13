@@ -14,7 +14,37 @@
     {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "path"
+          ],
+          "not": {
+            "required": [
+              "variable"
+            ]
+          }
+        },
+        {
+          "required": [
+            "variable"
+          ],
+          "not": {
+            "required": [
+              "path"
+            ]
+          }
+        }
+      ],
       "properties": {
+        "$schema": {
+          "description": "Optional self-describing schema URI for linters",
+          "type": "string",
+          "format": "uri-reference"
+        },
         "name": {
           "type": "string",
           "title": "Cookie name",
@@ -37,6 +67,7 @@
           "type": "string",
           "title": "Cookie file path",
           "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+          "pattern": "^(?:[A-Za-z0-9_.-]+\\.(?:txt|cookies)|\\$[A-Za-z_][A-Za-z0-9_]*)$",
           "transform": [
             "trim"
           ]
@@ -74,7 +105,37 @@
       "object": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "path"
+            ],
+            "not": {
+              "required": [
+                "variable"
+              ]
+            }
+          },
+          {
+            "required": [
+              "variable"
+            ],
+            "not": {
+              "required": [
+                "path"
+              ]
+            }
+          }
+        ],
         "properties": {
+          "$schema": {
+            "description": "Optional self-describing schema URI for linters",
+            "type": "string",
+            "format": "uri-reference"
+          },
           "name": {
             "type": "string",
             "title": "Cookie name",
@@ -97,6 +158,7 @@
             "type": "string",
             "title": "Cookie file path",
             "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+            "pattern": "^(?:[A-Za-z0-9_.-]+\\.(?:txt|cookies)|\\$[A-Za-z_][A-Za-z0-9_]*)$",
             "transform": [
               "trim"
             ]
