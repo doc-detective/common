@@ -5391,7 +5391,7 @@
                                               {
                                                 "title": "Element (simple)",
                                                 "type": "string",
-                                                "description": "Display text or selector of the element."
+                                                "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                               },
                                               {
                                                 "title": "Element (detailed)",
@@ -5411,7 +5411,7 @@
                                                 "properties": {
                                                   "elementText": {
                                                     "type": "string",
-                                                    "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                    "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                   },
                                                   "selector": {
                                                     "type": "string",
@@ -5432,7 +5432,7 @@
                                               {
                                                 "title": "Element (simple)",
                                                 "type": "string",
-                                                "description": "Display text or selector of the element."
+                                                "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                               },
                                               {
                                                 "title": "Element (detailed)",
@@ -5452,7 +5452,7 @@
                                                 "properties": {
                                                   "elementText": {
                                                     "type": "string",
-                                                    "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                    "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                   },
                                                   "selector": {
                                                     "type": "string",
@@ -5481,7 +5481,7 @@
                                                 {
                                                   "title": "Element (simple)",
                                                   "type": "string",
-                                                  "description": "Display text or selector of the element."
+                                                  "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                                 },
                                                 {
                                                   "title": "Element (detailed)",
@@ -5501,7 +5501,7 @@
                                                   "properties": {
                                                     "elementText": {
                                                       "type": "string",
-                                                      "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                      "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                     },
                                                     "selector": {
                                                       "type": "string",
@@ -5519,7 +5519,7 @@
                                             "string": {
                                               "title": "Element (simple)",
                                               "type": "string",
-                                              "description": "Display text or selector of the element."
+                                              "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                             },
                                             "object": {
                                               "title": "Element (detailed)",
@@ -5539,7 +5539,7 @@
                                               "properties": {
                                                 "elementText": {
                                                   "type": "string",
-                                                  "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                  "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                 },
                                                 "selector": {
                                                   "type": "string",
@@ -5582,6 +5582,19 @@
                                             "target": {
                                               "elementText": "Drop Zone",
                                               "timeout": 5000
+                                            }
+                                          },
+                                          {
+                                            "source": "/Widget Item.*/",
+                                            "target": "#canvas"
+                                          },
+                                          {
+                                            "source": {
+                                              "selector": ".draggable",
+                                              "elementText": "/Button [0-9]+/"
+                                            },
+                                            "target": {
+                                              "elementText": "/Drop Zone.*/"
                                             }
                                           }
                                         ]
@@ -10494,7 +10507,7 @@
                                                     {
                                                       "title": "Element (simple)",
                                                       "type": "string",
-                                                      "description": "Display text or selector of the element."
+                                                      "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                                     },
                                                     {
                                                       "title": "Element (detailed)",
@@ -10514,7 +10527,7 @@
                                                       "properties": {
                                                         "elementText": {
                                                           "type": "string",
-                                                          "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                          "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                         },
                                                         "selector": {
                                                           "type": "string",
@@ -10535,7 +10548,7 @@
                                                     {
                                                       "title": "Element (simple)",
                                                       "type": "string",
-                                                      "description": "Display text or selector of the element."
+                                                      "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                                     },
                                                     {
                                                       "title": "Element (detailed)",
@@ -10555,7 +10568,7 @@
                                                       "properties": {
                                                         "elementText": {
                                                           "type": "string",
-                                                          "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                          "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                         },
                                                         "selector": {
                                                           "type": "string",
@@ -10584,7 +10597,7 @@
                                                       {
                                                         "title": "Element (simple)",
                                                         "type": "string",
-                                                        "description": "Display text or selector of the element."
+                                                        "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                                       },
                                                       {
                                                         "title": "Element (detailed)",
@@ -10604,7 +10617,7 @@
                                                         "properties": {
                                                           "elementText": {
                                                             "type": "string",
-                                                            "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                            "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                           },
                                                           "selector": {
                                                             "type": "string",
@@ -10622,7 +10635,7 @@
                                                   "string": {
                                                     "title": "Element (simple)",
                                                     "type": "string",
-                                                    "description": "Display text or selector of the element."
+                                                    "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
                                                   },
                                                   "object": {
                                                     "title": "Element (detailed)",
@@ -10642,7 +10655,7 @@
                                                     "properties": {
                                                       "elementText": {
                                                         "type": "string",
-                                                        "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                                        "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
                                                       },
                                                       "selector": {
                                                         "type": "string",
@@ -10685,6 +10698,19 @@
                                                   "target": {
                                                     "elementText": "Drop Zone",
                                                     "timeout": 5000
+                                                  }
+                                                },
+                                                {
+                                                  "source": "/Widget Item.*/",
+                                                  "target": "#canvas"
+                                                },
+                                                {
+                                                  "source": {
+                                                    "selector": ".draggable",
+                                                    "elementText": "/Button [0-9]+/"
+                                                  },
+                                                  "target": {
+                                                    "elementText": "/Drop Zone.*/"
                                                   }
                                                 }
                                               ]
