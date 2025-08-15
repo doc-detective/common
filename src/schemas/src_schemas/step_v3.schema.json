@@ -297,6 +297,23 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "title": "dragAndDrop",
+          "type": "object",
+          "required": ["dragAndDrop"],
+          "properties": {
+            "dragAndDrop": {
+              "$ref": "dragAndDrop_v3.schema.json#"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
           "title": "wait",
           "type": "object",
           "required": ["wait"],

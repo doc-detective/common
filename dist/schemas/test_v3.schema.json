@@ -4750,6 +4750,288 @@
                 "title": "Common"
               },
               {
+                "title": "dragAndDrop",
+                "type": "object",
+                "required": [
+                  "dragAndDrop"
+                ],
+                "properties": {
+                  "dragAndDrop": {
+                    "$schema": "http://json-schema.org/draft-07/schema#",
+                    "title": "dragAndDrop",
+                    "description": "Drag and drop an element from source to target.",
+                    "type": "object",
+                    "required": [
+                      "source",
+                      "target"
+                    ],
+                    "properties": {
+                      "source": {
+                        "description": "The element to drag.",
+                        "anyOf": [
+                          {
+                            "title": "Element (simple)",
+                            "type": "string",
+                            "description": "Display text or selector of the element."
+                          },
+                          {
+                            "title": "Element (detailed)",
+                            "type": "object",
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "selector"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "elementText"
+                                ]
+                              }
+                            ],
+                            "properties": {
+                              "elementText": {
+                                "type": "string",
+                                "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                              },
+                              "selector": {
+                                "type": "string",
+                                "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                              },
+                              "timeout": {
+                                "type": "integer",
+                                "description": "Max duration in milliseconds to wait for the element to exist.",
+                                "default": 5000
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "target": {
+                        "description": "The target location to drop the element.",
+                        "anyOf": [
+                          {
+                            "title": "Element (simple)",
+                            "type": "string",
+                            "description": "Display text or selector of the element."
+                          },
+                          {
+                            "title": "Element (detailed)",
+                            "type": "object",
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "selector"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "elementText"
+                                ]
+                              }
+                            ],
+                            "properties": {
+                              "elementText": {
+                                "type": "string",
+                                "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                              },
+                              "selector": {
+                                "type": "string",
+                                "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                              },
+                              "timeout": {
+                                "type": "integer",
+                                "description": "Max duration in milliseconds to wait for the element to exist.",
+                                "default": 5000
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "duration": {
+                        "type": "integer",
+                        "description": "Duration of the drag operation in milliseconds.",
+                        "default": 1000,
+                        "minimum": 0
+                      }
+                    },
+                    "components": {
+                      "schemas": {
+                        "elementSpecification": {
+                          "anyOf": [
+                            {
+                              "title": "Element (simple)",
+                              "type": "string",
+                              "description": "Display text or selector of the element."
+                            },
+                            {
+                              "title": "Element (detailed)",
+                              "type": "object",
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "selector"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "elementText"
+                                  ]
+                                }
+                              ],
+                              "properties": {
+                                "elementText": {
+                                  "type": "string",
+                                  "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                },
+                                "selector": {
+                                  "type": "string",
+                                  "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                },
+                                "timeout": {
+                                  "type": "integer",
+                                  "description": "Max duration in milliseconds to wait for the element to exist.",
+                                  "default": 5000
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "string": {
+                          "title": "Element (simple)",
+                          "type": "string",
+                          "description": "Display text or selector of the element."
+                        },
+                        "object": {
+                          "title": "Element (detailed)",
+                          "type": "object",
+                          "anyOf": [
+                            {
+                              "required": [
+                                "selector"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "elementText"
+                              ]
+                            }
+                          ],
+                          "properties": {
+                            "elementText": {
+                              "type": "string",
+                              "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                            },
+                            "selector": {
+                              "type": "string",
+                              "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                            },
+                            "timeout": {
+                              "type": "integer",
+                              "description": "Max duration in milliseconds to wait for the element to exist.",
+                              "default": 5000
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "examples": [
+                      {
+                        "source": "Table",
+                        "target": "#canvas"
+                      },
+                      {
+                        "source": ".draggable-block",
+                        "target": ".drop-zone",
+                        "duration": 2000
+                      },
+                      {
+                        "source": {
+                          "selector": ".widget",
+                          "elementText": "Data Table"
+                        },
+                        "target": {
+                          "selector": "#design-canvas"
+                        },
+                        "duration": 500
+                      },
+                      {
+                        "source": {
+                          "selector": ".draggable",
+                          "timeout": 10000
+                        },
+                        "target": {
+                          "elementText": "Drop Zone",
+                          "timeout": 5000
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "dynamicDefaults": {
+                  "stepId": "uuid"
+                },
+                "properties": {
+                  "$schema": {
+                    "description": "JSON Schema for this object.",
+                    "type": "string",
+                    "enum": [
+                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                    ]
+                  },
+                  "stepId": {
+                    "type": "string",
+                    "description": "ID of the step."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the step."
+                  },
+                  "unsafe": {
+                    "type": "boolean",
+                    "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                    "default": false
+                  },
+                  "outputs": {
+                    "type": "object",
+                    "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Outputs (step)"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "description": "Environment variables to set from user-defined expressions.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
+                  }
+                },
+                "title": "Common"
+              },
+              {
                 "title": "wait",
                 "type": "object",
                 "required": [
@@ -9504,6 +9786,288 @@
                           "description": "Load environment variables from the specified `.env` file.",
                           "examples": [
                             ".env"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "dynamicDefaults": {
+                        "stepId": "uuid"
+                      },
+                      "properties": {
+                        "$schema": {
+                          "description": "JSON Schema for this object.",
+                          "type": "string",
+                          "enum": [
+                            "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                          ]
+                        },
+                        "stepId": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "unsafe": {
+                          "type": "boolean",
+                          "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                          "default": false
+                        },
+                        "outputs": {
+                          "type": "object",
+                          "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Outputs (step)"
+                        },
+                        "variables": {
+                          "type": "object",
+                          "description": "Environment variables to set from user-defined expressions.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
+                        }
+                      },
+                      "title": "Common"
+                    },
+                    {
+                      "title": "dragAndDrop",
+                      "type": "object",
+                      "required": [
+                        "dragAndDrop"
+                      ],
+                      "properties": {
+                        "dragAndDrop": {
+                          "$schema": "http://json-schema.org/draft-07/schema#",
+                          "title": "dragAndDrop",
+                          "description": "Drag and drop an element from source to target.",
+                          "type": "object",
+                          "required": [
+                            "source",
+                            "target"
+                          ],
+                          "properties": {
+                            "source": {
+                              "description": "The element to drag.",
+                              "anyOf": [
+                                {
+                                  "title": "Element (simple)",
+                                  "type": "string",
+                                  "description": "Display text or selector of the element."
+                                },
+                                {
+                                  "title": "Element (detailed)",
+                                  "type": "object",
+                                  "anyOf": [
+                                    {
+                                      "required": [
+                                        "selector"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementText"
+                                      ]
+                                    }
+                                  ],
+                                  "properties": {
+                                    "elementText": {
+                                      "type": "string",
+                                      "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                    },
+                                    "selector": {
+                                      "type": "string",
+                                      "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                    },
+                                    "timeout": {
+                                      "type": "integer",
+                                      "description": "Max duration in milliseconds to wait for the element to exist.",
+                                      "default": 5000
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "target": {
+                              "description": "The target location to drop the element.",
+                              "anyOf": [
+                                {
+                                  "title": "Element (simple)",
+                                  "type": "string",
+                                  "description": "Display text or selector of the element."
+                                },
+                                {
+                                  "title": "Element (detailed)",
+                                  "type": "object",
+                                  "anyOf": [
+                                    {
+                                      "required": [
+                                        "selector"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementText"
+                                      ]
+                                    }
+                                  ],
+                                  "properties": {
+                                    "elementText": {
+                                      "type": "string",
+                                      "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                    },
+                                    "selector": {
+                                      "type": "string",
+                                      "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                    },
+                                    "timeout": {
+                                      "type": "integer",
+                                      "description": "Max duration in milliseconds to wait for the element to exist.",
+                                      "default": 5000
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "duration": {
+                              "type": "integer",
+                              "description": "Duration of the drag operation in milliseconds.",
+                              "default": 1000,
+                              "minimum": 0
+                            }
+                          },
+                          "components": {
+                            "schemas": {
+                              "elementSpecification": {
+                                "anyOf": [
+                                  {
+                                    "title": "Element (simple)",
+                                    "type": "string",
+                                    "description": "Display text or selector of the element."
+                                  },
+                                  {
+                                    "title": "Element (detailed)",
+                                    "type": "object",
+                                    "anyOf": [
+                                      {
+                                        "required": [
+                                          "selector"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementText"
+                                        ]
+                                      }
+                                    ],
+                                    "properties": {
+                                      "elementText": {
+                                        "type": "string",
+                                        "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                      },
+                                      "selector": {
+                                        "type": "string",
+                                        "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                      },
+                                      "timeout": {
+                                        "type": "integer",
+                                        "description": "Max duration in milliseconds to wait for the element to exist.",
+                                        "default": 5000
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "string": {
+                                "title": "Element (simple)",
+                                "type": "string",
+                                "description": "Display text or selector of the element."
+                              },
+                              "object": {
+                                "title": "Element (detailed)",
+                                "type": "object",
+                                "anyOf": [
+                                  {
+                                    "required": [
+                                      "selector"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementText"
+                                    ]
+                                  }
+                                ],
+                                "properties": {
+                                  "elementText": {
+                                    "type": "string",
+                                    "description": "Display text of the element. If combined with `selector`, the element must match both the text and the selector."
+                                  },
+                                  "selector": {
+                                    "type": "string",
+                                    "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                  },
+                                  "timeout": {
+                                    "type": "integer",
+                                    "description": "Max duration in milliseconds to wait for the element to exist.",
+                                    "default": 5000
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "examples": [
+                            {
+                              "source": "Table",
+                              "target": "#canvas"
+                            },
+                            {
+                              "source": ".draggable-block",
+                              "target": ".drop-zone",
+                              "duration": 2000
+                            },
+                            {
+                              "source": {
+                                "selector": ".widget",
+                                "elementText": "Data Table"
+                              },
+                              "target": {
+                                "selector": "#design-canvas"
+                              },
+                              "duration": 500
+                            },
+                            {
+                              "source": {
+                                "selector": ".draggable",
+                                "timeout": 10000
+                              },
+                              "target": {
+                                "elementText": "Drop Zone",
+                                "timeout": 5000
+                              }
+                            }
                           ]
                         }
                       }

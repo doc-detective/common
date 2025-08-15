@@ -30,6 +30,7 @@ async function dereferenceSchemas() {
     "click_v3.schema.json",
     "config_v3.schema.json",
     "context_v3.schema.json",
+    "dragAndDrop_v3.schema.json",
     "find_v3.schema.json",
     "goTo_v3.schema.json",
     "loadVariables_v3.schema.json",
