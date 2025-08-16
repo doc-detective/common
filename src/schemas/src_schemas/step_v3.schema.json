@@ -247,6 +247,23 @@
         },
         {
           "type": "object",
+          "required": ["saveCookie"],
+          "properties": {
+            "saveCookie": {
+              "$ref": "saveCookie_v3.schema.json#"
+            }
+          },
+          "title": "saveCookie"
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
+          "type": "object",
           "required": ["record"],
           "properties": {
             "record": {
@@ -297,12 +314,21 @@
           "$ref": "#/components/schemas/common"
         },
         {
+<<<<<<< HEAD
           "title": "dragAndDrop",
           "type": "object",
           "required": ["dragAndDrop"],
           "properties": {
             "dragAndDrop": {
               "$ref": "dragAndDrop_v3.schema.json#"
+=======
+          "title": "loadCookie",
+          "type": "object",
+          "required": ["loadCookie"],
+          "properties": {
+            "loadCookie": {
+              "$ref": "loadCookie_v3.schema.json#"
+>>>>>>> 586f2c4c53ea07b602c4604b6660c7a49090f058
             }
           }
         }
@@ -447,6 +473,27 @@
     },
     {
       "loadVariables": "variables.env"
+    },
+    {
+      "saveCookie": "session_token"
+    },
+    {
+      "saveCookie": {
+        "name": "auth_cookie",
+        "path": "auth-session.txt",
+        "directory": "./test-data",
+        "overwrite": true
+      }
+    },
+    {
+      "loadCookie": "session_token"
+    },
+    {
+      "loadCookie": {
+        "name": "auth_cookie",
+        "path": "auth-session.txt",
+        "directory": "./test-data"
+      }
     },
     {
       "find": {
