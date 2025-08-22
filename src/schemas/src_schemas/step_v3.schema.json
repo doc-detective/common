@@ -314,21 +314,29 @@
           "$ref": "#/components/schemas/common"
         },
         {
-<<<<<<< HEAD
           "title": "dragAndDrop",
           "type": "object",
           "required": ["dragAndDrop"],
           "properties": {
             "dragAndDrop": {
               "$ref": "dragAndDrop_v3.schema.json#"
-=======
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
           "title": "loadCookie",
           "type": "object",
           "required": ["loadCookie"],
           "properties": {
             "loadCookie": {
               "$ref": "loadCookie_v3.schema.json#"
->>>>>>> 586f2c4c53ea07b602c4604b6660c7a49090f058
             }
           }
         }
