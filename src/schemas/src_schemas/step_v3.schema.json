@@ -314,6 +314,23 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "title": "dragAndDrop",
+          "type": "object",
+          "required": ["dragAndDrop"],
+          "properties": {
+            "dragAndDrop": {
+              "$ref": "dragAndDrop_v3.schema.json#"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
           "title": "loadCookie",
           "type": "object",
           "required": ["loadCookie"],
@@ -600,6 +617,16 @@
     {
       "checkLink": "https://www.google.com",
       "breakpoint": false
+    },
+    {
+      "dragAndDrop": {
+        "source": {
+          "selector": "#sourceElement"
+        },
+        "target": {
+          "selector": "#targetElement"
+        }
+      }
     }
   ]
 }
