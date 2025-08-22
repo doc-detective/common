@@ -5489,6 +5489,16 @@
     {
       "checkLink": "https://www.google.com",
       "breakpoint": false
+    },
+    {
+      "dragAndDrop": {
+        "source": {
+          "selector": "#sourceElement"
+        },
+        "target": {
+          "selector": "#targetElement"
+        }
+      }
     }
   ]
 }
