@@ -1767,9 +1767,6 @@
                             },
                             {
                               "type": "object",
-                              "required": [
-                                "operationId"
-                              ],
                               "title": "OpenAPI definition (httpRequest)"
                             }
                           ]
@@ -2158,9 +2155,6 @@
                               },
                               {
                                 "type": "object",
-                                "required": [
-                                  "operationId"
-                                ],
                                 "title": "OpenAPI definition (httpRequest)"
                               }
                             ]
@@ -2431,6 +2425,11 @@
                     "parameters": {
                       "id": 123
                     }
+                  }
+                },
+                {
+                  "openApi": {
+                    "descriptionPath": "https://api.example.com/openapi.json"
                   }
                 },
                 {
@@ -5438,6 +5437,13 @@
     {
       "httpRequest": {
         "openApi": {
+          "descriptionPath": "https://api.example.com/openapi.json"
+        }
+      }
+    },
+    {
+      "httpRequest": {
+        "openApi": {
           "descriptionPath": "https://api.example.com/openapi.json",
           "operationId": "getUserById"
         },
@@ -5464,19 +5470,6 @@
           "operationId": "updateUser",
           "useExample": "request",
           "exampleKey": "acme"
-        }
-      }
-    },
-    {
-      "httpRequest": {
-        "openApi": {
-          "descriptionPath": "https://api.example.com/openapi.json",
-          "operationId": "updateUser",
-          "useExample": "request",
-          "exampleKey": "acme",
-          "headers": {
-            "Authorization": "Bearer $TOKEN"
-          }
         }
       }
     },

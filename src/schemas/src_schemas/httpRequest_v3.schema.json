@@ -55,7 +55,6 @@
                   },
                   {
                     "type": "object",
-                    "required": ["operationId"],
                     "title": "OpenAPI definition (httpRequest)"
                   }
                 ]
@@ -302,6 +301,11 @@
         "parameters": {
           "id": 123
         }
+      }
+    },
+    {
+      "openApi": {
+        "descriptionPath": "https://api.example.com/openapi.json"
       }
     },
     {
