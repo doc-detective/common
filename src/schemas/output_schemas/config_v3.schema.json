@@ -121,6 +121,11 @@
       "type": "boolean",
       "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
     },
+    "processDitaMaps": {
+      "description": "If `true`, processes DITA maps and includes generated files as inputs.",
+      "type": "boolean",
+      "default": true
+    },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
       "type": "string",
@@ -520,7 +525,8 @@
       "default": [
         "markdown",
         "asciidoc",
-        "html"
+        "html",
+        "dita"
       ],
       "anyOf": [
         {
@@ -535,7 +541,8 @@
                 "enum": [
                   "markdown",
                   "asciidoc",
-                  "html"
+                  "html",
+                  "dita"
                 ]
               },
               {

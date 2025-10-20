@@ -101,6 +101,11 @@
       "type": "boolean",
       "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
     },
+    "processDitaMaps": {
+      "description": "If `true`, processes DITA maps and includes generated files as inputs.",
+      "type": "boolean",
+      "default": true
+    },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
       "type": "string",
@@ -112,7 +117,7 @@
     },
     "fileTypes": {
       "description": "Configuration for file types and their markup detection.",
-      "default": ["markdown", "asciidoc", "html"],
+      "default": ["markdown", "asciidoc", "html", "dita"],
       "anyOf": [
         {
           "type": "array",
@@ -123,7 +128,7 @@
                 "$comment": "Simple mode: Reference predefined templates by name.",
                 "title": "File type (predefined)",
                 "type": "string",
-                "enum": ["markdown", "asciidoc", "html"]
+                "enum": ["markdown", "asciidoc", "html", "dita"]
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",

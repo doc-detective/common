@@ -6,7 +6,7 @@ const addFormats = require("ajv-formats");
 const addKeywords = require("ajv-keywords");
 // Ajv custom errors: https://ajv.js.org/packages/ajv-errors.html
 const addErrors = require("ajv-errors");
-const uuid = require("uuid");
+const { randomUUID } = require("crypto");
 
 // Configure base Ajv
 const ajv = new Ajv({
@@ -19,7 +19,7 @@ const ajv = new Ajv({
 
 // Enable `uuid` dynamic default
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
-def.DEFAULTS.uuid = () => uuid.v4;
+def.DEFAULTS.uuid = () => randomUUID;
 
 // Enhance Ajv
 addFormats(ajv);
