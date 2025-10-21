@@ -7016,6 +7016,18 @@
                 }
               ]
             }
+          },
+          "docDetective": {
+            "type": "object",
+            "description": "Configuration for Doc Detective Orchestration API integration.",
+            "additionalProperties": false,
+            "properties": {
+              "apiKey": {
+                "type": "string",
+                "description": "API key for authenticating with the Doc Detective Orchestration API."
+              }
+            },
+            "title": "Doc Detective Orchestration API"
           }
         },
         "title": "Integrations options"
@@ -12964,6 +12976,13 @@
       },
       {
         "debug": "stepThrough"
+      },
+      {
+        "integrations": {
+          "docDetective": {
+            "apiKey": "your-api-key-here"
+          }
+        }
       }
     ]
   },
@@ -22587,6 +22606,18 @@
                     }
                   ]
                 }
+              },
+              "docDetective": {
+                "type": "object",
+                "description": "Configuration for Doc Detective Orchestration API integration.",
+                "additionalProperties": false,
+                "properties": {
+                  "apiKey": {
+                    "type": "string",
+                    "description": "API key for authenticating with the Doc Detective Orchestration API."
+                  }
+                },
+                "title": "Doc Detective Orchestration API"
               }
             },
             "title": "Integrations options"
@@ -28535,6 +28566,13 @@
           },
           {
             "debug": "stepThrough"
+          },
+          {
+            "integrations": {
+              "docDetective": {
+                "apiKey": "your-api-key-here"
+              }
+            }
           }
         ]
       },
