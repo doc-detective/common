@@ -6755,7 +6755,7 @@
             ]
           }
         },
-        "docDetective": {
+        "docDetectiveApi": {
           "type": "object",
           "description": "Configuration for Doc Detective Orchestration API integration.",
           "additionalProperties": false,
@@ -12717,7 +12717,7 @@
     },
     {
       "integrations": {
-        "docDetective": {
+        "docDetectiveApi": {
           "apiKey": "your-api-key-here"
         }
       }
