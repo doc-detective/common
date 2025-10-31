@@ -383,6 +383,11 @@
         "type": "boolean",
         "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
       },
+      "crawl": {
+        "description": "If `true`, crawls sitemap.xml files specified by URL to find additional files to test.",
+        "type": "boolean",
+        "default": false
+      },
       "processDitaMaps": {
         "description": "If `true`, processes DITA maps and includes generated files as inputs.",
         "type": "boolean",
@@ -12983,6 +12988,9 @@
             "apiKey": "your-api-key-here"
           }
         }
+      },
+      {
+        "crawl": true
       }
     ]
   },
@@ -15972,6 +15980,11 @@
           "allowUnsafeSteps": {
             "type": "boolean",
             "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
+          },
+          "crawl": {
+            "description": "If `true`, crawls sitemap.xml files specified by URL to find additional files to test.",
+            "type": "boolean",
+            "default": false
           },
           "processDitaMaps": {
             "description": "If `true`, processes DITA maps and includes generated files as inputs.",
@@ -28573,6 +28586,9 @@
                 "apiKey": "your-api-key-here"
               }
             }
+          },
+          {
+            "crawl": true
           }
         ]
       },
