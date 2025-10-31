@@ -30,7 +30,7 @@
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
-    "axios": "^1.12.2",
+    "axios": "^1.13.1",
     "yaml": "^2.8.1"
   }
 }
