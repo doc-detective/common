@@ -1620,6 +1620,31 @@
                                       "required": [
                                         "elementText"
                                       ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementId"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementTestId"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementClass"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementAttribute"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementAltText"
+                                      ]
                                     }
                                   ],
                                   "properties": {
@@ -1634,11 +1659,54 @@
                                     },
                                     "elementText": {
                                       "type": "string",
-                                      "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                      "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                     },
                                     "selector": {
                                       "type": "string",
-                                      "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                      "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                    },
+                                    "elementId": {
+                                      "type": "string",
+                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementTestId": {
+                                      "type": "string",
+                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementClass": {
+                                      "oneOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      ],
+                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                    },
+                                    "elementAttribute": {
+                                      "type": "object",
+                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                      "additionalProperties": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "number"
+                                          },
+                                          {
+                                            "type": "boolean"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "elementAltText": {
+                                      "type": "string",
+                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                     }
                                   }
                                 },
@@ -1675,6 +1743,31 @@
                                         "required": [
                                           "elementText"
                                         ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementTestId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementClass"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAttribute"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAltText"
+                                        ]
                                       }
                                     ],
                                     "properties": {
@@ -1689,11 +1782,54 @@
                                       },
                                       "elementText": {
                                         "type": "string",
-                                        "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                        "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                       },
                                       "selector": {
                                         "type": "string",
-                                        "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                        "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                      },
+                                      "elementId": {
+                                        "type": "string",
+                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementTestId": {
+                                        "type": "string",
+                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementClass": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        ],
+                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                      },
+                                      "elementAttribute": {
+                                        "type": "object",
+                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                        "additionalProperties": {
+                                          "oneOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "boolean"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "elementAltText": {
+                                        "type": "string",
+                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                       }
                                     }
                                   }
@@ -1807,17 +1943,85 @@
                                       "required": [
                                         "elementText"
                                       ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementId"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementTestId"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementClass"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementAttribute"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementAltText"
+                                      ]
                                     }
                                   ],
                                   "additionalProperties": false,
                                   "properties": {
                                     "elementText": {
                                       "type": "string",
-                                      "description": "Display text of the element to find. If combined with `selector`, the element must match both the text and the selector."
+                                      "description": "Display text of the element to find. If combined with other element finding fields, the element must match all specified criteria."
                                     },
                                     "selector": {
                                       "type": "string",
-                                      "description": "Selector of the element to find. If combined with `elementText`, the element must match both the text and the selector."
+                                      "description": "Selector of the element to find. If combined with other element finding fields, the element must match all specified criteria."
+                                    },
+                                    "elementId": {
+                                      "type": "string",
+                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementTestId": {
+                                      "type": "string",
+                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementClass": {
+                                      "oneOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      ],
+                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                    },
+                                    "elementAttribute": {
+                                      "type": "object",
+                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                      "additionalProperties": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "number"
+                                          },
+                                          {
+                                            "type": "boolean"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "elementAltText": {
+                                      "type": "string",
+                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                     },
                                     "timeout": {
                                       "type": "integer",
@@ -1855,6 +2059,31 @@
                                                   "required": [
                                                     "elementText"
                                                   ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementId"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementTestId"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementClass"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementAttribute"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementAltText"
+                                                  ]
                                                 }
                                               ],
                                               "properties": {
@@ -1869,11 +2098,54 @@
                                                 },
                                                 "elementText": {
                                                   "type": "string",
-                                                  "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                  "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                 },
                                                 "selector": {
                                                   "type": "string",
-                                                  "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                  "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                },
+                                                "elementId": {
+                                                  "type": "string",
+                                                  "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "elementTestId": {
+                                                  "type": "string",
+                                                  "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "elementClass": {
+                                                  "oneOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    }
+                                                  ],
+                                                  "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                },
+                                                "elementAttribute": {
+                                                  "type": "object",
+                                                  "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                  "additionalProperties": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "number"
+                                                      },
+                                                      {
+                                                        "type": "boolean"
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                "elementAltText": {
+                                                  "type": "string",
+                                                  "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                 }
                                               }
                                             },
@@ -1910,6 +2182,31 @@
                                                     "required": [
                                                       "elementText"
                                                     ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementTestId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementClass"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAttribute"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAltText"
+                                                    ]
                                                   }
                                                 ],
                                                 "properties": {
@@ -1924,11 +2221,54 @@
                                                   },
                                                   "elementText": {
                                                     "type": "string",
-                                                    "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                    "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                   },
                                                   "selector": {
                                                     "type": "string",
-                                                    "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                    "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                  },
+                                                  "elementId": {
+                                                    "type": "string",
+                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementTestId": {
+                                                    "type": "string",
+                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementClass": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    ],
+                                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                  },
+                                                  "elementAttribute": {
+                                                    "type": "object",
+                                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                    "additionalProperties": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "number"
+                                                        },
+                                                        {
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "elementAltText": {
+                                                    "type": "string",
+                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                   }
                                                 }
                                               }
@@ -2023,6 +2363,53 @@
                                                 "selector": {
                                                   "type": "string",
                                                   "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                },
+                                                "elementText": {
+                                                  "type": "string",
+                                                  "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                },
+                                                "elementId": {
+                                                  "type": "string",
+                                                  "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "elementTestId": {
+                                                  "type": "string",
+                                                  "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "elementClass": {
+                                                  "oneOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    }
+                                                  ],
+                                                  "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                },
+                                                "elementAttribute": {
+                                                  "type": "object",
+                                                  "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                  "additionalProperties": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "number"
+                                                      },
+                                                      {
+                                                        "type": "boolean"
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                "elementAltText": {
+                                                  "type": "string",
+                                                  "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                 }
                                               },
                                               "required": [
@@ -2083,6 +2470,53 @@
                                                   "selector": {
                                                     "type": "string",
                                                     "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                  },
+                                                  "elementText": {
+                                                    "type": "string",
+                                                    "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                  },
+                                                  "elementId": {
+                                                    "type": "string",
+                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementTestId": {
+                                                    "type": "string",
+                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementClass": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    ],
+                                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                  },
+                                                  "elementAttribute": {
+                                                    "type": "object",
+                                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                    "additionalProperties": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "number"
+                                                        },
+                                                        {
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "elementAltText": {
+                                                    "type": "string",
+                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                   }
                                                 },
                                                 "required": [
@@ -2153,17 +2587,85 @@
                                         "required": [
                                           "elementText"
                                         ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementTestId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementClass"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAttribute"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAltText"
+                                        ]
                                       }
                                     ],
                                     "additionalProperties": false,
                                     "properties": {
                                       "elementText": {
                                         "type": "string",
-                                        "description": "Display text of the element to find. If combined with `selector`, the element must match both the text and the selector."
+                                        "description": "Display text of the element to find. If combined with other element finding fields, the element must match all specified criteria."
                                       },
                                       "selector": {
                                         "type": "string",
-                                        "description": "Selector of the element to find. If combined with `elementText`, the element must match both the text and the selector."
+                                        "description": "Selector of the element to find. If combined with other element finding fields, the element must match all specified criteria."
+                                      },
+                                      "elementId": {
+                                        "type": "string",
+                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementTestId": {
+                                        "type": "string",
+                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementClass": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        ],
+                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                      },
+                                      "elementAttribute": {
+                                        "type": "object",
+                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                        "additionalProperties": {
+                                          "oneOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "boolean"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "elementAltText": {
+                                        "type": "string",
+                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                       },
                                       "timeout": {
                                         "type": "integer",
@@ -2201,6 +2703,31 @@
                                                     "required": [
                                                       "elementText"
                                                     ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementTestId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementClass"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAttribute"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAltText"
+                                                    ]
                                                   }
                                                 ],
                                                 "properties": {
@@ -2215,11 +2742,54 @@
                                                   },
                                                   "elementText": {
                                                     "type": "string",
-                                                    "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                    "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                   },
                                                   "selector": {
                                                     "type": "string",
-                                                    "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                    "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                  },
+                                                  "elementId": {
+                                                    "type": "string",
+                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementTestId": {
+                                                    "type": "string",
+                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementClass": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    ],
+                                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                  },
+                                                  "elementAttribute": {
+                                                    "type": "object",
+                                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                    "additionalProperties": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "number"
+                                                        },
+                                                        {
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "elementAltText": {
+                                                    "type": "string",
+                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                   }
                                                 }
                                               },
@@ -2256,6 +2826,31 @@
                                                       "required": [
                                                         "elementText"
                                                       ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementId"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementTestId"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementClass"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementAttribute"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementAltText"
+                                                      ]
                                                     }
                                                   ],
                                                   "properties": {
@@ -2270,11 +2865,54 @@
                                                     },
                                                     "elementText": {
                                                       "type": "string",
-                                                      "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                      "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                     },
                                                     "selector": {
                                                       "type": "string",
-                                                      "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                      "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                    },
+                                                    "elementId": {
+                                                      "type": "string",
+                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementTestId": {
+                                                      "type": "string",
+                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementClass": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      ],
+                                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                    },
+                                                    "elementAttribute": {
+                                                      "type": "object",
+                                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                      "additionalProperties": {
+                                                        "oneOf": [
+                                                          {
+                                                            "type": "string"
+                                                          },
+                                                          {
+                                                            "type": "number"
+                                                          },
+                                                          {
+                                                            "type": "boolean"
+                                                          }
+                                                        ]
+                                                      }
+                                                    },
+                                                    "elementAltText": {
+                                                      "type": "string",
+                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                     }
                                                   }
                                                 }
@@ -2369,6 +3007,53 @@
                                                   "selector": {
                                                     "type": "string",
                                                     "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                  },
+                                                  "elementText": {
+                                                    "type": "string",
+                                                    "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                  },
+                                                  "elementId": {
+                                                    "type": "string",
+                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementTestId": {
+                                                    "type": "string",
+                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementClass": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    ],
+                                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                  },
+                                                  "elementAttribute": {
+                                                    "type": "object",
+                                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                    "additionalProperties": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "number"
+                                                        },
+                                                        {
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "elementAltText": {
+                                                    "type": "string",
+                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                   }
                                                 },
                                                 "required": [
@@ -2429,6 +3114,53 @@
                                                     "selector": {
                                                       "type": "string",
                                                       "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                    },
+                                                    "elementText": {
+                                                      "type": "string",
+                                                      "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                    },
+                                                    "elementId": {
+                                                      "type": "string",
+                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementTestId": {
+                                                      "type": "string",
+                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementClass": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      ],
+                                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                    },
+                                                    "elementAttribute": {
+                                                      "type": "object",
+                                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                      "additionalProperties": {
+                                                        "oneOf": [
+                                                          {
+                                                            "type": "string"
+                                                          },
+                                                          {
+                                                            "type": "number"
+                                                          },
+                                                          {
+                                                            "type": "boolean"
+                                                          }
+                                                        ]
+                                                      }
+                                                    },
+                                                    "elementAltText": {
+                                                      "type": "string",
+                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                     }
                                                   },
                                                   "required": [
@@ -4405,6 +5137,53 @@
                                     "selector": {
                                       "type": "string",
                                       "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                    },
+                                    "elementText": {
+                                      "type": "string",
+                                      "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                    },
+                                    "elementId": {
+                                      "type": "string",
+                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementTestId": {
+                                      "type": "string",
+                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementClass": {
+                                      "oneOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      ],
+                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                    },
+                                    "elementAttribute": {
+                                      "type": "object",
+                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                      "additionalProperties": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "number"
+                                          },
+                                          {
+                                            "type": "boolean"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "elementAltText": {
+                                      "type": "string",
+                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                     }
                                   },
                                   "required": [
@@ -4465,6 +5244,53 @@
                                       "selector": {
                                         "type": "string",
                                         "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                      },
+                                      "elementText": {
+                                        "type": "string",
+                                        "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                      },
+                                      "elementId": {
+                                        "type": "string",
+                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementTestId": {
+                                        "type": "string",
+                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementClass": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        ],
+                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                      },
+                                      "elementAttribute": {
+                                        "type": "object",
+                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                        "additionalProperties": {
+                                          "oneOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "boolean"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "elementAltText": {
+                                        "type": "string",
+                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                       }
                                     },
                                     "required": [
@@ -4644,6 +5470,31 @@
                                               "required": [
                                                 "elementText"
                                               ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementTestId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementClass"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAttribute"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAltText"
+                                              ]
                                             }
                                           ],
                                           "properties": {
@@ -4654,6 +5505,49 @@
                                             "selector": {
                                               "type": "string",
                                               "description": "Selector of the element to screenshot."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "oneOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAltText": {
+                                              "type": "string",
+                                              "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "padding": {
                                               "anyOf": [
@@ -4772,6 +5666,31 @@
                                                 "required": [
                                                   "elementText"
                                                 ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementTestId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementClass"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAttribute"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAltText"
+                                                ]
                                               }
                                             ],
                                             "properties": {
@@ -4782,6 +5701,49 @@
                                               "selector": {
                                                 "type": "string",
                                                 "description": "Selector of the element to screenshot."
+                                              },
+                                              "elementId": {
+                                                "type": "string",
+                                                "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementTestId": {
+                                                "type": "string",
+                                                "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementClass": {
+                                                "oneOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                ],
+                                                "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                              },
+                                              "elementAttribute": {
+                                                "type": "object",
+                                                "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                "additionalProperties": {
+                                                  "oneOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "number"
+                                                    },
+                                                    {
+                                                      "type": "boolean"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "elementAltText": {
+                                                "type": "string",
+                                                "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "padding": {
                                                 "anyOf": [
@@ -4839,6 +5801,31 @@
                                         "required": [
                                           "elementText"
                                         ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementTestId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementClass"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAttribute"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAltText"
+                                        ]
                                       }
                                     ],
                                     "properties": {
@@ -4849,6 +5836,49 @@
                                       "selector": {
                                         "type": "string",
                                         "description": "Selector of the element to screenshot."
+                                      },
+                                      "elementId": {
+                                        "type": "string",
+                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementTestId": {
+                                        "type": "string",
+                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementClass": {
+                                        "oneOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        ],
+                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                      },
+                                      "elementAttribute": {
+                                        "type": "object",
+                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                        "additionalProperties": {
+                                          "oneOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "boolean"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "elementAltText": {
+                                        "type": "string",
+                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                       },
                                       "padding": {
                                         "anyOf": [
@@ -6441,6 +7471,31 @@
                                             "required": [
                                               "elementText"
                                             ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementId"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementTestId"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementClass"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementAttribute"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementAltText"
+                                            ]
                                           }
                                         ],
                                         "properties": {
@@ -6455,11 +7510,54 @@
                                           },
                                           "elementText": {
                                             "type": "string",
-                                            "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                            "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                           },
                                           "selector": {
                                             "type": "string",
-                                            "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                            "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                          },
+                                          "elementId": {
+                                            "type": "string",
+                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementTestId": {
+                                            "type": "string",
+                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementClass": {
+                                            "oneOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            ],
+                                            "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                          },
+                                          "elementAttribute": {
+                                            "type": "object",
+                                            "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                            "additionalProperties": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "number"
+                                                },
+                                                {
+                                                  "type": "boolean"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "elementAltText": {
+                                            "type": "string",
+                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                           }
                                         }
                                       },
@@ -6496,6 +7594,31 @@
                                               "required": [
                                                 "elementText"
                                               ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementTestId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementClass"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAttribute"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAltText"
+                                              ]
                                             }
                                           ],
                                           "properties": {
@@ -6510,11 +7633,54 @@
                                             },
                                             "elementText": {
                                               "type": "string",
-                                              "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                              "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                             },
                                             "selector": {
                                               "type": "string",
-                                              "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                              "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "oneOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAltText": {
+                                              "type": "string",
+                                              "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             }
                                           }
                                         }
@@ -6628,17 +7794,85 @@
                                             "required": [
                                               "elementText"
                                             ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementId"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementTestId"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementClass"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementAttribute"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementAltText"
+                                            ]
                                           }
                                         ],
                                         "additionalProperties": false,
                                         "properties": {
                                           "elementText": {
                                             "type": "string",
-                                            "description": "Display text of the element to find. If combined with `selector`, the element must match both the text and the selector."
+                                            "description": "Display text of the element to find. If combined with other element finding fields, the element must match all specified criteria."
                                           },
                                           "selector": {
                                             "type": "string",
-                                            "description": "Selector of the element to find. If combined with `elementText`, the element must match both the text and the selector."
+                                            "description": "Selector of the element to find. If combined with other element finding fields, the element must match all specified criteria."
+                                          },
+                                          "elementId": {
+                                            "type": "string",
+                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementTestId": {
+                                            "type": "string",
+                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementClass": {
+                                            "oneOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            ],
+                                            "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                          },
+                                          "elementAttribute": {
+                                            "type": "object",
+                                            "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                            "additionalProperties": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "number"
+                                                },
+                                                {
+                                                  "type": "boolean"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "elementAltText": {
+                                            "type": "string",
+                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                           },
                                           "timeout": {
                                             "type": "integer",
@@ -6676,6 +7910,31 @@
                                                         "required": [
                                                           "elementText"
                                                         ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementId"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementTestId"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementClass"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementAttribute"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementAltText"
+                                                        ]
                                                       }
                                                     ],
                                                     "properties": {
@@ -6690,11 +7949,54 @@
                                                       },
                                                       "elementText": {
                                                         "type": "string",
-                                                        "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                        "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                       },
                                                       "selector": {
                                                         "type": "string",
-                                                        "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                        "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                      },
+                                                      "elementId": {
+                                                        "type": "string",
+                                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      },
+                                                      "elementTestId": {
+                                                        "type": "string",
+                                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      },
+                                                      "elementClass": {
+                                                        "oneOf": [
+                                                          {
+                                                            "type": "string"
+                                                          },
+                                                          {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        ],
+                                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                      },
+                                                      "elementAttribute": {
+                                                        "type": "object",
+                                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                        "additionalProperties": {
+                                                          "oneOf": [
+                                                            {
+                                                              "type": "string"
+                                                            },
+                                                            {
+                                                              "type": "number"
+                                                            },
+                                                            {
+                                                              "type": "boolean"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      "elementAltText": {
+                                                        "type": "string",
+                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     }
                                                   },
@@ -6731,6 +8033,31 @@
                                                           "required": [
                                                             "elementText"
                                                           ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementId"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementTestId"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementClass"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementAttribute"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementAltText"
+                                                          ]
                                                         }
                                                       ],
                                                       "properties": {
@@ -6745,11 +8072,54 @@
                                                         },
                                                         "elementText": {
                                                           "type": "string",
-                                                          "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                          "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                         },
                                                         "selector": {
                                                           "type": "string",
-                                                          "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                          "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                        },
+                                                        "elementId": {
+                                                          "type": "string",
+                                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementTestId": {
+                                                          "type": "string",
+                                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementClass": {
+                                                          "oneOf": [
+                                                            {
+                                                              "type": "string"
+                                                            },
+                                                            {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          ],
+                                                          "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                        },
+                                                        "elementAttribute": {
+                                                          "type": "object",
+                                                          "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                          "additionalProperties": {
+                                                            "oneOf": [
+                                                              {
+                                                                "type": "string"
+                                                              },
+                                                              {
+                                                                "type": "number"
+                                                              },
+                                                              {
+                                                                "type": "boolean"
+                                                              }
+                                                            ]
+                                                          }
+                                                        },
+                                                        "elementAltText": {
+                                                          "type": "string",
+                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       }
                                                     }
@@ -6844,6 +8214,53 @@
                                                       "selector": {
                                                         "type": "string",
                                                         "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                      },
+                                                      "elementText": {
+                                                        "type": "string",
+                                                        "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                      },
+                                                      "elementId": {
+                                                        "type": "string",
+                                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      },
+                                                      "elementTestId": {
+                                                        "type": "string",
+                                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      },
+                                                      "elementClass": {
+                                                        "oneOf": [
+                                                          {
+                                                            "type": "string"
+                                                          },
+                                                          {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        ],
+                                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                      },
+                                                      "elementAttribute": {
+                                                        "type": "object",
+                                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                        "additionalProperties": {
+                                                          "oneOf": [
+                                                            {
+                                                              "type": "string"
+                                                            },
+                                                            {
+                                                              "type": "number"
+                                                            },
+                                                            {
+                                                              "type": "boolean"
+                                                            }
+                                                          ]
+                                                        }
+                                                      },
+                                                      "elementAltText": {
+                                                        "type": "string",
+                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     },
                                                     "required": [
@@ -6904,6 +8321,53 @@
                                                         "selector": {
                                                           "type": "string",
                                                           "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                        },
+                                                        "elementText": {
+                                                          "type": "string",
+                                                          "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                        },
+                                                        "elementId": {
+                                                          "type": "string",
+                                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementTestId": {
+                                                          "type": "string",
+                                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementClass": {
+                                                          "oneOf": [
+                                                            {
+                                                              "type": "string"
+                                                            },
+                                                            {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          ],
+                                                          "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                        },
+                                                        "elementAttribute": {
+                                                          "type": "object",
+                                                          "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                          "additionalProperties": {
+                                                            "oneOf": [
+                                                              {
+                                                                "type": "string"
+                                                              },
+                                                              {
+                                                                "type": "number"
+                                                              },
+                                                              {
+                                                                "type": "boolean"
+                                                              }
+                                                            ]
+                                                          }
+                                                        },
+                                                        "elementAltText": {
+                                                          "type": "string",
+                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       },
                                                       "required": [
@@ -6974,17 +8438,85 @@
                                               "required": [
                                                 "elementText"
                                               ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementTestId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementClass"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAttribute"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAltText"
+                                              ]
                                             }
                                           ],
                                           "additionalProperties": false,
                                           "properties": {
                                             "elementText": {
                                               "type": "string",
-                                              "description": "Display text of the element to find. If combined with `selector`, the element must match both the text and the selector."
+                                              "description": "Display text of the element to find. If combined with other element finding fields, the element must match all specified criteria."
                                             },
                                             "selector": {
                                               "type": "string",
-                                              "description": "Selector of the element to find. If combined with `elementText`, the element must match both the text and the selector."
+                                              "description": "Selector of the element to find. If combined with other element finding fields, the element must match all specified criteria."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "oneOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAltText": {
+                                              "type": "string",
+                                              "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "timeout": {
                                               "type": "integer",
@@ -7022,6 +8554,31 @@
                                                           "required": [
                                                             "elementText"
                                                           ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementId"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementTestId"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementClass"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementAttribute"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementAltText"
+                                                          ]
                                                         }
                                                       ],
                                                       "properties": {
@@ -7036,11 +8593,54 @@
                                                         },
                                                         "elementText": {
                                                           "type": "string",
-                                                          "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                          "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                         },
                                                         "selector": {
                                                           "type": "string",
-                                                          "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                          "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                        },
+                                                        "elementId": {
+                                                          "type": "string",
+                                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementTestId": {
+                                                          "type": "string",
+                                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementClass": {
+                                                          "oneOf": [
+                                                            {
+                                                              "type": "string"
+                                                            },
+                                                            {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          ],
+                                                          "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                        },
+                                                        "elementAttribute": {
+                                                          "type": "object",
+                                                          "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                          "additionalProperties": {
+                                                            "oneOf": [
+                                                              {
+                                                                "type": "string"
+                                                              },
+                                                              {
+                                                                "type": "number"
+                                                              },
+                                                              {
+                                                                "type": "boolean"
+                                                              }
+                                                            ]
+                                                          }
+                                                        },
+                                                        "elementAltText": {
+                                                          "type": "string",
+                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       }
                                                     },
@@ -7077,6 +8677,31 @@
                                                             "required": [
                                                               "elementText"
                                                             ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "elementId"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "elementTestId"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "elementClass"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "elementAttribute"
+                                                            ]
+                                                          },
+                                                          {
+                                                            "required": [
+                                                              "elementAltText"
+                                                            ]
                                                           }
                                                         ],
                                                         "properties": {
@@ -7091,11 +8716,54 @@
                                                           },
                                                           "elementText": {
                                                             "type": "string",
-                                                            "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                                            "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                                           },
                                                           "selector": {
                                                             "type": "string",
-                                                            "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                                            "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                                          },
+                                                          "elementId": {
+                                                            "type": "string",
+                                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          },
+                                                          "elementTestId": {
+                                                            "type": "string",
+                                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          },
+                                                          "elementClass": {
+                                                            "oneOf": [
+                                                              {
+                                                                "type": "string"
+                                                              },
+                                                              {
+                                                                "type": "array",
+                                                                "items": {
+                                                                  "type": "string"
+                                                                }
+                                                              }
+                                                            ],
+                                                            "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                          },
+                                                          "elementAttribute": {
+                                                            "type": "object",
+                                                            "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                            "additionalProperties": {
+                                                              "oneOf": [
+                                                                {
+                                                                  "type": "string"
+                                                                },
+                                                                {
+                                                                  "type": "number"
+                                                                },
+                                                                {
+                                                                  "type": "boolean"
+                                                                }
+                                                              ]
+                                                            }
+                                                          },
+                                                          "elementAltText": {
+                                                            "type": "string",
+                                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           }
                                                         }
                                                       }
@@ -7190,6 +8858,53 @@
                                                         "selector": {
                                                           "type": "string",
                                                           "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                        },
+                                                        "elementText": {
+                                                          "type": "string",
+                                                          "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                        },
+                                                        "elementId": {
+                                                          "type": "string",
+                                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementTestId": {
+                                                          "type": "string",
+                                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        },
+                                                        "elementClass": {
+                                                          "oneOf": [
+                                                            {
+                                                              "type": "string"
+                                                            },
+                                                            {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          ],
+                                                          "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                        },
+                                                        "elementAttribute": {
+                                                          "type": "object",
+                                                          "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                          "additionalProperties": {
+                                                            "oneOf": [
+                                                              {
+                                                                "type": "string"
+                                                              },
+                                                              {
+                                                                "type": "number"
+                                                              },
+                                                              {
+                                                                "type": "boolean"
+                                                              }
+                                                            ]
+                                                          }
+                                                        },
+                                                        "elementAltText": {
+                                                          "type": "string",
+                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       },
                                                       "required": [
@@ -7250,6 +8965,53 @@
                                                           "selector": {
                                                             "type": "string",
                                                             "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                                          },
+                                                          "elementText": {
+                                                            "type": "string",
+                                                            "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                                          },
+                                                          "elementId": {
+                                                            "type": "string",
+                                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          },
+                                                          "elementTestId": {
+                                                            "type": "string",
+                                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          },
+                                                          "elementClass": {
+                                                            "oneOf": [
+                                                              {
+                                                                "type": "string"
+                                                              },
+                                                              {
+                                                                "type": "array",
+                                                                "items": {
+                                                                  "type": "string"
+                                                                }
+                                                              }
+                                                            ],
+                                                            "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                          },
+                                                          "elementAttribute": {
+                                                            "type": "object",
+                                                            "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                            "additionalProperties": {
+                                                              "oneOf": [
+                                                                {
+                                                                  "type": "string"
+                                                                },
+                                                                {
+                                                                  "type": "number"
+                                                                },
+                                                                {
+                                                                  "type": "boolean"
+                                                                }
+                                                              ]
+                                                            }
+                                                          },
+                                                          "elementAltText": {
+                                                            "type": "string",
+                                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           }
                                                         },
                                                         "required": [
@@ -9226,6 +10988,53 @@
                                           "selector": {
                                             "type": "string",
                                             "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                          },
+                                          "elementText": {
+                                            "type": "string",
+                                            "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                          },
+                                          "elementId": {
+                                            "type": "string",
+                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementTestId": {
+                                            "type": "string",
+                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementClass": {
+                                            "oneOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            ],
+                                            "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                          },
+                                          "elementAttribute": {
+                                            "type": "object",
+                                            "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                            "additionalProperties": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "number"
+                                                },
+                                                {
+                                                  "type": "boolean"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "elementAltText": {
+                                            "type": "string",
+                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                           }
                                         },
                                         "required": [
@@ -9286,6 +11095,53 @@
                                             "selector": {
                                               "type": "string",
                                               "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                            },
+                                            "elementText": {
+                                              "type": "string",
+                                              "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "oneOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAltText": {
+                                              "type": "string",
+                                              "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             }
                                           },
                                           "required": [
@@ -9465,6 +11321,31 @@
                                                     "required": [
                                                       "elementText"
                                                     ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementTestId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementClass"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAttribute"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAltText"
+                                                    ]
                                                   }
                                                 ],
                                                 "properties": {
@@ -9475,6 +11356,49 @@
                                                   "selector": {
                                                     "type": "string",
                                                     "description": "Selector of the element to screenshot."
+                                                  },
+                                                  "elementId": {
+                                                    "type": "string",
+                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementTestId": {
+                                                    "type": "string",
+                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementClass": {
+                                                    "oneOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    ],
+                                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                  },
+                                                  "elementAttribute": {
+                                                    "type": "object",
+                                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                    "additionalProperties": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "number"
+                                                        },
+                                                        {
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "elementAltText": {
+                                                    "type": "string",
+                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                   },
                                                   "padding": {
                                                     "anyOf": [
@@ -9593,6 +11517,31 @@
                                                       "required": [
                                                         "elementText"
                                                       ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementId"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementTestId"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementClass"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementAttribute"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementAltText"
+                                                      ]
                                                     }
                                                   ],
                                                   "properties": {
@@ -9603,6 +11552,49 @@
                                                     "selector": {
                                                       "type": "string",
                                                       "description": "Selector of the element to screenshot."
+                                                    },
+                                                    "elementId": {
+                                                      "type": "string",
+                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementTestId": {
+                                                      "type": "string",
+                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementClass": {
+                                                      "oneOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      ],
+                                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                    },
+                                                    "elementAttribute": {
+                                                      "type": "object",
+                                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                      "additionalProperties": {
+                                                        "oneOf": [
+                                                          {
+                                                            "type": "string"
+                                                          },
+                                                          {
+                                                            "type": "number"
+                                                          },
+                                                          {
+                                                            "type": "boolean"
+                                                          }
+                                                        ]
+                                                      }
+                                                    },
+                                                    "elementAltText": {
+                                                      "type": "string",
+                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "padding": {
                                                       "anyOf": [
@@ -9660,6 +11652,31 @@
                                               "required": [
                                                 "elementText"
                                               ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementTestId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementClass"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAttribute"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAltText"
+                                              ]
                                             }
                                           ],
                                           "properties": {
@@ -9670,6 +11687,49 @@
                                             "selector": {
                                               "type": "string",
                                               "description": "Selector of the element to screenshot."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "oneOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "oneOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAltText": {
+                                              "type": "string",
+                                              "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "padding": {
                                               "anyOf": [
