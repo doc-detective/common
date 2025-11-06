@@ -1212,7 +1212,7 @@
                                                       },
                                                       {
                                                         "required": [
-                                                          "elementAltText"
+                                                          "elementAria"
                                                         ]
                                                       }
                                                     ],
@@ -1273,9 +1273,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       }
                                                     }
                                                   },
@@ -1335,7 +1335,7 @@
                                                         },
                                                         {
                                                           "required": [
-                                                            "elementAltText"
+                                                            "elementAria"
                                                           ]
                                                         }
                                                       ],
@@ -1396,9 +1396,9 @@
                                                             ]
                                                           }
                                                         },
-                                                        "elementAltText": {
+                                                        "elementAria": {
                                                           "type": "string",
-                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                         }
                                                       }
                                                     }
@@ -1535,7 +1535,7 @@
                                                       },
                                                       {
                                                         "required": [
-                                                          "elementAltText"
+                                                          "elementAria"
                                                         ]
                                                       }
                                                     ],
@@ -1588,9 +1588,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       },
                                                       "timeout": {
                                                         "type": "integer",
@@ -1651,7 +1651,7 @@
                                                                   },
                                                                   {
                                                                     "required": [
-                                                                      "elementAltText"
+                                                                      "elementAria"
                                                                     ]
                                                                   }
                                                                 ],
@@ -1712,9 +1712,9 @@
                                                                       ]
                                                                     }
                                                                   },
-                                                                  "elementAltText": {
+                                                                  "elementAria": {
                                                                     "type": "string",
-                                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                   }
                                                                 }
                                                               },
@@ -1774,7 +1774,7 @@
                                                                     },
                                                                     {
                                                                       "required": [
-                                                                        "elementAltText"
+                                                                        "elementAria"
                                                                       ]
                                                                     }
                                                                   ],
@@ -1835,9 +1835,9 @@
                                                                         ]
                                                                       }
                                                                     },
-                                                                    "elementAltText": {
+                                                                    "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                     }
                                                                   }
                                                                 }
@@ -1976,9 +1976,9 @@
                                                                       ]
                                                                     }
                                                                   },
-                                                                  "elementAltText": {
+                                                                  "elementAria": {
                                                                     "type": "string",
-                                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                   }
                                                                 },
                                                                 "required": [
@@ -2083,9 +2083,9 @@
                                                                         ]
                                                                       }
                                                                     },
-                                                                    "elementAltText": {
+                                                                    "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                     }
                                                                   },
                                                                   "required": [
@@ -2179,7 +2179,7 @@
                                                         },
                                                         {
                                                           "required": [
-                                                            "elementAltText"
+                                                            "elementAria"
                                                           ]
                                                         }
                                                       ],
@@ -2232,9 +2232,9 @@
                                                             ]
                                                           }
                                                         },
-                                                        "elementAltText": {
+                                                        "elementAria": {
                                                           "type": "string",
-                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                         },
                                                         "timeout": {
                                                           "type": "integer",
@@ -2295,7 +2295,7 @@
                                                                     },
                                                                     {
                                                                       "required": [
-                                                                        "elementAltText"
+                                                                        "elementAria"
                                                                       ]
                                                                     }
                                                                   ],
@@ -2356,9 +2356,9 @@
                                                                         ]
                                                                       }
                                                                     },
-                                                                    "elementAltText": {
+                                                                    "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                     }
                                                                   }
                                                                 },
@@ -2418,7 +2418,7 @@
                                                                       },
                                                                       {
                                                                         "required": [
-                                                                          "elementAltText"
+                                                                          "elementAria"
                                                                         ]
                                                                       }
                                                                     ],
@@ -2479,9 +2479,9 @@
                                                                           ]
                                                                         }
                                                                       },
-                                                                      "elementAltText": {
+                                                                      "elementAria": {
                                                                         "type": "string",
-                                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                       }
                                                                     }
                                                                   }
@@ -2620,9 +2620,9 @@
                                                                         ]
                                                                       }
                                                                     },
-                                                                    "elementAltText": {
+                                                                    "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                     }
                                                                   },
                                                                   "required": [
@@ -2727,9 +2727,9 @@
                                                                           ]
                                                                         }
                                                                       },
-                                                                      "elementAltText": {
+                                                                      "elementAria": {
                                                                         "type": "string",
-                                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                       }
                                                                     },
                                                                     "required": [
@@ -4750,9 +4750,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       }
                                                     },
                                                     "required": [
@@ -4857,9 +4857,9 @@
                                                             ]
                                                           }
                                                         },
-                                                        "elementAltText": {
+                                                        "elementAria": {
                                                           "type": "string",
-                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                         }
                                                       },
                                                       "required": [
@@ -5062,7 +5062,7 @@
                                                               },
                                                               {
                                                                 "required": [
-                                                                  "elementAltText"
+                                                                  "elementAria"
                                                                 ]
                                                               }
                                                             ],
@@ -5114,9 +5114,9 @@
                                                                   ]
                                                                 }
                                                               },
-                                                              "elementAltText": {
+                                                              "elementAria": {
                                                                 "type": "string",
-                                                                "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                               },
                                                               "padding": {
                                                                 "anyOf": [
@@ -5258,7 +5258,7 @@
                                                                 },
                                                                 {
                                                                   "required": [
-                                                                    "elementAltText"
+                                                                    "elementAria"
                                                                   ]
                                                                 }
                                                               ],
@@ -5310,9 +5310,9 @@
                                                                     ]
                                                                   }
                                                                 },
-                                                                "elementAltText": {
+                                                                "elementAria": {
                                                                   "type": "string",
-                                                                  "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                                 },
                                                                 "padding": {
                                                                   "anyOf": [
@@ -5393,7 +5393,7 @@
                                                         },
                                                         {
                                                           "required": [
-                                                            "elementAltText"
+                                                            "elementAria"
                                                           ]
                                                         }
                                                       ],
@@ -5445,9 +5445,9 @@
                                                             ]
                                                           }
                                                         },
-                                                        "elementAltText": {
+                                                        "elementAria": {
                                                           "type": "string",
-                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                         },
                                                         "padding": {
                                                           "anyOf": [
@@ -7478,7 +7478,7 @@
                                         },
                                         {
                                           "required": [
-                                            "elementAltText"
+                                            "elementAria"
                                           ]
                                         }
                                       ],
@@ -7539,9 +7539,9 @@
                                             ]
                                           }
                                         },
-                                        "elementAltText": {
+                                        "elementAria": {
                                           "type": "string",
-                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                         }
                                       }
                                     },
@@ -7601,7 +7601,7 @@
                                           },
                                           {
                                             "required": [
-                                              "elementAltText"
+                                              "elementAria"
                                             ]
                                           }
                                         ],
@@ -7662,9 +7662,9 @@
                                               ]
                                             }
                                           },
-                                          "elementAltText": {
+                                          "elementAria": {
                                             "type": "string",
-                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                           }
                                         }
                                       }
@@ -7801,7 +7801,7 @@
                                         },
                                         {
                                           "required": [
-                                            "elementAltText"
+                                            "elementAria"
                                           ]
                                         }
                                       ],
@@ -7854,9 +7854,9 @@
                                             ]
                                           }
                                         },
-                                        "elementAltText": {
+                                        "elementAria": {
                                           "type": "string",
-                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                         },
                                         "timeout": {
                                           "type": "integer",
@@ -7917,7 +7917,7 @@
                                                     },
                                                     {
                                                       "required": [
-                                                        "elementAltText"
+                                                        "elementAria"
                                                       ]
                                                     }
                                                   ],
@@ -7978,9 +7978,9 @@
                                                         ]
                                                       }
                                                     },
-                                                    "elementAltText": {
+                                                    "elementAria": {
                                                       "type": "string",
-                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                     }
                                                   }
                                                 },
@@ -8040,7 +8040,7 @@
                                                       },
                                                       {
                                                         "required": [
-                                                          "elementAltText"
+                                                          "elementAria"
                                                         ]
                                                       }
                                                     ],
@@ -8101,9 +8101,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       }
                                                     }
                                                   }
@@ -8242,9 +8242,9 @@
                                                         ]
                                                       }
                                                     },
-                                                    "elementAltText": {
+                                                    "elementAria": {
                                                       "type": "string",
-                                                      "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                     }
                                                   },
                                                   "required": [
@@ -8349,9 +8349,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       }
                                                     },
                                                     "required": [
@@ -8445,7 +8445,7 @@
                                           },
                                           {
                                             "required": [
-                                              "elementAltText"
+                                              "elementAria"
                                             ]
                                           }
                                         ],
@@ -8498,9 +8498,9 @@
                                               ]
                                             }
                                           },
-                                          "elementAltText": {
+                                          "elementAria": {
                                             "type": "string",
-                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                           },
                                           "timeout": {
                                             "type": "integer",
@@ -8561,7 +8561,7 @@
                                                       },
                                                       {
                                                         "required": [
-                                                          "elementAltText"
+                                                          "elementAria"
                                                         ]
                                                       }
                                                     ],
@@ -8622,9 +8622,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       }
                                                     }
                                                   },
@@ -8684,7 +8684,7 @@
                                                         },
                                                         {
                                                           "required": [
-                                                            "elementAltText"
+                                                            "elementAria"
                                                           ]
                                                         }
                                                       ],
@@ -8745,9 +8745,9 @@
                                                             ]
                                                           }
                                                         },
-                                                        "elementAltText": {
+                                                        "elementAria": {
                                                           "type": "string",
-                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                         }
                                                       }
                                                     }
@@ -8886,9 +8886,9 @@
                                                           ]
                                                         }
                                                       },
-                                                      "elementAltText": {
+                                                      "elementAria": {
                                                         "type": "string",
-                                                        "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                       }
                                                     },
                                                     "required": [
@@ -8993,9 +8993,9 @@
                                                             ]
                                                           }
                                                         },
-                                                        "elementAltText": {
+                                                        "elementAria": {
                                                           "type": "string",
-                                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                         }
                                                       },
                                                       "required": [
@@ -11016,9 +11016,9 @@
                                             ]
                                           }
                                         },
-                                        "elementAltText": {
+                                        "elementAria": {
                                           "type": "string",
-                                          "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                         }
                                       },
                                       "required": [
@@ -11123,9 +11123,9 @@
                                               ]
                                             }
                                           },
-                                          "elementAltText": {
+                                          "elementAria": {
                                             "type": "string",
-                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                           }
                                         },
                                         "required": [
@@ -11328,7 +11328,7 @@
                                                 },
                                                 {
                                                   "required": [
-                                                    "elementAltText"
+                                                    "elementAria"
                                                   ]
                                                 }
                                               ],
@@ -11380,9 +11380,9 @@
                                                     ]
                                                   }
                                                 },
-                                                "elementAltText": {
+                                                "elementAria": {
                                                   "type": "string",
-                                                  "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                 },
                                                 "padding": {
                                                   "anyOf": [
@@ -11524,7 +11524,7 @@
                                                   },
                                                   {
                                                     "required": [
-                                                      "elementAltText"
+                                                      "elementAria"
                                                     ]
                                                   }
                                                 ],
@@ -11576,9 +11576,9 @@
                                                       ]
                                                     }
                                                   },
-                                                  "elementAltText": {
+                                                  "elementAria": {
                                                     "type": "string",
-                                                    "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                                   },
                                                   "padding": {
                                                     "anyOf": [
@@ -11659,7 +11659,7 @@
                                           },
                                           {
                                             "required": [
-                                              "elementAltText"
+                                              "elementAria"
                                             ]
                                           }
                                         ],
@@ -11711,9 +11711,9 @@
                                               ]
                                             }
                                           },
-                                          "elementAltText": {
+                                          "elementAria": {
                                             "type": "string",
-                                            "description": "Alt text attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
                                           },
                                           "padding": {
                                             "anyOf": [
