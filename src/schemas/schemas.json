@@ -3523,6 +3523,52 @@
                                                       "request": {
                                                         "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                                       }
+                                                    },
+                                                    {
+                                                      "url": "https://api.example.com/users/123",
+                                                      "response": {
+                                                        "required": [
+                                                          "id",
+                                                          "email",
+                                                          "createdAt"
+                                                        ]
+                                                      }
+                                                    },
+                                                    {
+                                                      "url": "https://api.example.com/users/123",
+                                                      "response": {
+                                                        "required": [
+                                                          "user.profile.name",
+                                                          "user.profile.avatar",
+                                                          "user.settings.notifications"
+                                                        ]
+                                                      }
+                                                    },
+                                                    {
+                                                      "url": "https://api.example.com/orders",
+                                                      "response": {
+                                                        "required": [
+                                                          "orders[0].id",
+                                                          "orders[0].total",
+                                                          "orders[0].items[0].productId"
+                                                        ]
+                                                      }
+                                                    },
+                                                    {
+                                                      "url": "https://api.example.com/users",
+                                                      "response": {
+                                                        "required": [
+                                                          "sessionToken",
+                                                          "expiresAt",
+                                                          "user.id"
+                                                        ],
+                                                        "body": {
+                                                          "status": "success",
+                                                          "user": {
+                                                            "role": "admin"
+                                                          }
+                                                        }
+                                                      }
                                                     }
                                                   ]
                                                 }
@@ -8775,6 +8821,52 @@
                                         "request": {
                                           "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                         }
+                                      },
+                                      {
+                                        "url": "https://api.example.com/users/123",
+                                        "response": {
+                                          "required": [
+                                            "id",
+                                            "email",
+                                            "createdAt"
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "url": "https://api.example.com/users/123",
+                                        "response": {
+                                          "required": [
+                                            "user.profile.name",
+                                            "user.profile.avatar",
+                                            "user.settings.notifications"
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "url": "https://api.example.com/orders",
+                                        "response": {
+                                          "required": [
+                                            "orders[0].id",
+                                            "orders[0].total",
+                                            "orders[0].items[0].productId"
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "url": "https://api.example.com/users",
+                                        "response": {
+                                          "required": [
+                                            "sessionToken",
+                                            "expiresAt",
+                                            "user.id"
+                                          ],
+                                          "body": {
+                                            "status": "success",
+                                            "user": {
+                                              "role": "admin"
+                                            }
+                                          }
+                                        }
                                       }
                                     ]
                                   }
@@ -13249,6 +13341,52 @@
         "request": {
           "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
         }
+      },
+      {
+        "url": "https://api.example.com/users/123",
+        "response": {
+          "required": [
+            "id",
+            "email",
+            "createdAt"
+          ]
+        }
+      },
+      {
+        "url": "https://api.example.com/users/123",
+        "response": {
+          "required": [
+            "user.profile.name",
+            "user.profile.avatar",
+            "user.settings.notifications"
+          ]
+        }
+      },
+      {
+        "url": "https://api.example.com/orders",
+        "response": {
+          "required": [
+            "orders[0].id",
+            "orders[0].total",
+            "orders[0].items[0].productId"
+          ]
+        }
+      },
+      {
+        "url": "https://api.example.com/users",
+        "response": {
+          "required": [
+            "sessionToken",
+            "expiresAt",
+            "user.id"
+          ],
+          "body": {
+            "status": "success",
+            "user": {
+              "role": "admin"
+            }
+          }
+        }
       }
     ]
   },
@@ -16790,6 +16928,52 @@
                                                           "method": "post",
                                                           "request": {
                                                             "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                                          }
+                                                        },
+                                                        {
+                                                          "url": "https://api.example.com/users/123",
+                                                          "response": {
+                                                            "required": [
+                                                              "id",
+                                                              "email",
+                                                              "createdAt"
+                                                            ]
+                                                          }
+                                                        },
+                                                        {
+                                                          "url": "https://api.example.com/users/123",
+                                                          "response": {
+                                                            "required": [
+                                                              "user.profile.name",
+                                                              "user.profile.avatar",
+                                                              "user.settings.notifications"
+                                                            ]
+                                                          }
+                                                        },
+                                                        {
+                                                          "url": "https://api.example.com/orders",
+                                                          "response": {
+                                                            "required": [
+                                                              "orders[0].id",
+                                                              "orders[0].total",
+                                                              "orders[0].items[0].productId"
+                                                            ]
+                                                          }
+                                                        },
+                                                        {
+                                                          "url": "https://api.example.com/users",
+                                                          "response": {
+                                                            "required": [
+                                                              "sessionToken",
+                                                              "expiresAt",
+                                                              "user.id"
+                                                            ],
+                                                            "body": {
+                                                              "status": "success",
+                                                              "user": {
+                                                                "role": "admin"
+                                                              }
+                                                            }
                                                           }
                                                         }
                                                       ]
@@ -22042,6 +22226,52 @@
                                             "method": "post",
                                             "request": {
                                               "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/users/123",
+                                            "response": {
+                                              "required": [
+                                                "id",
+                                                "email",
+                                                "createdAt"
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/users/123",
+                                            "response": {
+                                              "required": [
+                                                "user.profile.name",
+                                                "user.profile.avatar",
+                                                "user.settings.notifications"
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/orders",
+                                            "response": {
+                                              "required": [
+                                                "orders[0].id",
+                                                "orders[0].total",
+                                                "orders[0].items[0].productId"
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/users",
+                                            "response": {
+                                              "required": [
+                                                "sessionToken",
+                                                "expiresAt",
+                                                "user.id"
+                                              ],
+                                              "body": {
+                                                "status": "success",
+                                                "user": {
+                                                  "role": "admin"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -28068,6 +28298,52 @@
                                               "request": {
                                                 "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                               }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/users/123",
+                                              "response": {
+                                                "required": [
+                                                  "id",
+                                                  "email",
+                                                  "createdAt"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/users/123",
+                                              "response": {
+                                                "required": [
+                                                  "user.profile.name",
+                                                  "user.profile.avatar",
+                                                  "user.settings.notifications"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/orders",
+                                              "response": {
+                                                "required": [
+                                                  "orders[0].id",
+                                                  "orders[0].total",
+                                                  "orders[0].items[0].productId"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/users",
+                                              "response": {
+                                                "required": [
+                                                  "sessionToken",
+                                                  "expiresAt",
+                                                  "user.id"
+                                                ],
+                                                "body": {
+                                                  "status": "success",
+                                                  "user": {
+                                                    "role": "admin"
+                                                  }
+                                                }
+                                              }
                                             }
                                           ]
                                         }
@@ -32904,6 +33180,52 @@
                                                     "method": "post",
                                                     "request": {
                                                       "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/users/123",
+                                                    "response": {
+                                                      "required": [
+                                                        "id",
+                                                        "email",
+                                                        "createdAt"
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/users/123",
+                                                    "response": {
+                                                      "required": [
+                                                        "user.profile.name",
+                                                        "user.profile.avatar",
+                                                        "user.settings.notifications"
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/orders",
+                                                    "response": {
+                                                      "required": [
+                                                        "orders[0].id",
+                                                        "orders[0].total",
+                                                        "orders[0].items[0].productId"
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/users",
+                                                    "response": {
+                                                      "required": [
+                                                        "sessionToken",
+                                                        "expiresAt",
+                                                        "user.id"
+                                                      ],
+                                                      "body": {
+                                                        "status": "success",
+                                                        "user": {
+                                                          "role": "admin"
+                                                        }
+                                                      }
                                                     }
                                                   }
                                                 ]
@@ -39452,6 +39774,52 @@
                                               "request": {
                                                 "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                               }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/users/123",
+                                              "response": {
+                                                "required": [
+                                                  "id",
+                                                  "email",
+                                                  "createdAt"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/users/123",
+                                              "response": {
+                                                "required": [
+                                                  "user.profile.name",
+                                                  "user.profile.avatar",
+                                                  "user.settings.notifications"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/orders",
+                                              "response": {
+                                                "required": [
+                                                  "orders[0].id",
+                                                  "orders[0].total",
+                                                  "orders[0].items[0].productId"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "url": "https://api.example.com/users",
+                                              "response": {
+                                                "required": [
+                                                  "sessionToken",
+                                                  "expiresAt",
+                                                  "user.id"
+                                                ],
+                                                "body": {
+                                                  "status": "success",
+                                                  "user": {
+                                                    "role": "admin"
+                                                  }
+                                                }
+                                              }
                                             }
                                           ]
                                         }
@@ -44288,6 +44656,52 @@
                                                     "method": "post",
                                                     "request": {
                                                       "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/users/123",
+                                                    "response": {
+                                                      "required": [
+                                                        "id",
+                                                        "email",
+                                                        "createdAt"
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/users/123",
+                                                    "response": {
+                                                      "required": [
+                                                        "user.profile.name",
+                                                        "user.profile.avatar",
+                                                        "user.settings.notifications"
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/orders",
+                                                    "response": {
+                                                      "required": [
+                                                        "orders[0].id",
+                                                        "orders[0].total",
+                                                        "orders[0].items[0].productId"
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    "url": "https://api.example.com/users",
+                                                    "response": {
+                                                      "required": [
+                                                        "sessionToken",
+                                                        "expiresAt",
+                                                        "user.id"
+                                                      ],
+                                                      "body": {
+                                                        "status": "success",
+                                                        "user": {
+                                                          "role": "admin"
+                                                        }
+                                                      }
                                                     }
                                                   }
                                                 ]
@@ -51619,6 +52033,52 @@
                                     "request": {
                                       "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                                     }
+                                  },
+                                  {
+                                    "url": "https://api.example.com/users/123",
+                                    "response": {
+                                      "required": [
+                                        "id",
+                                        "email",
+                                        "createdAt"
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "url": "https://api.example.com/users/123",
+                                    "response": {
+                                      "required": [
+                                        "user.profile.name",
+                                        "user.profile.avatar",
+                                        "user.settings.notifications"
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "url": "https://api.example.com/orders",
+                                    "response": {
+                                      "required": [
+                                        "orders[0].id",
+                                        "orders[0].total",
+                                        "orders[0].items[0].productId"
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "url": "https://api.example.com/users",
+                                    "response": {
+                                      "required": [
+                                        "sessionToken",
+                                        "expiresAt",
+                                        "user.id"
+                                      ],
+                                      "body": {
+                                        "status": "success",
+                                        "user": {
+                                          "role": "admin"
+                                        }
+                                      }
+                                    }
                                   }
                                 ]
                               }
@@ -56455,6 +56915,52 @@
                                           "method": "post",
                                           "request": {
                                             "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/users/123",
+                                          "response": {
+                                            "required": [
+                                              "id",
+                                              "email",
+                                              "createdAt"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/users/123",
+                                          "response": {
+                                            "required": [
+                                              "user.profile.name",
+                                              "user.profile.avatar",
+                                              "user.settings.notifications"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/orders",
+                                          "response": {
+                                            "required": [
+                                              "orders[0].id",
+                                              "orders[0].total",
+                                              "orders[0].items[0].productId"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/users",
+                                          "response": {
+                                            "required": [
+                                              "sessionToken",
+                                              "expiresAt",
+                                              "user.id"
+                                            ],
+                                            "body": {
+                                              "status": "success",
+                                              "user": {
+                                                "role": "admin"
+                                              }
+                                            }
                                           }
                                         }
                                       ]
@@ -61572,6 +62078,52 @@
                     "method": "post",
                     "request": {
                       "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                    }
+                  },
+                  {
+                    "url": "https://api.example.com/users/123",
+                    "response": {
+                      "required": [
+                        "id",
+                        "email",
+                        "createdAt"
+                      ]
+                    }
+                  },
+                  {
+                    "url": "https://api.example.com/users/123",
+                    "response": {
+                      "required": [
+                        "user.profile.name",
+                        "user.profile.avatar",
+                        "user.settings.notifications"
+                      ]
+                    }
+                  },
+                  {
+                    "url": "https://api.example.com/orders",
+                    "response": {
+                      "required": [
+                        "orders[0].id",
+                        "orders[0].total",
+                        "orders[0].items[0].productId"
+                      ]
+                    }
+                  },
+                  {
+                    "url": "https://api.example.com/users",
+                    "response": {
+                      "required": [
+                        "sessionToken",
+                        "expiresAt",
+                        "user.id"
+                      ],
+                      "body": {
+                        "status": "success",
+                        "user": {
+                          "role": "admin"
+                        }
+                      }
                     }
                   }
                 ]
@@ -66765,6 +67317,52 @@
                           "request": {
                             "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                           }
+                        },
+                        {
+                          "url": "https://api.example.com/users/123",
+                          "response": {
+                            "required": [
+                              "id",
+                              "email",
+                              "createdAt"
+                            ]
+                          }
+                        },
+                        {
+                          "url": "https://api.example.com/users/123",
+                          "response": {
+                            "required": [
+                              "user.profile.name",
+                              "user.profile.avatar",
+                              "user.settings.notifications"
+                            ]
+                          }
+                        },
+                        {
+                          "url": "https://api.example.com/orders",
+                          "response": {
+                            "required": [
+                              "orders[0].id",
+                              "orders[0].total",
+                              "orders[0].items[0].productId"
+                            ]
+                          }
+                        },
+                        {
+                          "url": "https://api.example.com/users",
+                          "response": {
+                            "required": [
+                              "sessionToken",
+                              "expiresAt",
+                              "user.id"
+                            ],
+                            "body": {
+                              "status": "success",
+                              "user": {
+                                "role": "admin"
+                              }
+                            }
+                          }
                         }
                       ]
                     }
@@ -71601,6 +72199,52 @@
                                 "method": "post",
                                 "request": {
                                   "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                }
+                              },
+                              {
+                                "url": "https://api.example.com/users/123",
+                                "response": {
+                                  "required": [
+                                    "id",
+                                    "email",
+                                    "createdAt"
+                                  ]
+                                }
+                              },
+                              {
+                                "url": "https://api.example.com/users/123",
+                                "response": {
+                                  "required": [
+                                    "user.profile.name",
+                                    "user.profile.avatar",
+                                    "user.settings.notifications"
+                                  ]
+                                }
+                              },
+                              {
+                                "url": "https://api.example.com/orders",
+                                "response": {
+                                  "required": [
+                                    "orders[0].id",
+                                    "orders[0].total",
+                                    "orders[0].items[0].productId"
+                                  ]
+                                }
+                              },
+                              {
+                                "url": "https://api.example.com/users",
+                                "response": {
+                                  "required": [
+                                    "sessionToken",
+                                    "expiresAt",
+                                    "user.id"
+                                  ],
+                                  "body": {
+                                    "status": "success",
+                                    "user": {
+                                      "role": "admin"
+                                    }
+                                  }
                                 }
                               }
                             ]
