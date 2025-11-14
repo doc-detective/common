@@ -140,6 +140,11 @@ async function resolvePaths({
     pathProperties = specPaths;
   }
 
+  // If the object is null or empty, return it as is
+  if (object === null || Object.keys(object).length === 0) {
+    return object;
+  }
+
   for (const property of Object.keys(object)) {
     // If the property is an array, recursively call resolvePaths for each item in the array
     if (Array.isArray(object[property])) {
