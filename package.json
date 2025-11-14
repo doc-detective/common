@@ -20,17 +20,17 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
-    "chai": "^6.2.0",
-    "mocha": "^11.7.4",
+    "chai": "^6.2.1",
+    "mocha": "^11.7.5",
     "sinon": "^21.0.0"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^14.2.1",
+    "@apidevtools/json-schema-ref-parser": "^15.1.1",
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
-    "axios": "^1.13.1",
+    "axios": "^1.13.2",
     "yaml": "^2.8.1"
   }
 }
