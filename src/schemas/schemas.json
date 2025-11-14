@@ -2954,7 +2954,7 @@
                                                             },
                                                             "required": {
                                                               "type": "array",
-                                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                               "items": {
                                                                 "type": "string"
                                                               },
@@ -3353,7 +3353,7 @@
                                                               },
                                                               "required": {
                                                                 "type": "array",
-                                                                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                                 "items": {
                                                                   "type": "string"
                                                                 },
@@ -9209,7 +9209,7 @@
                                               },
                                               "required": {
                                                 "type": "array",
-                                                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                 "items": {
                                                   "type": "string"
                                                 },
@@ -9608,7 +9608,7 @@
                                                 },
                                                 "required": {
                                                   "type": "array",
-                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                   "items": {
                                                     "type": "string"
                                                   },
@@ -15134,7 +15134,7 @@
               },
               "required": {
                 "type": "array",
-                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                 "items": {
                   "type": "string"
                 },
@@ -15533,7 +15533,7 @@
                 },
                 "required": {
                   "type": "array",
-                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                   "items": {
                     "type": "string"
                   },
@@ -18738,7 +18738,7 @@
                                                                 },
                                                                 "required": {
                                                                   "type": "array",
-                                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                                   "items": {
                                                                     "type": "string"
                                                                   },
@@ -19137,7 +19137,7 @@
                                                                   },
                                                                   "required": {
                                                                     "type": "array",
-                                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                                     "items": {
                                                                       "type": "string"
                                                                     },
@@ -24993,7 +24993,7 @@
                                                   },
                                                   "required": {
                                                     "type": "array",
-                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                     "items": {
                                                       "type": "string"
                                                     },
@@ -25392,7 +25392,7 @@
                                                     },
                                                     "required": {
                                                       "type": "array",
-                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                       "items": {
                                                         "type": "string"
                                                       },
@@ -32017,7 +32017,7 @@
                                                     },
                                                     "required": {
                                                       "type": "array",
-                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                       "items": {
                                                         "type": "string"
                                                       },
@@ -32416,7 +32416,7 @@
                                                       },
                                                       "required": {
                                                         "type": "array",
-                                                        "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                        "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                         "items": {
                                                           "type": "string"
                                                         },
@@ -37841,7 +37841,7 @@
                                                           },
                                                           "required": {
                                                             "type": "array",
-                                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                             "items": {
                                                               "type": "string"
                                                             },
@@ -38240,7 +38240,7 @@
                                                             },
                                                             "required": {
                                                               "type": "array",
-                                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                               "items": {
                                                                 "type": "string"
                                                               },
@@ -45375,7 +45375,7 @@
                                                     },
                                                     "required": {
                                                       "type": "array",
-                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                       "items": {
                                                         "type": "string"
                                                       },
@@ -45774,7 +45774,7 @@
                                                       },
                                                       "required": {
                                                         "type": "array",
-                                                        "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                        "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                         "items": {
                                                           "type": "string"
                                                         },
@@ -51199,7 +51199,7 @@
                                                           },
                                                           "required": {
                                                             "type": "array",
-                                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                             "items": {
                                                               "type": "string"
                                                             },
@@ -51598,7 +51598,7 @@
                                                             },
                                                             "required": {
                                                               "type": "array",
-                                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                               "items": {
                                                                 "type": "string"
                                                               },
@@ -59761,7 +59761,7 @@
                                           },
                                           "required": {
                                             "type": "array",
-                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                             "items": {
                                               "type": "string"
                                             },
@@ -60160,7 +60160,7 @@
                                             },
                                             "required": {
                                               "type": "array",
-                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                               "items": {
                                                 "type": "string"
                                               },
@@ -65585,7 +65585,7 @@
                                                 },
                                                 "required": {
                                                   "type": "array",
-                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                   "items": {
                                                     "type": "string"
                                                   },
@@ -65984,7 +65984,7 @@
                                                   },
                                                   "required": {
                                                     "type": "array",
-                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                                     "items": {
                                                       "type": "string"
                                                     },
@@ -71689,7 +71689,7 @@
                           },
                           "required": {
                             "type": "array",
-                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                             "items": {
                               "type": "string"
                             },
@@ -72088,7 +72088,7 @@
                             },
                             "required": {
                               "type": "array",
-                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                              "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                               "items": {
                                 "type": "string"
                               },
@@ -77868,7 +77868,7 @@
                                 },
                                 "required": {
                                   "type": "array",
-                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                   "items": {
                                     "type": "string"
                                   },
@@ -78267,7 +78267,7 @@
                                   },
                                   "required": {
                                     "type": "array",
-                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                     "items": {
                                       "type": "string"
                                     },
@@ -83692,7 +83692,7 @@
                                       },
                                       "required": {
                                         "type": "array",
-                                        "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                        "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                         "items": {
                                           "type": "string"
                                         },
@@ -84091,7 +84091,7 @@
                                         },
                                         "required": {
                                           "type": "array",
-                                          "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields may have any value including null or undefined.",
+                                          "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
                                           "items": {
                                             "type": "string"
                                           },
