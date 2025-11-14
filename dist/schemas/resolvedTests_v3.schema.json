@@ -2702,6 +2702,14 @@
                                                                   }
                                                                 ],
                                                                 "default": {}
+                                                              },
+                                                              "required": {
+                                                                "type": "array",
+                                                                "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                                "items": {
+                                                                  "type": "string"
+                                                                },
+                                                                "default": []
                                                               }
                                                             },
                                                             "title": "Response"
@@ -3093,6 +3101,14 @@
                                                                     }
                                                                   ],
                                                                   "default": {}
+                                                                },
+                                                                "required": {
+                                                                  "type": "array",
+                                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                                  "items": {
+                                                                    "type": "string"
+                                                                  },
+                                                                  "default": []
                                                                 }
                                                               },
                                                               "title": "Response"
@@ -3273,6 +3289,52 @@
                                                         "method": "post",
                                                         "request": {
                                                           "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://api.example.com/users/123",
+                                                        "response": {
+                                                          "required": [
+                                                            "id",
+                                                            "email",
+                                                            "createdAt"
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://api.example.com/users/123",
+                                                        "response": {
+                                                          "required": [
+                                                            "user.profile.name",
+                                                            "user.profile.avatar",
+                                                            "user.settings.notifications"
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://api.example.com/orders",
+                                                        "response": {
+                                                          "required": [
+                                                            "orders[0].id",
+                                                            "orders[0].total",
+                                                            "orders[0].items[0].productId"
+                                                          ]
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://api.example.com/users",
+                                                        "response": {
+                                                          "required": [
+                                                            "sessionToken",
+                                                            "expiresAt",
+                                                            "user.id"
+                                                          ],
+                                                          "body": {
+                                                            "status": "success",
+                                                            "user": {
+                                                              "role": "admin"
+                                                            }
+                                                          }
                                                         }
                                                       }
                                                     ]
@@ -8895,6 +8957,14 @@
                                                     }
                                                   ],
                                                   "default": {}
+                                                },
+                                                "required": {
+                                                  "type": "array",
+                                                  "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                  "items": {
+                                                    "type": "string"
+                                                  },
+                                                  "default": []
                                                 }
                                               },
                                               "title": "Response"
@@ -9286,6 +9356,14 @@
                                                       }
                                                     ],
                                                     "default": {}
+                                                  },
+                                                  "required": {
+                                                    "type": "array",
+                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                    "items": {
+                                                      "type": "string"
+                                                    },
+                                                    "default": []
                                                   }
                                                 },
                                                 "title": "Response"
@@ -9466,6 +9544,52 @@
                                           "method": "post",
                                           "request": {
                                             "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/users/123",
+                                          "response": {
+                                            "required": [
+                                              "id",
+                                              "email",
+                                              "createdAt"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/users/123",
+                                          "response": {
+                                            "required": [
+                                              "user.profile.name",
+                                              "user.profile.avatar",
+                                              "user.settings.notifications"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/orders",
+                                          "response": {
+                                            "required": [
+                                              "orders[0].id",
+                                              "orders[0].total",
+                                              "orders[0].items[0].productId"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "url": "https://api.example.com/users",
+                                          "response": {
+                                            "required": [
+                                              "sessionToken",
+                                              "expiresAt",
+                                              "user.id"
+                                            ],
+                                            "body": {
+                                              "status": "success",
+                                              "user": {
+                                                "role": "admin"
+                                              }
+                                            }
                                           }
                                         }
                                       ]
@@ -15857,6 +15981,14 @@
                                                       }
                                                     ],
                                                     "default": {}
+                                                  },
+                                                  "required": {
+                                                    "type": "array",
+                                                    "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                    "items": {
+                                                      "type": "string"
+                                                    },
+                                                    "default": []
                                                   }
                                                 },
                                                 "title": "Response"
@@ -16248,6 +16380,14 @@
                                                         }
                                                       ],
                                                       "default": {}
+                                                    },
+                                                    "required": {
+                                                      "type": "array",
+                                                      "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                      "items": {
+                                                        "type": "string"
+                                                      },
+                                                      "default": []
                                                     }
                                                   },
                                                   "title": "Response"
@@ -16428,6 +16568,52 @@
                                             "method": "post",
                                             "request": {
                                               "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/users/123",
+                                            "response": {
+                                              "required": [
+                                                "id",
+                                                "email",
+                                                "createdAt"
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/users/123",
+                                            "response": {
+                                              "required": [
+                                                "user.profile.name",
+                                                "user.profile.avatar",
+                                                "user.settings.notifications"
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/orders",
+                                            "response": {
+                                              "required": [
+                                                "orders[0].id",
+                                                "orders[0].total",
+                                                "orders[0].items[0].productId"
+                                              ]
+                                            }
+                                          },
+                                          {
+                                            "url": "https://api.example.com/users",
+                                            "response": {
+                                              "required": [
+                                                "sessionToken",
+                                                "expiresAt",
+                                                "user.id"
+                                              ],
+                                              "body": {
+                                                "status": "success",
+                                                "user": {
+                                                  "role": "admin"
+                                                }
+                                              }
                                             }
                                           }
                                         ]
@@ -21619,6 +21805,14 @@
                                                             }
                                                           ],
                                                           "default": {}
+                                                        },
+                                                        "required": {
+                                                          "type": "array",
+                                                          "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                          "items": {
+                                                            "type": "string"
+                                                          },
+                                                          "default": []
                                                         }
                                                       },
                                                       "title": "Response"
@@ -22010,6 +22204,14 @@
                                                               }
                                                             ],
                                                             "default": {}
+                                                          },
+                                                          "required": {
+                                                            "type": "array",
+                                                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                                                            "items": {
+                                                              "type": "string"
+                                                            },
+                                                            "default": []
                                                           }
                                                         },
                                                         "title": "Response"
@@ -22190,6 +22392,52 @@
                                                   "method": "post",
                                                   "request": {
                                                     "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://api.example.com/users/123",
+                                                  "response": {
+                                                    "required": [
+                                                      "id",
+                                                      "email",
+                                                      "createdAt"
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://api.example.com/users/123",
+                                                  "response": {
+                                                    "required": [
+                                                      "user.profile.name",
+                                                      "user.profile.avatar",
+                                                      "user.settings.notifications"
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://api.example.com/orders",
+                                                  "response": {
+                                                    "required": [
+                                                      "orders[0].id",
+                                                      "orders[0].total",
+                                                      "orders[0].items[0].productId"
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://api.example.com/users",
+                                                  "response": {
+                                                    "required": [
+                                                      "sessionToken",
+                                                      "expiresAt",
+                                                      "user.id"
+                                                    ],
+                                                    "body": {
+                                                      "status": "success",
+                                                      "user": {
+                                                        "role": "admin"
+                                                      }
+                                                    }
                                                   }
                                                 }
                                               ]
