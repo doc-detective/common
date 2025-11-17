@@ -116,7 +116,7 @@
                   "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                 },
                 "elementClass": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "type": "string"
                     },
@@ -133,7 +133,7 @@
                   "type": "object",
                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                   "additionalProperties": {
-                    "oneOf": [
+                    "anyOf": [
                       {
                         "type": "string"
                       },
@@ -312,7 +312,7 @@
                     "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                   },
                   "elementClass": {
-                    "oneOf": [
+                    "anyOf": [
                       {
                         "type": "string"
                       },
@@ -329,7 +329,7 @@
                     "type": "object",
                     "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                     "additionalProperties": {
-                      "oneOf": [
+                      "anyOf": [
                         {
                           "type": "string"
                         },
@@ -447,7 +447,7 @@
             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
           },
           "elementClass": {
-            "oneOf": [
+            "anyOf": [
               {
                 "type": "string"
               },
@@ -464,7 +464,7 @@
             "type": "object",
             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
             "additionalProperties": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "type": "string"
                 },

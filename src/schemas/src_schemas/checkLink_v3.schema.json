@@ -53,7 +53,7 @@
               {
                 "type": "array",
                 "items": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "type": "integer"
                     }

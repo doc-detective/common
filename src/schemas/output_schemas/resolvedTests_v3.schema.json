@@ -160,7 +160,7 @@
           "type": "array",
           "description": "Contexts to run the test in. Overrides contexts defined at the config and spec levels.",
           "items": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$schema": "http://json-schema.org/draft-07/schema#",
                 "title": "context",
@@ -1025,7 +1025,7 @@
                                                               {
                                                                 "type": "array",
                                                                 "items": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "integer"
                                                                     }
@@ -1088,7 +1088,7 @@
                                                                 {
                                                                   "type": "array",
                                                                   "items": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "integer"
                                                                       }
@@ -1272,7 +1272,7 @@
                                                             "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -1289,7 +1289,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -1395,7 +1395,7 @@
                                                               "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -1412,7 +1412,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -1587,7 +1587,7 @@
                                                             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -1604,7 +1604,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -1711,7 +1711,7 @@
                                                                         "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                       },
                                                                       "elementClass": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           },
@@ -1728,7 +1728,7 @@
                                                                         "type": "object",
                                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                         "additionalProperties": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             },
@@ -1834,7 +1834,7 @@
                                                                           "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                         },
                                                                         "elementClass": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             },
@@ -1851,7 +1851,7 @@
                                                                           "type": "object",
                                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                           "additionalProperties": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               },
@@ -1921,7 +1921,7 @@
                                                                       {
                                                                         "type": "array",
                                                                         "items": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             }
@@ -1944,7 +1944,7 @@
                                                                           {
                                                                             "type": "array",
                                                                             "items": {
-                                                                              "oneOf": [
+                                                                              "anyOf": [
                                                                                 {
                                                                                   "type": "string"
                                                                                 }
@@ -1975,7 +1975,7 @@
                                                                         "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                       },
                                                                       "elementClass": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           },
@@ -1992,7 +1992,7 @@
                                                                         "type": "object",
                                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                         "additionalProperties": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             },
@@ -2028,7 +2028,7 @@
                                                                         {
                                                                           "type": "array",
                                                                           "items": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               }
@@ -2051,7 +2051,7 @@
                                                                             {
                                                                               "type": "array",
                                                                               "items": {
-                                                                                "oneOf": [
+                                                                                "anyOf": [
                                                                                   {
                                                                                     "type": "string"
                                                                                   }
@@ -2082,7 +2082,7 @@
                                                                           "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                         },
                                                                         "elementClass": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             },
@@ -2099,7 +2099,7 @@
                                                                           "type": "object",
                                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                           "additionalProperties": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               },
@@ -2236,7 +2236,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -2253,7 +2253,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -2360,7 +2360,7 @@
                                                                           "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                         },
                                                                         "elementClass": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             },
@@ -2377,7 +2377,7 @@
                                                                           "type": "object",
                                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                           "additionalProperties": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               },
@@ -2483,7 +2483,7 @@
                                                                             "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                           },
                                                                           "elementClass": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               },
@@ -2500,7 +2500,7 @@
                                                                             "type": "object",
                                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                             "additionalProperties": {
-                                                                              "oneOf": [
+                                                                              "anyOf": [
                                                                                 {
                                                                                   "type": "string"
                                                                                 },
@@ -2570,7 +2570,7 @@
                                                                         {
                                                                           "type": "array",
                                                                           "items": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               }
@@ -2593,7 +2593,7 @@
                                                                             {
                                                                               "type": "array",
                                                                               "items": {
-                                                                                "oneOf": [
+                                                                                "anyOf": [
                                                                                   {
                                                                                     "type": "string"
                                                                                   }
@@ -2624,7 +2624,7 @@
                                                                           "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                         },
                                                                         "elementClass": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             },
@@ -2641,7 +2641,7 @@
                                                                           "type": "object",
                                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                           "additionalProperties": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               },
@@ -2677,7 +2677,7 @@
                                                                           {
                                                                             "type": "array",
                                                                             "items": {
-                                                                              "oneOf": [
+                                                                              "anyOf": [
                                                                                 {
                                                                                   "type": "string"
                                                                                 }
@@ -2700,7 +2700,7 @@
                                                                               {
                                                                                 "type": "array",
                                                                                 "items": {
-                                                                                  "oneOf": [
+                                                                                  "anyOf": [
                                                                                     {
                                                                                       "type": "string"
                                                                                     }
@@ -2731,7 +2731,7 @@
                                                                             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                           },
                                                                           "elementClass": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               },
@@ -2748,7 +2748,7 @@
                                                                             "type": "object",
                                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                             "additionalProperties": {
-                                                                              "oneOf": [
+                                                                              "anyOf": [
                                                                                 {
                                                                                   "type": "string"
                                                                                 },
@@ -2851,6 +2851,19 @@
                                                           ],
                                                           "inputDelay": 100
                                                         }
+                                                      },
+                                                      {
+                                                        "elementId": "/^user-[0-9]+$/",
+                                                        "elementClass": [
+                                                          "admin",
+                                                          "/^level-[1-5]$/"
+                                                        ],
+                                                        "elementAttribute": {
+                                                          "data-active": true,
+                                                          "data-score": "/^[0-9]+$/"
+                                                        },
+                                                        "timeout": 8000,
+                                                        "moveTo": false
                                                       }
                                                     ]
                                                   }
@@ -3320,7 +3333,7 @@
                                                             "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "integer"
                                                                 }
@@ -3719,7 +3732,7 @@
                                                               "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                               "type": "array",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "integer"
                                                                   }
@@ -4180,7 +4193,7 @@
                                                             "type": "array",
                                                             "description": "Arguments for the command.",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -4197,7 +4210,7 @@
                                                             "type": "array",
                                                             "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "integer"
                                                                 }
@@ -4270,7 +4283,7 @@
                                                               "type": "array",
                                                               "description": "Arguments for the command.",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -4287,7 +4300,7 @@
                                                               "type": "array",
                                                               "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "integer"
                                                                   }
@@ -4488,7 +4501,7 @@
                                                             "type": "array",
                                                             "description": "Arguments for the command.",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -4505,7 +4518,7 @@
                                                             "type": "array",
                                                             "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "integer"
                                                                 }
@@ -4579,7 +4592,7 @@
                                                               "type": "array",
                                                               "description": "Arguments for the command.",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -4596,7 +4609,7 @@
                                                               "type": "array",
                                                               "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "integer"
                                                                   }
@@ -4767,7 +4780,7 @@
                                                           {
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -4790,7 +4803,7 @@
                                                               {
                                                                 "type": "array",
                                                                 "items": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     }
@@ -4821,7 +4834,7 @@
                                                             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -4838,7 +4851,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -4874,7 +4887,7 @@
                                                             {
                                                               "type": "array",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -4897,7 +4910,7 @@
                                                                 {
                                                                   "type": "array",
                                                                   "items": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       }
@@ -4928,7 +4941,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -4945,7 +4958,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -5185,7 +5198,7 @@
                                                                     "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementClass": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -5202,7 +5215,7 @@
                                                                     "type": "object",
                                                                     "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                     "additionalProperties": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -5381,7 +5394,7 @@
                                                                       "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementClass": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -5398,7 +5411,7 @@
                                                                       "type": "object",
                                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                       "additionalProperties": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           },
@@ -5516,7 +5529,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -5533,7 +5546,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -7471,7 +7484,7 @@
                                     "type": "array",
                                     "description": "Arguments for the command.",
                                     "items": {
-                                      "oneOf": [
+                                      "anyOf": [
                                         {
                                           "type": "string"
                                         }
@@ -7488,7 +7501,7 @@
                                     "type": "array",
                                     "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                     "items": {
-                                      "oneOf": [
+                                      "anyOf": [
                                         {
                                           "type": "integer"
                                         }
@@ -7561,7 +7574,7 @@
                                       "type": "array",
                                       "description": "Arguments for the command.",
                                       "items": {
-                                        "oneOf": [
+                                        "anyOf": [
                                           {
                                             "type": "string"
                                           }
@@ -7578,7 +7591,7 @@
                                       "type": "array",
                                       "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                       "items": {
-                                        "oneOf": [
+                                        "anyOf": [
                                           {
                                             "type": "integer"
                                           }
@@ -8320,7 +8333,7 @@
                                                 {
                                                   "type": "array",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "integer"
                                                       }
@@ -8383,7 +8396,7 @@
                                                   {
                                                     "type": "array",
                                                     "items": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "integer"
                                                         }
@@ -8567,7 +8580,7 @@
                                               "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "elementClass": {
-                                              "oneOf": [
+                                              "anyOf": [
                                                 {
                                                   "type": "string"
                                                 },
@@ -8584,7 +8597,7 @@
                                               "type": "object",
                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                               "additionalProperties": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -8690,7 +8703,7 @@
                                                 "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -8707,7 +8720,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -8882,7 +8895,7 @@
                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "elementClass": {
-                                              "oneOf": [
+                                              "anyOf": [
                                                 {
                                                   "type": "string"
                                                 },
@@ -8899,7 +8912,7 @@
                                               "type": "object",
                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                               "additionalProperties": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -9006,7 +9019,7 @@
                                                           "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementClass": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -9023,7 +9036,7 @@
                                                           "type": "object",
                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                           "additionalProperties": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -9129,7 +9142,7 @@
                                                             "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -9146,7 +9159,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -9216,7 +9229,7 @@
                                                         {
                                                           "type": "array",
                                                           "items": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               }
@@ -9239,7 +9252,7 @@
                                                             {
                                                               "type": "array",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -9270,7 +9283,7 @@
                                                           "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementClass": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -9287,7 +9300,7 @@
                                                           "type": "object",
                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                           "additionalProperties": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -9323,7 +9336,7 @@
                                                           {
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -9346,7 +9359,7 @@
                                                               {
                                                                 "type": "array",
                                                                 "items": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     }
@@ -9377,7 +9390,7 @@
                                                             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -9394,7 +9407,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -9531,7 +9544,7 @@
                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -9548,7 +9561,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -9655,7 +9668,7 @@
                                                             "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -9672,7 +9685,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -9778,7 +9791,7 @@
                                                               "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -9795,7 +9808,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -9865,7 +9878,7 @@
                                                           {
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -9888,7 +9901,7 @@
                                                               {
                                                                 "type": "array",
                                                                 "items": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     }
@@ -9919,7 +9932,7 @@
                                                             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -9936,7 +9949,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -9972,7 +9985,7 @@
                                                             {
                                                               "type": "array",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -9995,7 +10008,7 @@
                                                                 {
                                                                   "type": "array",
                                                                   "items": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       }
@@ -10026,7 +10039,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -10043,7 +10056,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -10146,6 +10159,19 @@
                                             ],
                                             "inputDelay": 100
                                           }
+                                        },
+                                        {
+                                          "elementId": "/^user-[0-9]+$/",
+                                          "elementClass": [
+                                            "admin",
+                                            "/^level-[1-5]$/"
+                                          ],
+                                          "elementAttribute": {
+                                            "data-active": true,
+                                            "data-score": "/^[0-9]+$/"
+                                          },
+                                          "timeout": 8000,
+                                          "moveTo": false
                                         }
                                       ]
                                     }
@@ -10615,7 +10641,7 @@
                                               "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                               "type": "array",
                                               "items": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "integer"
                                                   }
@@ -11014,7 +11040,7 @@
                                                 "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                 "type": "array",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "integer"
                                                     }
@@ -11475,7 +11501,7 @@
                                               "type": "array",
                                               "description": "Arguments for the command.",
                                               "items": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   }
@@ -11492,7 +11518,7 @@
                                               "type": "array",
                                               "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                               "items": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "integer"
                                                   }
@@ -11565,7 +11591,7 @@
                                                 "type": "array",
                                                 "description": "Arguments for the command.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     }
@@ -11582,7 +11608,7 @@
                                                 "type": "array",
                                                 "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "integer"
                                                     }
@@ -11783,7 +11809,7 @@
                                               "type": "array",
                                               "description": "Arguments for the command.",
                                               "items": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   }
@@ -11800,7 +11826,7 @@
                                               "type": "array",
                                               "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                               "items": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "integer"
                                                   }
@@ -11874,7 +11900,7 @@
                                                 "type": "array",
                                                 "description": "Arguments for the command.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     }
@@ -11891,7 +11917,7 @@
                                                 "type": "array",
                                                 "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "integer"
                                                     }
@@ -12062,7 +12088,7 @@
                                             {
                                               "type": "array",
                                               "items": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   }
@@ -12085,7 +12111,7 @@
                                                 {
                                                   "type": "array",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       }
@@ -12116,7 +12142,7 @@
                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "elementClass": {
-                                              "oneOf": [
+                                              "anyOf": [
                                                 {
                                                   "type": "string"
                                                 },
@@ -12133,7 +12159,7 @@
                                               "type": "object",
                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                               "additionalProperties": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -12169,7 +12195,7 @@
                                               {
                                                 "type": "array",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     }
@@ -12192,7 +12218,7 @@
                                                   {
                                                     "type": "array",
                                                     "items": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "string"
                                                         }
@@ -12223,7 +12249,7 @@
                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -12240,7 +12266,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -12480,7 +12506,7 @@
                                                       "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "elementClass": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "string"
                                                         },
@@ -12497,7 +12523,7 @@
                                                       "type": "object",
                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                       "additionalProperties": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -12676,7 +12702,7 @@
                                                         "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -12693,7 +12719,7 @@
                                                         "type": "object",
                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                         "additionalProperties": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -12811,7 +12837,7 @@
                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -12828,7 +12854,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -14990,7 +15016,7 @@
                 "type": "array",
                 "description": "Contexts to run the test in. Overrides contexts defined at the config and spec levels.",
                 "items": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "$schema": "http://json-schema.org/draft-07/schema#",
                       "title": "context",
@@ -15583,7 +15609,7 @@
                           "type": "array",
                           "description": "Contexts to run the test in. Overrides contexts defined at the config and spec levels.",
                           "items": {
-                            "oneOf": [
+                            "anyOf": [
                               {
                                 "$schema": "http://json-schema.org/draft-07/schema#",
                                 "title": "context",
@@ -16384,7 +16410,7 @@
                                                   {
                                                     "type": "array",
                                                     "items": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "integer"
                                                         }
@@ -16447,7 +16473,7 @@
                                                     {
                                                       "type": "array",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "integer"
                                                           }
@@ -16631,7 +16657,7 @@
                                                 "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -16648,7 +16674,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -16754,7 +16780,7 @@
                                                   "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                 },
                                                 "elementClass": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -16771,7 +16797,7 @@
                                                   "type": "object",
                                                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                   "additionalProperties": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       },
@@ -16946,7 +16972,7 @@
                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -16963,7 +16989,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -17070,7 +17096,7 @@
                                                             "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -17087,7 +17113,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -17193,7 +17219,7 @@
                                                               "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -17210,7 +17236,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -17280,7 +17306,7 @@
                                                           {
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -17303,7 +17329,7 @@
                                                               {
                                                                 "type": "array",
                                                                 "items": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     }
@@ -17334,7 +17360,7 @@
                                                             "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                           },
                                                           "elementClass": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -17351,7 +17377,7 @@
                                                             "type": "object",
                                                             "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                             "additionalProperties": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -17387,7 +17413,7 @@
                                                             {
                                                               "type": "array",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -17410,7 +17436,7 @@
                                                                 {
                                                                   "type": "array",
                                                                   "items": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       }
@@ -17441,7 +17467,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -17458,7 +17484,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -17595,7 +17621,7 @@
                                                   "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                 },
                                                 "elementClass": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -17612,7 +17638,7 @@
                                                   "type": "object",
                                                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                   "additionalProperties": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       },
@@ -17719,7 +17745,7 @@
                                                               "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -17736,7 +17762,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -17842,7 +17868,7 @@
                                                                 "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                               },
                                                               "elementClass": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -17859,7 +17885,7 @@
                                                                 "type": "object",
                                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                 "additionalProperties": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     },
@@ -17929,7 +17955,7 @@
                                                             {
                                                               "type": "array",
                                                               "items": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   }
@@ -17952,7 +17978,7 @@
                                                                 {
                                                                   "type": "array",
                                                                   "items": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       }
@@ -17983,7 +18009,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -18000,7 +18026,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -18036,7 +18062,7 @@
                                                               {
                                                                 "type": "array",
                                                                 "items": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     }
@@ -18059,7 +18085,7 @@
                                                                   {
                                                                     "type": "array",
                                                                     "items": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         }
@@ -18090,7 +18116,7 @@
                                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                               },
                                                               "elementClass": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -18107,7 +18133,7 @@
                                                                 "type": "object",
                                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                 "additionalProperties": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     },
@@ -18210,6 +18236,19 @@
                                               ],
                                               "inputDelay": 100
                                             }
+                                          },
+                                          {
+                                            "elementId": "/^user-[0-9]+$/",
+                                            "elementClass": [
+                                              "admin",
+                                              "/^level-[1-5]$/"
+                                            ],
+                                            "elementAttribute": {
+                                              "data-active": true,
+                                              "data-score": "/^[0-9]+$/"
+                                            },
+                                            "timeout": 8000,
+                                            "moveTo": false
                                           }
                                         ]
                                       }
@@ -18679,7 +18718,7 @@
                                                 "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                 "type": "array",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "integer"
                                                     }
@@ -19078,7 +19117,7 @@
                                                   "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                   "type": "array",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "integer"
                                                       }
@@ -19539,7 +19578,7 @@
                                                 "type": "array",
                                                 "description": "Arguments for the command.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     }
@@ -19556,7 +19595,7 @@
                                                 "type": "array",
                                                 "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "integer"
                                                     }
@@ -19629,7 +19668,7 @@
                                                   "type": "array",
                                                   "description": "Arguments for the command.",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       }
@@ -19646,7 +19685,7 @@
                                                   "type": "array",
                                                   "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "integer"
                                                       }
@@ -19847,7 +19886,7 @@
                                                 "type": "array",
                                                 "description": "Arguments for the command.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     }
@@ -19864,7 +19903,7 @@
                                                 "type": "array",
                                                 "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "integer"
                                                     }
@@ -19938,7 +19977,7 @@
                                                   "type": "array",
                                                   "description": "Arguments for the command.",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       }
@@ -19955,7 +19994,7 @@
                                                   "type": "array",
                                                   "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "integer"
                                                       }
@@ -20126,7 +20165,7 @@
                                               {
                                                 "type": "array",
                                                 "items": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     }
@@ -20149,7 +20188,7 @@
                                                   {
                                                     "type": "array",
                                                     "items": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "string"
                                                         }
@@ -20180,7 +20219,7 @@
                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "elementClass": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                   {
                                                     "type": "string"
                                                   },
@@ -20197,7 +20236,7 @@
                                                 "type": "object",
                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                 "additionalProperties": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -20233,7 +20272,7 @@
                                                 {
                                                   "type": "array",
                                                   "items": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       }
@@ -20256,7 +20295,7 @@
                                                     {
                                                       "type": "array",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           }
@@ -20287,7 +20326,7 @@
                                                   "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                 },
                                                 "elementClass": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -20304,7 +20343,7 @@
                                                   "type": "object",
                                                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                   "additionalProperties": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       },
@@ -20544,7 +20583,7 @@
                                                         "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -20561,7 +20600,7 @@
                                                         "type": "object",
                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                         "additionalProperties": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -20740,7 +20779,7 @@
                                                           "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementClass": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -20757,7 +20796,7 @@
                                                           "type": "object",
                                                           "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                           "additionalProperties": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               },
@@ -20875,7 +20914,7 @@
                                                   "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                 },
                                                 "elementClass": {
-                                                  "oneOf": [
+                                                  "anyOf": [
                                                     {
                                                       "type": "string"
                                                     },
@@ -20892,7 +20931,7 @@
                                                   "type": "object",
                                                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                   "additionalProperties": {
-                                                    "oneOf": [
+                                                    "anyOf": [
                                                       {
                                                         "type": "string"
                                                       },
@@ -23248,7 +23287,7 @@
                                                         {
                                                           "type": "array",
                                                           "items": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "integer"
                                                               }
@@ -23311,7 +23350,7 @@
                                                           {
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "integer"
                                                                 }
@@ -23495,7 +23534,7 @@
                                                       "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "elementClass": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "string"
                                                         },
@@ -23512,7 +23551,7 @@
                                                       "type": "object",
                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                       "additionalProperties": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -23618,7 +23657,7 @@
                                                         "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -23635,7 +23674,7 @@
                                                         "type": "object",
                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                         "additionalProperties": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -23810,7 +23849,7 @@
                                                       "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "elementClass": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "string"
                                                         },
@@ -23827,7 +23866,7 @@
                                                       "type": "object",
                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                       "additionalProperties": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -23934,7 +23973,7 @@
                                                                   "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                 },
                                                                 "elementClass": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     },
@@ -23951,7 +23990,7 @@
                                                                   "type": "object",
                                                                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                   "additionalProperties": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -24057,7 +24096,7 @@
                                                                     "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementClass": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -24074,7 +24113,7 @@
                                                                     "type": "object",
                                                                     "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                     "additionalProperties": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -24144,7 +24183,7 @@
                                                                 {
                                                                   "type": "array",
                                                                   "items": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       }
@@ -24167,7 +24206,7 @@
                                                                     {
                                                                       "type": "array",
                                                                       "items": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           }
@@ -24198,7 +24237,7 @@
                                                                   "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                 },
                                                                 "elementClass": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     },
@@ -24215,7 +24254,7 @@
                                                                   "type": "object",
                                                                   "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                   "additionalProperties": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -24251,7 +24290,7 @@
                                                                   {
                                                                     "type": "array",
                                                                     "items": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         }
@@ -24274,7 +24313,7 @@
                                                                       {
                                                                         "type": "array",
                                                                         "items": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             }
@@ -24305,7 +24344,7 @@
                                                                     "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementClass": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -24322,7 +24361,7 @@
                                                                     "type": "object",
                                                                     "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                     "additionalProperties": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -24459,7 +24498,7 @@
                                                         "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -24476,7 +24515,7 @@
                                                         "type": "object",
                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                         "additionalProperties": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -24583,7 +24622,7 @@
                                                                     "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementClass": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -24600,7 +24639,7 @@
                                                                     "type": "object",
                                                                     "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                     "additionalProperties": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -24706,7 +24745,7 @@
                                                                       "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementClass": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -24723,7 +24762,7 @@
                                                                       "type": "object",
                                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                       "additionalProperties": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           },
@@ -24793,7 +24832,7 @@
                                                                   {
                                                                     "type": "array",
                                                                     "items": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         }
@@ -24816,7 +24855,7 @@
                                                                       {
                                                                         "type": "array",
                                                                         "items": {
-                                                                          "oneOf": [
+                                                                          "anyOf": [
                                                                             {
                                                                               "type": "string"
                                                                             }
@@ -24847,7 +24886,7 @@
                                                                     "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementClass": {
-                                                                    "oneOf": [
+                                                                    "anyOf": [
                                                                       {
                                                                         "type": "string"
                                                                       },
@@ -24864,7 +24903,7 @@
                                                                     "type": "object",
                                                                     "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                     "additionalProperties": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -24900,7 +24939,7 @@
                                                                     {
                                                                       "type": "array",
                                                                       "items": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           }
@@ -24923,7 +24962,7 @@
                                                                         {
                                                                           "type": "array",
                                                                           "items": {
-                                                                            "oneOf": [
+                                                                            "anyOf": [
                                                                               {
                                                                                 "type": "string"
                                                                               }
@@ -24954,7 +24993,7 @@
                                                                       "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementClass": {
-                                                                      "oneOf": [
+                                                                      "anyOf": [
                                                                         {
                                                                           "type": "string"
                                                                         },
@@ -24971,7 +25010,7 @@
                                                                       "type": "object",
                                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                       "additionalProperties": {
-                                                                        "oneOf": [
+                                                                        "anyOf": [
                                                                           {
                                                                             "type": "string"
                                                                           },
@@ -25074,6 +25113,19 @@
                                                     ],
                                                     "inputDelay": 100
                                                   }
+                                                },
+                                                {
+                                                  "elementId": "/^user-[0-9]+$/",
+                                                  "elementClass": [
+                                                    "admin",
+                                                    "/^level-[1-5]$/"
+                                                  ],
+                                                  "elementAttribute": {
+                                                    "data-active": true,
+                                                    "data-score": "/^[0-9]+$/"
+                                                  },
+                                                  "timeout": 8000,
+                                                  "moveTo": false
                                                 }
                                               ]
                                             }
@@ -25543,7 +25595,7 @@
                                                       "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                       "type": "array",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "integer"
                                                           }
@@ -25942,7 +25994,7 @@
                                                         "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                                                         "type": "array",
                                                         "items": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "integer"
                                                             }
@@ -26403,7 +26455,7 @@
                                                       "type": "array",
                                                       "description": "Arguments for the command.",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           }
@@ -26420,7 +26472,7 @@
                                                       "type": "array",
                                                       "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "integer"
                                                           }
@@ -26493,7 +26545,7 @@
                                                         "type": "array",
                                                         "description": "Arguments for the command.",
                                                         "items": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             }
@@ -26510,7 +26562,7 @@
                                                         "type": "array",
                                                         "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                         "items": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "integer"
                                                             }
@@ -26711,7 +26763,7 @@
                                                       "type": "array",
                                                       "description": "Arguments for the command.",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           }
@@ -26728,7 +26780,7 @@
                                                       "type": "array",
                                                       "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "integer"
                                                           }
@@ -26802,7 +26854,7 @@
                                                         "type": "array",
                                                         "description": "Arguments for the command.",
                                                         "items": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             }
@@ -26819,7 +26871,7 @@
                                                         "type": "array",
                                                         "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                                                         "items": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "integer"
                                                             }
@@ -26990,7 +27042,7 @@
                                                     {
                                                       "type": "array",
                                                       "items": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           }
@@ -27013,7 +27065,7 @@
                                                         {
                                                           "type": "array",
                                                           "items": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                               {
                                                                 "type": "string"
                                                               }
@@ -27044,7 +27096,7 @@
                                                       "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "elementClass": {
-                                                      "oneOf": [
+                                                      "anyOf": [
                                                         {
                                                           "type": "string"
                                                         },
@@ -27061,7 +27113,7 @@
                                                       "type": "object",
                                                       "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                       "additionalProperties": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -27097,7 +27149,7 @@
                                                       {
                                                         "type": "array",
                                                         "items": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             }
@@ -27120,7 +27172,7 @@
                                                           {
                                                             "type": "array",
                                                             "items": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 }
@@ -27151,7 +27203,7 @@
                                                         "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -27168,7 +27220,7 @@
                                                         "type": "object",
                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                         "additionalProperties": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },
@@ -27408,7 +27460,7 @@
                                                               "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                             },
                                                             "elementClass": {
-                                                              "oneOf": [
+                                                              "anyOf": [
                                                                 {
                                                                   "type": "string"
                                                                 },
@@ -27425,7 +27477,7 @@
                                                               "type": "object",
                                                               "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                               "additionalProperties": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -27604,7 +27656,7 @@
                                                                 "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                               },
                                                               "elementClass": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                   {
                                                                     "type": "string"
                                                                   },
@@ -27621,7 +27673,7 @@
                                                                 "type": "object",
                                                                 "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                                 "additionalProperties": {
-                                                                  "oneOf": [
+                                                                  "anyOf": [
                                                                     {
                                                                       "type": "string"
                                                                     },
@@ -27739,7 +27791,7 @@
                                                         "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
-                                                        "oneOf": [
+                                                        "anyOf": [
                                                           {
                                                             "type": "string"
                                                           },
@@ -27756,7 +27808,7 @@
                                                         "type": "object",
                                                         "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
                                                         "additionalProperties": {
-                                                          "oneOf": [
+                                                          "anyOf": [
                                                             {
                                                               "type": "string"
                                                             },

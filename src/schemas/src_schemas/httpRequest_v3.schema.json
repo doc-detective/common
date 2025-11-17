@@ -66,7 +66,7 @@
             "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
             "type": "array",
             "items": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "type": "integer"
                 }
