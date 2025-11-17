@@ -2540,7 +2540,12 @@
                                                                 "type": "object",
                                                                 "required": [
                                                                   "selector",
-                                                                  "elementText"
+                                                                  "elementText",
+                                                                  "elementId",
+                                                                  "elementTestId",
+                                                                  "elementClass",
+                                                                  "elementAttribute",
+                                                                  "elementAria"
                                                                 ],
                                                                 "title": "Find element and type"
                                                               }
@@ -3184,7 +3189,12 @@
                                                                   "type": "object",
                                                                   "required": [
                                                                     "selector",
-                                                                    "elementText"
+                                                                    "elementText",
+                                                                    "elementId",
+                                                                    "elementTestId",
+                                                                    "elementClass",
+                                                                    "elementAttribute",
+                                                                    "elementAria"
                                                                   ],
                                                                   "title": "Find element and type"
                                                                 }
@@ -9825,7 +9835,12 @@
                                                   "type": "object",
                                                   "required": [
                                                     "selector",
-                                                    "elementText"
+                                                    "elementText",
+                                                    "elementId",
+                                                    "elementTestId",
+                                                    "elementClass",
+                                                    "elementAttribute",
+                                                    "elementAria"
                                                   ],
                                                   "title": "Find element and type"
                                                 }
@@ -10469,7 +10484,12 @@
                                                     "type": "object",
                                                     "required": [
                                                       "selector",
-                                                      "elementText"
+                                                      "elementText",
+                                                      "elementId",
+                                                      "elementTestId",
+                                                      "elementClass",
+                                                      "elementAttribute",
+                                                      "elementAria"
                                                     ],
                                                     "title": "Find element and type"
                                                   }
@@ -16549,7 +16569,12 @@
                   "type": "object",
                   "required": [
                     "selector",
-                    "elementText"
+                    "elementText",
+                    "elementId",
+                    "elementTestId",
+                    "elementClass",
+                    "elementAttribute",
+                    "elementAria"
                   ],
                   "title": "Find element and type"
                 }
@@ -17193,7 +17218,12 @@
                     "type": "object",
                     "required": [
                       "selector",
-                      "elementText"
+                      "elementText",
+                      "elementId",
+                      "elementTestId",
+                      "elementClass",
+                      "elementAttribute",
+                      "elementAria"
                     ],
                     "title": "Find element and type"
                   }
@@ -20980,7 +21010,12 @@
                                                                     "type": "object",
                                                                     "required": [
                                                                       "selector",
-                                                                      "elementText"
+                                                                      "elementText",
+                                                                      "elementId",
+                                                                      "elementTestId",
+                                                                      "elementClass",
+                                                                      "elementAttribute",
+                                                                      "elementAria"
                                                                     ],
                                                                     "title": "Find element and type"
                                                                   }
@@ -21624,7 +21659,12 @@
                                                                       "type": "object",
                                                                       "required": [
                                                                         "selector",
-                                                                        "elementText"
+                                                                        "elementText",
+                                                                        "elementId",
+                                                                        "elementTestId",
+                                                                        "elementClass",
+                                                                        "elementAttribute",
+                                                                        "elementAria"
                                                                       ],
                                                                       "title": "Find element and type"
                                                                     }
@@ -28265,7 +28305,12 @@
                                                       "type": "object",
                                                       "required": [
                                                         "selector",
-                                                        "elementText"
+                                                        "elementText",
+                                                        "elementId",
+                                                        "elementTestId",
+                                                        "elementClass",
+                                                        "elementAttribute",
+                                                        "elementAria"
                                                       ],
                                                       "title": "Find element and type"
                                                     }
@@ -28909,7 +28954,12 @@
                                                         "type": "object",
                                                         "required": [
                                                           "selector",
-                                                          "elementText"
+                                                          "elementText",
+                                                          "elementId",
+                                                          "elementTestId",
+                                                          "elementClass",
+                                                          "elementAttribute",
+                                                          "elementAria"
                                                         ],
                                                         "title": "Find element and type"
                                                       }
@@ -36319,7 +36369,12 @@
                                                         "type": "object",
                                                         "required": [
                                                           "selector",
-                                                          "elementText"
+                                                          "elementText",
+                                                          "elementId",
+                                                          "elementTestId",
+                                                          "elementClass",
+                                                          "elementAttribute",
+                                                          "elementAria"
                                                         ],
                                                         "title": "Find element and type"
                                                       }
@@ -36963,7 +37018,12 @@
                                                           "type": "object",
                                                           "required": [
                                                             "selector",
-                                                            "elementText"
+                                                            "elementText",
+                                                            "elementId",
+                                                            "elementTestId",
+                                                            "elementClass",
+                                                            "elementAttribute",
+                                                            "elementAria"
                                                           ],
                                                           "title": "Find element and type"
                                                         }
@@ -43173,7 +43233,12 @@
                                                               "type": "object",
                                                               "required": [
                                                                 "selector",
-                                                                "elementText"
+                                                                "elementText",
+                                                                "elementId",
+                                                                "elementTestId",
+                                                                "elementClass",
+                                                                "elementAttribute",
+                                                                "elementAria"
                                                               ],
                                                               "title": "Find element and type"
                                                             }
@@ -43817,7 +43882,12 @@
                                                                 "type": "object",
                                                                 "required": [
                                                                   "selector",
-                                                                  "elementText"
+                                                                  "elementText",
+                                                                  "elementId",
+                                                                  "elementTestId",
+                                                                  "elementClass",
+                                                                  "elementAttribute",
+                                                                  "elementAria"
                                                                 ],
                                                                 "title": "Find element and type"
                                                               }
@@ -51737,7 +51807,12 @@
                                                         "type": "object",
                                                         "required": [
                                                           "selector",
-                                                          "elementText"
+                                                          "elementText",
+                                                          "elementId",
+                                                          "elementTestId",
+                                                          "elementClass",
+                                                          "elementAttribute",
+                                                          "elementAria"
                                                         ],
                                                         "title": "Find element and type"
                                                       }
@@ -52381,7 +52456,12 @@
                                                           "type": "object",
                                                           "required": [
                                                             "selector",
-                                                            "elementText"
+                                                            "elementText",
+                                                            "elementId",
+                                                            "elementTestId",
+                                                            "elementClass",
+                                                            "elementAttribute",
+                                                            "elementAria"
                                                           ],
                                                           "title": "Find element and type"
                                                         }
@@ -58591,7 +58671,12 @@
                                                               "type": "object",
                                                               "required": [
                                                                 "selector",
-                                                                "elementText"
+                                                                "elementText",
+                                                                "elementId",
+                                                                "elementTestId",
+                                                                "elementClass",
+                                                                "elementAttribute",
+                                                                "elementAria"
                                                               ],
                                                               "title": "Find element and type"
                                                             }
@@ -59235,7 +59320,12 @@
                                                                 "type": "object",
                                                                 "required": [
                                                                   "selector",
-                                                                  "elementText"
+                                                                  "elementText",
+                                                                  "elementId",
+                                                                  "elementTestId",
+                                                                  "elementClass",
+                                                                  "elementAttribute",
+                                                                  "elementAria"
                                                                 ],
                                                                 "title": "Find element and type"
                                                               }
@@ -68387,7 +68477,12 @@
                                               "type": "object",
                                               "required": [
                                                 "selector",
-                                                "elementText"
+                                                "elementText",
+                                                "elementId",
+                                                "elementTestId",
+                                                "elementClass",
+                                                "elementAttribute",
+                                                "elementAria"
                                               ],
                                               "title": "Find element and type"
                                             }
@@ -69031,7 +69126,12 @@
                                                 "type": "object",
                                                 "required": [
                                                   "selector",
-                                                  "elementText"
+                                                  "elementText",
+                                                  "elementId",
+                                                  "elementTestId",
+                                                  "elementClass",
+                                                  "elementAttribute",
+                                                  "elementAria"
                                                 ],
                                                 "title": "Find element and type"
                                               }
@@ -75241,7 +75341,12 @@
                                                     "type": "object",
                                                     "required": [
                                                       "selector",
-                                                      "elementText"
+                                                      "elementText",
+                                                      "elementId",
+                                                      "elementTestId",
+                                                      "elementClass",
+                                                      "elementAttribute",
+                                                      "elementAria"
                                                     ],
                                                     "title": "Find element and type"
                                                   }
@@ -75885,7 +75990,12 @@
                                                       "type": "object",
                                                       "required": [
                                                         "selector",
-                                                        "elementText"
+                                                        "elementText",
+                                                        "elementId",
+                                                        "elementTestId",
+                                                        "elementClass",
+                                                        "elementAttribute",
+                                                        "elementAria"
                                                       ],
                                                       "title": "Find element and type"
                                                     }
@@ -82375,7 +82485,12 @@
                               "type": "object",
                               "required": [
                                 "selector",
-                                "elementText"
+                                "elementText",
+                                "elementId",
+                                "elementTestId",
+                                "elementClass",
+                                "elementAttribute",
+                                "elementAria"
                               ],
                               "title": "Find element and type"
                             }
@@ -83019,7 +83134,12 @@
                                 "type": "object",
                                 "required": [
                                   "selector",
-                                  "elementText"
+                                  "elementText",
+                                  "elementId",
+                                  "elementTestId",
+                                  "elementClass",
+                                  "elementAttribute",
+                                  "elementAria"
                                 ],
                                 "title": "Find element and type"
                               }
@@ -89584,7 +89704,12 @@
                                     "type": "object",
                                     "required": [
                                       "selector",
-                                      "elementText"
+                                      "elementText",
+                                      "elementId",
+                                      "elementTestId",
+                                      "elementClass",
+                                      "elementAttribute",
+                                      "elementAria"
                                     ],
                                     "title": "Find element and type"
                                   }
@@ -90228,7 +90353,12 @@
                                       "type": "object",
                                       "required": [
                                         "selector",
-                                        "elementText"
+                                        "elementText",
+                                        "elementId",
+                                        "elementTestId",
+                                        "elementClass",
+                                        "elementAttribute",
+                                        "elementAria"
                                       ],
                                       "title": "Find element and type"
                                     }
@@ -96438,7 +96568,12 @@
                                           "type": "object",
                                           "required": [
                                             "selector",
-                                            "elementText"
+                                            "elementText",
+                                            "elementId",
+                                            "elementTestId",
+                                            "elementClass",
+                                            "elementAttribute",
+                                            "elementAria"
                                           ],
                                           "title": "Find element and type"
                                         }
@@ -97082,7 +97217,12 @@
                                             "type": "object",
                                             "required": [
                                               "selector",
-                                              "elementText"
+                                              "elementText",
+                                              "elementId",
+                                              "elementTestId",
+                                              "elementClass",
+                                              "elementAttribute",
+                                              "elementAria"
                                             ],
                                             "title": "Find element and type"
                                           }
