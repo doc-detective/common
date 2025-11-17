@@ -1174,7 +1174,7 @@
                                                   {
                                                     "title": "Click element (simple)",
                                                     "type": "string",
-                                                    "description": "Display text or selector of the element to find."
+                                                    "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                   },
                                                   {
                                                     "title": "Click element (detailed)",
@@ -1236,11 +1236,11 @@
                                                       },
                                                       "elementId": {
                                                         "type": "string",
-                                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementTestId": {
                                                         "type": "string",
-                                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
                                                         "oneOf": [
@@ -1275,7 +1275,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     }
                                                   },
@@ -1288,7 +1288,7 @@
                                                     "string": {
                                                       "title": "Click element (simple)",
                                                       "type": "string",
-                                                      "description": "Display text or selector of the element to find."
+                                                      "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                     },
                                                     "button": {
                                                       "description": "Kind of click to perform.",
@@ -1359,11 +1359,11 @@
                                                         },
                                                         "elementId": {
                                                           "type": "string",
-                                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementTestId": {
                                                           "type": "string",
-                                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementClass": {
                                                           "oneOf": [
@@ -1398,7 +1398,7 @@
                                                         },
                                                         "elementAria": {
                                                           "type": "string",
-                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       }
                                                     }
@@ -1497,7 +1497,7 @@
                                                   {
                                                     "title": "Find element (simple)",
                                                     "type": "string",
-                                                    "description": "Display text or selector of the element to find."
+                                                    "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
                                                   },
                                                   {
                                                     "title": "Find element (detailed)",
@@ -1590,7 +1590,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "timeout": {
                                                         "type": "integer",
@@ -1613,7 +1613,7 @@
                                                               {
                                                                 "title": "Click element (simple)",
                                                                 "type": "string",
-                                                                "description": "Display text or selector of the element to find."
+                                                                "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                               },
                                                               {
                                                                 "title": "Click element (detailed)",
@@ -1675,11 +1675,11 @@
                                                                   },
                                                                   "elementId": {
                                                                     "type": "string",
-                                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                    "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementTestId": {
                                                                     "type": "string",
-                                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                    "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   },
                                                                   "elementClass": {
                                                                     "oneOf": [
@@ -1714,7 +1714,7 @@
                                                                   },
                                                                   "elementAria": {
                                                                     "type": "string",
-                                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   }
                                                                 }
                                                               },
@@ -1727,7 +1727,7 @@
                                                                 "string": {
                                                                   "title": "Click element (simple)",
                                                                   "type": "string",
-                                                                  "description": "Display text or selector of the element to find."
+                                                                  "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                                 },
                                                                 "button": {
                                                                   "description": "Kind of click to perform.",
@@ -1798,11 +1798,11 @@
                                                                     },
                                                                     "elementId": {
                                                                       "type": "string",
-                                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementTestId": {
                                                                       "type": "string",
-                                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementClass": {
                                                                       "oneOf": [
@@ -1837,7 +1837,7 @@
                                                                     },
                                                                     "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     }
                                                                   }
                                                                 }
@@ -1978,7 +1978,7 @@
                                                                   },
                                                                   "elementAria": {
                                                                     "type": "string",
-                                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                   }
                                                                 },
                                                                 "required": [
@@ -2085,7 +2085,7 @@
                                                                     },
                                                                     "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     }
                                                                   },
                                                                   "required": [
@@ -2141,7 +2141,7 @@
                                                     "string": {
                                                       "title": "Find element (simple)",
                                                       "type": "string",
-                                                      "description": "Display text or selector of the element to find."
+                                                      "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
                                                     },
                                                     "object": {
                                                       "title": "Find element (detailed)",
@@ -2234,7 +2234,7 @@
                                                         },
                                                         "elementAria": {
                                                           "type": "string",
-                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "timeout": {
                                                           "type": "integer",
@@ -2257,7 +2257,7 @@
                                                                 {
                                                                   "title": "Click element (simple)",
                                                                   "type": "string",
-                                                                  "description": "Display text or selector of the element to find."
+                                                                  "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                                 },
                                                                 {
                                                                   "title": "Click element (detailed)",
@@ -2319,11 +2319,11 @@
                                                                     },
                                                                     "elementId": {
                                                                       "type": "string",
-                                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementTestId": {
                                                                       "type": "string",
-                                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                      "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     },
                                                                     "elementClass": {
                                                                       "oneOf": [
@@ -2358,7 +2358,7 @@
                                                                     },
                                                                     "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     }
                                                                   }
                                                                 },
@@ -2371,7 +2371,7 @@
                                                                   "string": {
                                                                     "title": "Click element (simple)",
                                                                     "type": "string",
-                                                                    "description": "Display text or selector of the element to find."
+                                                                    "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                                   },
                                                                   "button": {
                                                                     "description": "Kind of click to perform.",
@@ -2442,11 +2442,11 @@
                                                                       },
                                                                       "elementId": {
                                                                         "type": "string",
-                                                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                        "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                       },
                                                                       "elementTestId": {
                                                                         "type": "string",
-                                                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                                        "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                                       },
                                                                       "elementClass": {
                                                                         "oneOf": [
@@ -2481,7 +2481,7 @@
                                                                       },
                                                                       "elementAria": {
                                                                         "type": "string",
-                                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                       }
                                                                     }
                                                                   }
@@ -2622,7 +2622,7 @@
                                                                     },
                                                                     "elementAria": {
                                                                       "type": "string",
-                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                     }
                                                                   },
                                                                   "required": [
@@ -2729,7 +2729,7 @@
                                                                       },
                                                                       "elementAria": {
                                                                         "type": "string",
-                                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                       }
                                                                     },
                                                                     "required": [
@@ -4752,7 +4752,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     },
                                                     "required": [
@@ -4859,7 +4859,7 @@
                                                         },
                                                         "elementAria": {
                                                           "type": "string",
-                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       },
                                                       "required": [
@@ -5116,7 +5116,7 @@
                                                               },
                                                               "elementAria": {
                                                                 "type": "string",
-                                                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                               },
                                                               "padding": {
                                                                 "anyOf": [
@@ -5312,7 +5312,7 @@
                                                                 },
                                                                 "elementAria": {
                                                                   "type": "string",
-                                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                                 },
                                                                 "padding": {
                                                                   "anyOf": [
@@ -5447,7 +5447,7 @@
                                                         },
                                                         "elementAria": {
                                                           "type": "string",
-                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "padding": {
                                                           "anyOf": [
@@ -7440,7 +7440,7 @@
                                     {
                                       "title": "Click element (simple)",
                                       "type": "string",
-                                      "description": "Display text or selector of the element to find."
+                                      "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                     },
                                     {
                                       "title": "Click element (detailed)",
@@ -7502,11 +7502,11 @@
                                         },
                                         "elementId": {
                                           "type": "string",
-                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                         },
                                         "elementTestId": {
                                           "type": "string",
-                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                         },
                                         "elementClass": {
                                           "oneOf": [
@@ -7541,7 +7541,7 @@
                                         },
                                         "elementAria": {
                                           "type": "string",
-                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                         }
                                       }
                                     },
@@ -7554,7 +7554,7 @@
                                       "string": {
                                         "title": "Click element (simple)",
                                         "type": "string",
-                                        "description": "Display text or selector of the element to find."
+                                        "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                       },
                                       "button": {
                                         "description": "Kind of click to perform.",
@@ -7625,11 +7625,11 @@
                                           },
                                           "elementId": {
                                             "type": "string",
-                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                           },
                                           "elementTestId": {
                                             "type": "string",
-                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                           },
                                           "elementClass": {
                                             "oneOf": [
@@ -7664,7 +7664,7 @@
                                           },
                                           "elementAria": {
                                             "type": "string",
-                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                           }
                                         }
                                       }
@@ -7763,7 +7763,7 @@
                                     {
                                       "title": "Find element (simple)",
                                       "type": "string",
-                                      "description": "Display text or selector of the element to find."
+                                      "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
                                     },
                                     {
                                       "title": "Find element (detailed)",
@@ -7856,7 +7856,7 @@
                                         },
                                         "elementAria": {
                                           "type": "string",
-                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                         },
                                         "timeout": {
                                           "type": "integer",
@@ -7879,7 +7879,7 @@
                                                 {
                                                   "title": "Click element (simple)",
                                                   "type": "string",
-                                                  "description": "Display text or selector of the element to find."
+                                                  "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                 },
                                                 {
                                                   "title": "Click element (detailed)",
@@ -7941,11 +7941,11 @@
                                                     },
                                                     "elementId": {
                                                       "type": "string",
-                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "elementTestId": {
                                                       "type": "string",
-                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                      "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                     },
                                                     "elementClass": {
                                                       "oneOf": [
@@ -7980,7 +7980,7 @@
                                                     },
                                                     "elementAria": {
                                                       "type": "string",
-                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                     }
                                                   }
                                                 },
@@ -7993,7 +7993,7 @@
                                                   "string": {
                                                     "title": "Click element (simple)",
                                                     "type": "string",
-                                                    "description": "Display text or selector of the element to find."
+                                                    "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                   },
                                                   "button": {
                                                     "description": "Kind of click to perform.",
@@ -8064,11 +8064,11 @@
                                                       },
                                                       "elementId": {
                                                         "type": "string",
-                                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementTestId": {
                                                         "type": "string",
-                                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
                                                         "oneOf": [
@@ -8103,7 +8103,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     }
                                                   }
@@ -8244,7 +8244,7 @@
                                                     },
                                                     "elementAria": {
                                                       "type": "string",
-                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                     }
                                                   },
                                                   "required": [
@@ -8351,7 +8351,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     },
                                                     "required": [
@@ -8407,7 +8407,7 @@
                                       "string": {
                                         "title": "Find element (simple)",
                                         "type": "string",
-                                        "description": "Display text or selector of the element to find."
+                                        "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
                                       },
                                       "object": {
                                         "title": "Find element (detailed)",
@@ -8500,7 +8500,7 @@
                                           },
                                           "elementAria": {
                                             "type": "string",
-                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                           },
                                           "timeout": {
                                             "type": "integer",
@@ -8523,7 +8523,7 @@
                                                   {
                                                     "title": "Click element (simple)",
                                                     "type": "string",
-                                                    "description": "Display text or selector of the element to find."
+                                                    "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                   },
                                                   {
                                                     "title": "Click element (detailed)",
@@ -8585,11 +8585,11 @@
                                                       },
                                                       "elementId": {
                                                         "type": "string",
-                                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementTestId": {
                                                         "type": "string",
-                                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                        "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                       },
                                                       "elementClass": {
                                                         "oneOf": [
@@ -8624,7 +8624,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     }
                                                   },
@@ -8637,7 +8637,7 @@
                                                     "string": {
                                                       "title": "Click element (simple)",
                                                       "type": "string",
-                                                      "description": "Display text or selector of the element to find."
+                                                      "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                                     },
                                                     "button": {
                                                       "description": "Kind of click to perform.",
@@ -8708,11 +8708,11 @@
                                                         },
                                                         "elementId": {
                                                           "type": "string",
-                                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementTestId": {
                                                           "type": "string",
-                                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                          "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
                                                         },
                                                         "elementClass": {
                                                           "oneOf": [
@@ -8747,7 +8747,7 @@
                                                         },
                                                         "elementAria": {
                                                           "type": "string",
-                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       }
                                                     }
@@ -8888,7 +8888,7 @@
                                                       },
                                                       "elementAria": {
                                                         "type": "string",
-                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                       }
                                                     },
                                                     "required": [
@@ -8995,7 +8995,7 @@
                                                         },
                                                         "elementAria": {
                                                           "type": "string",
-                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                         }
                                                       },
                                                       "required": [
@@ -11018,7 +11018,7 @@
                                         },
                                         "elementAria": {
                                           "type": "string",
-                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                         }
                                       },
                                       "required": [
@@ -11125,7 +11125,7 @@
                                           },
                                           "elementAria": {
                                             "type": "string",
-                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                           }
                                         },
                                         "required": [
@@ -11382,7 +11382,7 @@
                                                 },
                                                 "elementAria": {
                                                   "type": "string",
-                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                 },
                                                 "padding": {
                                                   "anyOf": [
@@ -11578,7 +11578,7 @@
                                                   },
                                                   "elementAria": {
                                                     "type": "string",
-                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                   },
                                                   "padding": {
                                                     "anyOf": [
@@ -11713,7 +11713,7 @@
                                           },
                                           "elementAria": {
                                             "type": "string",
-                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                           },
                                           "padding": {
                                             "anyOf": [

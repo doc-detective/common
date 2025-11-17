@@ -15,7 +15,7 @@
       "string": {
         "title": "Find element (simple)",
         "type": "string",
-        "description": "Display text or selector of the element to find."
+        "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
       },
       "object": {
         "title": "Find element (detailed)",
@@ -108,7 +108,7 @@
           },
           "elementAria": {
             "type": "string",
-            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
           },
           "timeout": {
             "type": "integer",

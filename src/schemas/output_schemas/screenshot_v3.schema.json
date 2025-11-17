@@ -148,7 +148,7 @@
                 },
                 "elementAria": {
                   "type": "string",
-                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                 },
                 "padding": {
                   "anyOf": [
@@ -344,7 +344,7 @@
                   },
                   "elementAria": {
                     "type": "string",
-                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                   },
                   "padding": {
                     "anyOf": [
@@ -479,7 +479,7 @@
           },
           "elementAria": {
             "type": "string",
-            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
           },
           "padding": {
             "anyOf": [

@@ -18,7 +18,7 @@
       "string": {
         "title": "Click element (simple)",
         "type": "string",
-        "description": "Display text or selector of the element to find."
+        "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
       },
       "button": {
         "description": "Kind of click to perform.",
@@ -83,11 +83,11 @@
           },
           "elementId": {
             "type": "string",
-            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+            "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
           },
           "elementTestId": {
             "type": "string",
-            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+            "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
           },
           "elementClass": {
             "oneOf": [
@@ -122,7 +122,7 @@
           },
           "elementAria": {
             "type": "string",
-            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax. Leverages WebDriverIO's aria/<text> selector."
+            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
           }
         }
       }
