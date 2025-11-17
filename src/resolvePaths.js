@@ -76,8 +76,14 @@ async function resolvePaths({
    * @returns {string} The absolute path corresponding to {@link relativePath}.
    *
    * @remark If {@link relativePath} is already absolute, it is returned unchanged. If {@link filePath} does not exist, its extension is used to infer whether it is a file or directory.
+   * @remark HTTP and HTTPS URLs are returned unchanged without resolution.
    */
   function resolve(baseType, relativePath, filePath) {
+    // If the path is an http:// or https:// URL, return it
+    if (relativePath.startsWith("https://") || relativePath.startsWith("http://")) {
+      return relativePath;
+    }
+
     // If path is already absolute, return it
     if (path.isAbsolute(relativePath)) {
       return relativePath;
@@ -132,6 +138,11 @@ async function resolvePaths({
   } else if (objectType === "spec") {
     // If the object type is spec, use specPaths
     pathProperties = specPaths;
+  }
+
+  // If the object is null or empty, return it as is
+  if (object === null || Object.keys(object).length === 0) {
+    return object;
   }
 
   for (const property of Object.keys(object)) {
