@@ -2022,7 +2022,7 @@
                           },
                           "wait": {
                             "type": "object",
-                            "description": "Configuration for waiting conditions after navigation. When omitted, applies defaults: timeout 30000ms, networkIdleTime 500ms, domIdleTime 1000ms.",
+                            "description": "Configuration for waiting conditions after navigation.",
                             "additionalProperties": false,
                             "properties": {
                               "timeout": {
@@ -2032,7 +2032,7 @@
                                 "minimum": 0
                               },
                               "networkIdleTime": {
-                                "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to null to skip this check.",
+                                "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
                                 "anyOf": [
                                   {
                                     "type": "integer",
@@ -2045,7 +2045,7 @@
                                 "default": 500
                               },
                               "domIdleTime": {
-                                "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to null to skip this check.",
+                                "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
                                 "anyOf": [
                                   {
                                     "type": "integer",
@@ -2080,7 +2080,7 @@
                                   },
                                   "elementText": {
                                     "type": "string",
-                                    "description": "Text content the element must contain (substring match, case-sensitive)."
+                                    "description": "Text content the element must contain."
                                   }
                                 }
                               }
@@ -2126,7 +2126,7 @@
                             },
                             "wait": {
                               "type": "object",
-                              "description": "Configuration for waiting conditions after navigation. When omitted, applies defaults: timeout 30000ms, networkIdleTime 500ms, domIdleTime 1000ms.",
+                              "description": "Configuration for waiting conditions after navigation.",
                               "additionalProperties": false,
                               "properties": {
                                 "timeout": {
@@ -2136,7 +2136,7 @@
                                   "minimum": 0
                                 },
                                 "networkIdleTime": {
-                                  "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to null to skip this check.",
+                                  "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
                                   "anyOf": [
                                     {
                                       "type": "integer",
@@ -2149,7 +2149,7 @@
                                   "default": 500
                                 },
                                 "domIdleTime": {
-                                  "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to null to skip this check.",
+                                  "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
                                   "anyOf": [
                                     {
                                       "type": "integer",
@@ -2184,7 +2184,7 @@
                                     },
                                     "elementText": {
                                       "type": "string",
-                                      "description": "Text content the element must contain (substring match, case-sensitive)."
+                                      "description": "Text content the element must contain."
                                     }
                                   }
                                 }
@@ -7009,7 +7009,7 @@
                                 },
                                 "wait": {
                                   "type": "object",
-                                  "description": "Configuration for waiting conditions after navigation. When omitted, applies defaults: timeout 30000ms, networkIdleTime 500ms, domIdleTime 1000ms.",
+                                  "description": "Configuration for waiting conditions after navigation.",
                                   "additionalProperties": false,
                                   "properties": {
                                     "timeout": {
@@ -7019,7 +7019,7 @@
                                       "minimum": 0
                                     },
                                     "networkIdleTime": {
-                                      "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to null to skip this check.",
+                                      "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
                                       "anyOf": [
                                         {
                                           "type": "integer",
@@ -7032,7 +7032,7 @@
                                       "default": 500
                                     },
                                     "domIdleTime": {
-                                      "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to null to skip this check.",
+                                      "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
                                       "anyOf": [
                                         {
                                           "type": "integer",
@@ -7067,7 +7067,7 @@
                                         },
                                         "elementText": {
                                           "type": "string",
-                                          "description": "Text content the element must contain (substring match, case-sensitive)."
+                                          "description": "Text content the element must contain."
                                         }
                                       }
                                     }
@@ -7113,7 +7113,7 @@
                                   },
                                   "wait": {
                                     "type": "object",
-                                    "description": "Configuration for waiting conditions after navigation. When omitted, applies defaults: timeout 30000ms, networkIdleTime 500ms, domIdleTime 1000ms.",
+                                    "description": "Configuration for waiting conditions after navigation.",
                                     "additionalProperties": false,
                                     "properties": {
                                       "timeout": {
@@ -7123,7 +7123,7 @@
                                         "minimum": 0
                                       },
                                       "networkIdleTime": {
-                                        "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to null to skip this check.",
+                                        "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
                                         "anyOf": [
                                           {
                                             "type": "integer",
@@ -7136,7 +7136,7 @@
                                         "default": 500
                                       },
                                       "domIdleTime": {
-                                        "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to null to skip this check.",
+                                        "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
                                         "anyOf": [
                                           {
                                             "type": "integer",
@@ -7171,7 +7171,7 @@
                                           },
                                           "elementText": {
                                             "type": "string",
-                                            "description": "Text content the element must contain (substring match, case-sensitive)."
+                                            "description": "Text content the element must contain."
                                           }
                                         }
                                       }
