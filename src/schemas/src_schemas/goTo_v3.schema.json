@@ -16,44 +16,36 @@
         "description": "Navigate to an HTTP or HTTPS URL. Can be a full URL or a path. If a path is provided, navigates relative to the current URL, if any.",
         "type": "string",
         "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
-        "transform": [
-          "trim"
-        ]
+        "transform": ["trim"]
       },
       "object": {
         "description": "Navigate to an HTTP or HTTPS URL.",
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "url"
-        ],
+        "required": ["url"],
         "properties": {
           "url": {
             "type": "string",
             "description": "URL to navigate to. Can be a full URL or a path. If a path is provided and `origin` is specified, prepends `origin` to `url`. If a path is provided but `origin` isn't specified, attempts to navigate relative to the current URL, if any.",
             "pattern": "(^(http://|https://|/).*|\\$[A-Za-z0-9_]+)",
-            "transform": [
-              "trim"
-            ]
+            "transform": ["trim"]
           },
           "origin": {
             "type": "string",
             "description": "Protocol and domain to navigate to. Prepended to `url`.",
-            "transform": [
-              "trim"
-            ]
+            "transform": ["trim"]
           },
-          "wait": {
+          "timeout": {
+            "type": "integer",
+            "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+            "default": 30000,
+            "minimum": 0
+          },
+          "waitUntil": {
             "type": "object",
             "description": "Configuration for waiting conditions after navigation.",
             "additionalProperties": false,
             "properties": {
-              "timeout": {
-                "type": "integer",
-                "description": "Maximum time in milliseconds to wait for all conditions to be met. If exceeded, the goTo action fails.",
-                "default": 30000,
-                "minimum": 0
-              },
               "networkIdleTime": {
                 "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
                 "anyOf": [
@@ -86,14 +78,10 @@
                 "additionalProperties": false,
                 "anyOf": [
                   {
-                    "required": [
-                      "selector"
-                    ]
+                    "required": ["selector"]
                   },
                   {
-                    "required": [
-                      "elementText"
-                    ]
+                    "required": ["elementText"]
                   }
                 ],
                 "properties": {
@@ -126,13 +114,13 @@
     },
     {
       "url": "https://www.example.com",
-      "wait": {
+      "waitUntil": {
         "networkIdleTime": 500
       }
     },
     {
       "url": "https://www.example.com/dashboard",
-      "wait": {
+      "waitUntil": {
         "find": {
           "selector": "[data-testid='dashboard-loaded']"
         }
@@ -140,8 +128,8 @@
     },
     {
       "url": "https://www.example.com/app",
-      "wait": {
-        "timeout": 60000,
+      "timeout": 60000,
+      "waitUntil": {
         "networkIdleTime": 500,
         "domIdleTime": 1000,
         "find": {
@@ -152,7 +140,7 @@
     },
     {
       "url": "https://www.example.com/status",
-      "wait": {
+      "waitUntil": {
         "find": {
           "elementText": "System operational"
         }

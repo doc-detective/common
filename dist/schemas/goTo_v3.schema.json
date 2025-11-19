@@ -34,17 +34,17 @@
             "trim"
           ]
         },
-        "wait": {
+        "timeout": {
+          "type": "integer",
+          "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+          "default": 30000,
+          "minimum": 0
+        },
+        "waitUntil": {
           "type": "object",
           "description": "Configuration for waiting conditions after navigation.",
           "additionalProperties": false,
           "properties": {
-            "timeout": {
-              "type": "integer",
-              "description": "Maximum time in milliseconds to wait for all conditions to be met. If exceeded, the goTo action fails.",
-              "default": 30000,
-              "minimum": 0
-            },
             "networkIdleTime": {
               "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
               "anyOf": [
@@ -138,17 +138,17 @@
               "trim"
             ]
           },
-          "wait": {
+          "timeout": {
+            "type": "integer",
+            "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+            "default": 30000,
+            "minimum": 0
+          },
+          "waitUntil": {
             "type": "object",
             "description": "Configuration for waiting conditions after navigation.",
             "additionalProperties": false,
             "properties": {
-              "timeout": {
-                "type": "integer",
-                "description": "Maximum time in milliseconds to wait for all conditions to be met. If exceeded, the goTo action fails.",
-                "default": 30000,
-                "minimum": 0
-              },
               "networkIdleTime": {
                 "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
                 "anyOf": [
@@ -221,13 +221,13 @@
     },
     {
       "url": "https://www.example.com",
-      "wait": {
+      "waitUntil": {
         "networkIdleTime": 500
       }
     },
     {
       "url": "https://www.example.com/dashboard",
-      "wait": {
+      "waitUntil": {
         "find": {
           "selector": "[data-testid='dashboard-loaded']"
         }
@@ -235,8 +235,8 @@
     },
     {
       "url": "https://www.example.com/app",
-      "wait": {
-        "timeout": 60000,
+      "timeout": 60000,
+      "waitUntil": {
         "networkIdleTime": 500,
         "domIdleTime": 1000,
         "find": {
@@ -247,7 +247,7 @@
     },
     {
       "url": "https://www.example.com/status",
-      "wait": {
+      "waitUntil": {
         "find": {
           "elementText": "System operational"
         }
