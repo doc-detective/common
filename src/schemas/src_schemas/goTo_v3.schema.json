@@ -138,6 +138,13 @@
         }
       }
     },
+        {
+      "url": "https://www.example.com/app",
+      "timeout": 60000,
+      "waitUntil": {
+        "networkIdleTime": null
+      }
+    },
     {
       "url": "https://www.example.com/status",
       "waitUntil": {
