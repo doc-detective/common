@@ -3157,7 +3157,7 @@
                                                       },
                                                       {
                                                         "url": "/search",
-                                                        "origin": "www.google.com"
+                                                        "origin": "https://www.google.com"
                                                       },
                                                       {
                                                         "url": "https://www.example.com",
@@ -10631,7 +10631,7 @@
                                         },
                                         {
                                           "url": "/search",
-                                          "origin": "www.google.com"
+                                          "origin": "https://www.google.com"
                                         },
                                         {
                                           "url": "https://www.example.com",
@@ -18874,7 +18874,7 @@
                                           },
                                           {
                                             "url": "/search",
-                                            "origin": "www.google.com"
+                                            "origin": "https://www.google.com"
                                           },
                                           {
                                             "url": "https://www.example.com",
@@ -25917,7 +25917,7 @@
                                                 },
                                                 {
                                                   "url": "/search",
-                                                  "origin": "www.google.com"
+                                                  "origin": "https://www.google.com"
                                                 },
                                                 {
                                                   "url": "https://www.example.com",
