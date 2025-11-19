@@ -227,7 +227,7 @@
                         {
                           "type": "array",
                           "items": {
-                            "oneOf": [
+                            "anyOf": [
                               {
                                 "type": "integer"
                               }
@@ -290,7 +290,7 @@
                           {
                             "type": "array",
                             "items": {
-                              "oneOf": [
+                              "anyOf": [
                                 {
                                   "type": "integer"
                                 }
@@ -405,7 +405,7 @@
                 {
                   "title": "Click element (simple)",
                   "type": "string",
-                  "description": "Display text or selector of the element to find."
+                  "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                 },
                 {
                   "title": "Click element (detailed)",
@@ -419,6 +419,31 @@
                     {
                       "required": [
                         "elementText"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementTestId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementClass"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementAttribute"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementAria"
                       ]
                     }
                   ],
@@ -434,11 +459,54 @@
                     },
                     "elementText": {
                       "type": "string",
-                      "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                      "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                     },
                     "selector": {
                       "type": "string",
-                      "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                      "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                    },
+                    "elementId": {
+                      "type": "string",
+                      "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementTestId": {
+                      "type": "string",
+                      "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementClass": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                    },
+                    "elementAttribute": {
+                      "type": "object",
+                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    },
+                    "elementAria": {
+                      "type": "string",
+                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                     }
                   }
                 },
@@ -451,7 +519,7 @@
                   "string": {
                     "title": "Click element (simple)",
                     "type": "string",
-                    "description": "Display text or selector of the element to find."
+                    "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                   },
                   "button": {
                     "description": "Kind of click to perform.",
@@ -475,6 +543,31 @@
                         "required": [
                           "elementText"
                         ]
+                      },
+                      {
+                        "required": [
+                          "elementId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementTestId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementClass"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementAttribute"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementAria"
+                        ]
                       }
                     ],
                     "properties": {
@@ -489,11 +582,54 @@
                       },
                       "elementText": {
                         "type": "string",
-                        "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                        "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                       },
                       "selector": {
                         "type": "string",
-                        "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                        "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                      },
+                      "elementId": {
+                        "type": "string",
+                        "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementTestId": {
+                        "type": "string",
+                        "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementClass": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ],
+                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                      },
+                      "elementAttribute": {
+                        "type": "object",
+                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                        "additionalProperties": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "boolean"
+                            }
+                          ]
+                        }
+                      },
+                      "elementAria": {
+                        "type": "string",
+                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                       }
                     }
                   }
@@ -592,7 +728,7 @@
                 {
                   "title": "Find element (simple)",
                   "type": "string",
-                  "description": "Display text or selector of the element to find."
+                  "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
                 },
                 {
                   "title": "Find element (detailed)",
@@ -607,17 +743,85 @@
                       "required": [
                         "elementText"
                       ]
+                    },
+                    {
+                      "required": [
+                        "elementId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementTestId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementClass"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementAttribute"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementAria"
+                      ]
                     }
                   ],
                   "additionalProperties": false,
                   "properties": {
                     "elementText": {
                       "type": "string",
-                      "description": "Display text of the element to find. If combined with `selector`, the element must match both the text and the selector."
+                      "description": "Display text of the element to find. If combined with other element finding fields, the element must match all specified criteria."
                     },
                     "selector": {
                       "type": "string",
-                      "description": "Selector of the element to find. If combined with `elementText`, the element must match both the text and the selector."
+                      "description": "Selector of the element to find. If combined with other element finding fields, the element must match all specified criteria."
+                    },
+                    "elementId": {
+                      "type": "string",
+                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementTestId": {
+                      "type": "string",
+                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementClass": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                    },
+                    "elementAttribute": {
+                      "type": "object",
+                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    },
+                    "elementAria": {
+                      "type": "string",
+                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                     },
                     "timeout": {
                       "type": "integer",
@@ -640,7 +844,7 @@
                             {
                               "title": "Click element (simple)",
                               "type": "string",
-                              "description": "Display text or selector of the element to find."
+                              "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                             },
                             {
                               "title": "Click element (detailed)",
@@ -654,6 +858,31 @@
                                 {
                                   "required": [
                                     "elementText"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "elementId"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "elementTestId"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "elementClass"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "elementAttribute"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "elementAria"
                                   ]
                                 }
                               ],
@@ -669,11 +898,54 @@
                                 },
                                 "elementText": {
                                   "type": "string",
-                                  "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                  "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                 },
                                 "selector": {
                                   "type": "string",
-                                  "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                  "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                },
+                                "elementId": {
+                                  "type": "string",
+                                  "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                },
+                                "elementTestId": {
+                                  "type": "string",
+                                  "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                },
+                                "elementClass": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  ],
+                                  "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                },
+                                "elementAttribute": {
+                                  "type": "object",
+                                  "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                  "additionalProperties": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "boolean"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementAria": {
+                                  "type": "string",
+                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                 }
                               }
                             },
@@ -686,7 +958,7 @@
                               "string": {
                                 "title": "Click element (simple)",
                                 "type": "string",
-                                "description": "Display text or selector of the element to find."
+                                "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                               },
                               "button": {
                                 "description": "Kind of click to perform.",
@@ -710,6 +982,31 @@
                                     "required": [
                                       "elementText"
                                     ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementId"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementTestId"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementClass"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementAttribute"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementAria"
+                                    ]
                                   }
                                 ],
                                 "properties": {
@@ -724,11 +1021,54 @@
                                   },
                                   "elementText": {
                                     "type": "string",
-                                    "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                    "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                   },
                                   "selector": {
                                     "type": "string",
-                                    "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                    "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                  },
+                                  "elementId": {
+                                    "type": "string",
+                                    "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementTestId": {
+                                    "type": "string",
+                                    "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementClass": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    ],
+                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                  },
+                                  "elementAttribute": {
+                                    "type": "object",
+                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                    "additionalProperties": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "boolean"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "elementAria": {
+                                    "type": "string",
+                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                   }
                                 }
                               }
@@ -783,7 +1123,7 @@
                                 {
                                   "type": "array",
                                   "items": {
-                                    "oneOf": [
+                                    "anyOf": [
                                       {
                                         "type": "string"
                                       }
@@ -806,7 +1146,7 @@
                                     {
                                       "type": "array",
                                       "items": {
-                                        "oneOf": [
+                                        "anyOf": [
                                           {
                                             "type": "string"
                                           }
@@ -823,6 +1163,53 @@
                                 "selector": {
                                   "type": "string",
                                   "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                },
+                                "elementText": {
+                                  "type": "string",
+                                  "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                },
+                                "elementId": {
+                                  "type": "string",
+                                  "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                },
+                                "elementTestId": {
+                                  "type": "string",
+                                  "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                },
+                                "elementClass": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  ],
+                                  "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                },
+                                "elementAttribute": {
+                                  "type": "object",
+                                  "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                  "additionalProperties": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "boolean"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "elementAria": {
+                                  "type": "string",
+                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                 }
                               },
                               "required": [
@@ -843,7 +1230,7 @@
                                   {
                                     "type": "array",
                                     "items": {
-                                      "oneOf": [
+                                      "anyOf": [
                                         {
                                           "type": "string"
                                         }
@@ -866,7 +1253,7 @@
                                       {
                                         "type": "array",
                                         "items": {
-                                          "oneOf": [
+                                          "anyOf": [
                                             {
                                               "type": "string"
                                             }
@@ -883,6 +1270,53 @@
                                   "selector": {
                                     "type": "string",
                                     "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                  },
+                                  "elementText": {
+                                    "type": "string",
+                                    "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                  },
+                                  "elementId": {
+                                    "type": "string",
+                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementTestId": {
+                                    "type": "string",
+                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementClass": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    ],
+                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                  },
+                                  "elementAttribute": {
+                                    "type": "object",
+                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                    "additionalProperties": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "boolean"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "elementAria": {
+                                    "type": "string",
+                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                   }
                                 },
                                 "required": [
@@ -923,7 +1357,12 @@
                             "type": "object",
                             "required": [
                               "selector",
-                              "elementText"
+                              "elementText",
+                              "elementId",
+                              "elementTestId",
+                              "elementClass",
+                              "elementAttribute",
+                              "elementAria"
                             ],
                             "title": "Find element and type"
                           }
@@ -938,7 +1377,7 @@
                   "string": {
                     "title": "Find element (simple)",
                     "type": "string",
-                    "description": "Display text or selector of the element to find."
+                    "description": "Identifier for the element to find. Can be a selector, element text, ARIA name, ID, or test ID."
                   },
                   "object": {
                     "title": "Find element (detailed)",
@@ -953,17 +1392,85 @@
                         "required": [
                           "elementText"
                         ]
+                      },
+                      {
+                        "required": [
+                          "elementId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementTestId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementClass"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementAttribute"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementAria"
+                        ]
                       }
                     ],
                     "additionalProperties": false,
                     "properties": {
                       "elementText": {
                         "type": "string",
-                        "description": "Display text of the element to find. If combined with `selector`, the element must match both the text and the selector."
+                        "description": "Display text of the element to find. If combined with other element finding fields, the element must match all specified criteria."
                       },
                       "selector": {
                         "type": "string",
-                        "description": "Selector of the element to find. If combined with `elementText`, the element must match both the text and the selector."
+                        "description": "Selector of the element to find. If combined with other element finding fields, the element must match all specified criteria."
+                      },
+                      "elementId": {
+                        "type": "string",
+                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementTestId": {
+                        "type": "string",
+                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementClass": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ],
+                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                      },
+                      "elementAttribute": {
+                        "type": "object",
+                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                        "additionalProperties": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "boolean"
+                            }
+                          ]
+                        }
+                      },
+                      "elementAria": {
+                        "type": "string",
+                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                       },
                       "timeout": {
                         "type": "integer",
@@ -986,7 +1493,7 @@
                               {
                                 "title": "Click element (simple)",
                                 "type": "string",
-                                "description": "Display text or selector of the element to find."
+                                "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                               },
                               {
                                 "title": "Click element (detailed)",
@@ -1000,6 +1507,31 @@
                                   {
                                     "required": [
                                       "elementText"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementId"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementTestId"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementClass"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementAttribute"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "elementAria"
                                     ]
                                   }
                                 ],
@@ -1015,11 +1547,54 @@
                                   },
                                   "elementText": {
                                     "type": "string",
-                                    "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                    "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                   },
                                   "selector": {
                                     "type": "string",
-                                    "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                    "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                  },
+                                  "elementId": {
+                                    "type": "string",
+                                    "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementTestId": {
+                                    "type": "string",
+                                    "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementClass": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    ],
+                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                  },
+                                  "elementAttribute": {
+                                    "type": "object",
+                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                    "additionalProperties": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "boolean"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "elementAria": {
+                                    "type": "string",
+                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                   }
                                 }
                               },
@@ -1032,7 +1607,7 @@
                                 "string": {
                                   "title": "Click element (simple)",
                                   "type": "string",
-                                  "description": "Display text or selector of the element to find."
+                                  "description": "Identifier for the element to click. Can be a selector, element text, ARIA name, ID, or test ID."
                                 },
                                 "button": {
                                   "description": "Kind of click to perform.",
@@ -1056,6 +1631,31 @@
                                       "required": [
                                         "elementText"
                                       ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementId"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementTestId"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementClass"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementAttribute"
+                                      ]
+                                    },
+                                    {
+                                      "required": [
+                                        "elementAria"
+                                      ]
                                     }
                                   ],
                                   "properties": {
@@ -1070,11 +1670,54 @@
                                     },
                                     "elementText": {
                                       "type": "string",
-                                      "description": "Display text of the element to click. If combined with `selector`, the element must match both the text and the selector."
+                                      "description": "Display text of the element to click. If combined with other element finding fields, the element must match all specified criteria."
                                     },
                                     "selector": {
                                       "type": "string",
-                                      "description": "Selector of the element to click. If combined with `elementText`, the element must match both the text and the selector."
+                                      "description": "Selector of the element to click. If combined with other element finding fields, the element must match all specified criteria."
+                                    },
+                                    "elementId": {
+                                      "type": "string",
+                                      "description": "ID attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementTestId": {
+                                      "type": "string",
+                                      "description": "data-testid attribute of the element to click. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementClass": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      ],
+                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                    },
+                                    "elementAttribute": {
+                                      "type": "object",
+                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                      "additionalProperties": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "number"
+                                          },
+                                          {
+                                            "type": "boolean"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "elementAria": {
+                                      "type": "string",
+                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                     }
                                   }
                                 }
@@ -1129,7 +1772,7 @@
                                   {
                                     "type": "array",
                                     "items": {
-                                      "oneOf": [
+                                      "anyOf": [
                                         {
                                           "type": "string"
                                         }
@@ -1152,7 +1795,7 @@
                                       {
                                         "type": "array",
                                         "items": {
-                                          "oneOf": [
+                                          "anyOf": [
                                             {
                                               "type": "string"
                                             }
@@ -1169,6 +1812,53 @@
                                   "selector": {
                                     "type": "string",
                                     "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                  },
+                                  "elementText": {
+                                    "type": "string",
+                                    "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                  },
+                                  "elementId": {
+                                    "type": "string",
+                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementTestId": {
+                                    "type": "string",
+                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "elementClass": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    ],
+                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                  },
+                                  "elementAttribute": {
+                                    "type": "object",
+                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                    "additionalProperties": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "number"
+                                        },
+                                        {
+                                          "type": "boolean"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "elementAria": {
+                                    "type": "string",
+                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                   }
                                 },
                                 "required": [
@@ -1189,7 +1879,7 @@
                                     {
                                       "type": "array",
                                       "items": {
-                                        "oneOf": [
+                                        "anyOf": [
                                           {
                                             "type": "string"
                                           }
@@ -1212,7 +1902,7 @@
                                         {
                                           "type": "array",
                                           "items": {
-                                            "oneOf": [
+                                            "anyOf": [
                                               {
                                                 "type": "string"
                                               }
@@ -1229,6 +1919,53 @@
                                     "selector": {
                                       "type": "string",
                                       "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                                    },
+                                    "elementText": {
+                                      "type": "string",
+                                      "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                                    },
+                                    "elementId": {
+                                      "type": "string",
+                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementTestId": {
+                                      "type": "string",
+                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                    },
+                                    "elementClass": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      ],
+                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                    },
+                                    "elementAttribute": {
+                                      "type": "object",
+                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                      "additionalProperties": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "number"
+                                          },
+                                          {
+                                            "type": "boolean"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "elementAria": {
+                                      "type": "string",
+                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                     }
                                   },
                                   "required": [
@@ -1269,7 +2006,12 @@
                               "type": "object",
                               "required": [
                                 "selector",
-                                "elementText"
+                                "elementText",
+                                "elementId",
+                                "elementTestId",
+                                "elementClass",
+                                "elementAttribute",
+                                "elementAria"
                               ],
                               "title": "Find element and type"
                             }
@@ -1311,6 +2053,19 @@
                     ],
                     "inputDelay": 100
                   }
+                },
+                {
+                  "elementId": "/^user-[0-9]+$/",
+                  "elementClass": [
+                    "admin",
+                    "/^level-[1-5]$/"
+                  ],
+                  "elementAttribute": {
+                    "data-active": true,
+                    "data-score": "/^[0-9]+$/"
+                  },
+                  "timeout": 8000,
+                  "moveTo": false
                 }
               ]
             }
@@ -1946,7 +2701,7 @@
                       "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                       "type": "array",
                       "items": {
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "type": "integer"
                           }
@@ -2070,6 +2825,14 @@
                             }
                           ],
                           "default": {}
+                        },
+                        "required": {
+                          "type": "array",
+                          "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                          "items": {
+                            "type": "string"
+                          },
+                          "default": []
                         }
                       },
                       "title": "Response"
@@ -2337,7 +3100,7 @@
                         "description": "Accepted status codes. If the specified URL returns a code other than what is specified here, the action fails.",
                         "type": "array",
                         "items": {
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "type": "integer"
                             }
@@ -2461,6 +3224,14 @@
                               }
                             ],
                             "default": {}
+                          },
+                          "required": {
+                            "type": "array",
+                            "description": "Array of field paths that must exist in the response body. Uses dot notation for nested fields (e.g., 'user.name') and bracket notation for array indices (e.g., 'items[0].id'). Fields must be present but may have any value including null.",
+                            "items": {
+                              "type": "string"
+                            },
+                            "default": []
                           }
                         },
                         "title": "Response"
@@ -2642,6 +3413,52 @@
                   "request": {
                     "headers": "Content-Type: application/json\\nAuthorization: Bearer token"
                   }
+                },
+                {
+                  "url": "https://api.example.com/users/123",
+                  "response": {
+                    "required": [
+                      "id",
+                      "email",
+                      "createdAt"
+                    ]
+                  }
+                },
+                {
+                  "url": "https://api.example.com/users/123",
+                  "response": {
+                    "required": [
+                      "user.profile.name",
+                      "user.profile.avatar",
+                      "user.settings.notifications"
+                    ]
+                  }
+                },
+                {
+                  "url": "https://api.example.com/orders",
+                  "response": {
+                    "required": [
+                      "orders[0].id",
+                      "orders[0].total",
+                      "orders[0].items[0].productId"
+                    ]
+                  }
+                },
+                {
+                  "url": "https://api.example.com/users",
+                  "response": {
+                    "required": [
+                      "sessionToken",
+                      "expiresAt",
+                      "user.id"
+                    ],
+                    "body": {
+                      "status": "success",
+                      "user": {
+                        "role": "admin"
+                      }
+                    }
+                  }
                 }
               ]
             }
@@ -2744,7 +3561,7 @@
                       "type": "array",
                       "description": "Arguments for the command.",
                       "items": {
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "type": "string"
                           }
@@ -2761,7 +3578,7 @@
                       "type": "array",
                       "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                       "items": {
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "type": "integer"
                           }
@@ -2834,7 +3651,7 @@
                         "type": "array",
                         "description": "Arguments for the command.",
                         "items": {
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "type": "string"
                             }
@@ -2851,7 +3668,7 @@
                         "type": "array",
                         "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                         "items": {
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "type": "integer"
                             }
@@ -3052,7 +3869,7 @@
                       "type": "array",
                       "description": "Arguments for the command.",
                       "items": {
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "type": "string"
                           }
@@ -3069,7 +3886,7 @@
                       "type": "array",
                       "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                       "items": {
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "type": "integer"
                           }
@@ -3143,7 +3960,7 @@
                         "type": "array",
                         "description": "Arguments for the command.",
                         "items": {
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "type": "string"
                             }
@@ -3160,7 +3977,7 @@
                         "type": "array",
                         "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
                         "items": {
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "type": "integer"
                             }
@@ -3331,7 +4148,7 @@
                     {
                       "type": "array",
                       "items": {
-                        "oneOf": [
+                        "anyOf": [
                           {
                             "type": "string"
                           }
@@ -3354,7 +4171,7 @@
                         {
                           "type": "array",
                           "items": {
-                            "oneOf": [
+                            "anyOf": [
                               {
                                 "type": "string"
                               }
@@ -3371,6 +4188,53 @@
                     "selector": {
                       "type": "string",
                       "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                    },
+                    "elementText": {
+                      "type": "string",
+                      "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                    },
+                    "elementId": {
+                      "type": "string",
+                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementTestId": {
+                      "type": "string",
+                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementClass": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                    },
+                    "elementAttribute": {
+                      "type": "object",
+                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    },
+                    "elementAria": {
+                      "type": "string",
+                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                     }
                   },
                   "required": [
@@ -3391,7 +4255,7 @@
                       {
                         "type": "array",
                         "items": {
-                          "oneOf": [
+                          "anyOf": [
                             {
                               "type": "string"
                             }
@@ -3414,7 +4278,7 @@
                           {
                             "type": "array",
                             "items": {
-                              "oneOf": [
+                              "anyOf": [
                                 {
                                   "type": "string"
                                 }
@@ -3431,6 +4295,53 @@
                       "selector": {
                         "type": "string",
                         "description": "Selector for the element to type into. If not specified, the typing occurs in the active element."
+                      },
+                      "elementText": {
+                        "type": "string",
+                        "description": "Display text of the element to type into. If combined with other element finding fields, the element must match all specified criteria."
+                      },
+                      "elementId": {
+                        "type": "string",
+                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementTestId": {
+                        "type": "string",
+                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementClass": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ],
+                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                      },
+                      "elementAttribute": {
+                        "type": "object",
+                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                        "additionalProperties": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "boolean"
+                            }
+                          ]
+                        }
+                      },
+                      "elementAria": {
+                        "type": "string",
+                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                       }
                     },
                     "required": [
@@ -3610,6 +4521,31 @@
                               "required": [
                                 "elementText"
                               ]
+                            },
+                            {
+                              "required": [
+                                "elementId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "elementTestId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "elementClass"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "elementAttribute"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "elementAria"
+                              ]
                             }
                           ],
                           "properties": {
@@ -3620,6 +4556,49 @@
                             "selector": {
                               "type": "string",
                               "description": "Selector of the element to screenshot."
+                            },
+                            "elementId": {
+                              "type": "string",
+                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                            },
+                            "elementTestId": {
+                              "type": "string",
+                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                            },
+                            "elementClass": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              ],
+                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                            },
+                            "elementAttribute": {
+                              "type": "object",
+                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                              "additionalProperties": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "boolean"
+                                  }
+                                ]
+                              }
+                            },
+                            "elementAria": {
+                              "type": "string",
+                              "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                             },
                             "padding": {
                               "anyOf": [
@@ -3738,6 +4717,31 @@
                                 "required": [
                                   "elementText"
                                 ]
+                              },
+                              {
+                                "required": [
+                                  "elementId"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "elementTestId"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "elementClass"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "elementAttribute"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "elementAria"
+                                ]
                               }
                             ],
                             "properties": {
@@ -3748,6 +4752,49 @@
                               "selector": {
                                 "type": "string",
                                 "description": "Selector of the element to screenshot."
+                              },
+                              "elementId": {
+                                "type": "string",
+                                "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                              },
+                              "elementTestId": {
+                                "type": "string",
+                                "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                              },
+                              "elementClass": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                ],
+                                "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                              },
+                              "elementAttribute": {
+                                "type": "object",
+                                "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                "additionalProperties": {
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "number"
+                                    },
+                                    {
+                                      "type": "boolean"
+                                    }
+                                  ]
+                                }
+                              },
+                              "elementAria": {
+                                "type": "string",
+                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                               },
                               "padding": {
                                 "anyOf": [
@@ -3805,6 +4852,31 @@
                         "required": [
                           "elementText"
                         ]
+                      },
+                      {
+                        "required": [
+                          "elementId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementTestId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementClass"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementAttribute"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementAria"
+                        ]
                       }
                     ],
                     "properties": {
@@ -3815,6 +4887,49 @@
                       "selector": {
                         "type": "string",
                         "description": "Selector of the element to screenshot."
+                      },
+                      "elementId": {
+                        "type": "string",
+                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementTestId": {
+                        "type": "string",
+                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "elementClass": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ],
+                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                      },
+                      "elementAttribute": {
+                        "type": "object",
+                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                        "additionalProperties": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "boolean"
+                            }
+                          ]
+                        }
+                      },
+                      "elementAria": {
+                        "type": "string",
+                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                       },
                       "padding": {
                         "anyOf": [
@@ -3916,6 +5031,322 @@
             }
           },
           "title": "screenshot"
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "dynamicDefaults": {
+            "stepId": "uuid"
+          },
+          "properties": {
+            "$schema": {
+              "description": "JSON Schema for this object.",
+              "type": "string",
+              "enum": [
+                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+              ]
+            },
+            "stepId": {
+              "type": "string",
+              "description": "ID of the step."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the step."
+            },
+            "unsafe": {
+              "type": "boolean",
+              "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+              "default": false
+            },
+            "outputs": {
+              "type": "object",
+              "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+              "default": {},
+              "patternProperties": {
+                "^[A-Za-z0-9_]+$": {
+                  "type": "string",
+                  "description": "Runtime expression for a user-defined output value."
+                }
+              },
+              "title": "Outputs (step)"
+            },
+            "variables": {
+              "type": "object",
+              "description": "Environment variables to set from user-defined expressions.",
+              "default": {},
+              "patternProperties": {
+                "^[A-Za-z0-9_]+$": {
+                  "type": "string",
+                  "description": "Runtime expression for a user-defined output value."
+                }
+              },
+              "title": "Variables (step)"
+            },
+            "breakpoint": {
+              "type": "boolean",
+              "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+              "default": false
+            }
+          },
+          "title": "Common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "saveCookie"
+          ],
+          "properties": {
+            "saveCookie": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "title": "saveCookie",
+              "description": "Save a specific browser cookie to a file or environment variable for later reuse.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "title": "Cookie name",
+                  "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
+                  "pattern": "^[A-Za-z0-9_./\\-]+$",
+                  "transform": [
+                    "trim"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$schema": {
+                      "description": "Optional self-describing schema URI for linters",
+                      "type": "string",
+                      "format": "uri-reference"
+                    },
+                    "name": {
+                      "type": "string",
+                      "title": "Cookie name",
+                      "description": "Name of the specific cookie to save.",
+                      "pattern": "^[A-Za-z0-9_.-]+$",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "variable": {
+                      "type": "string",
+                      "title": "Environment variable name",
+                      "description": "Environment variable name to store the cookie as JSON string.",
+                      "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Cookie file path",
+                      "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "directory": {
+                      "type": "string",
+                      "title": "Directory path",
+                      "description": "Directory to save the cookie file. If not specified, uses output directory.",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "overwrite": {
+                      "type": "boolean",
+                      "title": "Overwrite existing file",
+                      "description": "Whether to overwrite existing cookie file.",
+                      "default": false
+                    },
+                    "domain": {
+                      "type": "string",
+                      "title": "Cookie domain",
+                      "description": "Specific domain to filter the cookie by (optional).",
+                      "transform": [
+                        "trim"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "anyOf": [
+                    {
+                      "required": [
+                        "path"
+                      ],
+                      "not": {
+                        "required": [
+                          "variable"
+                        ]
+                      }
+                    },
+                    {
+                      "required": [
+                        "variable"
+                      ],
+                      "not": {
+                        "anyOf": [
+                          {
+                            "required": [
+                              "path"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "directory"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "title": "Save cookie (detailed)"
+                }
+              ],
+              "components": {
+                "schemas": {
+                  "string": {
+                    "type": "string",
+                    "title": "Cookie name",
+                    "description": "Name of the specific cookie to save. Will be saved to a default file path or environment variable.",
+                    "pattern": "^[A-Za-z0-9_./\\-]+$",
+                    "transform": [
+                      "trim"
+                    ]
+                  },
+                  "object": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "$schema": {
+                        "description": "Optional self-describing schema URI for linters",
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "name": {
+                        "type": "string",
+                        "title": "Cookie name",
+                        "description": "Name of the specific cookie to save.",
+                        "pattern": "^[A-Za-z0-9_.-]+$",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "variable": {
+                        "type": "string",
+                        "title": "Environment variable name",
+                        "description": "Environment variable name to store the cookie as JSON string.",
+                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "path": {
+                        "type": "string",
+                        "title": "Cookie file path",
+                        "description": "File path to save the cookie, relative to directory. Uses Netscape cookie format.",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "directory": {
+                        "type": "string",
+                        "title": "Directory path",
+                        "description": "Directory to save the cookie file. If not specified, uses output directory.",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "overwrite": {
+                        "type": "boolean",
+                        "title": "Overwrite existing file",
+                        "description": "Whether to overwrite existing cookie file.",
+                        "default": false
+                      },
+                      "domain": {
+                        "type": "string",
+                        "title": "Cookie domain",
+                        "description": "Specific domain to filter the cookie by (optional).",
+                        "transform": [
+                          "trim"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "anyOf": [
+                      {
+                        "required": [
+                          "path"
+                        ],
+                        "not": {
+                          "required": [
+                            "variable"
+                          ]
+                        }
+                      },
+                      {
+                        "required": [
+                          "variable"
+                        ],
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "path"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "directory"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "title": "Save cookie (detailed)"
+                  }
+                }
+              },
+              "examples": [
+                "session_token",
+                "test_env_cookie",
+                {
+                  "name": "auth_cookie",
+                  "path": "auth-cookie.txt"
+                },
+                {
+                  "name": "session_token",
+                  "variable": "SESSION_TOKEN"
+                },
+                {
+                  "name": "test_cookie",
+                  "path": "test-cookie.txt",
+                  "overwrite": true
+                },
+                {
+                  "name": "user_session",
+                  "path": "user-session.txt",
+                  "directory": "./test-data",
+                  "overwrite": true
+                },
+                {
+                  "name": "login_token",
+                  "path": "login-token.txt",
+                  "domain": "app.example.com"
+                }
+              ]
+            }
+          },
+          "title": "saveCookie"
         }
       ]
     },
@@ -4317,6 +5748,600 @@
           "title": "Common"
         },
         {
+          "title": "dragAndDrop",
+          "type": "object",
+          "required": [
+            "dragAndDrop"
+          ],
+          "properties": {
+            "dragAndDrop": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "title": "dragAndDrop",
+              "description": "Drag and drop an element from source to target.",
+              "type": "object",
+              "required": [
+                "source",
+                "target"
+              ],
+              "properties": {
+                "source": {
+                  "description": "The element to drag.",
+                  "anyOf": [
+                    {
+                      "title": "Element (simple)",
+                      "type": "string",
+                      "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
+                    },
+                    {
+                      "title": "Element (detailed)",
+                      "type": "object",
+                      "anyOf": [
+                        {
+                          "required": [
+                            "selector"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "elementText"
+                          ]
+                        }
+                      ],
+                      "properties": {
+                        "elementText": {
+                          "type": "string",
+                          "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
+                        },
+                        "selector": {
+                          "type": "string",
+                          "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                        },
+                        "timeout": {
+                          "type": "integer",
+                          "description": "Max duration in milliseconds to wait for the element to exist.",
+                          "default": 5000
+                        }
+                      }
+                    }
+                  ]
+                },
+                "target": {
+                  "description": "The target location to drop the element.",
+                  "anyOf": [
+                    {
+                      "title": "Element (simple)",
+                      "type": "string",
+                      "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
+                    },
+                    {
+                      "title": "Element (detailed)",
+                      "type": "object",
+                      "anyOf": [
+                        {
+                          "required": [
+                            "selector"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "elementText"
+                          ]
+                        }
+                      ],
+                      "properties": {
+                        "elementText": {
+                          "type": "string",
+                          "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
+                        },
+                        "selector": {
+                          "type": "string",
+                          "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                        },
+                        "timeout": {
+                          "type": "integer",
+                          "description": "Max duration in milliseconds to wait for the element to exist.",
+                          "default": 5000
+                        }
+                      }
+                    }
+                  ]
+                },
+                "duration": {
+                  "type": "integer",
+                  "description": "Duration of the drag operation in milliseconds.",
+                  "default": 1000,
+                  "minimum": 0
+                }
+              },
+              "components": {
+                "schemas": {
+                  "elementSpecification": {
+                    "anyOf": [
+                      {
+                        "title": "Element (simple)",
+                        "type": "string",
+                        "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
+                      },
+                      {
+                        "title": "Element (detailed)",
+                        "type": "object",
+                        "anyOf": [
+                          {
+                            "required": [
+                              "selector"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "elementText"
+                            ]
+                          }
+                        ],
+                        "properties": {
+                          "elementText": {
+                            "type": "string",
+                            "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
+                          },
+                          "selector": {
+                            "type": "string",
+                            "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                          },
+                          "timeout": {
+                            "type": "integer",
+                            "description": "Max duration in milliseconds to wait for the element to exist.",
+                            "default": 5000
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "string": {
+                    "title": "Element (simple)",
+                    "type": "string",
+                    "description": "Display text, selector, or regex pattern (enclosed in forward slashes) of the element."
+                  },
+                  "object": {
+                    "title": "Element (detailed)",
+                    "type": "object",
+                    "anyOf": [
+                      {
+                        "required": [
+                          "selector"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "elementText"
+                        ]
+                      }
+                    ],
+                    "properties": {
+                      "elementText": {
+                        "type": "string",
+                        "description": "Display text or regex pattern (enclosed in forward slashes) of the element. If combined with `selector`, the element must match both the text and the selector."
+                      },
+                      "selector": {
+                        "type": "string",
+                        "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                      },
+                      "timeout": {
+                        "type": "integer",
+                        "description": "Max duration in milliseconds to wait for the element to exist.",
+                        "default": 5000
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": [
+                {
+                  "source": "Table",
+                  "target": "#canvas"
+                },
+                {
+                  "source": ".draggable-block",
+                  "target": ".drop-zone",
+                  "duration": 2000
+                },
+                {
+                  "source": {
+                    "selector": ".widget",
+                    "elementText": "Data Table"
+                  },
+                  "target": {
+                    "selector": "#design-canvas"
+                  },
+                  "duration": 500
+                },
+                {
+                  "source": {
+                    "selector": ".draggable",
+                    "timeout": 10000
+                  },
+                  "target": {
+                    "elementText": "Drop Zone",
+                    "timeout": 5000
+                  }
+                },
+                {
+                  "source": "/Widget Item.*/",
+                  "target": "#canvas"
+                },
+                {
+                  "source": {
+                    "selector": ".draggable",
+                    "elementText": "/Button [0-9]+/"
+                  },
+                  "target": {
+                    "elementText": "/Drop Zone.*/"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "dynamicDefaults": {
+            "stepId": "uuid"
+          },
+          "properties": {
+            "$schema": {
+              "description": "JSON Schema for this object.",
+              "type": "string",
+              "enum": [
+                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+              ]
+            },
+            "stepId": {
+              "type": "string",
+              "description": "ID of the step."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the step."
+            },
+            "unsafe": {
+              "type": "boolean",
+              "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+              "default": false
+            },
+            "outputs": {
+              "type": "object",
+              "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+              "default": {},
+              "patternProperties": {
+                "^[A-Za-z0-9_]+$": {
+                  "type": "string",
+                  "description": "Runtime expression for a user-defined output value."
+                }
+              },
+              "title": "Outputs (step)"
+            },
+            "variables": {
+              "type": "object",
+              "description": "Environment variables to set from user-defined expressions.",
+              "default": {},
+              "patternProperties": {
+                "^[A-Za-z0-9_]+$": {
+                  "type": "string",
+                  "description": "Runtime expression for a user-defined output value."
+                }
+              },
+              "title": "Variables (step)"
+            },
+            "breakpoint": {
+              "type": "boolean",
+              "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+              "default": false
+            }
+          },
+          "title": "Common"
+        },
+        {
+          "title": "loadCookie",
+          "type": "object",
+          "required": [
+            "loadCookie"
+          ],
+          "properties": {
+            "loadCookie": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "title": "loadCookie",
+              "description": "Load a specific cookie from a file or environment variable into the browser.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "title": "Cookie name or file path",
+                  "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                  "pattern": "^[A-Za-z0-9_./\\-]+$",
+                  "transform": [
+                    "trim"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "name"
+                  ],
+                  "anyOf": [
+                    {
+                      "required": [
+                        "path"
+                      ],
+                      "not": {
+                        "required": [
+                          "variable"
+                        ]
+                      }
+                    },
+                    {
+                      "required": [
+                        "variable"
+                      ],
+                      "not": {
+                        "anyOf": [
+                          {
+                            "required": [
+                              "path"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "directory"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "properties": {
+                    "$schema": {
+                      "description": "Optional self-describing schema URI for linters",
+                      "type": "string",
+                      "format": "uri-reference"
+                    },
+                    "name": {
+                      "type": "string",
+                      "title": "Cookie name",
+                      "description": "Name of the specific cookie to load.",
+                      "pattern": "^[A-Za-z0-9_.-]+$",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "variable": {
+                      "type": "string",
+                      "title": "Environment variable name",
+                      "description": "Environment variable name containing the cookie as JSON string.",
+                      "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "path": {
+                      "type": "string",
+                      "title": "Cookie file path",
+                      "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "directory": {
+                      "type": "string",
+                      "title": "Directory path",
+                      "description": "Directory containing the cookie file.",
+                      "transform": [
+                        "trim"
+                      ]
+                    },
+                    "domain": {
+                      "type": "string",
+                      "title": "Cookie domain",
+                      "description": "Specific domain to filter the cookie by when loading from multi-cookie file (optional).",
+                      "transform": [
+                        "trim"
+                      ]
+                    }
+                  },
+                  "title": "Load cookie (detailed)"
+                }
+              ],
+              "components": {
+                "schemas": {
+                  "string": {
+                    "type": "string",
+                    "title": "Cookie name or file path",
+                    "description": "Name of the specific cookie to load from default location, or file path to cookie file.",
+                    "pattern": "^[A-Za-z0-9_./\\-]+$",
+                    "transform": [
+                      "trim"
+                    ]
+                  },
+                  "object": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name"
+                    ],
+                    "anyOf": [
+                      {
+                        "required": [
+                          "path"
+                        ],
+                        "not": {
+                          "required": [
+                            "variable"
+                          ]
+                        }
+                      },
+                      {
+                        "required": [
+                          "variable"
+                        ],
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "path"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "directory"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "properties": {
+                      "$schema": {
+                        "description": "Optional self-describing schema URI for linters",
+                        "type": "string",
+                        "format": "uri-reference"
+                      },
+                      "name": {
+                        "type": "string",
+                        "title": "Cookie name",
+                        "description": "Name of the specific cookie to load.",
+                        "pattern": "^[A-Za-z0-9_.-]+$",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "variable": {
+                        "type": "string",
+                        "title": "Environment variable name",
+                        "description": "Environment variable name containing the cookie as JSON string.",
+                        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "path": {
+                        "type": "string",
+                        "title": "Cookie file path",
+                        "description": "File path to cookie file, relative to directory. Supports Netscape cookie format.",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "directory": {
+                        "type": "string",
+                        "title": "Directory path",
+                        "description": "Directory containing the cookie file.",
+                        "transform": [
+                          "trim"
+                        ]
+                      },
+                      "domain": {
+                        "type": "string",
+                        "title": "Cookie domain",
+                        "description": "Specific domain to filter the cookie by when loading from multi-cookie file (optional).",
+                        "transform": [
+                          "trim"
+                        ]
+                      }
+                    },
+                    "title": "Load cookie (detailed)"
+                  }
+                }
+              },
+              "examples": [
+                "session_token",
+                "./test-data/auth-session.txt",
+                "test_env_cookie",
+                {
+                  "name": "auth_cookie",
+                  "variable": "AUTH_COOKIE"
+                },
+                {
+                  "name": "test_cookie",
+                  "path": "test-cookie.txt"
+                },
+                {
+                  "name": "session_token",
+                  "path": "session-token.txt",
+                  "directory": "./test-data"
+                },
+                {
+                  "name": "user_session",
+                  "path": "saved-cookies.txt",
+                  "domain": "app.example.com"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "type": "object",
+          "dynamicDefaults": {
+            "stepId": "uuid"
+          },
+          "properties": {
+            "$schema": {
+              "description": "JSON Schema for this object.",
+              "type": "string",
+              "enum": [
+                "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+              ]
+            },
+            "stepId": {
+              "type": "string",
+              "description": "ID of the step."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the step."
+            },
+            "unsafe": {
+              "type": "boolean",
+              "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+              "default": false
+            },
+            "outputs": {
+              "type": "object",
+              "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+              "default": {},
+              "patternProperties": {
+                "^[A-Za-z0-9_]+$": {
+                  "type": "string",
+                  "description": "Runtime expression for a user-defined output value."
+                }
+              },
+              "title": "Outputs (step)"
+            },
+            "variables": {
+              "type": "object",
+              "description": "Environment variables to set from user-defined expressions.",
+              "default": {},
+              "patternProperties": {
+                "^[A-Za-z0-9_]+$": {
+                  "type": "string",
+                  "description": "Runtime expression for a user-defined output value."
+                }
+              },
+              "title": "Variables (step)"
+            },
+            "breakpoint": {
+              "type": "boolean",
+              "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+              "default": false
+            }
+          },
+          "title": "Common"
+        },
+        {
           "title": "wait",
           "type": "object",
           "required": [
@@ -4494,6 +6519,27 @@
     },
     {
       "loadVariables": "variables.env"
+    },
+    {
+      "saveCookie": "session_token"
+    },
+    {
+      "saveCookie": {
+        "name": "auth_cookie",
+        "path": "auth-session.txt",
+        "directory": "./test-data",
+        "overwrite": true
+      }
+    },
+    {
+      "loadCookie": "session_token"
+    },
+    {
+      "loadCookie": {
+        "name": "auth_cookie",
+        "path": "auth-session.txt",
+        "directory": "./test-data"
+      }
     },
     {
       "find": "Find me!"
@@ -4724,6 +6770,16 @@
     {
       "checkLink": "https://www.google.com",
       "breakpoint": false
+    },
+    {
+      "dragAndDrop": {
+        "source": {
+          "selector": "#sourceElement"
+        },
+        "target": {
+          "selector": "#targetElement"
+        }
+      }
     }
   ]
 }

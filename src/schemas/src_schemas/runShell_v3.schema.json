@@ -35,7 +35,7 @@
             "type": "array",
             "description": "Arguments for the command.",
             "items": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "type": "string"
                 }
@@ -52,7 +52,7 @@
             "type": "array",
             "description": "Expected exit codes of the command. If the command's actual exit code isn't in this list, the step fails.",
             "items": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "type": "integer"
                 }

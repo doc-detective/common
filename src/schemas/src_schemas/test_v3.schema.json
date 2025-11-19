@@ -25,7 +25,7 @@
       "type": "array",
       "description": "Contexts to run the test in. Overrides contexts defined at the config and spec levels.",
       "items": {
-        "oneOf": [
+        "anyOf": [
           {
             "$ref": "context_v3.schema.json#"
           }

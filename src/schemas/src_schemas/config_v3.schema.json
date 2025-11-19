@@ -101,6 +101,16 @@
       "type": "boolean",
       "description": "Whether or not to run potentially unsafe steps, such as those that might modify files or system state."
     },
+    "crawl": {
+      "description": "If `true`, crawls sitemap.xml files specified by URL to find additional files to test.",
+      "type": "boolean",
+      "default": false
+    },
+    "processDitaMaps": {
+      "description": "If `true`, processes DITA maps and includes generated files as inputs.",
+      "type": "boolean",
+      "default": true
+    },
     "logLevel": {
       "description": "Amount of detail to output when performing an operation.",
       "type": "string",
@@ -112,7 +122,7 @@
     },
     "fileTypes": {
       "description": "Configuration for file types and their markup detection.",
-      "default": ["markdown", "asciidoc", "html"],
+      "default": ["markdown", "asciidoc", "html", "dita"],
       "anyOf": [
         {
           "type": "array",
@@ -123,7 +133,7 @@
                 "$comment": "Simple mode: Reference predefined templates by name.",
                 "title": "File type (predefined)",
                 "type": "string",
-                "enum": ["markdown", "asciidoc", "html"]
+                "enum": ["markdown", "asciidoc", "html", "dita"]
               },
               {
                 "$comment": "Custom mode: Extend predefined templates or write whole new ones.",
@@ -200,6 +210,18 @@
       "properties": {
         "openApi": {
           "$ref": "test_v3.schema.json#/properties/openApi"
+        },
+        "docDetectiveApi": {
+          "type": "object",
+          "description": "Configuration for Doc Detective Orchestration API integration.",
+          "additionalProperties": false,
+          "properties": {
+            "apiKey": {
+              "type": "string",
+              "description": "API key for authenticating with the Doc Detective Orchestration API."
+            }
+          },
+          "title": "Doc Detective Orchestration API"
         }
       },
       "title": "Integrations options"
@@ -329,10 +351,12 @@
           "find",
           "goTo",
           "httpRequest",
+          "loadCookie",
           "loadVariables",
           "record",
           "runCode",
           "runShell",
+          "saveCookie",
           "screenshot",
           "stopRecord",
           "type",
@@ -489,6 +513,16 @@
     },
     {
       "debug": "stepThrough"
+    },
+    {
+      "integrations": {
+        "docDetectiveApi": {
+          "apiKey": "your-api-key-here"
+        }
+      }
+    },
+    {
+      "crawl": true
     }
   ]
 }
