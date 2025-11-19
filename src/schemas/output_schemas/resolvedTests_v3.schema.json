@@ -2973,6 +2973,72 @@
                                                             "transform": [
                                                               "trim"
                                                             ]
+                                                          },
+                                                          "timeout": {
+                                                            "type": "integer",
+                                                            "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                            "default": 30000,
+                                                            "minimum": 0
+                                                          },
+                                                          "waitUntil": {
+                                                            "type": "object",
+                                                            "description": "Configuration for waiting conditions after navigation.",
+                                                            "additionalProperties": false,
+                                                            "properties": {
+                                                              "networkIdleTime": {
+                                                                "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                                "anyOf": [
+                                                                  {
+                                                                    "type": "integer",
+                                                                    "minimum": 0
+                                                                  },
+                                                                  {
+                                                                    "type": "null"
+                                                                  }
+                                                                ],
+                                                                "default": 500
+                                                              },
+                                                              "domIdleTime": {
+                                                                "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                                "anyOf": [
+                                                                  {
+                                                                    "type": "integer",
+                                                                    "minimum": 0
+                                                                  },
+                                                                  {
+                                                                    "type": "null"
+                                                                  }
+                                                                ],
+                                                                "default": 1000
+                                                              },
+                                                              "find": {
+                                                                "type": "object",
+                                                                "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                                "additionalProperties": false,
+                                                                "anyOf": [
+                                                                  {
+                                                                    "required": [
+                                                                      "selector"
+                                                                    ]
+                                                                  },
+                                                                  {
+                                                                    "required": [
+                                                                      "elementText"
+                                                                    ]
+                                                                  }
+                                                                ],
+                                                                "properties": {
+                                                                  "selector": {
+                                                                    "type": "string",
+                                                                    "description": "CSS selector for the element to wait for."
+                                                                  },
+                                                                  "elementText": {
+                                                                    "type": "string",
+                                                                    "description": "Text content the element must contain."
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
                                                           }
                                                         },
                                                         "title": "Go to URL (detailed)"
@@ -3011,6 +3077,72 @@
                                                               "transform": [
                                                                 "trim"
                                                               ]
+                                                            },
+                                                            "timeout": {
+                                                              "type": "integer",
+                                                              "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                              "default": 30000,
+                                                              "minimum": 0
+                                                            },
+                                                            "waitUntil": {
+                                                              "type": "object",
+                                                              "description": "Configuration for waiting conditions after navigation.",
+                                                              "additionalProperties": false,
+                                                              "properties": {
+                                                                "networkIdleTime": {
+                                                                  "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                                  "anyOf": [
+                                                                    {
+                                                                      "type": "integer",
+                                                                      "minimum": 0
+                                                                    },
+                                                                    {
+                                                                      "type": "null"
+                                                                    }
+                                                                  ],
+                                                                  "default": 500
+                                                                },
+                                                                "domIdleTime": {
+                                                                  "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                                  "anyOf": [
+                                                                    {
+                                                                      "type": "integer",
+                                                                      "minimum": 0
+                                                                    },
+                                                                    {
+                                                                      "type": "null"
+                                                                    }
+                                                                  ],
+                                                                  "default": 1000
+                                                                },
+                                                                "find": {
+                                                                  "type": "object",
+                                                                  "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                                  "additionalProperties": false,
+                                                                  "anyOf": [
+                                                                    {
+                                                                      "required": [
+                                                                        "selector"
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "required": [
+                                                                        "elementText"
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "properties": {
+                                                                    "selector": {
+                                                                      "type": "string",
+                                                                      "description": "CSS selector for the element to wait for."
+                                                                    },
+                                                                    "elementText": {
+                                                                      "type": "string",
+                                                                      "description": "Text content the element must contain."
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
                                                             }
                                                           },
                                                           "title": "Go to URL (detailed)"
@@ -3025,7 +3157,41 @@
                                                       },
                                                       {
                                                         "url": "/search",
-                                                        "origin": "www.google.com"
+                                                        "origin": "https://www.google.com"
+                                                      },
+                                                      {
+                                                        "url": "https://www.example.com",
+                                                        "waitUntil": {
+                                                          "networkIdleTime": 500
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://www.example.com/dashboard",
+                                                        "waitUntil": {
+                                                          "find": {
+                                                            "selector": "[data-testid='dashboard-loaded']"
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://www.example.com/app",
+                                                        "timeout": 60000,
+                                                        "waitUntil": {
+                                                          "networkIdleTime": 500,
+                                                          "domIdleTime": 1000,
+                                                          "find": {
+                                                            "selector": ".main-content",
+                                                            "elementText": "Dashboard"
+                                                          }
+                                                        }
+                                                      },
+                                                      {
+                                                        "url": "https://www.example.com/status",
+                                                        "waitUntil": {
+                                                          "find": {
+                                                            "elementText": "System operational"
+                                                          }
+                                                        }
                                                       }
                                                     ]
                                                   }
@@ -10281,6 +10447,72 @@
                                               "transform": [
                                                 "trim"
                                               ]
+                                            },
+                                            "timeout": {
+                                              "type": "integer",
+                                              "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                              "default": 30000,
+                                              "minimum": 0
+                                            },
+                                            "waitUntil": {
+                                              "type": "object",
+                                              "description": "Configuration for waiting conditions after navigation.",
+                                              "additionalProperties": false,
+                                              "properties": {
+                                                "networkIdleTime": {
+                                                  "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "integer",
+                                                      "minimum": 0
+                                                    },
+                                                    {
+                                                      "type": "null"
+                                                    }
+                                                  ],
+                                                  "default": 500
+                                                },
+                                                "domIdleTime": {
+                                                  "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "integer",
+                                                      "minimum": 0
+                                                    },
+                                                    {
+                                                      "type": "null"
+                                                    }
+                                                  ],
+                                                  "default": 1000
+                                                },
+                                                "find": {
+                                                  "type": "object",
+                                                  "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                  "additionalProperties": false,
+                                                  "anyOf": [
+                                                    {
+                                                      "required": [
+                                                        "selector"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementText"
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "properties": {
+                                                    "selector": {
+                                                      "type": "string",
+                                                      "description": "CSS selector for the element to wait for."
+                                                    },
+                                                    "elementText": {
+                                                      "type": "string",
+                                                      "description": "Text content the element must contain."
+                                                    }
+                                                  }
+                                                }
+                                              }
                                             }
                                           },
                                           "title": "Go to URL (detailed)"
@@ -10319,6 +10551,72 @@
                                                 "transform": [
                                                   "trim"
                                                 ]
+                                              },
+                                              "timeout": {
+                                                "type": "integer",
+                                                "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                "default": 30000,
+                                                "minimum": 0
+                                              },
+                                              "waitUntil": {
+                                                "type": "object",
+                                                "description": "Configuration for waiting conditions after navigation.",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                  "networkIdleTime": {
+                                                    "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "integer",
+                                                        "minimum": 0
+                                                      },
+                                                      {
+                                                        "type": "null"
+                                                      }
+                                                    ],
+                                                    "default": 500
+                                                  },
+                                                  "domIdleTime": {
+                                                    "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "integer",
+                                                        "minimum": 0
+                                                      },
+                                                      {
+                                                        "type": "null"
+                                                      }
+                                                    ],
+                                                    "default": 1000
+                                                  },
+                                                  "find": {
+                                                    "type": "object",
+                                                    "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                    "additionalProperties": false,
+                                                    "anyOf": [
+                                                      {
+                                                        "required": [
+                                                          "selector"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementText"
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "properties": {
+                                                      "selector": {
+                                                        "type": "string",
+                                                        "description": "CSS selector for the element to wait for."
+                                                      },
+                                                      "elementText": {
+                                                        "type": "string",
+                                                        "description": "Text content the element must contain."
+                                                      }
+                                                    }
+                                                  }
+                                                }
                                               }
                                             },
                                             "title": "Go to URL (detailed)"
@@ -10333,7 +10631,41 @@
                                         },
                                         {
                                           "url": "/search",
-                                          "origin": "www.google.com"
+                                          "origin": "https://www.google.com"
+                                        },
+                                        {
+                                          "url": "https://www.example.com",
+                                          "waitUntil": {
+                                            "networkIdleTime": 500
+                                          }
+                                        },
+                                        {
+                                          "url": "https://www.example.com/dashboard",
+                                          "waitUntil": {
+                                            "find": {
+                                              "selector": "[data-testid='dashboard-loaded']"
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "url": "https://www.example.com/app",
+                                          "timeout": 60000,
+                                          "waitUntil": {
+                                            "networkIdleTime": 500,
+                                            "domIdleTime": 1000,
+                                            "find": {
+                                              "selector": ".main-content",
+                                              "elementText": "Dashboard"
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "url": "https://www.example.com/status",
+                                          "waitUntil": {
+                                            "find": {
+                                              "elementText": "System operational"
+                                            }
+                                          }
                                         }
                                       ]
                                     }
@@ -18358,6 +18690,72 @@
                                                 "transform": [
                                                   "trim"
                                                 ]
+                                              },
+                                              "timeout": {
+                                                "type": "integer",
+                                                "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                "default": 30000,
+                                                "minimum": 0
+                                              },
+                                              "waitUntil": {
+                                                "type": "object",
+                                                "description": "Configuration for waiting conditions after navigation.",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                  "networkIdleTime": {
+                                                    "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "integer",
+                                                        "minimum": 0
+                                                      },
+                                                      {
+                                                        "type": "null"
+                                                      }
+                                                    ],
+                                                    "default": 500
+                                                  },
+                                                  "domIdleTime": {
+                                                    "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "integer",
+                                                        "minimum": 0
+                                                      },
+                                                      {
+                                                        "type": "null"
+                                                      }
+                                                    ],
+                                                    "default": 1000
+                                                  },
+                                                  "find": {
+                                                    "type": "object",
+                                                    "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                    "additionalProperties": false,
+                                                    "anyOf": [
+                                                      {
+                                                        "required": [
+                                                          "selector"
+                                                        ]
+                                                      },
+                                                      {
+                                                        "required": [
+                                                          "elementText"
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "properties": {
+                                                      "selector": {
+                                                        "type": "string",
+                                                        "description": "CSS selector for the element to wait for."
+                                                      },
+                                                      "elementText": {
+                                                        "type": "string",
+                                                        "description": "Text content the element must contain."
+                                                      }
+                                                    }
+                                                  }
+                                                }
                                               }
                                             },
                                             "title": "Go to URL (detailed)"
@@ -18396,6 +18794,72 @@
                                                   "transform": [
                                                     "trim"
                                                   ]
+                                                },
+                                                "timeout": {
+                                                  "type": "integer",
+                                                  "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                  "default": 30000,
+                                                  "minimum": 0
+                                                },
+                                                "waitUntil": {
+                                                  "type": "object",
+                                                  "description": "Configuration for waiting conditions after navigation.",
+                                                  "additionalProperties": false,
+                                                  "properties": {
+                                                    "networkIdleTime": {
+                                                      "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer",
+                                                          "minimum": 0
+                                                        },
+                                                        {
+                                                          "type": "null"
+                                                        }
+                                                      ],
+                                                      "default": 500
+                                                    },
+                                                    "domIdleTime": {
+                                                      "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "integer",
+                                                          "minimum": 0
+                                                        },
+                                                        {
+                                                          "type": "null"
+                                                        }
+                                                      ],
+                                                      "default": 1000
+                                                    },
+                                                    "find": {
+                                                      "type": "object",
+                                                      "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                      "additionalProperties": false,
+                                                      "anyOf": [
+                                                        {
+                                                          "required": [
+                                                            "selector"
+                                                          ]
+                                                        },
+                                                        {
+                                                          "required": [
+                                                            "elementText"
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "properties": {
+                                                        "selector": {
+                                                          "type": "string",
+                                                          "description": "CSS selector for the element to wait for."
+                                                        },
+                                                        "elementText": {
+                                                          "type": "string",
+                                                          "description": "Text content the element must contain."
+                                                        }
+                                                      }
+                                                    }
+                                                  }
                                                 }
                                               },
                                               "title": "Go to URL (detailed)"
@@ -18410,7 +18874,41 @@
                                           },
                                           {
                                             "url": "/search",
-                                            "origin": "www.google.com"
+                                            "origin": "https://www.google.com"
+                                          },
+                                          {
+                                            "url": "https://www.example.com",
+                                            "waitUntil": {
+                                              "networkIdleTime": 500
+                                            }
+                                          },
+                                          {
+                                            "url": "https://www.example.com/dashboard",
+                                            "waitUntil": {
+                                              "find": {
+                                                "selector": "[data-testid='dashboard-loaded']"
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "url": "https://www.example.com/app",
+                                            "timeout": 60000,
+                                            "waitUntil": {
+                                              "networkIdleTime": 500,
+                                              "domIdleTime": 1000,
+                                              "find": {
+                                                "selector": ".main-content",
+                                                "elementText": "Dashboard"
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "url": "https://www.example.com/status",
+                                            "waitUntil": {
+                                              "find": {
+                                                "elementText": "System operational"
+                                              }
+                                            }
                                           }
                                         ]
                                       }
@@ -25235,6 +25733,72 @@
                                                       "transform": [
                                                         "trim"
                                                       ]
+                                                    },
+                                                    "timeout": {
+                                                      "type": "integer",
+                                                      "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                      "default": 30000,
+                                                      "minimum": 0
+                                                    },
+                                                    "waitUntil": {
+                                                      "type": "object",
+                                                      "description": "Configuration for waiting conditions after navigation.",
+                                                      "additionalProperties": false,
+                                                      "properties": {
+                                                        "networkIdleTime": {
+                                                          "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                          "anyOf": [
+                                                            {
+                                                              "type": "integer",
+                                                              "minimum": 0
+                                                            },
+                                                            {
+                                                              "type": "null"
+                                                            }
+                                                          ],
+                                                          "default": 500
+                                                        },
+                                                        "domIdleTime": {
+                                                          "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                          "anyOf": [
+                                                            {
+                                                              "type": "integer",
+                                                              "minimum": 0
+                                                            },
+                                                            {
+                                                              "type": "null"
+                                                            }
+                                                          ],
+                                                          "default": 1000
+                                                        },
+                                                        "find": {
+                                                          "type": "object",
+                                                          "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                          "additionalProperties": false,
+                                                          "anyOf": [
+                                                            {
+                                                              "required": [
+                                                                "selector"
+                                                              ]
+                                                            },
+                                                            {
+                                                              "required": [
+                                                                "elementText"
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "properties": {
+                                                            "selector": {
+                                                              "type": "string",
+                                                              "description": "CSS selector for the element to wait for."
+                                                            },
+                                                            "elementText": {
+                                                              "type": "string",
+                                                              "description": "Text content the element must contain."
+                                                            }
+                                                          }
+                                                        }
+                                                      }
                                                     }
                                                   },
                                                   "title": "Go to URL (detailed)"
@@ -25273,6 +25837,72 @@
                                                         "transform": [
                                                           "trim"
                                                         ]
+                                                      },
+                                                      "timeout": {
+                                                        "type": "integer",
+                                                        "description": "Maximum time in milliseconds to wait for the page to be ready. If exceeded, the goTo action fails.",
+                                                        "default": 30000,
+                                                        "minimum": 0
+                                                      },
+                                                      "waitUntil": {
+                                                        "type": "object",
+                                                        "description": "Configuration for waiting conditions after navigation.",
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                          "networkIdleTime": {
+                                                            "description": "Wait for network activity to be idle (no new requests) for this duration in milliseconds. Set to `null` to skip this check.",
+                                                            "anyOf": [
+                                                              {
+                                                                "type": "integer",
+                                                                "minimum": 0
+                                                              },
+                                                              {
+                                                                "type": "null"
+                                                              }
+                                                            ],
+                                                            "default": 500
+                                                          },
+                                                          "domIdleTime": {
+                                                            "description": "Wait for DOM mutations to stop for this duration in milliseconds. Set to `null` to skip this check.",
+                                                            "anyOf": [
+                                                              {
+                                                                "type": "integer",
+                                                                "minimum": 0
+                                                              },
+                                                              {
+                                                                "type": "null"
+                                                              }
+                                                            ],
+                                                            "default": 1000
+                                                          },
+                                                          "find": {
+                                                            "type": "object",
+                                                            "description": "Wait for a specific element to be present in the DOM. At least one of selector or elementText must be specified.",
+                                                            "additionalProperties": false,
+                                                            "anyOf": [
+                                                              {
+                                                                "required": [
+                                                                  "selector"
+                                                                ]
+                                                              },
+                                                              {
+                                                                "required": [
+                                                                  "elementText"
+                                                                ]
+                                                              }
+                                                            ],
+                                                            "properties": {
+                                                              "selector": {
+                                                                "type": "string",
+                                                                "description": "CSS selector for the element to wait for."
+                                                              },
+                                                              "elementText": {
+                                                                "type": "string",
+                                                                "description": "Text content the element must contain."
+                                                              }
+                                                            }
+                                                          }
+                                                        }
                                                       }
                                                     },
                                                     "title": "Go to URL (detailed)"
@@ -25287,7 +25917,41 @@
                                                 },
                                                 {
                                                   "url": "/search",
-                                                  "origin": "www.google.com"
+                                                  "origin": "https://www.google.com"
+                                                },
+                                                {
+                                                  "url": "https://www.example.com",
+                                                  "waitUntil": {
+                                                    "networkIdleTime": 500
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://www.example.com/dashboard",
+                                                  "waitUntil": {
+                                                    "find": {
+                                                      "selector": "[data-testid='dashboard-loaded']"
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://www.example.com/app",
+                                                  "timeout": 60000,
+                                                  "waitUntil": {
+                                                    "networkIdleTime": 500,
+                                                    "domIdleTime": 1000,
+                                                    "find": {
+                                                      "selector": ".main-content",
+                                                      "elementText": "Dashboard"
+                                                    }
+                                                  }
+                                                },
+                                                {
+                                                  "url": "https://www.example.com/status",
+                                                  "waitUntil": {
+                                                    "find": {
+                                                      "elementText": "System operational"
+                                                    }
+                                                  }
                                                 }
                                               ]
                                             }
