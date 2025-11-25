@@ -167,6 +167,7 @@ async function dereferenceSchemas() {
 
 // Prepend app-root path to referenced relative paths
 function updateRefPaths(schema) {
+  if (schema === null || typeof schema !== "object") return schema;
   for (let [key, value] of Object.entries(schema)) {
     if (typeof value === "object") {
       updateRefPaths(value);
@@ -191,6 +192,7 @@ function updateRefPaths(schema) {
  * @returns {object} The schema object with all `$id` properties deleted.
  */
 function deleteDollarIds(schema) {
+  if (schema === null || typeof schema !== "object") return schema;
   for (let [key, value] of Object.entries(schema)) {
     if (typeof value === "object") {
       deleteDollarIds(value);

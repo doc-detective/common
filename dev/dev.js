@@ -1,3 +1,31 @@
 const { validate, schemas } = require("../src/index");
 
-console.log(validate("find_v2",schemas.find_v2.examples[0]))
+const object = {
+  tests: [
+    {
+      steps: [
+        {
+          goTo: {
+            url: "http://localhost:8092",
+            waitUntil: {
+              find: {
+                selector: "button",
+                elementText: "Standard Button",
+                elementTestId: "standard-btn",
+                elementAria: "Sample Standard Button",
+                elementId: "standard-btn",
+                elementClass: ["btn"],
+                elementAttribute: {
+                  type: "button",
+                  value: "Standard Button",
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+  ],
+};
+
+console.log(validate({ schemaKey: "spec_v3", object }));
