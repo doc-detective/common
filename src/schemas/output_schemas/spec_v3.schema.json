@@ -3427,6 +3427,31 @@
                                               "required": [
                                                 "elementText"
                                               ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementTestId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementClass"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAttribute"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAria"
+                                              ]
                                             }
                                           ],
                                           "properties": {
@@ -3436,7 +3461,50 @@
                                             },
                                             "elementText": {
                                               "type": "string",
-                                              "description": "Text content the element must contain."
+                                              "description": "Text content the element must contain. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "anyOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAria": {
+                                              "type": "string",
+                                              "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                             }
                                           }
                                         }
@@ -3531,6 +3599,31 @@
                                                 "required": [
                                                   "elementText"
                                                 ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementTestId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementClass"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAttribute"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAria"
+                                                ]
                                               }
                                             ],
                                             "properties": {
@@ -3540,7 +3633,50 @@
                                               },
                                               "elementText": {
                                                 "type": "string",
-                                                "description": "Text content the element must contain."
+                                                "description": "Text content the element must contain. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementId": {
+                                                "type": "string",
+                                                "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementTestId": {
+                                                "type": "string",
+                                                "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementClass": {
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                ],
+                                                "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                              },
+                                              "elementAttribute": {
+                                                "type": "object",
+                                                "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                "additionalProperties": {
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "number"
+                                                    },
+                                                    {
+                                                      "type": "boolean"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "elementAria": {
+                                                "type": "string",
+                                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                               }
                                             }
                                           }
@@ -3588,10 +3724,36 @@
                                   }
                                 },
                                 {
+                                  "url": "https://www.example.com/app",
+                                  "timeout": 60000,
+                                  "waitUntil": {
+                                    "networkIdleTime": null
+                                  }
+                                },
+                                {
                                   "url": "https://www.example.com/status",
                                   "waitUntil": {
                                     "find": {
                                       "elementText": "System operational"
+                                    }
+                                  }
+                                },
+                                {
+                                  "url": "http://localhost:8092",
+                                  "waitUntil": {
+                                    "find": {
+                                      "selector": "button",
+                                      "elementText": "Standard Button",
+                                      "elementTestId": "standard-btn",
+                                      "elementAria": "Sample Standard Button",
+                                      "elementId": "standard-btn",
+                                      "elementClass": [
+                                        "btn"
+                                      ],
+                                      "elementAttribute": {
+                                        "type": "button",
+                                        "value": "Standard Button"
+                                      }
                                     }
                                   }
                                 }
@@ -6985,6 +7147,31 @@
                                           "required": [
                                             "elementText"
                                           ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementId"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementTestId"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementClass"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementAttribute"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementAria"
+                                          ]
                                         }
                                       ],
                                       "properties": {
@@ -6995,6 +7182,49 @@
                                         "selector": {
                                           "type": "string",
                                           "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                        },
+                                        "elementId": {
+                                          "type": "string",
+                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                        },
+                                        "elementTestId": {
+                                          "type": "string",
+                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                        },
+                                        "elementClass": {
+                                          "anyOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          ],
+                                          "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                        },
+                                        "elementAttribute": {
+                                          "type": "object",
+                                          "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                          "additionalProperties": {
+                                            "anyOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "number"
+                                              },
+                                              {
+                                                "type": "boolean"
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        "elementAria": {
+                                          "type": "string",
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                         },
                                         "timeout": {
                                           "type": "integer",
@@ -7026,6 +7256,31 @@
                                           "required": [
                                             "elementText"
                                           ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementId"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementTestId"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementClass"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementAttribute"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "elementAria"
+                                          ]
                                         }
                                       ],
                                       "properties": {
@@ -7036,6 +7291,49 @@
                                         "selector": {
                                           "type": "string",
                                           "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                        },
+                                        "elementId": {
+                                          "type": "string",
+                                          "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                        },
+                                        "elementTestId": {
+                                          "type": "string",
+                                          "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                        },
+                                        "elementClass": {
+                                          "anyOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          ],
+                                          "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                        },
+                                        "elementAttribute": {
+                                          "type": "object",
+                                          "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                          "additionalProperties": {
+                                            "anyOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "number"
+                                              },
+                                              {
+                                                "type": "boolean"
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        "elementAria": {
+                                          "type": "string",
+                                          "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                         },
                                         "timeout": {
                                           "type": "integer",
@@ -7075,6 +7373,31 @@
                                             "required": [
                                               "elementText"
                                             ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementId"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementTestId"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementClass"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementAttribute"
+                                            ]
+                                          },
+                                          {
+                                            "required": [
+                                              "elementAria"
+                                            ]
                                           }
                                         ],
                                         "properties": {
@@ -7085,6 +7408,49 @@
                                           "selector": {
                                             "type": "string",
                                             "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                          },
+                                          "elementId": {
+                                            "type": "string",
+                                            "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementTestId": {
+                                            "type": "string",
+                                            "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "elementClass": {
+                                            "anyOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            ],
+                                            "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                          },
+                                          "elementAttribute": {
+                                            "type": "object",
+                                            "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                            "additionalProperties": {
+                                              "anyOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "number"
+                                                },
+                                                {
+                                                  "type": "boolean"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "elementAria": {
+                                            "type": "string",
+                                            "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                           },
                                           "timeout": {
                                             "type": "integer",
@@ -7113,6 +7479,31 @@
                                         "required": [
                                           "elementText"
                                         ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementTestId"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementClass"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAttribute"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "elementAria"
+                                        ]
                                       }
                                     ],
                                     "properties": {
@@ -7123,6 +7514,49 @@
                                       "selector": {
                                         "type": "string",
                                         "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                      },
+                                      "elementId": {
+                                        "type": "string",
+                                        "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementTestId": {
+                                        "type": "string",
+                                        "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "elementClass": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        ],
+                                        "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                      },
+                                      "elementAttribute": {
+                                        "type": "object",
+                                        "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                        "additionalProperties": {
+                                          "anyOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "number"
+                                            },
+                                            {
+                                              "type": "boolean"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "elementAria": {
+                                        "type": "string",
+                                        "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                       },
                                       "timeout": {
                                         "type": "integer",
@@ -10470,6 +10904,31 @@
                                                     "required": [
                                                       "elementText"
                                                     ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementTestId"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementClass"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAttribute"
+                                                    ]
+                                                  },
+                                                  {
+                                                    "required": [
+                                                      "elementAria"
+                                                    ]
                                                   }
                                                 ],
                                                 "properties": {
@@ -10479,7 +10938,50 @@
                                                   },
                                                   "elementText": {
                                                     "type": "string",
-                                                    "description": "Text content the element must contain."
+                                                    "description": "Text content the element must contain. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementId": {
+                                                    "type": "string",
+                                                    "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementTestId": {
+                                                    "type": "string",
+                                                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                  },
+                                                  "elementClass": {
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    ],
+                                                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                  },
+                                                  "elementAttribute": {
+                                                    "type": "object",
+                                                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                    "additionalProperties": {
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "number"
+                                                        },
+                                                        {
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "elementAria": {
+                                                    "type": "string",
+                                                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                   }
                                                 }
                                               }
@@ -10574,6 +11076,31 @@
                                                       "required": [
                                                         "elementText"
                                                       ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementId"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementTestId"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementClass"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementAttribute"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "required": [
+                                                        "elementAria"
+                                                      ]
                                                     }
                                                   ],
                                                   "properties": {
@@ -10583,7 +11110,50 @@
                                                     },
                                                     "elementText": {
                                                       "type": "string",
-                                                      "description": "Text content the element must contain."
+                                                      "description": "Text content the element must contain. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementId": {
+                                                      "type": "string",
+                                                      "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementTestId": {
+                                                      "type": "string",
+                                                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                    },
+                                                    "elementClass": {
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      ],
+                                                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                    },
+                                                    "elementAttribute": {
+                                                      "type": "object",
+                                                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                      "additionalProperties": {
+                                                        "anyOf": [
+                                                          {
+                                                            "type": "string"
+                                                          },
+                                                          {
+                                                            "type": "number"
+                                                          },
+                                                          {
+                                                            "type": "boolean"
+                                                          }
+                                                        ]
+                                                      }
+                                                    },
+                                                    "elementAria": {
+                                                      "type": "string",
+                                                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                     }
                                                   }
                                                 }
@@ -10631,10 +11201,36 @@
                                         }
                                       },
                                       {
+                                        "url": "https://www.example.com/app",
+                                        "timeout": 60000,
+                                        "waitUntil": {
+                                          "networkIdleTime": null
+                                        }
+                                      },
+                                      {
                                         "url": "https://www.example.com/status",
                                         "waitUntil": {
                                           "find": {
                                             "elementText": "System operational"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "url": "http://localhost:8092",
+                                        "waitUntil": {
+                                          "find": {
+                                            "selector": "button",
+                                            "elementText": "Standard Button",
+                                            "elementTestId": "standard-btn",
+                                            "elementAria": "Sample Standard Button",
+                                            "elementId": "standard-btn",
+                                            "elementClass": [
+                                              "btn"
+                                            ],
+                                            "elementAttribute": {
+                                              "type": "button",
+                                              "value": "Standard Button"
+                                            }
                                           }
                                         }
                                       }
@@ -14028,6 +14624,31 @@
                                                 "required": [
                                                   "elementText"
                                                 ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementTestId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementClass"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAttribute"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAria"
+                                                ]
                                               }
                                             ],
                                             "properties": {
@@ -14038,6 +14659,49 @@
                                               "selector": {
                                                 "type": "string",
                                                 "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                              },
+                                              "elementId": {
+                                                "type": "string",
+                                                "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementTestId": {
+                                                "type": "string",
+                                                "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementClass": {
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                ],
+                                                "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                              },
+                                              "elementAttribute": {
+                                                "type": "object",
+                                                "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                "additionalProperties": {
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "number"
+                                                    },
+                                                    {
+                                                      "type": "boolean"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "elementAria": {
+                                                "type": "string",
+                                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "timeout": {
                                                 "type": "integer",
@@ -14069,6 +14733,31 @@
                                                 "required": [
                                                   "elementText"
                                                 ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementTestId"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementClass"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAttribute"
+                                                ]
+                                              },
+                                              {
+                                                "required": [
+                                                  "elementAria"
+                                                ]
                                               }
                                             ],
                                             "properties": {
@@ -14079,6 +14768,49 @@
                                               "selector": {
                                                 "type": "string",
                                                 "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                              },
+                                              "elementId": {
+                                                "type": "string",
+                                                "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementTestId": {
+                                                "type": "string",
+                                                "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "elementClass": {
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                ],
+                                                "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                              },
+                                              "elementAttribute": {
+                                                "type": "object",
+                                                "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                "additionalProperties": {
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "number"
+                                                    },
+                                                    {
+                                                      "type": "boolean"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "elementAria": {
+                                                "type": "string",
+                                                "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                               },
                                               "timeout": {
                                                 "type": "integer",
@@ -14118,6 +14850,31 @@
                                                   "required": [
                                                     "elementText"
                                                   ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementId"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementTestId"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementClass"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementAttribute"
+                                                  ]
+                                                },
+                                                {
+                                                  "required": [
+                                                    "elementAria"
+                                                  ]
                                                 }
                                               ],
                                               "properties": {
@@ -14128,6 +14885,49 @@
                                                 "selector": {
                                                   "type": "string",
                                                   "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                                },
+                                                "elementId": {
+                                                  "type": "string",
+                                                  "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "elementTestId": {
+                                                  "type": "string",
+                                                  "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "elementClass": {
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    }
+                                                  ],
+                                                  "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                                },
+                                                "elementAttribute": {
+                                                  "type": "object",
+                                                  "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                                  "additionalProperties": {
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "number"
+                                                      },
+                                                      {
+                                                        "type": "boolean"
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                "elementAria": {
+                                                  "type": "string",
+                                                  "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                                 },
                                                 "timeout": {
                                                   "type": "integer",
@@ -14156,6 +14956,31 @@
                                               "required": [
                                                 "elementText"
                                               ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementTestId"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementClass"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAttribute"
+                                              ]
+                                            },
+                                            {
+                                              "required": [
+                                                "elementAria"
+                                              ]
                                             }
                                           ],
                                           "properties": {
@@ -14166,6 +14991,49 @@
                                             "selector": {
                                               "type": "string",
                                               "description": "Selector of the element. If combined with `elementText`, the element must match both the text and the selector."
+                                            },
+                                            "elementId": {
+                                              "type": "string",
+                                              "description": "ID attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementTestId": {
+                                              "type": "string",
+                                              "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "elementClass": {
+                                              "anyOf": [
+                                                {
+                                                  "type": "string"
+                                                },
+                                                {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              ],
+                                              "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                                            },
+                                            "elementAttribute": {
+                                              "type": "object",
+                                              "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                                              "additionalProperties": {
+                                                "anyOf": [
+                                                  {
+                                                    "type": "string"
+                                                  },
+                                                  {
+                                                    "type": "number"
+                                                  },
+                                                  {
+                                                    "type": "boolean"
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            "elementAria": {
+                                              "type": "string",
+                                              "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
                                             },
                                             "timeout": {
                                               "type": "integer",
