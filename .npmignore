@@ -114,3 +114,10 @@ test/
 .coderabbit.yaml
 .gitignore
 CONTRIBUTIONS.md
+
+# TypeScript source files (use compiled output in build/)
+src/
+tsconfig.json
+
+# Schema build directory
+src/schemas/build/

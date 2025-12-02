@@ -1,14 +1,14 @@
-const { schemas } = require("./schemas");
-const Ajv = require("ajv");
-// Ajv extra formats: https://ajv.js.org/packages/ajv-formats.html
-const addFormats = require("ajv-formats");
-// Ajv extra keywords: https://ajv.js.org/packages/ajv-keywords.html
-const addKeywords = require("ajv-keywords");
-// Ajv custom errors: https://ajv.js.org/packages/ajv-errors.html
-const addErrors = require("ajv-errors");
-const { randomUUID } = require("crypto");
+import { schemas as jsonSchemas } from "./schemas";
+import Ajv from "ajv";
+import addFormats from "ajv-formats";
+import addKeywords from "ajv-keywords";
+import addErrors from "ajv-errors";
+import { randomUUID } from "crypto";
 
-// Configure base Ajv
+// Re-export Zod schemas for type inference
+export * from "./zodSchemas";
+
+// Configure base Ajv for backward compatibility with v2 schemas
 const ajv = new Ajv({
   strictSchema: false,
   useDefaults: true,
@@ -26,16 +26,13 @@ addFormats(ajv);
 addKeywords(ajv);
 addErrors(ajv);
 
-// Exports
-exports.validate = validate;
-exports.transformToSchemaKey = transformToSchemaKey;
-
-// Add all schemas from `schema` object.
-for (const [key, value] of Object.entries(schemas)) {
+// Add all JSON schemas from `schema` object for backward compatibility
+for (const [key, value] of Object.entries(jsonSchemas)) {
   ajv.addSchema(value, key);
 }
 
-const compatibleSchemas = {
+// Map of compatible schemas for backward compatibility transformations
+const compatibleSchemas: Record<string, string[]> = {
   config_v3: ["config_v2"],
   context_v3: ["context_v2"],
   openApi_v3: ["openApi_v2"],
@@ -57,14 +54,26 @@ const compatibleSchemas = {
   test_v3: ["test_v2"],
 };
 
+export interface ValidateOptions {
+  schemaKey: string;
+  object: unknown;
+  addDefaults?: boolean;
+}
+
+export interface ValidationResult {
+  valid: boolean;
+  errors: string;
+  object: unknown;
+}
+
 /**
  * Escapes special characters in a string for safe use in a regular expression pattern.
  *
- * @param {string} string - The input string to escape.
- * @returns {string} The escaped string, safe for use in regular expressions.
+ * @param string - The input string to escape.
+ * @returns The escaped string, safe for use in regular expressions.
  */
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+function escapeRegExp(string: string): string {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /**
@@ -72,23 +81,29 @@ function escapeRegExp(string) {
  *
  * If validation against the target schema fails and compatible older schemas are defined, attempts validation against each compatible schema. On a match, transforms the object to the target schema and revalidates. Returns the validation result, any errors, and the (possibly transformed) object.
  *
- * @param {Object} options
- * @param {string} options.schemaKey - The key identifying the target JSON schema.
- * @param {Object} options.object - The object to validate.
- * @param {boolean} [options.addDefaults=true] - Whether to include default values in the returned object.
- * @returns {{ valid: boolean, errors: string, object: Object }} Validation result, error messages, and the validated (and possibly transformed) object.
+ * @param options - Validation options.
+ * @param options.schemaKey - The key identifying the target JSON schema.
+ * @param options.object - The object to validate.
+ * @param options.addDefaults - Whether to include default values in the returned object.
+ * @returns Validation result, error messages, and the validated (and possibly transformed) object.
  *
- * @throws {Error} If {@link schemaKey} or {@link object} is missing.
+ * @throws Error If schemaKey or object is missing.
  */
-function validate({ schemaKey, object, addDefaults = true }) {
+export function validate({ schemaKey, object, addDefaults = true }: ValidateOptions): ValidationResult {
   if (!schemaKey) {
     throw new Error("Schema key is required.");
   }
   if (!object) {
     throw new Error("Object is required.");
   }
-  const result = {};
-  let validationObject;
+
+  const result: ValidationResult = {
+    valid: false,
+    errors: "",
+    object: object,
+  };
+
+  let validationObject: Record<string, unknown>;
   let check = ajv.getSchema(schemaKey);
   if (!check) {
     result.valid = false;
@@ -101,7 +116,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
   validationObject = JSON.parse(JSON.stringify(object));
 
   // Check if the object is compatible with the schema
-  result.valid = check(validationObject);
+  result.valid = check(validationObject) as boolean;
   result.errors = "";
 
   if (check.errors) {
@@ -122,8 +137,9 @@ function validate({ schemaKey, object, addDefaults = true }) {
     }
     const matchedSchemaKey = compatibleSchemasList.find((key) => {
       validationObject = JSON.parse(JSON.stringify(object));
-      const check = ajv.getSchema(key);
-      if (check(validationObject)) return key;
+      const compatCheck = ajv.getSchema(key);
+      if (compatCheck && (compatCheck(validationObject) as boolean)) return true;
+      return false;
     });
     if (!matchedSchemaKey) {
       result.errors = check.errors
@@ -144,7 +160,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
         object: validationObject,
       });
 
-      result.valid = check(transformedObject);
+      result.valid = check(transformedObject) as boolean;
       if (result.valid) {
         validationObject = transformedObject;
         object = transformedObject;
@@ -169,41 +185,46 @@ function validate({ schemaKey, object, addDefaults = true }) {
   return result;
 }
 
+export interface TransformOptions {
+  currentSchema: string;
+  targetSchema: string;
+  object: Record<string, unknown>;
+}
+
 /**
  * Transforms an object from one JSON schema version to another, supporting multiple schema types and nested conversions.
  *
- * @param {Object} params
- * @param {string} params.currentSchema - The schema key of the object's current version.
- * @param {string} params.targetSchema - The schema key to which the object should be transformed.
- * @param {Object} params.object - The object to transform.
- * @returns {Object} The transformed object, validated against the target schema.
+ * @param params - Transformation options.
+ * @param params.currentSchema - The schema key of the object's current version.
+ * @param params.targetSchema - The schema key to which the object should be transformed.
+ * @param params.object - The object to transform.
+ * @returns The transformed object, validated against the target schema.
  *
- * @throws {Error} If transformation between the specified schemas is not supported, or if the transformed object fails validation.
- *
- * @remark
- * Supports deep and recursive transformations for complex schema types, including steps, configs, contexts, OpenAPI integrations, specs, and tests. Throws if the schemas are incompatible or if the resulting object does not conform to the target schema.
+ * @throws Error If transformation between the specified schemas is not supported, or if the transformed object fails validation.
  */
-function transformToSchemaKey({
+export function transformToSchemaKey({
   currentSchema = "",
   targetSchema = "",
   object = {},
-}) {
+}: TransformOptions): Record<string, unknown> {
   // Check if the current schema is the same as the target schema
   if (currentSchema === targetSchema) {
     return object;
   }
   // Check if the current schema is compatible with the target schema
-  if (!compatibleSchemas[targetSchema].includes(currentSchema)) {
+  if (!compatibleSchemas[targetSchema]?.includes(currentSchema)) {
     throw new Error(
       `Can't transform from ${currentSchema} to ${targetSchema}.`
     );
   }
+
   // Transform the object
   if (targetSchema === "step_v3") {
-    const transformedObject = {
-      stepId: object.id,
-      description: object.description,
+    const transformedObject: Record<string, unknown> = {
+      stepId: object.id as string | undefined,
+      description: object.description as string | undefined,
     };
+
     if (currentSchema === "goTo_v2") {
       transformedObject.goTo = {
         url: object.url,
@@ -216,26 +237,30 @@ function transformToSchemaKey({
         statusCodes: object.statusCodes,
       };
     } else if (currentSchema === "find_v2") {
+      const typeKeys = object.typeKeys as { keys?: string; delay?: number } | undefined;
       transformedObject.find = {
         selector: object.selector,
         elementText: object.matchText,
         timeout: object.timeout,
         moveTo: object.moveTo,
         click: object.click,
-        type: object.typeKeys,
+        type: typeKeys,
       };
       // Handle typeKeys.delay key change
-      if (typeof object.typeKeys === "object" && object.typeKeys.keys) {
-        transformedObject.find.type.inputDelay = object.typeKeys.delay;
-        delete transformedObject.find.type.delay;
+      if (typeof typeKeys === "object" && typeKeys.keys) {
+        (transformedObject.find as Record<string, unknown>).type = {
+          keys: typeKeys.keys,
+          inputDelay: typeKeys.delay,
+        };
       }
       transformedObject.variables = {};
-      object.setVariables?.forEach((variable) => {
-        transformedObject.variables[
-          variable.name
-        ] = `extract($$element.text, "${variable.regex}")`;
+      const setVariables = object.setVariables as Array<{ name: string; regex: string }> | undefined;
+      setVariables?.forEach((variable) => {
+        (transformedObject.variables as Record<string, string>)[variable.name] = 
+          `extract($$element.text, "${variable.regex}")`;
       });
     } else if (currentSchema === "httpRequest_v2") {
+      const maxVariation = (object.maxVariation as number) ?? 0;
       transformedObject.httpRequest = {
         method: object.method,
         url: object.url,
@@ -254,7 +279,7 @@ function transformToSchemaKey({
         timeout: object.timeout,
         path: object.savePath,
         directory: object.saveDirectory,
-        maxVariation: object.maxVariation / 100,
+        maxVariation: maxVariation / 100,
         overwrite:
           object.overwrite === "byVariation"
             ? "aboveVariation"
@@ -262,19 +287,20 @@ function transformToSchemaKey({
       };
       // Handle openApi.requestHeaders key change
       if (object.openApi) {
-        transformedObject.httpRequest.openApi = transformToSchemaKey({
+        (transformedObject.httpRequest as Record<string, unknown>).openApi = transformToSchemaKey({
           currentSchema: "openApi_v2",
           targetSchema: "openApi_v3",
-          object: object.openApi,
+          object: object.openApi as Record<string, unknown>,
         });
       }
       transformedObject.variables = {};
-      object.envsFromResponseData?.forEach((variable) => {
-        transformedObject.variables[
-          variable.name
-        ] = `jq($$response.body, "${variable.jqFilter}")`;
+      const envsFromResponseData = object.envsFromResponseData as Array<{ name: string; jqFilter: string }> | undefined;
+      envsFromResponseData?.forEach((variable) => {
+        (transformedObject.variables as Record<string, string>)[variable.name] = 
+          `jq($$response.body, "${variable.jqFilter}")`;
       });
     } else if (currentSchema === "runShell_v2") {
+      const maxVariation = (object.maxVariation as number) ?? 0;
       transformedObject.runShell = {
         command: object.command,
         args: object.args,
@@ -283,7 +309,7 @@ function transformToSchemaKey({
         stdio: object.output,
         path: object.savePath,
         directory: object.saveDirectory,
-        maxVariation: object.maxVariation / 100,
+        maxVariation: maxVariation / 100,
         overwrite:
           object.overwrite === "byVariation"
             ? "aboveVariation"
@@ -291,12 +317,13 @@ function transformToSchemaKey({
         timeout: object.timeout,
       };
       transformedObject.variables = {};
-      object.setVariables?.forEach((variable) => {
-        transformedObject.variables[
-          variable.name
-        ] = `extract($$stdio.stdout, "${variable.regex}")`;
+      const setVariables = object.setVariables as Array<{ name: string; regex: string }> | undefined;
+      setVariables?.forEach((variable) => {
+        (transformedObject.variables as Record<string, string>)[variable.name] = 
+          `extract($$stdio.stdout, "${variable.regex}")`;
       });
     } else if (currentSchema === "runCode_v2") {
+      const maxVariation = (object.maxVariation as number) ?? 0;
       transformedObject.runCode = {
         language: object.language,
         code: object.code,
@@ -306,7 +333,7 @@ function transformToSchemaKey({
         stdio: object.output,
         path: object.savePath,
         directory: object.saveDirectory,
-        maxVariation: object.maxVariation / 100,
+        maxVariation: maxVariation / 100,
         overwrite:
           object.overwrite === "byVariation"
             ? "aboveVariation"
@@ -314,10 +341,10 @@ function transformToSchemaKey({
         timeout: object.timeout,
       };
       transformedObject.variables = {};
-      object?.setVariables?.forEach((variable) => {
-        transformedObject.variables[
-          variable.name
-        ] = `extract($$stdio.stdout, "${variable.regex}")`;
+      const setVariables = object.setVariables as Array<{ name: string; regex: string }> | undefined;
+      setVariables?.forEach((variable) => {
+        (transformedObject.variables as Record<string, string>)[variable.name] = 
+          `extract($$stdio.stdout, "${variable.regex}")`;
       });
     } else if (currentSchema === "setVariables_v2") {
       transformedObject.loadVariables = object.path;
@@ -327,10 +354,11 @@ function transformToSchemaKey({
         inputDelay: object.delay,
       };
     } else if (currentSchema === "saveScreenshot_v2") {
+      const maxVariation = (object.maxVariation as number) ?? 0;
       transformedObject.screenshot = {
         path: object.path,
         directory: object.directory,
-        maxVariation: object.maxVariation / 100,
+        maxVariation: maxVariation / 100,
         overwrite:
           object.overwrite === "byVariation"
             ? "aboveVariation"
@@ -348,175 +376,204 @@ function transformToSchemaKey({
     } else if (currentSchema === "wait_v2") {
       transformedObject.wait = object;
     }
-    const result = validate({
+
+    const validationResult = validate({
       schemaKey: "step_v3",
       object: transformedObject,
     });
-    if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors}`);
+    if (!validationResult.valid) {
+      throw new Error(`Invalid object: ${validationResult.errors}`);
     }
-    return result.object;
+    return validationResult.object as Record<string, unknown>;
   } else if (targetSchema === "config_v3") {
-    // Handle config_v2 to config_v3 transformation
-    const transformedObject = {
+    const runTests = object.runTests as Record<string, unknown> | undefined;
+    const transformedObject: Record<string, unknown> = {
       loadVariables: object.envVariables,
-      input: object?.runTests?.input || object.input,
-      output: object?.runTests?.output || object.output,
-      recursive: object?.runTests?.recursive || object.recursive,
+      input: runTests?.input ?? object.input,
+      output: runTests?.output ?? object.output,
+      recursive: runTests?.recursive ?? object.recursive,
       relativePathBase: object.relativePathBase,
-      detectSteps: object?.runTests?.detectSteps,
-      beforeAny: object?.runTests?.setup,
-      afterAll: object?.runTests?.cleanup,
+      detectSteps: runTests?.detectSteps,
+      beforeAny: runTests?.setup,
+      afterAll: runTests?.cleanup,
       logLevel: object.logLevel,
       telemetry: object.telemetry,
     };
+
     // Handle context transformation
-    if (object?.runTests?.contexts)
-      transformedObject.runOn = object.runTests.contexts.map((context) =>
+    if (runTests?.contexts) {
+      transformedObject.runOn = (runTests.contexts as Record<string, unknown>[]).map((context) =>
         transformToSchemaKey({
           currentSchema: "context_v2",
           targetSchema: "context_v3",
           object: context,
         })
       );
+    }
+
     // Handle openApi transformation
-    if (object?.integrations?.openApi) {
-      transformedObject.integrations = {};
-      transformedObject.integrations.openApi = object.integrations.openApi.map(
-        (description) =>
+    const integrations = object.integrations as Record<string, unknown> | undefined;
+    if (integrations?.openApi) {
+      transformedObject.integrations = {
+        openApi: (integrations.openApi as Record<string, unknown>[]).map((description) =>
           transformToSchemaKey({
             currentSchema: "openApi_v2",
             targetSchema: "openApi_v3",
             object: description,
           })
-      );
+        ),
+      };
     }
+
     // Handle fileTypes transformation
-    if (object?.fileTypes)
-      transformedObject.fileTypes = object.fileTypes.map((fileType) => {
-        const transformedFileType = {
+    const fileTypes = object.fileTypes as Array<Record<string, unknown>> | undefined;
+    if (fileTypes) {
+      transformedObject.fileTypes = fileTypes.map((fileType) => {
+        const extensions = fileType.extensions as string[] | undefined;
+        const transformedFileType: Record<string, unknown> = {
           name: fileType.name,
-          extensions: fileType.extensions.map((extension) =>
-            // Trim leading `.` from extension
-            extension.replace(/^\./, "")
+          extensions: extensions?.map((extension) =>
+            (extension as string).replace(/^\./, "")
           ),
           inlineStatements: {
-            // Convert strings to regex, escaping special characters
-            testStart: `${escapeRegExp(
-              fileType.testStartStatementOpen
-            )}(.*?)${escapeRegExp(fileType.testStartStatementClose)}`,
-            testEnd: escapeRegExp(fileType.testEndStatement),
-            ignoreStart: escapeRegExp(fileType.testIgnoreStatement),
-            step: `${escapeRegExp(
-              fileType.stepStatementOpen
-            )}(.*?)${escapeRegExp(fileType.stepStatementClose)}`,
+            testStart: `${escapeRegExp(fileType.testStartStatementOpen as string)}(.*?)${escapeRegExp(fileType.testStartStatementClose as string)}`,
+            testEnd: escapeRegExp(fileType.testEndStatement as string),
+            ignoreStart: escapeRegExp(fileType.testIgnoreStatement as string),
+            step: `${escapeRegExp(fileType.stepStatementOpen as string)}(.*?)${escapeRegExp(fileType.stepStatementClose as string)}`,
           },
         };
-        if (fileType.markup)
-          transformedFileType.markup = fileType.markup.map((markup) => {
-            const transformedMarkup = {
-              name: markup.name,
-              regex: markup.regex,
-            };
-            if (markup.actions)
-              transformedMarkup.actions = markup.actions.map((action) => {
-                if (typeof action === "string") return action;
-                if (typeof action === "object") {
-                  if (action.params) {
-                    action = {
-                      action: action.name,
-                      ...action.params,
-                    };
-                  }
-                  const transformedAction = transformToSchemaKey({
-                    currentSchema: `${action.action}_v2`,
-                    targetSchema: "step_v3",
-                    object: action,
-                  });
-                  return transformedAction;
-                }
-              });
 
+        const markup = fileType.markup as Array<Record<string, unknown>> | undefined;
+        if (markup) {
+          transformedFileType.markup = markup.map((markupItem) => {
+            const transformedMarkup: Record<string, unknown> = {
+              name: markupItem.name,
+              regex: markupItem.regex,
+            };
+
+            const actions = markupItem.actions as Array<unknown> | undefined;
+            if (actions) {
+              transformedMarkup.actions = actions.map((action) => {
+                if (typeof action === "string") return action;
+                if (typeof action === "object" && action !== null) {
+                  const actionObj = action as Record<string, unknown>;
+                  if (actionObj.params) {
+                    const newAction = {
+                      action: actionObj.name,
+                      ...(actionObj.params as Record<string, unknown>),
+                    };
+                    return transformToSchemaKey({
+                      currentSchema: `${newAction.action}_v2`,
+                      targetSchema: "step_v3",
+                      object: newAction,
+                    });
+                  }
+                  return transformToSchemaKey({
+                    currentSchema: `${actionObj.action}_v2`,
+                    targetSchema: "step_v3",
+                    object: actionObj,
+                  });
+                }
+                return action;
+              });
+            }
             return transformedMarkup;
           });
+        }
         return transformedFileType;
       });
-    const result = validate({
+    }
+
+    const validationResult = validate({
       schemaKey: "config_v3",
       object: transformedObject,
     });
-    if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors}`);
+    if (!validationResult.valid) {
+      throw new Error(`Invalid object: ${validationResult.errors}`);
     }
-    return result.object;
+    return validationResult.object as Record<string, unknown>;
   } else if (targetSchema === "context_v3") {
-    const transformedObject = {};
+    const transformedObject: Record<string, unknown> = {};
     // Handle context_v2 to context_v3 transformation
     transformedObject.platforms = object.platforms;
-    if (object.app?.name) {
-      const name = object.app.name === "edge" ? "chrome" : object.app?.name;
-      transformedObject.browsers = [];
-      transformedObject.browsers.push({
-        name,
-        headless: object.app?.options?.headless,
-        window: {
-          width: object.app?.options?.width,
-          height: object.app?.options?.height,
+
+    const app = object.app as Record<string, unknown> | undefined;
+    if (app?.name) {
+      const name = app.name === "edge" ? "chrome" : app.name;
+      const options = app.options as Record<string, unknown> | undefined;
+      transformedObject.browsers = [
+        {
+          name,
+          headless: options?.headless,
+          window: {
+            width: options?.width,
+            height: options?.height,
+          },
+          viewport: {
+            width: options?.viewport_width,
+            height: options?.viewport_height,
+          },
         },
-        viewport: {
-          width: object.app?.options?.viewport_width,
-          height: object.app?.options?.viewport_height,
-        },
-      });
+      ];
     }
-    const result = validate({
+
+    const validationResult = validate({
       schemaKey: "context_v3",
       object: transformedObject,
     });
-    if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors}`);
+    if (!validationResult.valid) {
+      throw new Error(`Invalid object: ${validationResult.errors}`);
     }
-    return result.object;
+    return validationResult.object as Record<string, unknown>;
   } else if (targetSchema === "openApi_v3") {
-    let transformedObject;
     // Handle openApi_v2 to openApi_v3 transformation
     const { name, requestHeaders, ...intermediaryObject } = object;
-    intermediaryObject.name = object.name;
-    intermediaryObject.headers = object.requestHeaders;
-    transformedObject = { ...intermediaryObject };
+    const transformedObject = {
+      ...intermediaryObject,
+      name: name,
+      headers: requestHeaders,
+    };
 
-    const result = validate({
+    const validationResult = validate({
       schemaKey: "openApi_v3",
       object: transformedObject,
     });
-    if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors}`);
+    if (!validationResult.valid) {
+      throw new Error(`Invalid object: ${validationResult.errors}`);
     }
-    return transformedObject;
+    return transformedObject as Record<string, unknown>;
   } else if (targetSchema === "spec_v3") {
     // Handle spec_v2 to spec_v3 transformation
-    const transformedObject = {
+    const transformedObject: Record<string, unknown> = {
       specId: object.id,
       description: object.description,
       contentPath: object.file,
     };
-    if (object.contexts)
-      transformedObject.runOn = object.contexts.map((context) =>
+
+    const contexts = object.contexts as Record<string, unknown>[] | undefined;
+    if (contexts) {
+      transformedObject.runOn = contexts.map((context) =>
         transformToSchemaKey({
           currentSchema: "context_v2",
           targetSchema: "context_v3",
           object: context,
         })
       );
-    if (object.openApi)
-      transformedObject.openApi = object.openApi.map((description) =>
+    }
+
+    const openApi = object.openApi as Record<string, unknown>[] | undefined;
+    if (openApi) {
+      transformedObject.openApi = openApi.map((description) =>
         transformToSchemaKey({
           currentSchema: "openApi_v2",
           targetSchema: "openApi_v3",
           object: description,
         })
       );
-    transformedObject.tests = object.tests.map((test) =>
+    }
+
+    const tests = object.tests as Record<string, unknown>[];
+    transformedObject.tests = tests.map((test) =>
       transformToSchemaKey({
         currentSchema: "test_v2",
         targetSchema: "test_v3",
@@ -524,17 +581,17 @@ function transformToSchemaKey({
       })
     );
 
-    const result = validate({
+    const validationResult = validate({
       schemaKey: "spec_v3",
       object: transformedObject,
     });
-    if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors}`);
+    if (!validationResult.valid) {
+      throw new Error(`Invalid object: ${validationResult.errors}`);
     }
-    return result.object;
+    return validationResult.object as Record<string, unknown>;
   } else if (targetSchema === "test_v3") {
     // Handle test_v2 to test_v3 transformation
-    const transformedObject = {
+    const transformedObject: Record<string, unknown> = {
       testId: object.id,
       description: object.description,
       contentPath: object.file,
@@ -542,23 +599,31 @@ function transformToSchemaKey({
       before: object.setup,
       after: object.cleanup,
     };
-    if (object.contexts)
-      transformedObject.runOn = object.contexts.map((context) =>
+
+    const contexts = object.contexts as Record<string, unknown>[] | undefined;
+    if (contexts) {
+      transformedObject.runOn = contexts.map((context) =>
         transformToSchemaKey({
           currentSchema: "context_v2",
           targetSchema: "context_v3",
           object: context,
         })
       );
-    if (object.openApi)
-      transformedObject.openApi = object.openApi.map((description) =>
+    }
+
+    const openApi = object.openApi as Record<string, unknown>[] | undefined;
+    if (openApi) {
+      transformedObject.openApi = openApi.map((description) =>
         transformToSchemaKey({
           currentSchema: "openApi_v2",
           targetSchema: "openApi_v3",
           object: description,
         })
       );
-    transformedObject.steps = object.steps.map((step) =>
+    }
+
+    const steps = object.steps as Record<string, unknown>[];
+    transformedObject.steps = steps.map((step) =>
       transformToSchemaKey({
         currentSchema: `${step.action}_v2`,
         targetSchema: "step_v3",
@@ -566,21 +631,22 @@ function transformToSchemaKey({
       })
     );
 
-    const result = validate({
+    const validationResult = validate({
       schemaKey: "test_v3",
       object: transformedObject,
     });
-    if (!result.valid) {
-      throw new Error(`Invalid object: ${result.errors}`);
+    if (!validationResult.valid) {
+      throw new Error(`Invalid object: ${validationResult.errors}`);
     }
-    return result.object;
+    return validationResult.object as Record<string, unknown>;
   }
-  return null;
+
+  throw new Error(`Transformation to ${targetSchema} is not implemented.`);
 }
 
 // If called directly, validate an example object
 if (require.main === module) {
-  const example =  {path: "/User/manny/projects/doc-detective/static/images/image.png"};
+  const example = { path: "/User/manny/projects/doc-detective/static/images/image.png" };
 
   const result = validate({ schemaKey: "screenshot_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
