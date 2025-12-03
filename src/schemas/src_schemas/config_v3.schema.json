@@ -222,6 +222,44 @@
             }
           },
           "title": "Doc Detective Orchestration API"
+        },
+        "heretto": {
+          "type": "array",
+          "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and DITA map to fetch and test.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "organizationId", "username", "apiToken", "fileId"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Unique identifier for this Heretto integration. Used in logs and results."
+              },
+              "organizationId": {
+                "type": "string",
+                "description": "The organization subdomain used to access Heretto CCMS (e.g., 'thunderbird' for thunderbird.heretto.com)."
+              },
+              "username": {
+                "type": "string",
+                "description": "Heretto CCMS username (email address) for API authentication."
+              },
+              "apiToken": {
+                "type": "string",
+                "description": "API token generated in Heretto CCMS for authentication. Recommended over password."
+              },
+              "fileId": {
+                "type": "string",
+                "description": "UUID of the DITA map to publish and test. Obtain from the API Info section in Heretto CCMS."
+              },
+              "outputPath": {
+                "type": "string",
+                "description": "Local path where Heretto content was downloaded. Set automatically during processing.",
+                "readOnly": true
+              }
+            },
+            "title": "Heretto CMS integration"
+          },
+          "title": "Heretto CMS integrations"
         }
       },
       "title": "Integrations options"
