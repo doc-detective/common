@@ -8887,7 +8887,7 @@
           },
           "heretto": {
             "type": "array",
-            "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and DITA map to fetch and test.",
+            "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and a DITA map to build and test.",
             "items": {
               "type": "object",
               "additionalProperties": false,
@@ -29240,7 +29240,7 @@
               },
               "heretto": {
                 "type": "array",
-                "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and DITA map to fetch and test.",
+                "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and a DITA map to build and test.",
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
