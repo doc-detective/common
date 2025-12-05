@@ -8514,7 +8514,7 @@
               },
               "apiToken": {
                 "type": "string",
-                "description": "API token generated in Heretto CCMS for authentication. See Heretto's [Generate a Token](https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3)."
+                "description": "API token generated in Heretto CCMS for authentication. See https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3"
               },
               "outputPath": {
                 "type": "string",
@@ -16198,6 +16198,21 @@
     },
     {
       "crawl": true
+    },
+    {
+      "processDitaMaps": true
+    },
+    {
+      "integrations": {
+        "heretto": [
+          {
+            "name": "example",
+            "organizationId": "your-organization-id",
+            "username": "your-username",
+            "apiToken": "your-api-token"
+          }
+        ]
+      }
     }
   ]
 }
