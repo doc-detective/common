@@ -8510,8 +8510,7 @@
                   "name",
                   "organizationId",
                   "username",
-                  "apiToken",
-                  "fileId"
+                  "apiToken"
                 ],
                 "properties": {
                   "name": {
@@ -8528,11 +8527,7 @@
                   },
                   "apiToken": {
                     "type": "string",
-                    "description": "API token generated in Heretto CCMS for authentication. Recommended over password."
-                  },
-                  "fileId": {
-                    "type": "string",
-                    "description": "UUID of the DITA map to publish and test. Obtain from the API Info section in Heretto CCMS."
+                    "description": "API token generated in Heretto CCMS for authentication. See Heretto's [Generate a Token](https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3)."
                   },
                   "outputPath": {
                     "type": "string",
