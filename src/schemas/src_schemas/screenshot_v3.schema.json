@@ -22,9 +22,7 @@
         "description": "File path of the PNG file. Accepts absolute paths. If not specified, the file name is the ID of the step.",
         "type": "string",
         "pattern": "([A-Za-z0-9_-]*\\.(png|PNG)$|\\$[A-Za-z0-9_]+)",
-        "transform": [
-          "trim"
-        ]
+        "transform": ["trim"]
       },
       "object": {
         "type": "object",
@@ -36,9 +34,7 @@
           "directory": {
             "type": "string",
             "description": "Directory of the PNG file. If the directory doesn't exist, creates the directory.",
-            "transform": [
-              "trim"
-            ]
+            "transform": ["trim"]
           },
           "maxVariation": {
             "type": "number",
@@ -50,11 +46,7 @@
           "overwrite": {
             "type": "string",
             "description": "If `true`, overwrites the existing screenshot at `path` if it exists.\nIf `aboveVariation`, overwrites the existing screenshot at `path` if the difference between the new screenshot and the existing screenshot is greater than `maxVariation`.",
-            "enum": [
-              "true",
-              "false",
-              "aboveVariation"
-            ],
+            "enum": ["true", "false", "aboveVariation"],
             "default": "aboveVariation"
           },
           "crop": {
@@ -68,6 +60,13 @@
                 "$ref": "#/components/schemas/crop_element"
               }
             ]
+          },
+          "annotations": {
+            "type": "array",
+            "description": "Array of annotations to add to the screenshot.",
+            "items": {
+              "$ref": "annotation_v3.schema.json#"
+            }
           }
         },
         "title": "Capture screenshot (detailed)"
@@ -79,39 +78,25 @@
         "additionalProperties": false,
         "anyOf": [
           {
-            "required": [
-              "selector"
-            ]
+            "required": ["selector"]
           },
           {
-            "required": [
-              "elementText"
-            ]
+            "required": ["elementText"]
           },
           {
-            "required": [
-              "elementId"
-            ]
+            "required": ["elementId"]
           },
           {
-            "required": [
-              "elementTestId"
-            ]
+            "required": ["elementTestId"]
           },
           {
-            "required": [
-              "elementClass"
-            ]
+            "required": ["elementClass"]
           },
           {
-            "required": [
-              "elementAttribute"
-            ]
+            "required": ["elementAttribute"]
           },
           {
-            "required": [
-              "elementAria"
-            ]
+            "required": ["elementAria"]
           }
         ],
         "properties": {
@@ -240,6 +225,47 @@
           "left": 0
         }
       }
+    },
+    {
+      "path": "image.png",
+      "annotations": [
+        {
+          "find": {
+            "selector": "#usernameField"
+          },
+          "arrow": {
+            "from": { "x": 0, "y": -50 },
+            "to": { "x": 0, "y": 0 },
+            "color": "#FF0000",
+            "strokeWidth": 4,
+            "headSize": 10
+          }
+        },
+        {
+          "find": {
+            "elementText": "Username",
+            "elementClass": ["input-field", "/^user-/"]
+          },
+          "text": {
+            "content": "Enter your username here",
+            "fontSize": 14,
+            "color": "#0000FF",
+            "backgroundColor": "#FFFFFF",
+            "padding": 5
+          }
+        },
+        {
+          "rectangle": {
+            "x": 100,
+            "y": 150,
+            "width": 200,
+            "height": 100,
+            "borderColor": "#00FF00",
+            "borderWidth": 3,
+            "fillColor": "rgba(0, 255, 0, 0.2)"
+          }
+        }
+      ]
     }
   ]
 }

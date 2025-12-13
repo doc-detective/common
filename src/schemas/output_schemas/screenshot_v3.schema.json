@@ -187,6 +187,1173 @@
               }
             }
           ]
+        },
+        "annotations": {
+          "type": "array",
+          "description": "Array of annotations to add to the screenshot.",
+          "items": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "annotation",
+            "type": "object",
+            "description": "A visual annotation to add to the screenshot. Annotations can point to elements on the page (via `find`) or be positioned freely within the viewport.",
+            "anyOf": [
+              {
+                "required": [
+                  "arrow"
+                ],
+                "not": {
+                  "required": [
+                    "text",
+                    "rectangle",
+                    "circle",
+                    "line",
+                    "callout",
+                    "highlight",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "text"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "rectangle",
+                    "circle",
+                    "line",
+                    "callout",
+                    "highlight",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "rectangle"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "text",
+                    "circle",
+                    "line",
+                    "callout",
+                    "highlight",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "circle"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "text",
+                    "rectangle",
+                    "line",
+                    "callout",
+                    "highlight",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "line"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "text",
+                    "rectangle",
+                    "circle",
+                    "callout",
+                    "highlight",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "callout"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "text",
+                    "rectangle",
+                    "circle",
+                    "line",
+                    "highlight",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "highlight"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "text",
+                    "rectangle",
+                    "circle",
+                    "line",
+                    "callout",
+                    "blur"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "blur"
+                ],
+                "not": {
+                  "required": [
+                    "arrow",
+                    "text",
+                    "rectangle",
+                    "circle",
+                    "line",
+                    "callout",
+                    "highlight"
+                  ]
+                }
+              }
+            ],
+            "properties": {
+              "find": {
+                "type": "object",
+                "description": "Element on the page to annotate.",
+                "anyOf": [
+                  {
+                    "required": [
+                      "selector"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementText"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementId"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementTestId"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementClass"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementAttribute"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "elementAria"
+                    ]
+                  }
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "selector": {
+                    "type": "string",
+                    "description": "Selector of the element to annotate."
+                  },
+                  "elementText": {
+                    "type": "string",
+                    "description": "Display text of the element to annotate."
+                  },
+                  "elementTestId": {
+                    "type": "string",
+                    "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                  },
+                  "elementClass": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                  },
+                  "elementAttribute": {
+                    "type": "object",
+                    "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    }
+                  },
+                  "elementAria": {
+                    "type": "string",
+                    "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                  }
+                }
+              },
+              "position": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      "top",
+                      "bottom",
+                      "left",
+                      "right",
+                      "center",
+                      "top-left",
+                      "top-right",
+                      "bottom-left",
+                      "bottom-right"
+                    ],
+                    "description": "Position relative to the element (if `find` is provided) or to the viewport."
+                  }
+                ]
+              },
+              "arrow": {
+                "type": "object",
+                "description": "Configuration for arrow annotations.",
+                "properties": {
+                  "from": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "to": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Color of the arrow (hex, rgb, or named color).",
+                    "default": "#FF0000"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "Width of the arrow line in pixels.",
+                    "minimum": 1,
+                    "default": 3
+                  },
+                  "headSize": {
+                    "type": "number",
+                    "description": "Size of the arrowhead in pixels.",
+                    "minimum": 1,
+                    "default": 15
+                  }
+                }
+              },
+              "text": {
+                "type": "object",
+                "description": "Configuration for text annotations.",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "Text content to display."
+                  },
+                  "fontSize": {
+                    "type": "number",
+                    "description": "Font size in pixels.",
+                    "minimum": 1,
+                    "default": 16
+                  },
+                  "fontFamily": {
+                    "type": "string",
+                    "description": "Font family name.",
+                    "default": "Arial"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Text color (hex, rgb, or named color).",
+                    "default": "#000000"
+                  },
+                  "backgroundColor": {
+                    "type": "string",
+                    "description": "Background color for the text box.",
+                    "default": "#FFFFFF"
+                  },
+                  "padding": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "description": "Padding in pixels on all sides.",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "top": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "right": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "bottom": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    ],
+                    "default": 5
+                  },
+                  "maxWidth": {
+                    "type": "number",
+                    "description": "Maximum width of the text box. Text will wrap.",
+                    "minimum": 1
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "Opacity of the text and background (0-1).",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                  }
+                },
+                "required": [
+                  "content"
+                ]
+              },
+              "rectangle": {
+                "type": "object",
+                "description": "Configuration for rectangle annotations.",
+                "properties": {
+                  "width": {
+                    "type": "number",
+                    "description": "Width of the rectangle in pixels.",
+                    "minimum": 1
+                  },
+                  "height": {
+                    "type": "number",
+                    "description": "Height of the rectangle in pixels.",
+                    "minimum": 1
+                  },
+                  "fill": {
+                    "type": "string",
+                    "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                    "default": "transparent"
+                  },
+                  "stroke": {
+                    "type": "string",
+                    "description": "Border color (hex, rgb, or named color).",
+                    "default": "#FF0000"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "Border width in pixels.",
+                    "minimum": 0,
+                    "default": 2
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "Opacity (0-1).",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                  },
+                  "rx": {
+                    "type": "number",
+                    "description": "Horizontal corner radius for rounded rectangles.",
+                    "minimum": 0,
+                    "default": 0
+                  },
+                  "ry": {
+                    "type": "number",
+                    "description": "Vertical corner radius for rounded rectangles.",
+                    "minimum": 0,
+                    "default": 0
+                  }
+                }
+              },
+              "circle": {
+                "type": "object",
+                "description": "Configuration for circle annotations.",
+                "properties": {
+                  "radius": {
+                    "type": "number",
+                    "description": "Radius of the circle in pixels.",
+                    "minimum": 1,
+                    "default": 30
+                  },
+                  "fill": {
+                    "type": "string",
+                    "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                    "default": "transparent"
+                  },
+                  "stroke": {
+                    "type": "string",
+                    "description": "Border color (hex, rgb, or named color).",
+                    "default": "#FF0000"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "Border width in pixels.",
+                    "minimum": 0,
+                    "default": 2
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "Opacity (0-1).",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 1
+                  }
+                }
+              },
+              "line": {
+                "type": "object",
+                "description": "Configuration for line annotations.",
+                "properties": {
+                  "from": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "to": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Color of the line (hex, rgb, or named color).",
+                    "default": "#000000"
+                  },
+                  "strokeWidth": {
+                    "type": "number",
+                    "description": "Width of the line in pixels.",
+                    "minimum": 1,
+                    "default": 2
+                  },
+                  "dashArray": {
+                    "type": "array",
+                    "description": "Dash pattern [dash, gap]. E.g., [5, 5] for dashed line.",
+                    "items": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "required": [
+                  "from",
+                  "to"
+                ]
+              },
+              "callout": {
+                "type": "object",
+                "description": "Configuration for callout annotations (text with arrow).",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "Text content to display."
+                  },
+                  "target": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "textPosition": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "fontSize": {
+                    "type": "number",
+                    "description": "Font size in pixels.",
+                    "minimum": 1,
+                    "default": 14
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Text color.",
+                    "default": "#000000"
+                  },
+                  "backgroundColor": {
+                    "type": "string",
+                    "description": "Background color for the text box.",
+                    "default": "#FFFFCC"
+                  },
+                  "arrowColor": {
+                    "type": "string",
+                    "description": "Color of the arrow.",
+                    "default": "#000000"
+                  },
+                  "maxWidth": {
+                    "type": "number",
+                    "description": "Maximum width of the text box.",
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "content",
+                  "target"
+                ]
+              },
+              "highlight": {
+                "type": "object",
+                "description": "Configuration for highlight annotations (semi-transparent overlay).",
+                "properties": {
+                  "color": {
+                    "type": "string",
+                    "description": "Highlight color (hex, rgb, or named color).",
+                    "default": "#FFFF00"
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "Opacity (0-1).",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "default": 0.3
+                  }
+                }
+              },
+              "blur": {
+                "type": "object",
+                "description": "Configuration for blur annotations (for redacting sensitive information).",
+                "properties": {
+                  "intensity": {
+                    "type": "number",
+                    "description": "Blur intensity level.",
+                    "minimum": 1,
+                    "default": 10
+                  },
+                  "width": {
+                    "type": "number",
+                    "description": "Width of the blur area in pixels.",
+                    "minimum": 1
+                  },
+                  "height": {
+                    "type": "number",
+                    "description": "Height of the blur area in pixels.",
+                    "minimum": 1
+                  }
+                }
+              }
+            },
+            "components": {
+              "schemas": {
+                "arrow_properties": {
+                  "type": "object",
+                  "description": "Configuration for arrow annotations.",
+                  "properties": {
+                    "from": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "to": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Color of the arrow (hex, rgb, or named color).",
+                      "default": "#FF0000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Width of the arrow line in pixels.",
+                      "minimum": 1,
+                      "default": 3
+                    },
+                    "headSize": {
+                      "type": "number",
+                      "description": "Size of the arrowhead in pixels.",
+                      "minimum": 1,
+                      "default": 15
+                    }
+                  }
+                },
+                "text_properties": {
+                  "type": "object",
+                  "description": "Configuration for text annotations.",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "Text content to display."
+                    },
+                    "fontSize": {
+                      "type": "number",
+                      "description": "Font size in pixels.",
+                      "minimum": 1,
+                      "default": 16
+                    },
+                    "fontFamily": {
+                      "type": "string",
+                      "description": "Font family name.",
+                      "default": "Arial"
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Text color (hex, rgb, or named color).",
+                      "default": "#000000"
+                    },
+                    "backgroundColor": {
+                      "type": "string",
+                      "description": "Background color for the text box.",
+                      "default": "#FFFFFF"
+                    },
+                    "padding": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "description": "Padding in pixels on all sides.",
+                          "minimum": 0
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "top": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "right": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "bottom": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "left": {
+                              "type": "number",
+                              "minimum": 0
+                            }
+                          }
+                        }
+                      ],
+                      "default": 5
+                    },
+                    "maxWidth": {
+                      "type": "number",
+                      "description": "Maximum width of the text box. Text will wrap.",
+                      "minimum": 1
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity of the text and background (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 1
+                    }
+                  },
+                  "required": [
+                    "content"
+                  ]
+                },
+                "rectangle_properties": {
+                  "type": "object",
+                  "description": "Configuration for rectangle annotations.",
+                  "properties": {
+                    "width": {
+                      "type": "number",
+                      "description": "Width of the rectangle in pixels.",
+                      "minimum": 1
+                    },
+                    "height": {
+                      "type": "number",
+                      "description": "Height of the rectangle in pixels.",
+                      "minimum": 1
+                    },
+                    "fill": {
+                      "type": "string",
+                      "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                      "default": "transparent"
+                    },
+                    "stroke": {
+                      "type": "string",
+                      "description": "Border color (hex, rgb, or named color).",
+                      "default": "#FF0000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Border width in pixels.",
+                      "minimum": 0,
+                      "default": 2
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 1
+                    },
+                    "rx": {
+                      "type": "number",
+                      "description": "Horizontal corner radius for rounded rectangles.",
+                      "minimum": 0,
+                      "default": 0
+                    },
+                    "ry": {
+                      "type": "number",
+                      "description": "Vertical corner radius for rounded rectangles.",
+                      "minimum": 0,
+                      "default": 0
+                    }
+                  }
+                },
+                "circle_properties": {
+                  "type": "object",
+                  "description": "Configuration for circle annotations.",
+                  "properties": {
+                    "radius": {
+                      "type": "number",
+                      "description": "Radius of the circle in pixels.",
+                      "minimum": 1,
+                      "default": 30
+                    },
+                    "fill": {
+                      "type": "string",
+                      "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                      "default": "transparent"
+                    },
+                    "stroke": {
+                      "type": "string",
+                      "description": "Border color (hex, rgb, or named color).",
+                      "default": "#FF0000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Border width in pixels.",
+                      "minimum": 0,
+                      "default": 2
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 1
+                    }
+                  }
+                },
+                "line_properties": {
+                  "type": "object",
+                  "description": "Configuration for line annotations.",
+                  "properties": {
+                    "from": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "to": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Color of the line (hex, rgb, or named color).",
+                      "default": "#000000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Width of the line in pixels.",
+                      "minimum": 1,
+                      "default": 2
+                    },
+                    "dashArray": {
+                      "type": "array",
+                      "description": "Dash pattern [dash, gap]. E.g., [5, 5] for dashed line.",
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "required": [
+                    "from",
+                    "to"
+                  ]
+                },
+                "callout_properties": {
+                  "type": "object",
+                  "description": "Configuration for callout annotations (text with arrow).",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "Text content to display."
+                    },
+                    "target": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "textPosition": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "fontSize": {
+                      "type": "number",
+                      "description": "Font size in pixels.",
+                      "minimum": 1,
+                      "default": 14
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Text color.",
+                      "default": "#000000"
+                    },
+                    "backgroundColor": {
+                      "type": "string",
+                      "description": "Background color for the text box.",
+                      "default": "#FFFFCC"
+                    },
+                    "arrowColor": {
+                      "type": "string",
+                      "description": "Color of the arrow.",
+                      "default": "#000000"
+                    },
+                    "maxWidth": {
+                      "type": "number",
+                      "description": "Maximum width of the text box.",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "content",
+                    "target"
+                  ]
+                },
+                "highlight_properties": {
+                  "type": "object",
+                  "description": "Configuration for highlight annotations (semi-transparent overlay).",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "description": "Highlight color (hex, rgb, or named color).",
+                      "default": "#FFFF00"
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 0.3
+                    }
+                  }
+                },
+                "blur_properties": {
+                  "type": "object",
+                  "description": "Configuration for blur annotations (for redacting sensitive information).",
+                  "properties": {
+                    "intensity": {
+                      "type": "number",
+                      "description": "Blur intensity level.",
+                      "minimum": 1,
+                      "default": 10
+                    },
+                    "width": {
+                      "type": "number",
+                      "description": "Width of the blur area in pixels.",
+                      "minimum": 1
+                    },
+                    "height": {
+                      "type": "number",
+                      "description": "Height of the blur area in pixels.",
+                      "minimum": 1
+                    }
+                  }
+                },
+                "point": {
+                  "type": "object",
+                  "description": "A coordinate point (x, y).",
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "description": "X coordinate in pixels."
+                    },
+                    "y": {
+                      "type": "number",
+                      "description": "Y coordinate in pixels."
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ]
+                },
+                "padding": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "top": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "right": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "bottom": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "left": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            },
+            "examples": [
+              {
+                "find": {
+                  "selector": "#submit-button"
+                },
+                "arrow": {
+                  "from": {
+                    "x": 0,
+                    "y": -50
+                  },
+                  "to": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "color": "#00FF00",
+                  "strokeWidth": 4,
+                  "headSize": 20
+                }
+              },
+              {
+                "position": "top-right",
+                "text": {
+                  "content": "Important Notice",
+                  "fontSize": 18,
+                  "color": "#FFFFFF",
+                  "backgroundColor": "#0000FF",
+                  "padding": 10,
+                  "maxWidth": 200,
+                  "opacity": 0.9
+                }
+              },
+              {
+                "find": {
+                  "elementClass": [
+                    "sensitive-info",
+                    "/^private-/"
+                  ]
+                },
+                "blur": {
+                  "intensity": 15,
+                  "width": 200,
+                  "height": 50
+                }
+              }
+            ]
+          }
         }
       },
       "title": "Capture screenshot (detailed)"
@@ -383,6 +1550,1173 @@
                 }
               }
             ]
+          },
+          "annotations": {
+            "type": "array",
+            "description": "Array of annotations to add to the screenshot.",
+            "items": {
+              "$schema": "http://json-schema.org/draft-07/schema#",
+              "title": "annotation",
+              "type": "object",
+              "description": "A visual annotation to add to the screenshot. Annotations can point to elements on the page (via `find`) or be positioned freely within the viewport.",
+              "anyOf": [
+                {
+                  "required": [
+                    "arrow"
+                  ],
+                  "not": {
+                    "required": [
+                      "text",
+                      "rectangle",
+                      "circle",
+                      "line",
+                      "callout",
+                      "highlight",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "text"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "rectangle",
+                      "circle",
+                      "line",
+                      "callout",
+                      "highlight",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "rectangle"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "text",
+                      "circle",
+                      "line",
+                      "callout",
+                      "highlight",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "circle"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "text",
+                      "rectangle",
+                      "line",
+                      "callout",
+                      "highlight",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "line"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "text",
+                      "rectangle",
+                      "circle",
+                      "callout",
+                      "highlight",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "callout"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "text",
+                      "rectangle",
+                      "circle",
+                      "line",
+                      "highlight",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "highlight"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "text",
+                      "rectangle",
+                      "circle",
+                      "line",
+                      "callout",
+                      "blur"
+                    ]
+                  }
+                },
+                {
+                  "required": [
+                    "blur"
+                  ],
+                  "not": {
+                    "required": [
+                      "arrow",
+                      "text",
+                      "rectangle",
+                      "circle",
+                      "line",
+                      "callout",
+                      "highlight"
+                    ]
+                  }
+                }
+              ],
+              "properties": {
+                "find": {
+                  "type": "object",
+                  "description": "Element on the page to annotate.",
+                  "anyOf": [
+                    {
+                      "required": [
+                        "selector"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementText"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementTestId"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementClass"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementAttribute"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "elementAria"
+                      ]
+                    }
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "selector": {
+                      "type": "string",
+                      "description": "Selector of the element to annotate."
+                    },
+                    "elementText": {
+                      "type": "string",
+                      "description": "Display text of the element to annotate."
+                    },
+                    "elementTestId": {
+                      "type": "string",
+                      "description": "data-testid attribute of the element to find. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "elementClass": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Class or array of classes that the element must have. Each class supports exact match or regex pattern using /pattern/ syntax. Element must have all specified classes."
+                    },
+                    "elementAttribute": {
+                      "type": "object",
+                      "description": "Object of attribute key-value pairs that the element must have. Values can be strings (supporting /pattern/ regex), numbers, or booleans. Boolean true matches attribute presence, false matches absence.",
+                      "additionalProperties": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      }
+                    },
+                    "elementAria": {
+                      "type": "string",
+                      "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                    }
+                  }
+                },
+                "position": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "top",
+                        "bottom",
+                        "left",
+                        "right",
+                        "center",
+                        "top-left",
+                        "top-right",
+                        "bottom-left",
+                        "bottom-right"
+                      ],
+                      "description": "Position relative to the element (if `find` is provided) or to the viewport."
+                    }
+                  ]
+                },
+                "arrow": {
+                  "type": "object",
+                  "description": "Configuration for arrow annotations.",
+                  "properties": {
+                    "from": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "to": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Color of the arrow (hex, rgb, or named color).",
+                      "default": "#FF0000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Width of the arrow line in pixels.",
+                      "minimum": 1,
+                      "default": 3
+                    },
+                    "headSize": {
+                      "type": "number",
+                      "description": "Size of the arrowhead in pixels.",
+                      "minimum": 1,
+                      "default": 15
+                    }
+                  }
+                },
+                "text": {
+                  "type": "object",
+                  "description": "Configuration for text annotations.",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "Text content to display."
+                    },
+                    "fontSize": {
+                      "type": "number",
+                      "description": "Font size in pixels.",
+                      "minimum": 1,
+                      "default": 16
+                    },
+                    "fontFamily": {
+                      "type": "string",
+                      "description": "Font family name.",
+                      "default": "Arial"
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Text color (hex, rgb, or named color).",
+                      "default": "#000000"
+                    },
+                    "backgroundColor": {
+                      "type": "string",
+                      "description": "Background color for the text box.",
+                      "default": "#FFFFFF"
+                    },
+                    "padding": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "description": "Padding in pixels on all sides.",
+                          "minimum": 0
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "top": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "right": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "bottom": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "left": {
+                              "type": "number",
+                              "minimum": 0
+                            }
+                          }
+                        }
+                      ],
+                      "default": 5
+                    },
+                    "maxWidth": {
+                      "type": "number",
+                      "description": "Maximum width of the text box. Text will wrap.",
+                      "minimum": 1
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity of the text and background (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 1
+                    }
+                  },
+                  "required": [
+                    "content"
+                  ]
+                },
+                "rectangle": {
+                  "type": "object",
+                  "description": "Configuration for rectangle annotations.",
+                  "properties": {
+                    "width": {
+                      "type": "number",
+                      "description": "Width of the rectangle in pixels.",
+                      "minimum": 1
+                    },
+                    "height": {
+                      "type": "number",
+                      "description": "Height of the rectangle in pixels.",
+                      "minimum": 1
+                    },
+                    "fill": {
+                      "type": "string",
+                      "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                      "default": "transparent"
+                    },
+                    "stroke": {
+                      "type": "string",
+                      "description": "Border color (hex, rgb, or named color).",
+                      "default": "#FF0000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Border width in pixels.",
+                      "minimum": 0,
+                      "default": 2
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 1
+                    },
+                    "rx": {
+                      "type": "number",
+                      "description": "Horizontal corner radius for rounded rectangles.",
+                      "minimum": 0,
+                      "default": 0
+                    },
+                    "ry": {
+                      "type": "number",
+                      "description": "Vertical corner radius for rounded rectangles.",
+                      "minimum": 0,
+                      "default": 0
+                    }
+                  }
+                },
+                "circle": {
+                  "type": "object",
+                  "description": "Configuration for circle annotations.",
+                  "properties": {
+                    "radius": {
+                      "type": "number",
+                      "description": "Radius of the circle in pixels.",
+                      "minimum": 1,
+                      "default": 30
+                    },
+                    "fill": {
+                      "type": "string",
+                      "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                      "default": "transparent"
+                    },
+                    "stroke": {
+                      "type": "string",
+                      "description": "Border color (hex, rgb, or named color).",
+                      "default": "#FF0000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Border width in pixels.",
+                      "minimum": 0,
+                      "default": 2
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 1
+                    }
+                  }
+                },
+                "line": {
+                  "type": "object",
+                  "description": "Configuration for line annotations.",
+                  "properties": {
+                    "from": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "to": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Color of the line (hex, rgb, or named color).",
+                      "default": "#000000"
+                    },
+                    "strokeWidth": {
+                      "type": "number",
+                      "description": "Width of the line in pixels.",
+                      "minimum": 1,
+                      "default": 2
+                    },
+                    "dashArray": {
+                      "type": "array",
+                      "description": "Dash pattern [dash, gap]. E.g., [5, 5] for dashed line.",
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "required": [
+                    "from",
+                    "to"
+                  ]
+                },
+                "callout": {
+                  "type": "object",
+                  "description": "Configuration for callout annotations (text with arrow).",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "Text content to display."
+                    },
+                    "target": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "textPosition": {
+                      "type": "object",
+                      "description": "A coordinate point (x, y).",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "description": "X coordinate in pixels."
+                        },
+                        "y": {
+                          "type": "number",
+                          "description": "Y coordinate in pixels."
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ]
+                    },
+                    "fontSize": {
+                      "type": "number",
+                      "description": "Font size in pixels.",
+                      "minimum": 1,
+                      "default": 14
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Text color.",
+                      "default": "#000000"
+                    },
+                    "backgroundColor": {
+                      "type": "string",
+                      "description": "Background color for the text box.",
+                      "default": "#FFFFCC"
+                    },
+                    "arrowColor": {
+                      "type": "string",
+                      "description": "Color of the arrow.",
+                      "default": "#000000"
+                    },
+                    "maxWidth": {
+                      "type": "number",
+                      "description": "Maximum width of the text box.",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "content",
+                    "target"
+                  ]
+                },
+                "highlight": {
+                  "type": "object",
+                  "description": "Configuration for highlight annotations (semi-transparent overlay).",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "description": "Highlight color (hex, rgb, or named color).",
+                      "default": "#FFFF00"
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "description": "Opacity (0-1).",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "default": 0.3
+                    }
+                  }
+                },
+                "blur": {
+                  "type": "object",
+                  "description": "Configuration for blur annotations (for redacting sensitive information).",
+                  "properties": {
+                    "intensity": {
+                      "type": "number",
+                      "description": "Blur intensity level.",
+                      "minimum": 1,
+                      "default": 10
+                    },
+                    "width": {
+                      "type": "number",
+                      "description": "Width of the blur area in pixels.",
+                      "minimum": 1
+                    },
+                    "height": {
+                      "type": "number",
+                      "description": "Height of the blur area in pixels.",
+                      "minimum": 1
+                    }
+                  }
+                }
+              },
+              "components": {
+                "schemas": {
+                  "arrow_properties": {
+                    "type": "object",
+                    "description": "Configuration for arrow annotations.",
+                    "properties": {
+                      "from": {
+                        "type": "object",
+                        "description": "A coordinate point (x, y).",
+                        "properties": {
+                          "x": {
+                            "type": "number",
+                            "description": "X coordinate in pixels."
+                          },
+                          "y": {
+                            "type": "number",
+                            "description": "Y coordinate in pixels."
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      "to": {
+                        "type": "object",
+                        "description": "A coordinate point (x, y).",
+                        "properties": {
+                          "x": {
+                            "type": "number",
+                            "description": "X coordinate in pixels."
+                          },
+                          "y": {
+                            "type": "number",
+                            "description": "Y coordinate in pixels."
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      "color": {
+                        "type": "string",
+                        "description": "Color of the arrow (hex, rgb, or named color).",
+                        "default": "#FF0000"
+                      },
+                      "strokeWidth": {
+                        "type": "number",
+                        "description": "Width of the arrow line in pixels.",
+                        "minimum": 1,
+                        "default": 3
+                      },
+                      "headSize": {
+                        "type": "number",
+                        "description": "Size of the arrowhead in pixels.",
+                        "minimum": 1,
+                        "default": 15
+                      }
+                    }
+                  },
+                  "text_properties": {
+                    "type": "object",
+                    "description": "Configuration for text annotations.",
+                    "properties": {
+                      "content": {
+                        "type": "string",
+                        "description": "Text content to display."
+                      },
+                      "fontSize": {
+                        "type": "number",
+                        "description": "Font size in pixels.",
+                        "minimum": 1,
+                        "default": 16
+                      },
+                      "fontFamily": {
+                        "type": "string",
+                        "description": "Font family name.",
+                        "default": "Arial"
+                      },
+                      "color": {
+                        "type": "string",
+                        "description": "Text color (hex, rgb, or named color).",
+                        "default": "#000000"
+                      },
+                      "backgroundColor": {
+                        "type": "string",
+                        "description": "Background color for the text box.",
+                        "default": "#FFFFFF"
+                      },
+                      "padding": {
+                        "anyOf": [
+                          {
+                            "type": "number",
+                            "description": "Padding in pixels on all sides.",
+                            "minimum": 0
+                          },
+                          {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "top": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "right": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "bottom": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "left": {
+                                "type": "number",
+                                "minimum": 0
+                              }
+                            }
+                          }
+                        ],
+                        "default": 5
+                      },
+                      "maxWidth": {
+                        "type": "number",
+                        "description": "Maximum width of the text box. Text will wrap.",
+                        "minimum": 1
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "description": "Opacity of the text and background (0-1).",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 1
+                      }
+                    },
+                    "required": [
+                      "content"
+                    ]
+                  },
+                  "rectangle_properties": {
+                    "type": "object",
+                    "description": "Configuration for rectangle annotations.",
+                    "properties": {
+                      "width": {
+                        "type": "number",
+                        "description": "Width of the rectangle in pixels.",
+                        "minimum": 1
+                      },
+                      "height": {
+                        "type": "number",
+                        "description": "Height of the rectangle in pixels.",
+                        "minimum": 1
+                      },
+                      "fill": {
+                        "type": "string",
+                        "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                        "default": "transparent"
+                      },
+                      "stroke": {
+                        "type": "string",
+                        "description": "Border color (hex, rgb, or named color).",
+                        "default": "#FF0000"
+                      },
+                      "strokeWidth": {
+                        "type": "number",
+                        "description": "Border width in pixels.",
+                        "minimum": 0,
+                        "default": 2
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "description": "Opacity (0-1).",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 1
+                      },
+                      "rx": {
+                        "type": "number",
+                        "description": "Horizontal corner radius for rounded rectangles.",
+                        "minimum": 0,
+                        "default": 0
+                      },
+                      "ry": {
+                        "type": "number",
+                        "description": "Vertical corner radius for rounded rectangles.",
+                        "minimum": 0,
+                        "default": 0
+                      }
+                    }
+                  },
+                  "circle_properties": {
+                    "type": "object",
+                    "description": "Configuration for circle annotations.",
+                    "properties": {
+                      "radius": {
+                        "type": "number",
+                        "description": "Radius of the circle in pixels.",
+                        "minimum": 1,
+                        "default": 30
+                      },
+                      "fill": {
+                        "type": "string",
+                        "description": "Fill color (hex, rgb, or named color). Use 'transparent' for no fill.",
+                        "default": "transparent"
+                      },
+                      "stroke": {
+                        "type": "string",
+                        "description": "Border color (hex, rgb, or named color).",
+                        "default": "#FF0000"
+                      },
+                      "strokeWidth": {
+                        "type": "number",
+                        "description": "Border width in pixels.",
+                        "minimum": 0,
+                        "default": 2
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "description": "Opacity (0-1).",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 1
+                      }
+                    }
+                  },
+                  "line_properties": {
+                    "type": "object",
+                    "description": "Configuration for line annotations.",
+                    "properties": {
+                      "from": {
+                        "type": "object",
+                        "description": "A coordinate point (x, y).",
+                        "properties": {
+                          "x": {
+                            "type": "number",
+                            "description": "X coordinate in pixels."
+                          },
+                          "y": {
+                            "type": "number",
+                            "description": "Y coordinate in pixels."
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      "to": {
+                        "type": "object",
+                        "description": "A coordinate point (x, y).",
+                        "properties": {
+                          "x": {
+                            "type": "number",
+                            "description": "X coordinate in pixels."
+                          },
+                          "y": {
+                            "type": "number",
+                            "description": "Y coordinate in pixels."
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      "color": {
+                        "type": "string",
+                        "description": "Color of the line (hex, rgb, or named color).",
+                        "default": "#000000"
+                      },
+                      "strokeWidth": {
+                        "type": "number",
+                        "description": "Width of the line in pixels.",
+                        "minimum": 1,
+                        "default": 2
+                      },
+                      "dashArray": {
+                        "type": "array",
+                        "description": "Dash pattern [dash, gap]. E.g., [5, 5] for dashed line.",
+                        "items": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      }
+                    },
+                    "required": [
+                      "from",
+                      "to"
+                    ]
+                  },
+                  "callout_properties": {
+                    "type": "object",
+                    "description": "Configuration for callout annotations (text with arrow).",
+                    "properties": {
+                      "content": {
+                        "type": "string",
+                        "description": "Text content to display."
+                      },
+                      "target": {
+                        "type": "object",
+                        "description": "A coordinate point (x, y).",
+                        "properties": {
+                          "x": {
+                            "type": "number",
+                            "description": "X coordinate in pixels."
+                          },
+                          "y": {
+                            "type": "number",
+                            "description": "Y coordinate in pixels."
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      "textPosition": {
+                        "type": "object",
+                        "description": "A coordinate point (x, y).",
+                        "properties": {
+                          "x": {
+                            "type": "number",
+                            "description": "X coordinate in pixels."
+                          },
+                          "y": {
+                            "type": "number",
+                            "description": "Y coordinate in pixels."
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y"
+                        ]
+                      },
+                      "fontSize": {
+                        "type": "number",
+                        "description": "Font size in pixels.",
+                        "minimum": 1,
+                        "default": 14
+                      },
+                      "color": {
+                        "type": "string",
+                        "description": "Text color.",
+                        "default": "#000000"
+                      },
+                      "backgroundColor": {
+                        "type": "string",
+                        "description": "Background color for the text box.",
+                        "default": "#FFFFCC"
+                      },
+                      "arrowColor": {
+                        "type": "string",
+                        "description": "Color of the arrow.",
+                        "default": "#000000"
+                      },
+                      "maxWidth": {
+                        "type": "number",
+                        "description": "Maximum width of the text box.",
+                        "minimum": 1
+                      }
+                    },
+                    "required": [
+                      "content",
+                      "target"
+                    ]
+                  },
+                  "highlight_properties": {
+                    "type": "object",
+                    "description": "Configuration for highlight annotations (semi-transparent overlay).",
+                    "properties": {
+                      "color": {
+                        "type": "string",
+                        "description": "Highlight color (hex, rgb, or named color).",
+                        "default": "#FFFF00"
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "description": "Opacity (0-1).",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "default": 0.3
+                      }
+                    }
+                  },
+                  "blur_properties": {
+                    "type": "object",
+                    "description": "Configuration for blur annotations (for redacting sensitive information).",
+                    "properties": {
+                      "intensity": {
+                        "type": "number",
+                        "description": "Blur intensity level.",
+                        "minimum": 1,
+                        "default": 10
+                      },
+                      "width": {
+                        "type": "number",
+                        "description": "Width of the blur area in pixels.",
+                        "minimum": 1
+                      },
+                      "height": {
+                        "type": "number",
+                        "description": "Height of the blur area in pixels.",
+                        "minimum": 1
+                      }
+                    }
+                  },
+                  "point": {
+                    "type": "object",
+                    "description": "A coordinate point (x, y).",
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "description": "X coordinate in pixels."
+                      },
+                      "y": {
+                        "type": "number",
+                        "description": "Y coordinate in pixels."
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y"
+                    ]
+                  },
+                  "padding": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "top": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "right": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "bottom": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "left": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": [
+                {
+                  "find": {
+                    "selector": "#submit-button"
+                  },
+                  "arrow": {
+                    "from": {
+                      "x": 0,
+                      "y": -50
+                    },
+                    "to": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "color": "#00FF00",
+                    "strokeWidth": 4,
+                    "headSize": 20
+                  }
+                },
+                {
+                  "position": "top-right",
+                  "text": {
+                    "content": "Important Notice",
+                    "fontSize": 18,
+                    "color": "#FFFFFF",
+                    "backgroundColor": "#0000FF",
+                    "padding": 10,
+                    "maxWidth": 200,
+                    "opacity": 0.9
+                  }
+                },
+                {
+                  "find": {
+                    "elementClass": [
+                      "sensitive-info",
+                      "/^private-/"
+                    ]
+                  },
+                  "blur": {
+                    "intensity": 15,
+                    "width": 200,
+                    "height": 50
+                  }
+                }
+              ]
+            }
           }
         },
         "title": "Capture screenshot (detailed)"
@@ -576,6 +2910,56 @@
           "left": 0
         }
       }
+    },
+    {
+      "path": "image.png",
+      "annotations": [
+        {
+          "find": {
+            "selector": "#usernameField"
+          },
+          "arrow": {
+            "from": {
+              "x": 0,
+              "y": -50
+            },
+            "to": {
+              "x": 0,
+              "y": 0
+            },
+            "color": "#FF0000",
+            "strokeWidth": 4,
+            "headSize": 10
+          }
+        },
+        {
+          "find": {
+            "elementText": "Username",
+            "elementClass": [
+              "input-field",
+              "/^user-/"
+            ]
+          },
+          "text": {
+            "content": "Enter your username here",
+            "fontSize": 14,
+            "color": "#0000FF",
+            "backgroundColor": "#FFFFFF",
+            "padding": 5
+          }
+        },
+        {
+          "rectangle": {
+            "x": 100,
+            "y": 150,
+            "width": 200,
+            "height": 100,
+            "borderColor": "#00FF00",
+            "borderWidth": 3,
+            "fillColor": "rgba(0, 255, 0, 0.2)"
+          }
+        }
+      ]
     }
   ]
 }
