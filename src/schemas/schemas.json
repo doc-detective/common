@@ -8914,6 +8914,11 @@
                   "type": "string",
                   "description": "API token generated in Heretto CCMS for authentication. See https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3"
                 },
+                "scenarioName": {
+                  "type": "string",
+                  "description": "Name of the scenario to build and test.",
+                  "default": "Doc Detective"
+                },
                 "outputPath": {
                   "type": "string",
                   "description": "Local path where Heretto content was downloaded. Set automatically during processing.",
@@ -29276,6 +29281,11 @@
                     "apiToken": {
                       "type": "string",
                       "description": "API token generated in Heretto CCMS for authentication. See https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3"
+                    },
+                    "scenarioName": {
+                      "type": "string",
+                      "description": "Name of the scenario to build and test.",
+                      "default": "Doc Detective"
                     },
                     "outputPath": {
                       "type": "string",
