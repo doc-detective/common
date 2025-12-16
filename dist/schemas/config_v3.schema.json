@@ -8486,6 +8486,52 @@
             }
           },
           "title": "Doc Detective Orchestration API"
+        },
+        "heretto": {
+          "type": "array",
+          "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and a scenario to build and test.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "organizationId",
+              "username",
+              "apiToken"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Unique identifier for this Heretto integration. Used in logs and results."
+              },
+              "organizationId": {
+                "type": "string",
+                "description": "The organization subdomain used to access Heretto CCMS (e.g., 'thunderbird' for thunderbird.heretto.com)."
+              },
+              "username": {
+                "type": "string",
+                "description": "Heretto CCMS username (email address) for API authentication."
+              },
+              "apiToken": {
+                "format": "password",
+                "minLength": 1,
+                "type": "string",
+                "description": "API token generated in Heretto CCMS for authentication. See https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3"
+              },
+              "scenarioName": {
+                "type": "string",
+                "description": "Name of the scenario to build and test.",
+                "default": "Doc Detective"
+              },
+              "outputPath": {
+                "type": "string",
+                "description": "Local path where Heretto content was downloaded. Set automatically during processing.",
+                "readOnly": true
+              }
+            },
+            "title": "Heretto CMS integration"
+          },
+          "title": "Heretto CMS integrations"
         }
       },
       "title": "Integrations options"
@@ -16159,6 +16205,21 @@
     },
     {
       "crawl": true
+    },
+    {
+      "processDitaMaps": true
+    },
+    {
+      "integrations": {
+        "heretto": [
+          {
+            "name": "example",
+            "organizationId": "your-organization-id",
+            "username": "your-username",
+            "apiToken": "your-api-token"
+          }
+        ]
+      }
     }
   ]
 }
