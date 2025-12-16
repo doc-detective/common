@@ -8911,6 +8911,8 @@
                   "description": "Heretto CCMS username (email address) for API authentication."
                 },
                 "apiToken": {
+                  "format": "password",
+                  "minLength": 1,
                   "type": "string",
                   "description": "API token generated in Heretto CCMS for authentication. See https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3"
                 },
@@ -29279,6 +29281,8 @@
                       "description": "Heretto CCMS username (email address) for API authentication."
                     },
                     "apiToken": {
+                      "format": "password",
+                      "minLength": 1,
                       "type": "string",
                       "description": "API token generated in Heretto CCMS for authentication. See https://help.heretto.com/en/heretto-ccms/api/ccms-api-authentication/basic-authentication#ariaid-title3"
                     },
