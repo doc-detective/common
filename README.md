@@ -1,6 +1,6 @@
 # Doc Detective Common
 
-Shared components for Doc Detective projects.
+Shared components for Doc Detective projects. Written in TypeScript with Zod for type-safe schema validation.
 
 ## 📦 Installation
 
@@ -25,10 +25,26 @@ This package automatically publishes development versions on every commit to the
 This package exports the following components:
 
 - `schemas` - JSON schemas for validation
-- `validate` - Validation functions
+- `validate` - Validation functions using AJV
 - `resolvePaths` - Path resolution utilities
 - `readFile` - File reading utilities
 - `transformToSchemaKey` - Schema key transformation
+
+### TypeScript & Zod Schemas
+
+The package includes Zod schemas for type inference:
+
+```typescript
+import { 
+  configV3Schema, 
+  stepV3Schema, 
+  type ConfigV3, 
+  type StepV3 
+} from 'doc-detective-common';
+
+// Type-safe validation
+const config: ConfigV3 = configV3Schema.parse(myConfigObject);
+```
 
 ## 🧪 Development
 
@@ -36,11 +52,14 @@ This package exports the following components:
 # Install dependencies
 npm install
 
+# Build TypeScript and schemas
+npm run build
+
 # Run tests
 npm test
 
-# Build schemas
-npm run build
+# Compile TypeScript only
+npm run compile
 ```
 
 ## 📄 License

@@ -103,4 +103,6 @@ typings/
 # TernJS port file
 .tern-port
 
+# Build directories
 src/schemas/build
+build/

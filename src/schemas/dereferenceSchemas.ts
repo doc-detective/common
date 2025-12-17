@@ -1,6 +1,11 @@
-const parser = require("@apidevtools/json-schema-ref-parser");
-const path = require("path");
-const fs = require("fs");
+import parser from "@apidevtools/json-schema-ref-parser";
+import * as path from "path";
+import * as fs from "fs";
+
+interface Schema {
+  $id?: string;
+  [key: string]: unknown;
+}
 
 (async () => {
   await dereferenceSchemas();
@@ -10,10 +15,8 @@ const fs = require("fs");
  * Processes JSON schema files by updating reference paths, dereferencing all `$ref` pointers, and generating fully resolved schema outputs.
  *
  * For each schema in the input directory, this function updates reference paths, writes intermediate schemas to a build directory, dereferences all references, removes `$id` properties, and writes the final schemas to an output directory. It also creates a consolidated `schemas.json` file containing all dereferenced schemas keyed by filename.
- *
- * @remark The function assumes all schema files listed exist in the input directory and does not handle missing files or invalid JSON beyond throwing synchronous errors.
  */
-async function dereferenceSchemas() {
+async function dereferenceSchemas(): Promise<void> {
   const inputDir = path.resolve(`${__dirname}/src_schemas`);
   const buildDir = path.resolve(`${__dirname}/build`);
   fs.mkdirSync(buildDir, { recursive: true });
@@ -23,7 +26,6 @@ async function dereferenceSchemas() {
   fs.mkdirSync(distDir, { recursive: true });
 
   // List of schema files to process
-  // These files should be present in the input directory
   const files = [
     // v3 schemas
     "checkLink_v3.schema.json",
@@ -74,7 +76,7 @@ async function dereferenceSchemas() {
   // Update schema reference paths
   console.log("Updating schema reference paths...");
   for (const file of files) {
-    console.log(`File: ${file}`)
+    console.log(`File: ${file}`);
     const filePath = path.resolve(`${inputDir}/${file}`);
     const buildFilePath = path.resolve(`${buildDir}/${file}`);
     try {
@@ -83,8 +85,8 @@ async function dereferenceSchemas() {
         throw new Error(`File not found: ${filePath}`);
       }
       // Load schema
-      let schema = fs.readFileSync(filePath).toString();
-      schema = JSON.parse(schema);
+      const schemaContent = fs.readFileSync(filePath).toString();
+      let schema = JSON.parse(schemaContent) as Schema;
 
       // Update references to current relative path
       schema.$id = `${filePath}`;
@@ -105,15 +107,16 @@ async function dereferenceSchemas() {
     const outputFilePath = path.resolve(`${outputDir}/${file}`);
     try {
       // Check if file exists
-      if (!fs.existsSync(filePath))
+      if (!fs.existsSync(filePath)) {
         throw new Error(`File not found: ${filePath}`);
+      }
 
       // Load schema
-      let schema = fs.readFileSync(filePath).toString();
-      schema = JSON.parse(schema);
+      const schemaContent = fs.readFileSync(filePath).toString();
+      let schema = JSON.parse(schemaContent) as Schema;
 
       // Dereference schema
-      schema = await parser.dereference(schema);
+      schema = await parser.dereference(schema) as Schema;
       // Delete $id attributes
       schema = deleteDollarIds(schema);
 
@@ -123,13 +126,15 @@ async function dereferenceSchemas() {
       console.error(`Error processing ${file}:`, err);
     }
   }
+
   // Build final schemas.json file
   console.log("Building schemas.json file...");
-  const schemas = {};
-  files.forEach(async (file) => {
+  const schemas: Record<string, Schema> = {};
+  files.forEach((file) => {
     const key = file.replace(".schema.json", "");
     // Load schema from file
-    let schema = require(`${outputDir}/${file}`);
+    const schemaContent = fs.readFileSync(`${outputDir}/${file}`).toString();
+    const schema = JSON.parse(schemaContent) as Schema;
     // Load into `schema` object
     schemas[key] = schema;
   });
@@ -137,11 +142,6 @@ async function dereferenceSchemas() {
     `${__dirname}/schemas.json`,
     JSON.stringify(schemas, null, 2)
   );
-
-  // Clean up build dir
-  // fs.rm(buildDir, { recursive: true }, (err) => {
-  //   if (err) throw err;
-  // });
 
   // Publish v3 schemas to distribution directory
   const publishedSchemas = files.filter(file => file.includes('_v3.schema.json'));
@@ -166,20 +166,19 @@ async function dereferenceSchemas() {
 }
 
 // Prepend app-root path to referenced relative paths
-function updateRefPaths(schema) {
+function updateRefPaths(schema: Schema): Schema {
   if (schema === null || typeof schema !== "object") return schema;
-  for (let [key, value] of Object.entries(schema)) {
-    if (typeof value === "object") {
-      updateRefPaths(value);
+  for (const [key, value] of Object.entries(schema)) {
+    if (typeof value === "object" && value !== null) {
+      updateRefPaths(value as Schema);
     }
-    if (key === "$ref" && !value.startsWith("#")) {
+    if (key === "$ref" && typeof value === "string" && !value.startsWith("#")) {
       // File name of the referenced schema
-      valueFile = value.split("#")[0];
+      const valueFile = value.split("#")[0];
       // Attribute path in the referenced schema
-      valueAttribute = value.split("#")[1];
-      valuePath = path.resolve(`${__dirname}/build/${valueFile}`);
+      const valueAttribute = value.split("#")[1];
+      const valuePath = path.resolve(`${__dirname}/build/${valueFile}`);
       schema[key] = `${valuePath}#${valueAttribute}`;
-      // console.log({value, valueFile, valueAttribute, final: schema[key]})
     }
   }
   return schema;
@@ -188,14 +187,14 @@ function updateRefPaths(schema) {
 /**
  * Recursively removes all `$id` properties from a JSON schema object.
  *
- * @param {object} schema - The JSON schema object to process.
- * @returns {object} The schema object with all `$id` properties deleted.
+ * @param schema - The JSON schema object to process.
+ * @returns The schema object with all `$id` properties deleted.
  */
-function deleteDollarIds(schema) {
+function deleteDollarIds(schema: Schema): Schema {
   if (schema === null || typeof schema !== "object") return schema;
-  for (let [key, value] of Object.entries(schema)) {
-    if (typeof value === "object") {
-      deleteDollarIds(value);
+  for (const [key, value] of Object.entries(schema)) {
+    if (typeof value === "object" && value !== null) {
+      deleteDollarIds(value as Schema);
     }
     if (key === "$id") {
       delete schema[key];

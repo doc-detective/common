@@ -1,20 +1,24 @@
-const fs = require("fs");
-const YAML = require("yaml");
-const axios = require("axios");
-const { URL } = require("url");
+import * as fs from "fs";
+import YAML from "yaml";
+import axios from "axios";
+import { URL } from "url";
+
+export interface ReadFileOptions {
+  fileURLOrPath: string;
+}
 
 /**
  * Reads and parses content from a remote URL or local file path, supporting JSON and YAML formats.
  *
  * Attempts to parse the file content as JSON first, then YAML. If both parsing attempts fail, returns the raw content as a string. Returns `null` if the file cannot be read.
  *
- * @param {Object} options
- * @param {string} options.fileURLOrPath - The URL or local file path to read.
- * @returns {Promise<Object|string|null>} Parsed object for JSON or YAML files, raw string for other formats, or `null` if reading fails.
+ * @param options - The options for reading the file.
+ * @param options.fileURLOrPath - The URL or local file path to read.
+ * @returns Parsed object for JSON or YAML files, raw string for other formats, or `null` if reading fails.
  *
- * @throws {Error} If {@link fileURLOrPath} is missing, not a string, or is an empty string.
+ * @throws Error If fileURLOrPath is missing, not a string, or is an empty string.
  */
-async function readFile({ fileURLOrPath }) {
+export async function readFile({ fileURLOrPath }: ReadFileOptions): Promise<unknown | null> {
   if (!fileURLOrPath) {
     throw new Error("fileURLOrPath is required");
   }
@@ -25,14 +29,14 @@ async function readFile({ fileURLOrPath }) {
     throw new Error("fileURLOrPath cannot be an empty string");
   }
 
-  let content;
+  let content: string;
   let isRemote = false;
 
   try {
     const parsedURL = new URL(fileURLOrPath);
     isRemote =
       parsedURL.protocol === "http:" || parsedURL.protocol === "https:";
-  } catch (error) {
+  } catch {
     // Not a valid URL, assume local file path
   }
 
@@ -42,7 +46,7 @@ async function readFile({ fileURLOrPath }) {
       content = response.data;
     } catch (error) {
       console.warn(
-        `Error reading remote file from ${fileURLOrPath}: ${error.message}`
+        `Error reading remote file from ${fileURLOrPath}: ${(error as Error).message}`
       );
       return null;
     }
@@ -50,35 +54,33 @@ async function readFile({ fileURLOrPath }) {
     try {
       content = await fs.promises.readFile(fileURLOrPath, "utf8");
     } catch (error) {
-      if (error.code === "ENOENT") {
+      if ((error as NodeJS.ErrnoException).code === "ENOENT") {
         console.warn(`File not found: ${fileURLOrPath}`);
       } else {
-        console.warn(`Error reading file: ${error.message}`);
+        console.warn(`Error reading file: ${(error as Error).message}`);
       }
       return null;
     }
   }
 
   // Parse based on file extension
-  const ext = fileURLOrPath.split('.').pop().toLowerCase();
+  const ext = fileURLOrPath.split('.').pop()?.toLowerCase();
 
   if (ext === "json") {
     try {
       return JSON.parse(content);
     } catch (error) {
-      console.warn(`Failed to parse JSON: ${error.message}`);
+      console.warn(`Failed to parse JSON: ${(error as Error).message}`);
       return content;
     }
   } else if (ext === "yaml" || ext === "yml") {
     try {
       return YAML.parse(content);
     } catch (error) {
-      console.warn(`Failed to parse YAML: ${error.message}`);
+      console.warn(`Failed to parse YAML: ${(error as Error).message}`);
       return content;
     }
   } else {
     return content;
   }
 }
-
-module.exports = { readFile };

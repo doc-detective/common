@@ -1,7 +1,7 @@
 const sinon = require("sinon");
 const axios = require("axios");
 const fs = require("fs");
-const { readFile } = require("../src/files");
+const { readFile } = require("../build/files");
 
 (async () => {
   const { expect } = await import("chai");
