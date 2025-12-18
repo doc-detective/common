@@ -258,6 +258,24 @@
                 "type": "string",
                 "description": "Local path where Heretto content was downloaded. Set automatically during processing.",
                 "readOnly": true
+              },
+              "fileMapping": {
+                "type": "object",
+                "description": "Mapping of local file paths to Heretto file metadata. Set automatically during content loading.",
+                "readOnly": true,
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "fileId": {
+                      "type": "string",
+                      "description": "The UUID of the file in Heretto."
+                    },
+                    "filePath": {
+                      "type": "string",
+                      "description": "The path of the file in Heretto."
+                    }
+                  }
+                }
               }
             },
             "title": "Heretto CMS integration"

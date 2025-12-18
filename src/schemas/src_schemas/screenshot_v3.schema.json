@@ -68,6 +68,11 @@
                 "$ref": "#/components/schemas/crop_element"
               }
             ]
+          },
+          "sourceIntegration": {
+            "description": "Information about the source integration for this screenshot, enabling upload of changed files back to the source CMS. Set automatically during test resolution for files from integrations.",
+            "readOnly": true,
+            "$ref": "sourceIntegration_v3.schema.json#"
           }
         },
         "title": "Capture screenshot (detailed)"
