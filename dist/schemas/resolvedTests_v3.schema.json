@@ -8658,6 +8658,37 @@
                         }
                       }
                     }
+                  },
+                  "uploadOnChange": {
+                    "type": "boolean",
+                    "description": "If `true`, uploads changed screenshots and other media files back to Heretto CMS after test execution.",
+                    "default": false
+                  },
+                  "resourceDependencies": {
+                    "type": "object",
+                    "description": "Mapping of Heretto file paths to their UUIDs and metadata. Set automatically during content loading by fetching ditamap resource dependencies.",
+                    "readOnly": true,
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "uuid": {
+                          "type": "string",
+                          "description": "The UUID of the file in Heretto."
+                        },
+                        "fullPath": {
+                          "type": "string",
+                          "description": "The full xmldb path of the file in Heretto."
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The file name."
+                        },
+                        "parentFolderId": {
+                          "type": "string",
+                          "description": "The UUID of the parent folder in Heretto."
+                        }
+                      }
+                    }
                   }
                 },
                 "title": "Heretto CMS integration"
