@@ -79,8 +79,8 @@ async function resolvePaths({
    * @remark HTTP and HTTPS URLs are returned unchanged without resolution.
    */
   function resolve(baseType, relativePath, filePath) {
-    // If the path is an http:// or https:// URL, return it
-    if (relativePath.startsWith("https://") || relativePath.startsWith("http://")) {
+    // If the path is an http:// or https:// URL, or a heretto: URI, return it
+    if (relativePath.startsWith("https://") || relativePath.startsWith("http://") || relativePath.startsWith("heretto:")) {
       return relativePath;
     }
 
@@ -190,10 +190,11 @@ async function resolvePaths({
         objectType: objectType,
       });
     } else if (typeof object[property] === "string") {
-      // If the property begins with "https://" or "http://", skip it
+      // If the property begins with "https://", "http://", or "heretto:", skip it
       if (
         object[property].startsWith("https://") ||
-        object[property].startsWith("http://")
+        object[property].startsWith("http://") ||
+        object[property].startsWith("heretto:")
       ) {
         continue;
       }
