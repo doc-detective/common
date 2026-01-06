@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "terminateScope",
+  "description": "Terminate a named scope and its associated process.",
+  "anyOf": [
+    {
+      "title": "Terminate scope (simple)",
+      "description": "Name of the scope to terminate.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+    },
+    {
+      "type": "object",
+      "required": [
+        "scope"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Name of the scope to terminate. The associated process will receive SIGTERM, followed by SIGKILL after a grace period if still running.",
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+        }
+      },
+      "title": "Terminate scope (detailed)"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "string": {
+        "title": "Terminate scope (simple)",
+        "description": "Name of the scope to terminate.",
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+      },
+      "object": {
+        "type": "object",
+        "required": [
+          "scope"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "scope": {
+            "type": "string",
+            "description": "Name of the scope to terminate. The associated process will receive SIGTERM, followed by SIGKILL after a grace period if still running.",
+            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+          }
+        },
+        "title": "Terminate scope (detailed)"
+      }
+    }
+  },
+  "examples": [
+    "dev-server",
+    {
+      "scope": "background-process"
+    },
+    {
+      "scope": "log-monitor"
+    }
+  ]
+}
