@@ -1809,6 +1809,11 @@
                                       "elementAria": {
                                         "type": "string",
                                         "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                      },
+                                      "scope": {
+                                        "type": "string",
+                                        "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                        "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                       }
                                     },
                                     "required": [
@@ -1916,6 +1921,11 @@
                                         "elementAria": {
                                           "type": "string",
                                           "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                        },
+                                        "scope": {
+                                          "type": "string",
+                                          "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                          "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                         }
                                       },
                                       "required": [
@@ -1948,6 +1958,10 @@
                                       "$ENTER$"
                                     ],
                                     "inputDelay": 500
+                                  },
+                                  {
+                                    "keys": "ls -la\n",
+                                    "scope": "dev-server"
                                   }
                                 ]
                               },
@@ -2458,6 +2472,11 @@
                                         "elementAria": {
                                           "type": "string",
                                           "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                        },
+                                        "scope": {
+                                          "type": "string",
+                                          "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                          "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                         }
                                       },
                                       "required": [
@@ -2565,6 +2584,11 @@
                                           "elementAria": {
                                             "type": "string",
                                             "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                          },
+                                          "scope": {
+                                            "type": "string",
+                                            "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                           }
                                         },
                                         "required": [
@@ -2597,6 +2621,10 @@
                                         "$ENTER$"
                                       ],
                                       "inputDelay": 500
+                                    },
+                                    {
+                                      "keys": "ls -la\n",
+                                      "scope": "dev-server"
                                     }
                                   ]
                                 },
@@ -4382,6 +4410,33 @@
                             "type": "integer",
                             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                             "default": 60000
+                          },
+                          "scope": {
+                            "type": "string",
+                            "description": "Named scope for persistent terminal session. Allows reusing the same terminal across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                          },
+                          "waitUntil": {
+                            "type": "object",
+                            "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                            "additionalProperties": false,
+                            "properties": {
+                              "stdio": {
+                                "type": "object",
+                                "description": "Standard I/O stream conditions to wait for.",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "stdout": {
+                                    "type": "string",
+                                    "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                  },
+                                  "stderr": {
+                                    "type": "string",
+                                    "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                  }
+                                }
+                              }
+                            }
                           }
                         },
                         "title": "Run shell command (detailed)"
@@ -4472,6 +4527,33 @@
                               "type": "integer",
                               "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                               "default": 60000
+                            },
+                            "scope": {
+                              "type": "string",
+                              "description": "Named scope for persistent terminal session. Allows reusing the same terminal across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                              "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                            },
+                            "waitUntil": {
+                              "type": "object",
+                              "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                              "additionalProperties": false,
+                              "properties": {
+                                "stdio": {
+                                  "type": "object",
+                                  "description": "Standard I/O stream conditions to wait for.",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "stdout": {
+                                      "type": "string",
+                                      "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                    },
+                                    "stderr": {
+                                      "type": "string",
+                                      "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                    }
+                                  }
+                                }
+                              }
                             }
                           },
                           "title": "Run shell command (detailed)"
@@ -4527,6 +4609,32 @@
                         "directory": "output",
                         "maxVariation": 0.1,
                         "overwrite": "aboveVariation"
+                      },
+                      {
+                        "command": "npm",
+                        "args": [
+                          "run",
+                          "dev"
+                        ],
+                        "scope": "dev-server",
+                        "waitUntil": {
+                          "stdio": {
+                            "stdout": "Server listening on"
+                          }
+                        }
+                      },
+                      {
+                        "command": "tail",
+                        "args": [
+                          "-f",
+                          "/var/log/app.log"
+                        ],
+                        "scope": "log-monitor",
+                        "waitUntil": {
+                          "stdio": {
+                            "stdout": "/ERROR.*critical/"
+                          }
+                        }
                       }
                     ]
                   }
@@ -4690,6 +4798,33 @@
                             "type": "integer",
                             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                             "default": 60000
+                          },
+                          "scope": {
+                            "type": "string",
+                            "description": "Named scope for persistent code execution session. Allows reusing the same execution context across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                          },
+                          "waitUntil": {
+                            "type": "object",
+                            "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                            "additionalProperties": false,
+                            "properties": {
+                              "stdio": {
+                                "type": "object",
+                                "description": "Standard I/O stream conditions to wait for.",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "stdout": {
+                                    "type": "string",
+                                    "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                  },
+                                  "stderr": {
+                                    "type": "string",
+                                    "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                  }
+                                }
+                              }
+                            }
                           }
                         },
                         "title": "Run code (detailed)"
@@ -4781,6 +4916,33 @@
                               "type": "integer",
                               "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                               "default": 60000
+                            },
+                            "scope": {
+                              "type": "string",
+                              "description": "Named scope for persistent code execution session. Allows reusing the same execution context across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                              "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                            },
+                            "waitUntil": {
+                              "type": "object",
+                              "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                              "additionalProperties": false,
+                              "properties": {
+                                "stdio": {
+                                  "type": "object",
+                                  "description": "Standard I/O stream conditions to wait for.",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "stdout": {
+                                      "type": "string",
+                                      "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                    },
+                                    "stderr": {
+                                      "type": "string",
+                                      "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                    }
+                                  }
+                                }
+                              }
                             }
                           },
                           "title": "Run code (detailed)"
@@ -4820,6 +4982,26 @@
                         "directory": "output",
                         "maxVariation": 0.1,
                         "overwrite": "aboveVariation"
+                      },
+                      {
+                        "language": "python",
+                        "code": "import time\nwhile True:\n    print('Running')\n    time.sleep(1)",
+                        "scope": "background-process",
+                        "waitUntil": {
+                          "stdio": {
+                            "stdout": "Running"
+                          }
+                        }
+                      },
+                      {
+                        "language": "javascript",
+                        "code": "const http = require('http');\nconst server = http.createServer();\nserver.listen(3000, () => console.log('Server started'));",
+                        "scope": "http-server",
+                        "waitUntil": {
+                          "stdio": {
+                            "stdout": "/Server started/"
+                          }
+                        }
                       }
                     ]
                   }
@@ -4996,6 +5178,11 @@
                           "elementAria": {
                             "type": "string",
                             "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                          },
+                          "scope": {
+                            "type": "string",
+                            "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                           }
                         },
                         "required": [
@@ -5103,6 +5290,11 @@
                             "elementAria": {
                               "type": "string",
                               "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                            },
+                            "scope": {
+                              "type": "string",
+                              "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                              "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                             }
                           },
                           "required": [
@@ -5135,6 +5327,10 @@
                           "$ENTER$"
                         ],
                         "inputDelay": 500
+                      },
+                      {
+                        "keys": "ls -la\n",
+                        "scope": "dev-server"
                       }
                     ]
                   }
@@ -6465,6 +6661,139 @@
                   }
                 },
                 "title": "stopRecord"
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "dynamicDefaults": {
+                  "stepId": "uuid"
+                },
+                "properties": {
+                  "$schema": {
+                    "description": "JSON Schema for this object.",
+                    "type": "string",
+                    "enum": [
+                      "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                    ]
+                  },
+                  "stepId": {
+                    "type": "string",
+                    "description": "ID of the step."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the step."
+                  },
+                  "unsafe": {
+                    "type": "boolean",
+                    "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                    "default": false
+                  },
+                  "outputs": {
+                    "type": "object",
+                    "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Outputs (step)"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "description": "Environment variables to set from user-defined expressions.",
+                    "default": {},
+                    "patternProperties": {
+                      "^[A-Za-z0-9_]+$": {
+                        "type": "string",
+                        "description": "Runtime expression for a user-defined output value."
+                      }
+                    },
+                    "title": "Variables (step)"
+                  },
+                  "breakpoint": {
+                    "type": "boolean",
+                    "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                    "default": false
+                  }
+                },
+                "title": "Common"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "terminateScope"
+                ],
+                "properties": {
+                  "terminateScope": {
+                    "$schema": "http://json-schema.org/draft-07/schema#",
+                    "title": "terminateScope",
+                    "description": "Terminate a named scope and its associated process.",
+                    "anyOf": [
+                      {
+                        "title": "Terminate scope (simple)",
+                        "description": "Name of the scope to terminate.",
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "scope"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "scope": {
+                            "type": "string",
+                            "description": "Name of the scope to terminate. The associated process will receive SIGTERM, followed by SIGKILL after a grace period if still running.",
+                            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                          }
+                        },
+                        "title": "Terminate scope (detailed)"
+                      }
+                    ],
+                    "components": {
+                      "schemas": {
+                        "string": {
+                          "title": "Terminate scope (simple)",
+                          "description": "Name of the scope to terminate.",
+                          "type": "string",
+                          "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                        },
+                        "object": {
+                          "type": "object",
+                          "required": [
+                            "scope"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "scope": {
+                              "type": "string",
+                              "description": "Name of the scope to terminate. The associated process will receive SIGTERM, followed by SIGKILL after a grace period if still running.",
+                              "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                            }
+                          },
+                          "title": "Terminate scope (detailed)"
+                        }
+                      }
+                    },
+                    "examples": [
+                      "dev-server",
+                      {
+                        "scope": "background-process"
+                      },
+                      {
+                        "scope": "log-monitor"
+                      }
+                    ]
+                  }
+                },
+                "title": "terminateScope"
               }
             ]
           },
@@ -9386,6 +9715,11 @@
                                             "elementAria": {
                                               "type": "string",
                                               "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                            },
+                                            "scope": {
+                                              "type": "string",
+                                              "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                              "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                             }
                                           },
                                           "required": [
@@ -9493,6 +9827,11 @@
                                               "elementAria": {
                                                 "type": "string",
                                                 "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "scope": {
+                                                "type": "string",
+                                                "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                                "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                               }
                                             },
                                             "required": [
@@ -9525,6 +9864,10 @@
                                             "$ENTER$"
                                           ],
                                           "inputDelay": 500
+                                        },
+                                        {
+                                          "keys": "ls -la\n",
+                                          "scope": "dev-server"
                                         }
                                       ]
                                     },
@@ -10035,6 +10378,11 @@
                                               "elementAria": {
                                                 "type": "string",
                                                 "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                              },
+                                              "scope": {
+                                                "type": "string",
+                                                "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                                "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                               }
                                             },
                                             "required": [
@@ -10142,6 +10490,11 @@
                                                 "elementAria": {
                                                   "type": "string",
                                                   "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                                },
+                                                "scope": {
+                                                  "type": "string",
+                                                  "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                                  "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                                 }
                                               },
                                               "required": [
@@ -10174,6 +10527,10 @@
                                               "$ENTER$"
                                             ],
                                             "inputDelay": 500
+                                          },
+                                          {
+                                            "keys": "ls -la\n",
+                                            "scope": "dev-server"
                                           }
                                         ]
                                       },
@@ -11959,6 +12316,33 @@
                                   "type": "integer",
                                   "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                   "default": 60000
+                                },
+                                "scope": {
+                                  "type": "string",
+                                  "description": "Named scope for persistent terminal session. Allows reusing the same terminal across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                  "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                                },
+                                "waitUntil": {
+                                  "type": "object",
+                                  "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "stdio": {
+                                      "type": "object",
+                                      "description": "Standard I/O stream conditions to wait for.",
+                                      "additionalProperties": false,
+                                      "properties": {
+                                        "stdout": {
+                                          "type": "string",
+                                          "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                        },
+                                        "stderr": {
+                                          "type": "string",
+                                          "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               },
                               "title": "Run shell command (detailed)"
@@ -12049,6 +12433,33 @@
                                     "type": "integer",
                                     "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                     "default": 60000
+                                  },
+                                  "scope": {
+                                    "type": "string",
+                                    "description": "Named scope for persistent terminal session. Allows reusing the same terminal across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                    "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                                  },
+                                  "waitUntil": {
+                                    "type": "object",
+                                    "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "stdio": {
+                                        "type": "object",
+                                        "description": "Standard I/O stream conditions to wait for.",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                          "stdout": {
+                                            "type": "string",
+                                            "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                          },
+                                          "stderr": {
+                                            "type": "string",
+                                            "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 },
                                 "title": "Run shell command (detailed)"
@@ -12104,6 +12515,32 @@
                               "directory": "output",
                               "maxVariation": 0.1,
                               "overwrite": "aboveVariation"
+                            },
+                            {
+                              "command": "npm",
+                              "args": [
+                                "run",
+                                "dev"
+                              ],
+                              "scope": "dev-server",
+                              "waitUntil": {
+                                "stdio": {
+                                  "stdout": "Server listening on"
+                                }
+                              }
+                            },
+                            {
+                              "command": "tail",
+                              "args": [
+                                "-f",
+                                "/var/log/app.log"
+                              ],
+                              "scope": "log-monitor",
+                              "waitUntil": {
+                                "stdio": {
+                                  "stdout": "/ERROR.*critical/"
+                                }
+                              }
                             }
                           ]
                         }
@@ -12267,6 +12704,33 @@
                                   "type": "integer",
                                   "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                   "default": 60000
+                                },
+                                "scope": {
+                                  "type": "string",
+                                  "description": "Named scope for persistent code execution session. Allows reusing the same execution context across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                  "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                                },
+                                "waitUntil": {
+                                  "type": "object",
+                                  "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "stdio": {
+                                      "type": "object",
+                                      "description": "Standard I/O stream conditions to wait for.",
+                                      "additionalProperties": false,
+                                      "properties": {
+                                        "stdout": {
+                                          "type": "string",
+                                          "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                        },
+                                        "stderr": {
+                                          "type": "string",
+                                          "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               },
                               "title": "Run code (detailed)"
@@ -12358,6 +12822,33 @@
                                     "type": "integer",
                                     "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
                                     "default": 60000
+                                  },
+                                  "scope": {
+                                    "type": "string",
+                                    "description": "Named scope for persistent code execution session. Allows reusing the same execution context across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                    "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                                  },
+                                  "waitUntil": {
+                                    "type": "object",
+                                    "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "stdio": {
+                                        "type": "object",
+                                        "description": "Standard I/O stream conditions to wait for.",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                          "stdout": {
+                                            "type": "string",
+                                            "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                          },
+                                          "stderr": {
+                                            "type": "string",
+                                            "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 },
                                 "title": "Run code (detailed)"
@@ -12397,6 +12888,26 @@
                               "directory": "output",
                               "maxVariation": 0.1,
                               "overwrite": "aboveVariation"
+                            },
+                            {
+                              "language": "python",
+                              "code": "import time\nwhile True:\n    print('Running')\n    time.sleep(1)",
+                              "scope": "background-process",
+                              "waitUntil": {
+                                "stdio": {
+                                  "stdout": "Running"
+                                }
+                              }
+                            },
+                            {
+                              "language": "javascript",
+                              "code": "const http = require('http');\nconst server = http.createServer();\nserver.listen(3000, () => console.log('Server started'));",
+                              "scope": "http-server",
+                              "waitUntil": {
+                                "stdio": {
+                                  "stdout": "/Server started/"
+                                }
+                              }
                             }
                           ]
                         }
@@ -12573,6 +13084,11 @@
                                 "elementAria": {
                                   "type": "string",
                                   "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                },
+                                "scope": {
+                                  "type": "string",
+                                  "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                  "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                 }
                               },
                               "required": [
@@ -12680,6 +13196,11 @@
                                   "elementAria": {
                                     "type": "string",
                                     "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                                  },
+                                  "scope": {
+                                    "type": "string",
+                                    "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                                    "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                                   }
                                 },
                                 "required": [
@@ -12712,6 +13233,10 @@
                                 "$ENTER$"
                               ],
                               "inputDelay": 500
+                            },
+                            {
+                              "keys": "ls -la\n",
+                              "scope": "dev-server"
                             }
                           ]
                         }
@@ -14042,6 +14567,139 @@
                         }
                       },
                       "title": "stopRecord"
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "dynamicDefaults": {
+                        "stepId": "uuid"
+                      },
+                      "properties": {
+                        "$schema": {
+                          "description": "JSON Schema for this object.",
+                          "type": "string",
+                          "enum": [
+                            "https://raw.githubusercontent.com/doc-detective/common/refs/heads/main/dist/schemas/step_v3.schema.json"
+                          ]
+                        },
+                        "stepId": {
+                          "type": "string",
+                          "description": "ID of the step."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the step."
+                        },
+                        "unsafe": {
+                          "type": "boolean",
+                          "description": "Whether or not the step may be unsafe. Unsafe steps may perform actions that could modify the system or environment in unexpected ways. Unsafe steps are only performed within Docker containers or if unsafe steps are enabled with the `allowUnsafeSteps` config property or the `--allow-unsafe` flag.",
+                          "default": false
+                        },
+                        "outputs": {
+                          "type": "object",
+                          "description": "Outputs from step processes and user-defined expressions. Use the `outputs` object to reference outputs in subsequent steps. If a user-defined output matches the key for a step-defined output, the user-defined output takes precedence.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Outputs (step)"
+                        },
+                        "variables": {
+                          "type": "object",
+                          "description": "Environment variables to set from user-defined expressions.",
+                          "default": {},
+                          "patternProperties": {
+                            "^[A-Za-z0-9_]+$": {
+                              "type": "string",
+                              "description": "Runtime expression for a user-defined output value."
+                            }
+                          },
+                          "title": "Variables (step)"
+                        },
+                        "breakpoint": {
+                          "type": "boolean",
+                          "description": "Whether or not this step should act as a breakpoint when debugging is enabled. When `true`, execution will pause at this step when debug mode is enabled.",
+                          "default": false
+                        }
+                      },
+                      "title": "Common"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "terminateScope"
+                      ],
+                      "properties": {
+                        "terminateScope": {
+                          "$schema": "http://json-schema.org/draft-07/schema#",
+                          "title": "terminateScope",
+                          "description": "Terminate a named scope and its associated process.",
+                          "anyOf": [
+                            {
+                              "title": "Terminate scope (simple)",
+                              "description": "Name of the scope to terminate.",
+                              "type": "string",
+                              "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "scope"
+                              ],
+                              "additionalProperties": false,
+                              "properties": {
+                                "scope": {
+                                  "type": "string",
+                                  "description": "Name of the scope to terminate. The associated process will receive SIGTERM, followed by SIGKILL after a grace period if still running.",
+                                  "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                                }
+                              },
+                              "title": "Terminate scope (detailed)"
+                            }
+                          ],
+                          "components": {
+                            "schemas": {
+                              "string": {
+                                "title": "Terminate scope (simple)",
+                                "description": "Name of the scope to terminate.",
+                                "type": "string",
+                                "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                              },
+                              "object": {
+                                "type": "object",
+                                "required": [
+                                  "scope"
+                                ],
+                                "additionalProperties": false,
+                                "properties": {
+                                  "scope": {
+                                    "type": "string",
+                                    "description": "Name of the scope to terminate. The associated process will receive SIGTERM, followed by SIGKILL after a grace period if still running.",
+                                    "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+                                  }
+                                },
+                                "title": "Terminate scope (detailed)"
+                              }
+                            }
+                          },
+                          "examples": [
+                            "dev-server",
+                            {
+                              "scope": "background-process"
+                            },
+                            {
+                              "scope": "log-monitor"
+                            }
+                          ]
+                        }
+                      },
+                      "title": "terminateScope"
                     }
                   ]
                 },

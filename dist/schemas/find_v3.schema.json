@@ -488,6 +488,11 @@
                     "elementAria": {
                       "type": "string",
                       "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                    },
+                    "scope": {
+                      "type": "string",
+                      "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                      "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                     }
                   },
                   "required": [
@@ -595,6 +600,11 @@
                       "elementAria": {
                         "type": "string",
                         "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "scope": {
+                        "type": "string",
+                        "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                        "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                       }
                     },
                     "required": [
@@ -627,6 +637,10 @@
                     "$ENTER$"
                   ],
                   "inputDelay": 500
+                },
+                {
+                  "keys": "ls -la\n",
+                  "scope": "dev-server"
                 }
               ]
             },
@@ -1137,6 +1151,11 @@
                       "elementAria": {
                         "type": "string",
                         "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                      },
+                      "scope": {
+                        "type": "string",
+                        "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                        "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                       }
                     },
                     "required": [
@@ -1244,6 +1263,11 @@
                         "elementAria": {
                           "type": "string",
                           "description": "Computed accessible name of the element per ARIA specification. Supports exact match or regex pattern using /pattern/ syntax."
+                        },
+                        "scope": {
+                          "type": "string",
+                          "description": "Named scope of an existing terminal or code session to type into. When specified, sends input to the scoped process instead of the browser. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+                          "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                         }
                       },
                       "required": [
@@ -1276,6 +1300,10 @@
                       "$ENTER$"
                     ],
                     "inputDelay": 500
+                  },
+                  {
+                    "keys": "ls -la\n",
+                    "scope": "dev-server"
                   }
                 ]
               },
