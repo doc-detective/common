@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr view:*)",
+      "WebFetch(domain:github.com)",
+      "Skill(superpowers:writing-plans)",
+      "Bash(mkdir:*)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Bash(npm test:*)",
+      "Bash(npm run build:*)",
+      "Bash(git show:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(grep:*)",
+      "Bash(done)",
+      "Skill(superpowers:finishing-a-development-branch)"
+    ]
+  }
+}
