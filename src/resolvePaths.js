@@ -5,19 +5,18 @@ const { validate } = require("./validate");
 exports.resolvePaths = resolvePaths;
 
 /**
- * Recursively resolves all relative path properties in a configuration or specification object to absolute paths.
+ * Convert recognized relative path properties in a config or spec object to absolute paths.
  *
- * Traverses the provided object, converting all recognized path-related properties to absolute paths using the given configuration and reference file path. Supports nested objects and distinguishes between config and spec objects based on schema validation. Throws an error if the object is not a valid config or spec, or if the object type is missing for nested objects.
+ * Traverses the provided object (recursing into nested objects and arrays), resolving fields that represent filesystem paths according to the provided config.relativePathBase and reference filePath. On top-level calls the function infers whether the object is a config or spec via schema validation; for nested calls objectType must be provided.
  *
- * @async
  * @param {Object} options - Options for path resolution.
- * @param {Object} options.config - Configuration object containing settings such as `relativePathBase`.
+ * @param {Object} options.config - Configuration containing settings such as `relativePathBase`.
  * @param {Object} options.object - The config or spec object whose path properties will be resolved.
- * @param {string} options.filePath - Reference file path used for resolving relative paths.
- * @param {boolean} [options.nested=false] - Indicates if this is a recursive call for a nested object.
- * @param {string} [options.objectType] - Specifies the object type ('config' or 'spec'); required for nested objects.
- * @returns {Promise<Object>} The object with all applicable path properties resolved to absolute paths.
- * @throws {Error} If the object is neither a valid config nor spec, or if `objectType` is missing for nested objects.
+ * @param {string} options.filePath - Reference file or directory used to resolve relative paths.
+ * @param {boolean} [options.nested=false] - True when invoked recursively for nested objects.
+ * @param {string} [options.objectType] - 'config' or 'spec'; required for nested invocations to select which properties to resolve.
+ * @returns {Object} The same object with applicable path properties converted to absolute paths.
+ * @throws {Error} If the top-level object matches neither config nor spec schema, or if `objectType` is missing for nested calls.
  */
 async function resolvePaths({
   config,
