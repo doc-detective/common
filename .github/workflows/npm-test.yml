@@ -38,6 +38,28 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm run build # Automatically run tests because of the `postbuild` script in package.json
+
+  coverage:
+    name: Coverage Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+          node-version: 20
+      - run: npm ci
+      - run: npm run dereferenceSchemas
+      - name: Run tests with coverage
+        run: npm run test:coverage
+      - name: Check coverage ratchet
+        run: npm run test:coverage:ratchet
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
   
   threat-assessment:
     if: github.event_name == 'release' && github.event.action == 'published'

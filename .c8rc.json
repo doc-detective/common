@@ -1,0 +1,8 @@
+{
+  "all": true,
+  "include": ["src/**/*.js"],
+  "exclude": ["src/schemas/dereferenceSchemas.js"],
+  "reporter": ["text", "lcov", "json", "json-summary"],
+  "report-dir": "coverage",
+  "check-coverage": false
+}

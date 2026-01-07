@@ -106,6 +106,8 @@ When creating new schema version (e.g., v4):
 **Test structure (Mocha + Chai):**
 - `test/schema.test.js`: Validates all schema examples (auto-generated from schemas)
 - `test/files.test.js`: Unit tests for `readFile()` with Sinon stubs
+- `test/validate.test.js`: Tests for `validate()` and `transformToSchemaKey()`
+- `test/resolvePaths.test.js`: Tests for path resolution
 
 **Run tests:** `npm test` (or `mocha`)
 
@@ -114,6 +116,51 @@ When creating new schema version (e.g., v4):
 const result = validate({ schemaKey: "step_v3", object: example });
 assert.ok(result.valid, `Validation failed: ${result.errors}`);
 ```
+
+### Testing Requirements (CRITICAL)
+
+**TDD is mandatory for this project.** All code changes must follow test-driven development:
+
+1. **Write tests first** - before any implementation
+2. **Run tests** - verify they fail (red)
+3. **Write implementation** - make tests pass
+4. **Run tests** - verify they pass (green)
+5. **Check coverage** - must not decrease
+
+**Coverage enforcement:**
+
+```bash
+# Run tests with coverage
+npm run test:coverage
+
+# Verify coverage baseline (CI enforces this)
+npm run test:coverage:ratchet
+
+# Generate HTML report for detailed analysis
+npm run test:coverage:html
+```
+
+**Current coverage thresholds (enforced by CI):**
+
+| Metric | Threshold |
+|--------|-----------|
+| Lines | 100% |
+| Statements | 100% |
+| Functions | 100% |
+| Branches | 100% |
+
+**Coverage ratchet:** Thresholds in `coverage-thresholds.json` can only increase. CI fails if coverage decreases.
+
+**Test file mapping:**
+
+| Source | Test File |
+|--------|-----------|
+| `src/validate.js` | `test/validate.test.js` |
+| `src/resolvePaths.js` | `test/resolvePaths.test.js` |
+| `src/files.js` | `test/files.test.js` |
+| Schema examples | `test/schema.test.js` |
+
+**AI Tooling:** See `.claude/skills/tdd-coverage/SKILL.md` for detailed TDD workflow.
 
 ### Version Management & CI/CD Workflows
 

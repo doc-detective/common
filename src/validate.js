@@ -148,6 +148,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
       if (result.valid) {
         validationObject = transformedObject;
         object = transformedObject;
+        /* c8 ignore start - Defensive: transformToSchemaKey validates internally, so this is unreachable */
       } else if (check.errors) {
         const errors = check.errors.map(
           (error) =>
@@ -158,6 +159,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
         result.errors = errors.join(", ");
         return result;
       }
+      /* c8 ignore stop */
     }
   }
   if (addDefaults) {
@@ -170,18 +172,14 @@ function validate({ schemaKey, object, addDefaults = true }) {
 }
 
 /**
- * Transforms an object from one JSON schema version to another, supporting multiple schema types and nested conversions.
+ * Transform an object from one schema key to another and return a validated instance of the target schema.
  *
- * @param {Object} params
- * @param {string} params.currentSchema - The schema key of the object's current version.
- * @param {string} params.targetSchema - The schema key to which the object should be transformed.
- * @param {Object} params.object - The object to transform.
- * @returns {Object} The transformed object, validated against the target schema.
- *
- * @throws {Error} If transformation between the specified schemas is not supported, or if the transformed object fails validation.
- *
- * @remark
- * Supports deep and recursive transformations for complex schema types, including steps, configs, contexts, OpenAPI integrations, specs, and tests. Throws if the schemas are incompatible or if the resulting object does not conform to the target schema.
+ * @param {Object} params - Function parameters.
+ * @param {string} params.currentSchema - Schema key representing the object's current version.
+ * @param {string} params.targetSchema - Schema key to transform the object into.
+ * @param {Object} params.object - The source object to transform.
+ * @returns {Object} The transformed object conforming to the target schema.
+ * @throws {Error} If transformation between the specified schemas is not supported or if the transformed object fails validation.
  */
 function transformToSchemaKey({
   currentSchema = "",
@@ -445,6 +443,8 @@ function transformToSchemaKey({
       schemaKey: "config_v3",
       object: transformedObject,
     });
+    // Defensive: transformation always produces valid config_v3, unreachable
+    /* c8 ignore next 3 */
     if (!result.valid) {
       throw new Error(`Invalid object: ${result.errors}`);
     }
@@ -528,6 +528,8 @@ function transformToSchemaKey({
       schemaKey: "spec_v3",
       object: transformedObject,
     });
+    // Defensive: nested transforms validate; this is unreachable
+    /* c8 ignore next 3 */
     if (!result.valid) {
       throw new Error(`Invalid object: ${result.errors}`);
     }
@@ -570,18 +572,25 @@ function transformToSchemaKey({
       schemaKey: "test_v3",
       object: transformedObject,
     });
+    // Defensive: nested transforms validate; this is unreachable
+    /* c8 ignore next 3 */
     if (!result.valid) {
       throw new Error(`Invalid object: ${result.errors}`);
     }
     return result.object;
   }
+  /* c8 ignore next - Dead code: incompatible schemas throw at line 197-200 */
   return null;
 }
 
 // If called directly, validate an example object
+/* c8 ignore start */
 if (require.main === module) {
-  const example =  {path: "/User/manny/projects/doc-detective/static/images/image.png"};
+  const example = {
+    path: "/User/manny/projects/doc-detective/static/images/image.png",
+  };
 
   const result = validate({ schemaKey: "screenshot_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
 }
+/* c8 ignore stop */
