@@ -15,6 +15,12 @@ const path = require('path');
 const THRESHOLDS_FILE = path.join(__dirname, '..', 'coverage-thresholds.json');
 const COVERAGE_SUMMARY_FILE = path.join(__dirname, '..', 'coverage', 'coverage-summary.json');
 
+/**
+ * Load and parse JSON from the given path, exiting the process with code 1 if the file is missing or cannot be parsed.
+ * @param {string} filePath - Filesystem path to the JSON file.
+ * @param {string} description - Human-readable name for the file used in error messages.
+ * @returns {Object} The parsed JSON object.
+ */
 function loadJSON(filePath, description) {
   if (!fs.existsSync(filePath)) {
     console.error(`Error: ${description} not found at ${filePath}`);
@@ -30,6 +36,14 @@ function loadJSON(filePath, description) {
   }
 }
 
+/**
+ * Compares current test coverage against the stored baseline thresholds and enforces the coverage ratchet.
+ *
+ * Loads baseline thresholds and the current coverage summary, prints a per-metric table of baseline vs current values and statuses, and enforces policy:
+ * - Exits with code 1 if any metric has decreased relative to the baseline.
+ * - If one or more metrics have improved, prints suggested threshold updates.
+ * - Exits with code 0 when all metrics meet or exceed their baselines.
+ */
 function main() {
   // Load baseline thresholds
   const thresholds = loadJSON(THRESHOLDS_FILE, 'Coverage thresholds file');
