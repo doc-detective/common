@@ -7,7 +7,11 @@
     "dereferenceSchemas": "node ./src/schemas/dereferenceSchemas.js",
     "build": "npm run dereferenceSchemas",
     "postbuild": "npm run test",
-    "test": "mocha"
+    "test": "mocha",
+    "test:coverage": "c8 mocha",
+    "test:coverage:html": "c8 --reporter=html mocha",
+    "test:coverage:check": "c8 check-coverage",
+    "test:coverage:ratchet": "node scripts/check-coverage-ratchet.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,7 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
+    "c8": "^10.1.3",
     "chai": "^6.2.2",
     "mocha": "^11.7.5",
     "sinon": "^21.0.1"

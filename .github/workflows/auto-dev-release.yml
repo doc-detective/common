@@ -100,6 +100,12 @@ jobs:
         if: steps.check_changes.outputs.skip_release == 'false'
         run: npm run build
 
+      - name: Run coverage and ratchet check
+        if: steps.check_changes.outputs.skip_release == 'false'
+        run: |
+          npm run test:coverage
+          npm run test:coverage:ratchet
+
       - name: Configure Git
         run: |
           git config --global user.name 'github-actions[bot]'

@@ -223,6 +223,7 @@ async function resolvePaths({
 }
 
 // If called directly, resolve paths in the provided object
+/* c8 ignore start */
 if (require.main === module) {
   (async () => {
     // Example usage
@@ -250,3 +251,4 @@ if (require.main === module) {
     console.log(JSON.stringify(object, null, 2));
   })();
 }
+/* c8 ignore stop */
