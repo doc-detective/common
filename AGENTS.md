@@ -144,10 +144,10 @@ npm run test:coverage:html
 
 | Metric | Threshold |
 |--------|-----------|
-| Lines | 98.3% |
-| Statements | 98.3% |
+| Lines | 100% |
+| Statements | 100% |
 | Functions | 100% |
-| Branches | 95.28% |
+| Branches | 100% |
 
 **Coverage ratchet:** Thresholds in `coverage-thresholds.json` can only increase. CI fails if coverage decreases.
 
