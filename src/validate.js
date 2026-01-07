@@ -148,7 +148,7 @@ function validate({ schemaKey, object, addDefaults = true }) {
       if (result.valid) {
         validationObject = transformedObject;
         object = transformedObject;
-      /* c8 ignore start - Defensive: transformToSchemaKey validates internally, so this is unreachable */
+        /* c8 ignore start - Defensive: transformToSchemaKey validates internally, so this is unreachable */
       } else if (check.errors) {
         const errors = check.errors.map(
           (error) =>
@@ -581,7 +581,7 @@ function transformToSchemaKey({
     if (!result.valid) {
       throw new Error(`Invalid object: ${result.errors}`);
     }
-  return result.object;
+    return result.object;
   }
   /* c8 ignore next - Dead code: incompatible schemas throw at line 197-200 */
   return null;
@@ -590,7 +590,9 @@ function transformToSchemaKey({
 // If called directly, validate an example object
 /* c8 ignore start */
 if (require.main === module) {
-  const example =  {path: "/User/manny/projects/doc-detective/static/images/image.png"};
+  const example = {
+    path: "/User/manny/projects/doc-detective/static/images/image.png",
+  };
 
   const result = validate({ schemaKey: "screenshot_v3", object: example });
   console.log(JSON.stringify(result, null, 2));
