@@ -1,6 +1,6 @@
 (async () => {
   const { expect } = await import("chai");
-  const { validate, transformToSchemaKey } = require("../src/validate");
+  const { validate, transformToSchemaKey } = require("../dist/validate");
 
   describe("validate", function () {
     describe("input validation", function () {

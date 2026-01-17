@@ -4,7 +4,7 @@ const path = require("path");
 
 (async () => {
   const { expect } = await import("chai");
-  const { resolvePaths } = require("../src/resolvePaths");
+  const { resolvePaths } = require("../dist/resolvePaths");
 
   describe("resolvePaths", function () {
     const mockFilePath = "/home/user/project/config.json";
