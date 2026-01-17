@@ -32,9 +32,8 @@ for (const [key, value] of Object.entries(schemas)) {
   ajv.addSchema(value, key);
 }
 
-type CompatibleSchemaKey = keyof typeof compatibleSchemas;
-
-const compatibleSchemas: Partial<Record<SchemaKey, SchemaKey[]>> = {
+// Define the specific schemas that have compatibility mappings
+const compatibleSchemas = {
   config_v3: ["config_v2"],
   context_v3: ["context_v2"],
   openApi_v3: ["openApi_v2"],
@@ -54,7 +53,9 @@ const compatibleSchemas: Partial<Record<SchemaKey, SchemaKey[]>> = {
     "wait_v2",
   ],
   test_v3: ["test_v2"],
-};
+} as const;
+
+type CompatibleSchemaKey = keyof typeof compatibleSchemas;
 
 export interface ValidateOptions {
   schemaKey: string;
@@ -97,7 +98,11 @@ function escapeRegExp(string: string): string {
  *
  * @throws {Error} If {@link schemaKey} or {@link object} is missing.
  */
-export function validate({ schemaKey, object, addDefaults = true }: ValidateOptions): ValidateResult {
+export function validate({
+  schemaKey,
+  object,
+  addDefaults = true,
+}: ValidateOptions): ValidateResult {
   if (!schemaKey) {
     throw new Error("Schema key is required.");
   }
@@ -127,14 +132,15 @@ export function validate({ schemaKey, object, addDefaults = true }: ValidateOpti
 
   if (check.errors) {
     // Check if the object is compatible with another schema
-    const compatibleSchemasList = compatibleSchemas[schemaKey as keyof typeof compatibleSchemas];
+    const compatibleSchemasList =
+      compatibleSchemas[schemaKey as keyof typeof compatibleSchemas];
     if (!compatibleSchemasList) {
       result.errors = check.errors
         .map(
           (error) =>
             `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
+              error.params,
+            )})`,
         )
         .join(", ");
       result.object = object;
@@ -151,8 +157,8 @@ export function validate({ schemaKey, object, addDefaults = true }: ValidateOpti
         .map(
           (error) =>
             `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
+              error.params,
+            )})`,
         )
         .join(", ");
       result.object = object;
@@ -174,8 +180,8 @@ export function validate({ schemaKey, object, addDefaults = true }: ValidateOpti
         const errors = check.errors.map(
           (error) =>
             `${error.instancePath} ${error.message} (${JSON.stringify(
-              error.params
-            )})`
+              error.params,
+            )})`,
         );
         result.errors = errors.join(", ");
         return result;
@@ -212,9 +218,13 @@ export function transformToSchemaKey({
     return object;
   }
   // Check if the current schema is compatible with the target schema
-  if (!compatibleSchemas[targetSchema as keyof typeof compatibleSchemas]?.includes(currentSchema as any)) {
+  const compatibleList = compatibleSchemas[targetSchema as CompatibleSchemaKey];
+  if (
+    !compatibleList ||
+    !(compatibleList as readonly string[]).includes(currentSchema)
+  ) {
     throw new Error(
-      `Can't transform from ${currentSchema} to ${targetSchema}.`
+      `Can't transform from ${currentSchema} to ${targetSchema}.`,
     );
   }
   // Transform the object
@@ -250,9 +260,8 @@ export function transformToSchemaKey({
       }
       transformedObject.variables = {};
       object.setVariables?.forEach((variable: any) => {
-        transformedObject.variables[
-          variable.name
-        ] = `extract($$element.text, "${variable.regex}")`;
+        transformedObject.variables[variable.name] =
+          `extract($$element.text, "${variable.regex}")`;
       });
     } else if (currentSchema === "httpRequest_v2") {
       transformedObject.httpRequest = {
@@ -289,9 +298,8 @@ export function transformToSchemaKey({
       }
       transformedObject.variables = {};
       object.envsFromResponseData?.forEach((variable: any) => {
-        transformedObject.variables[
-          variable.name
-        ] = `jq($$response.body, "${variable.jqFilter}")`;
+        transformedObject.variables[variable.name] =
+          `jq($$response.body, "${variable.jqFilter}")`;
       });
     } else if (currentSchema === "runShell_v2") {
       transformedObject.runShell = {
@@ -311,9 +319,8 @@ export function transformToSchemaKey({
       };
       transformedObject.variables = {};
       object.setVariables?.forEach((variable: any) => {
-        transformedObject.variables[
-          variable.name
-        ] = `extract($$stdio.stdout, "${variable.regex}")`;
+        transformedObject.variables[variable.name] =
+          `extract($$stdio.stdout, "${variable.regex}")`;
       });
     } else if (currentSchema === "runCode_v2") {
       transformedObject.runCode = {
@@ -334,9 +341,8 @@ export function transformToSchemaKey({
       };
       transformedObject.variables = {};
       object?.setVariables?.forEach((variable: any) => {
-        transformedObject.variables[
-          variable.name
-        ] = `extract($$stdio.stdout, "${variable.regex}")`;
+        transformedObject.variables[variable.name] =
+          `extract($$stdio.stdout, "${variable.regex}")`;
       });
     } else if (currentSchema === "setVariables_v2") {
       transformedObject.loadVariables = object.path;
@@ -396,7 +402,7 @@ export function transformToSchemaKey({
           currentSchema: "context_v2",
           targetSchema: "context_v3",
           object: context,
-        })
+        }),
       );
     // Handle openApi transformation
     if (object?.integrations?.openApi) {
@@ -407,7 +413,7 @@ export function transformToSchemaKey({
             currentSchema: "openApi_v2",
             targetSchema: "openApi_v3",
             object: description,
-          })
+          }),
       );
     }
     // Handle fileTypes transformation
@@ -417,17 +423,17 @@ export function transformToSchemaKey({
           name: fileType.name,
           extensions: fileType.extensions.map((extension: string) =>
             // Trim leading `.` from extension
-            extension.replace(/^\./, "")
+            extension.replace(/^\./, ""),
           ),
           inlineStatements: {
             // Convert strings to regex, escaping special characters
             testStart: `${escapeRegExp(
-              fileType.testStartStatementOpen
+              fileType.testStartStatementOpen,
             )}(.*?)${escapeRegExp(fileType.testStartStatementClose)}`,
             testEnd: escapeRegExp(fileType.testEndStatement),
             ignoreStart: escapeRegExp(fileType.testIgnoreStatement),
             step: `${escapeRegExp(
-              fileType.stepStatementOpen
+              fileType.stepStatementOpen,
             )}(.*?)${escapeRegExp(fileType.stepStatementClose)}`,
           },
         };
@@ -527,7 +533,7 @@ export function transformToSchemaKey({
           currentSchema: "context_v2",
           targetSchema: "context_v3",
           object: context,
-        })
+        }),
       );
     if (object.openApi)
       transformedObject.openApi = object.openApi.map((description: any) =>
@@ -535,14 +541,14 @@ export function transformToSchemaKey({
           currentSchema: "openApi_v2",
           targetSchema: "openApi_v3",
           object: description,
-        })
+        }),
       );
     transformedObject.tests = object.tests.map((test: any) =>
       transformToSchemaKey({
         currentSchema: "test_v2",
         targetSchema: "test_v3",
         object: test,
-      })
+      }),
     );
 
     const result = validate({
@@ -571,7 +577,7 @@ export function transformToSchemaKey({
           currentSchema: "context_v2",
           targetSchema: "context_v3",
           object: context,
-        })
+        }),
       );
     if (object.openApi)
       transformedObject.openApi = object.openApi.map((description: any) =>
@@ -579,14 +585,14 @@ export function transformToSchemaKey({
           currentSchema: "openApi_v2",
           targetSchema: "openApi_v3",
           object: description,
-        })
+        }),
       );
     transformedObject.steps = object.steps.map((step: any) =>
       transformToSchemaKey({
         currentSchema: `${step.action}_v2`,
         targetSchema: "step_v3",
         object: step,
-      })
+      }),
     );
 
     const result = validate({

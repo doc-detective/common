@@ -34,6 +34,7 @@ def.DEFAULTS.uuid = () => crypto_1.randomUUID;
 for (const [key, value] of Object.entries(schemas_1.schemas)) {
     ajv.addSchema(value, key);
 }
+// Define the specific schemas that have compatibility mappings
 const compatibleSchemas = {
     config_v3: ["config_v2"],
     context_v3: ["context_v2"],
@@ -77,7 +78,7 @@ function escapeRegExp(string) {
  *
  * @throws {Error} If {@link schemaKey} or {@link object} is missing.
  */
-function validate({ schemaKey, object, addDefaults = true }) {
+function validate({ schemaKey, object, addDefaults = true, }) {
     if (!schemaKey) {
         throw new Error("Schema key is required.");
     }
@@ -171,7 +172,9 @@ function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = 
         return object;
     }
     // Check if the current schema is compatible with the target schema
-    if (!compatibleSchemas[targetSchema]?.includes(currentSchema)) {
+    const compatibleList = compatibleSchemas[targetSchema];
+    if (!compatibleList ||
+        !compatibleList.includes(currentSchema)) {
         throw new Error(`Can't transform from ${currentSchema} to ${targetSchema}.`);
     }
     // Transform the object
@@ -209,7 +212,8 @@ function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = 
             }
             transformedObject.variables = {};
             object.setVariables?.forEach((variable) => {
-                transformedObject.variables[variable.name] = `extract($$element.text, "${variable.regex}")`;
+                transformedObject.variables[variable.name] =
+                    `extract($$element.text, "${variable.regex}")`;
             });
         }
         else if (currentSchema === "httpRequest_v2") {
@@ -246,7 +250,8 @@ function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = 
             }
             transformedObject.variables = {};
             object.envsFromResponseData?.forEach((variable) => {
-                transformedObject.variables[variable.name] = `jq($$response.body, "${variable.jqFilter}")`;
+                transformedObject.variables[variable.name] =
+                    `jq($$response.body, "${variable.jqFilter}")`;
             });
         }
         else if (currentSchema === "runShell_v2") {
@@ -266,7 +271,8 @@ function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = 
             };
             transformedObject.variables = {};
             object.setVariables?.forEach((variable) => {
-                transformedObject.variables[variable.name] = `extract($$stdio.stdout, "${variable.regex}")`;
+                transformedObject.variables[variable.name] =
+                    `extract($$stdio.stdout, "${variable.regex}")`;
             });
         }
         else if (currentSchema === "runCode_v2") {
@@ -287,7 +293,8 @@ function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = 
             };
             transformedObject.variables = {};
             object?.setVariables?.forEach((variable) => {
-                transformedObject.variables[variable.name] = `extract($$stdio.stdout, "${variable.regex}")`;
+                transformedObject.variables[variable.name] =
+                    `extract($$stdio.stdout, "${variable.regex}")`;
             });
         }
         else if (currentSchema === "setVariables_v2") {

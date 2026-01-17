@@ -26,7 +26,7 @@ export interface TransformOptions {
  *
  * @throws {Error} If {@link schemaKey} or {@link object} is missing.
  */
-export declare function validate({ schemaKey, object, addDefaults }: ValidateOptions): ValidateResult;
+export declare function validate({ schemaKey, object, addDefaults, }: ValidateOptions): ValidateResult;
 /**
  * Transform an object from one schema key to another and return a validated instance of the target schema.
  *
