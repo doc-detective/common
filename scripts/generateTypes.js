@@ -15,6 +15,9 @@ async function generateTypes() {
 
   console.log(`Generating TypeScript types for ${v3Schemas.length} schemas...`);
 
+  let hadErrors = false;
+  const failedFiles = [];
+
   for (const file of v3Schemas) {
     const schemaPath = path.join(schemasDir, file);
     const schema = JSON.parse(await fs.readFile(schemaPath, "utf-8"));
@@ -32,8 +35,14 @@ async function generateTypes() {
       await fs.writeFile(outputPath, ts);
       console.log(`  ✓ ${file} → ${path.basename(outputPath)}`);
     } catch (error) {
+      hadErrors = true;
+      failedFiles.push(file);
       console.error(`  ✗ Failed to generate ${file}:`, error.message);
     }
+  }
+
+  if (hadErrors) {
+    throw new Error(`One or more schemas failed to generate TypeScript types: ${failedFiles.join(", ")}`);
   }
 
   console.log("Type generation complete!");

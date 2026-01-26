@@ -14,7 +14,7 @@ A phased approach to convert this CommonJS JavaScript library to TypeScript, lev
 
 5. **Convert high-complexity** [src/validate.ts](src/validate.js) — split 350+ line `transformToSchemaKey()` into modular transformation functions, type the `compatibleSchemas` map, and use generic `validate<K>()` signature
 
-6. **Update build pipeline** in [dereferenceSchemas.js](src/schemas/dereferenceSchemas.js) — add `tsc` compilation step before schema dereference, update CI workflows to run TypeScript build
+6. **Update build pipeline** — ensure schema dereference runs before generate:types and compile (pipeline order: `dereferenceSchemas → generate:types → compile`), and update CI workflows to run the TypeScript build
 
 ### Further Considerations
 

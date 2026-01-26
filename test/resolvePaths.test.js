@@ -437,6 +437,20 @@ const path = require("path");
           expect(error.message).to.equal("Object type is required for nested objects.");
         }
       });
+
+      it("should throw error for invalid objectType", async function () {
+        const config = { relativePathBase: "file" };
+        const object = {
+          someProp: "value",
+        };
+
+        try {
+          await resolvePaths({ config, object, filePath: mockFilePath, nested: true, objectType: "invalid" });
+          expect.fail("Should have thrown an error");
+        } catch (error) {
+          expect(error.message).to.equal("Invalid objectType");
+        }
+      });
     });
 
     describe("null and empty object handling", function () {

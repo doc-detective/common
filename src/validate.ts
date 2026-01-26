@@ -519,7 +519,7 @@ export function transformToSchemaKey({
     if (!result.valid) {
       throw new Error(`Invalid object: ${result.errors}`);
     }
-    return transformedObject;
+    return result.object;
   } else if (targetSchema === "spec_v3") {
     // Handle spec_v2 to spec_v3 transformation
     const transformedObject: any = {
@@ -606,6 +606,6 @@ export function transformToSchemaKey({
     }
     return result.object;
   }
-  /* c8 ignore next - Dead code: incompatible schemas throw at line 197-200 */
+  /* c8 ignore next 2 - Dead code: incompatible schemas throw at line 226-228 */
   return null;
 }

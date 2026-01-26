@@ -566,8 +566,8 @@ async function processSpecFile(path: string) {
 
 ## Need Help?
 
-- **Issues**: Report bugs or request features at https://github.com/doc-detective/doc-detective-common/issues
-- **Discussions**: Ask questions at https://github.com/doc-detective/doc-detective-common/discussions
+- **Issues**: Report bugs or request features at [GitHub Issues](https://github.com/doc-detective/doc-detective-common/issues)
+- **Discussions**: Ask questions at [GitHub Discussions](https://github.com/doc-detective/doc-detective-common/discussions)
 - **Documentation**: See main [README.md](../README.md) for general usage
 
 ## Version Compatibility
