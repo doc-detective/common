@@ -49,14 +49,39 @@ jobs:
         run: |
           brew install ollama
           
+      # Install Ollama on Windows
+      - name: Install Ollama (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # Download Ollama installer
+          Invoke-WebRequest -Uri "https://ollama.com/download/OllamaSetup.exe" -OutFile "OllamaSetup.exe"
+          # Install silently
+          Start-Process -FilePath ".\OllamaSetup.exe" -Args "/S" -Wait
+          # Add to PATH for this session
+          $env:PATH = "$env:LOCALAPPDATA\Programs\Ollama;$env:PATH"
+          echo "$env:LOCALAPPDATA\Programs\Ollama" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
       # Start Ollama server and pull model (Linux/macOS)
-      - name: Start Ollama and pull model
+      - name: Start Ollama and pull model (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
           # Start Ollama server in background
           ollama serve &
           # Wait for server to start
           sleep 5
+          # Pull the default model used in tests
+          ollama pull qwen3:4b
+
+      # Start Ollama server and pull model (Windows)
+      - name: Start Ollama and pull model (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # Start Ollama server in background
+          Start-Process -FilePath "ollama" -ArgumentList "serve" -NoNewWindow
+          # Wait for server to start
+          Start-Sleep -Seconds 10
           # Pull the default model used in tests
           ollama pull qwen3:4b
           
