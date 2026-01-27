@@ -250,9 +250,11 @@ const renderProgressBar = ({ completed, total, status, barWidth = 40 }: { comple
  * Uses the /api/pull endpoint with streaming to display progress.
  */
 export async function ensureModelAvailable({ model, baseUrl = DEFAULT_OLLAMA_BASE_URL }: { model: string; baseUrl?: string }): Promise<boolean> {
-  // First check if Ollama is available
-  if (!await isOllamaAvailable()) {
-    console.error("    Ollama is not available.");
+  // First check if Ollama is available at the specified baseUrl
+  // Extract base URL without /api suffix for availability check
+  const ollamaUrl = baseUrl.replace(/\/api\/?$/, "");
+  if (!await isOllamaAvailable(ollamaUrl)) {
+    console.error(`    Ollama is not available at ${ollamaUrl}.`);
     return false;
   }
 
