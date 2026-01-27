@@ -55,6 +55,16 @@ describe("ollama", () => {
 
       expect(ollama.detectGpuType()).to.equal("none");
     });
+
+    it("should return none when fs.existsSync throws", () => {
+      const execSyncStub = sandbox.stub(child_process, "execSync");
+      execSyncStub.withArgs("nvidia-smi", { stdio: "ignore" }).throws(new Error("Command failed"));
+
+      const existsSyncStub = sandbox.stub(fs, "existsSync");
+      existsSyncStub.throws(new Error("fs error"));
+
+      expect(ollama.detectGpuType()).to.equal("none");
+    });
   });
 
   describe("isOllamaAvailable", () => {
@@ -198,6 +208,16 @@ describe("ollama", () => {
       const result = await ollama.isModelAvailable({ model: "llama3" });
       expect(result).to.be.false;
     });
+
+    it("should return false when response.ok is false", async () => {
+      sandbox.stub(global, "fetch").resolves({
+        ok: false,
+        status: 500
+      });
+
+      const result = await ollama.isModelAvailable({ model: "llama3" });
+      expect(result).to.be.false;
+    });
   });
 
   describe("ensureModelAvailable", () => {
@@ -279,6 +299,512 @@ describe("ollama", () => {
 
       const result = await ollama.ensureModelAvailable({ model: "llama3" });
       expect(result).to.be.false;
+    });
+
+    it("should handle successful streaming pull with progress", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      
+      // Mock process.stdout.write to capture progress output
+      const stdoutStub = sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false (need to pull)
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with progress data
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling manifest" }) + "\n",
+        JSON.stringify({ status: "downloading", completed: 1024, total: 4096 }) + "\n",
+        JSON.stringify({ status: "downloading", completed: 4096, total: 4096 }) + "\n",
+        JSON.stringify({ status: "success" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+      
+      // Verify progress was rendered (formatBytes and renderProgressBar were called)
+      expect(stdoutStub.called).to.be.true;
+    });
+
+    it("should handle streaming error from pull response", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write"); // Suppress console output
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with error
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling manifest" }) + "\n",
+        JSON.stringify({ error: "model not found" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.false;
+    });
+
+    it("should handle streaming with status-only updates (no progress data)", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      const stdoutStub = sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with status-only updates (no total/completed)
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling manifest" }) + "\n",
+        JSON.stringify({ status: "verifying sha256 digest" }) + "\n",
+        JSON.stringify({ status: "success" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+      
+      // Verify status messages were written (padEnd path)
+      expect(stdoutStub.called).to.be.true;
+    });
+
+    it("should handle remaining buffer with success status", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response where success is in final buffer (no trailing newline)
+      const encoder = new TextEncoder();
+      // Note: No newline after success - this will be left in the buffer
+      const progressData = [
+        JSON.stringify({ status: "pulling" }) + "\n",
+        JSON.stringify({ status: "success" })  // No trailing newline
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+    });
+
+    it("should handle remaining buffer with error", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response where error is in final buffer
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling" }) + "\n",
+        JSON.stringify({ error: "some error" })  // No trailing newline - left in buffer
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.false;
+    });
+
+    it("should fall back to isModelAvailable check when stream ends without success", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false (model not available initially)
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response that ends without explicit success
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling" }) + "\n",
+        JSON.stringify({ status: "done pulling" }) + "\n"
+        // Note: no "success" status
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+      
+      // 4. Final isModelAvailable check -> now available
+      fetchStub.onCall(3).resolves({
+        ok: true,
+        json: async () => ({ models: [{ name: "llama3:latest" }] })
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+    });
+
+    it("should return false when stream ends and model still not available", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response that ends without success
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+      
+      // 4. Final isModelAvailable check -> still not available
+      fetchStub.onCall(3).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.false;
+    });
+
+    it("should handle fetch error during pull", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> throws error
+      fetchStub.onCall(2).rejects(new Error("Network error during pull"));
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.false;
+    });
+
+    it("should handle invalid JSON in stream gracefully", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with invalid JSON followed by success
+      const encoder = new TextEncoder();
+      const progressData = [
+        "not valid json\n",
+        JSON.stringify({ status: "success" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+    });
+
+    it("should handle empty lines in stream", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with empty lines
+      const encoder = new TextEncoder();
+      const progressData = [
+        "\n",
+        "   \n",
+        JSON.stringify({ status: "success" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+    });
+
+    it("should handle invalid JSON in remaining buffer gracefully", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with invalid JSON left in buffer (no trailing newline)
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "pulling" }) + "\n",
+        "invalid json without newline"  // This goes into buffer and fails to parse
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+      
+      // 4. Final isModelAvailable check -> available (simulating successful pull despite parse error)
+      fetchStub.onCall(3).resolves({
+        ok: true,
+        json: async () => ({ models: [{ name: "llama3:latest" }] })
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+    });
+
+    it("should handle formatBytes with zero bytes", async () => {
+      const fetchStub = sandbox.stub(global, "fetch");
+      const stdoutStub = sandbox.stub(process.stdout, "write");
+      
+      // 1. isOllamaAvailable -> true
+      fetchStub.onCall(0).resolves({ ok: true });
+      
+      // 2. isModelAvailable -> false
+      fetchStub.onCall(1).resolves({
+        ok: true,
+        json: async () => ({ models: [] })
+      });
+      
+      // 3. pull -> streaming response with zero bytes progress
+      const encoder = new TextEncoder();
+      const progressData = [
+        JSON.stringify({ status: "downloading", completed: 0, total: 0 }) + "\n",
+        JSON.stringify({ status: "success" }) + "\n"
+      ];
+      
+      let callIndex = 0;
+      const mockReader = {
+        read: async () => {
+          if (callIndex < progressData.length) {
+            const data = encoder.encode(progressData[callIndex]);
+            callIndex++;
+            return { done: false, value: data };
+          }
+          return { done: true, value: undefined };
+        }
+      };
+      
+      fetchStub.onCall(2).resolves({
+        ok: true,
+        body: { getReader: () => mockReader }
+      });
+
+      const result = await ollama.ensureModelAvailable({ model: "llama3" });
+      expect(result).to.be.true;
+      
+      // Verify "0 B" was rendered
+      const allCalls = stdoutStub.getCalls().map(c => c.args[0]).join("");
+      expect(allCalls).to.include("0 B");
     });
   });
 
@@ -421,6 +947,16 @@ describe("ollama", () => {
       existsSyncStub.withArgs("/dev/dri").returns(true);
       
       expect(ollama.getGpuFlags()).to.equal("--device /dev/kfd --device /dev/dri -e OLLAMA_ROCM_SUPPORT=1");
+    });
+
+    it("should return empty string when no GPU detected", () => {
+      const execSyncStub = sandbox.stub(child_process, "execSync");
+      execSyncStub.withArgs("nvidia-smi", { stdio: "ignore" }).throws(new Error("No nvidia"));
+      
+      const existsSyncStub = sandbox.stub(fs, "existsSync");
+      existsSyncStub.returns(false); // No AMD devices
+      
+      expect(ollama.getGpuFlags()).to.equal("");
     });
   });
 });

@@ -1,5 +1,6 @@
 const { describe, it, before, after, beforeEach, afterEach } = require("mocha");
 const { z } = require("zod");
+const sinon = require("sinon");
 const aiModule = require("../dist/ai");
 const ollamaModule = require("../dist/ollama");
 
@@ -11,6 +12,7 @@ const {
   modelMap,
   DEFAULT_MODEL,
   MAX_SCHEMA_VALIDATION_RETRIES,
+  getApiKey,
 } = aiModule;
 
 const {
@@ -223,6 +225,104 @@ describe("AI Module", function () {
       expect(await detectProvider(config, "anthropic/claude-haiku-4.5")).to.deep.equal({
         provider: null,
         model: null,
+      });
+    });
+
+    describe("getDefaultProvider fallbacks (via detectProvider with unknown model)", function () {
+      let sandbox;
+      let originalFetch;
+
+      beforeEach(function () {
+        sandbox = sinon.createSandbox();
+        originalFetch = global.fetch;
+      });
+
+      afterEach(function () {
+        sandbox.restore();
+        global.fetch = originalFetch;
+      });
+
+      it("should fall back to Anthropic when Ollama unavailable and ANTHROPIC_API_KEY is set", async function () {
+        // Mock fetch to simulate Ollama being unavailable
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        process.env.ANTHROPIC_API_KEY = "sk-ant-fallback";
+        
+        const config = {};
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.equal("anthropic");
+        expect(result.model).to.equal("claude-haiku-4-5");
+        expect(result.apiKey).to.equal("sk-ant-fallback");
+      });
+
+      it("should fall back to Anthropic with config key when Ollama unavailable", async function () {
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        const config = { integrations: { anthropic: { apiKey: "sk-ant-config-fallback" } } };
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.equal("anthropic");
+        expect(result.model).to.equal("claude-haiku-4-5");
+        expect(result.apiKey).to.equal("sk-ant-config-fallback");
+      });
+
+      it("should fall back to OpenAI when Ollama unavailable and no Anthropic key", async function () {
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        process.env.OPENAI_API_KEY = "sk-openai-fallback";
+        
+        const config = {};
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.equal("openai");
+        expect(result.model).to.equal("gpt-5-mini");
+        expect(result.apiKey).to.equal("sk-openai-fallback");
+      });
+
+      it("should fall back to OpenAI with config key when Ollama unavailable", async function () {
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        const config = { integrations: { openAi: { apiKey: "sk-openai-config-fallback" } } };
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.equal("openai");
+        expect(result.model).to.equal("gpt-5-mini");
+        expect(result.apiKey).to.equal("sk-openai-config-fallback");
+      });
+
+      it("should fall back to Google when Ollama unavailable and no Anthropic/OpenAI key", async function () {
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        process.env.GOOGLE_GENERATIVE_AI_API_KEY = "google-fallback";
+        
+        const config = {};
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.equal("google");
+        expect(result.model).to.equal("gemini-2.5-flash");
+        expect(result.apiKey).to.equal("google-fallback");
+      });
+
+      it("should fall back to Google with config key when Ollama unavailable", async function () {
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        const config = { integrations: { google: { apiKey: "google-config-fallback" } } };
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.equal("google");
+        expect(result.model).to.equal("gemini-2.5-flash");
+        expect(result.apiKey).to.equal("google-config-fallback");
+      });
+
+      it("should return null when Ollama unavailable and no API keys configured", async function () {
+        global.fetch = sandbox.stub().rejects(new Error("Connection refused"));
+        
+        const config = {};
+        const result = await detectProvider(config, "unknown-model");
+        
+        expect(result.provider).to.be.null;
+        expect(result.model).to.be.null;
       });
     });
   });
@@ -550,6 +650,24 @@ describe("AI Module", function () {
       // 100x100 grid PNG with red, blue, and green squares
       const GRID_PNG_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABvUlEQVR4nO3YUW7DQAwD0b3/pZ0jhEjW2rE5LfT3ANGlE0Bda63LQc26kh/dmMMHbHP4gG0OH7DN4QO2OXzANocP2ObwAdscPmCbyy7Ia/McuICfMllzdxSy+c16i7MQmLMQmLMQmLMQmLMQmLMQmLMQmPNSh42fEJizEJizEJizEJizEJizEJizEJizEJizEJg7fpk6v1zqujGHD9jm8AHbHD5gm8MHbHP4gG0OH7DN4QO2OXzANnf8Mv0yu/9rc/p5Hn+p7y/kzHO85ivLQqYWh85CphaHzkKmFofOQqYWh85CphaHzkKmFofOQqYWh66wEPbsLwQ+9Dem8BNyaHHoLGRqcegsZGpx6CxkanHoLGRqcegsZGpx6CxkanHoLGRqcegKC3FQg39j2hw+YJvDB2xz+IBtDh+wzeEDtjl8wDaHD9jm8AHb3PHLlDm7f73U/3Q3FBLmg/9hLOTPB3mLsxCYsxCYsxCYsxCYsxCYsxCYO1mI46XOd35lwZyFwJyFwJyFwJyFwJyFwJyFwJyFwNzJQhzUwN/UPocP2ObwAdscPmCbwwdsc/iAbQ4fsM3hA7Y5fMAq9wGhbdAbu3rjOQAAAABJRU5ErkJggg==";
 
+      it("should throw error for unsupported file type", async function () {
+        try {
+          await generate({
+            prompt: "Test prompt",
+            files: [
+              {
+                type: "pdf",
+                data: "some data",
+              },
+            ],
+          });
+          expect.fail("Should have thrown an error");
+        } catch (error) {
+          expect(error.message).to.include("Unsupported file type");
+          expect(error.message).to.include("pdf");
+        }
+      });
+
       it("should handle image URL input with multimodal file object", async function () {
         // Note: Remote URLs may not work with all Ollama models
         // This test uses a base64 fallback approach for reliability
@@ -696,6 +814,148 @@ describe("AI Module", function () {
           expect(error).to.be.an("error");
         }
       });
+    });
+
+    describe("temperature and maxTokens options", function () {
+      it("should accept temperature option", async function () {
+        const result = await generate({
+          prompt: "Say hello",
+          temperature: 0.5,
+          maxTokens: 20,
+        });
+        expect(result.text).to.be.a("string");
+      });
+
+      it("should accept maxTokens option", async function () {
+        const result = await generate({
+          prompt: "Say hello briefly",
+          maxTokens: 10,
+        });
+        expect(result.text).to.be.a("string");
+      });
+    });
+
+    describe("messages with files", function () {
+      const GRID_PNG_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABvUlEQVR4nO3YUW7DQAwD0b3/pZ0jhEjW2rE5LfT3ANGlE0Bda63LQc26kh/dmMMHbHP4gG0OH7DN4QO2OXzANocP2ObwAdscPmCbyy7Ia/McuICfMllzdxSy+c16i7MQmLMQmLMQmLMQmLMQmLMQmPNSh42fEJizEJizEJizEJizEJizEJizEJizEJizEJg7fpk6v1zqujGHD9jm8AHbHD5gm8MHbHP4gG0OH7DN4QO2OXzANnf8Mv0yu/9rc/p5Hn+p7y/kzHO85ivLQqYWh85CphaHzkKmFofOQqYWh85CphaHzkKmFofOQqYWh66wEPbsLwQ+9Dem8BNyaHHoLGRqcegsZGpx6CxkanHoLGRqcegsZGpx6CxkanHoLGRqcegKC3FQg39j2hw+YJvDB2xz+IBtDh+wzeEDtjl8wDaHD9jm8AHb3PHLlDm7f73U/3Q3FBLmg/9hLOTPB3mLsxCYsxCYsxCYsxCYsxCYsxCYO1mI46XOd35lwZyFwJyFwJyFwJyFwJyFwJyFwJyFwNzJQhzUwN/UPocP2ObwAdscPmCbwwdsc/iAbQ4fsM3hA7Y5fMAq9wGhbdAbu3rjOQAAAABJRU5ErkJggg==";
+
+      it("should attach files only to the last user message in messages array", async function () {
+        const imageBuffer = Buffer.from(GRID_PNG_BASE64, "base64");
+
+        const result = await generate({
+          messages: [
+            { role: "user", content: "This is my first message." },
+            { role: "assistant", content: "I understand." },
+            { role: "user", content: "Describe this image briefly." },
+          ],
+          files: [
+            {
+              type: "image",
+              data: imageBuffer,
+              mimeType: "image/png",
+            },
+          ],
+          maxTokens: 50,
+        });
+
+        expect(result.text).to.be.a("string");
+        expect(result.text.length).to.be.greaterThan(0);
+      });
+    });
+  });
+
+  describe("getApiKey", function () {
+    let originalAnthropicKey;
+    let originalOpenAIKey;
+    let originalGoogleKey;
+
+    beforeEach(function () {
+      originalAnthropicKey = process.env.ANTHROPIC_API_KEY;
+      originalOpenAIKey = process.env.OPENAI_API_KEY;
+      originalGoogleKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+      delete process.env.ANTHROPIC_API_KEY;
+      delete process.env.OPENAI_API_KEY;
+      delete process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    });
+
+    afterEach(function () {
+      if (originalAnthropicKey !== undefined) {
+        process.env.ANTHROPIC_API_KEY = originalAnthropicKey;
+      } else {
+        delete process.env.ANTHROPIC_API_KEY;
+      }
+      if (originalOpenAIKey !== undefined) {
+        process.env.OPENAI_API_KEY = originalOpenAIKey;
+      } else {
+        delete process.env.OPENAI_API_KEY;
+      }
+      if (originalGoogleKey !== undefined) {
+        process.env.GOOGLE_GENERATIVE_AI_API_KEY = originalGoogleKey;
+      } else {
+        delete process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+      }
+    });
+
+    it("should return undefined when config is null", function () {
+      expect(getApiKey(null, "anthropic")).to.be.undefined;
+    });
+
+    it("should return undefined when config has no integrations", function () {
+      expect(getApiKey({}, "anthropic")).to.be.undefined;
+    });
+
+    it("should return Anthropic API key from env", function () {
+      process.env.ANTHROPIC_API_KEY = "sk-ant-env";
+      expect(getApiKey({ integrations: {} }, "anthropic")).to.equal("sk-ant-env");
+    });
+
+    it("should return Anthropic API key from config", function () {
+      const config = { integrations: { anthropic: { apiKey: "sk-ant-config" } } };
+      expect(getApiKey(config, "anthropic")).to.equal("sk-ant-config");
+    });
+
+    it("should return OpenAI API key from env", function () {
+      process.env.OPENAI_API_KEY = "sk-openai-env";
+      expect(getApiKey({ integrations: {} }, "openai")).to.equal("sk-openai-env");
+    });
+
+    it("should return OpenAI API key from config", function () {
+      const config = { integrations: { openAi: { apiKey: "sk-openai-config" } } };
+      expect(getApiKey(config, "openai")).to.equal("sk-openai-config");
+    });
+
+    it("should return Google API key from env", function () {
+      process.env.GOOGLE_GENERATIVE_AI_API_KEY = "google-env";
+      expect(getApiKey({ integrations: {} }, "google")).to.equal("google-env");
+    });
+
+    it("should return Google API key from config", function () {
+      const config = { integrations: { google: { apiKey: "google-config" } } };
+      expect(getApiKey(config, "google")).to.equal("google-config");
+    });
+
+    it("should prefer env key over config key for Anthropic", function () {
+      process.env.ANTHROPIC_API_KEY = "sk-ant-env";
+      const config = { integrations: { anthropic: { apiKey: "sk-ant-config" } } };
+      expect(getApiKey(config, "anthropic")).to.equal("sk-ant-env");
+    });
+
+    it("should prefer env key over config key for OpenAI", function () {
+      process.env.OPENAI_API_KEY = "sk-openai-env";
+      const config = { integrations: { openAi: { apiKey: "sk-openai-config" } } };
+      expect(getApiKey(config, "openai")).to.equal("sk-openai-env");
+    });
+
+    it("should prefer env key over config key for Google", function () {
+      process.env.GOOGLE_GENERATIVE_AI_API_KEY = "google-env";
+      const config = { integrations: { google: { apiKey: "google-config" } } };
+      expect(getApiKey(config, "google")).to.equal("google-env");
+    });
+
+    it("should return undefined when no key is available for provider", function () {
+      const config = { integrations: {} };
+      expect(getApiKey(config, "anthropic")).to.be.undefined;
+      expect(getApiKey(config, "openai")).to.be.undefined;
+      expect(getApiKey(config, "google")).to.be.undefined;
     });
   });
 });
