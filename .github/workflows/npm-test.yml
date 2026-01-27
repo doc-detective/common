@@ -66,10 +66,13 @@ jobs:
       - name: Start Ollama and pull model (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
-          # Start Ollama server in background
-          ollama serve &
-          # Wait for server to start
-          sleep 5
+          # Check if Ollama is already running (systemd service may have started it)
+          if ! curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+            # Start Ollama server in background
+            ollama serve &
+            # Wait for server to start
+            sleep 5
+          fi
           # Pull the default model used in tests
           ollama pull qwen3:4b
 
