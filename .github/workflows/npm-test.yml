@@ -16,7 +16,7 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 5
+    timeout-minutes: 15
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -36,12 +36,37 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
           node-version: ${{ matrix.node }}
+      
+      # Install Ollama on Linux
+      - name: Install Ollama (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          
+      # Install Ollama on macOS
+      - name: Install Ollama (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install ollama
+          
+      # Start Ollama server and pull model (Linux/macOS)
+      - name: Start Ollama and pull model
+        if: runner.os != 'Windows'
+        run: |
+          # Start Ollama server in background
+          ollama serve &
+          # Wait for server to start
+          sleep 5
+          # Pull the default model used in tests
+          ollama pull qwen3:4b
+          
       - run: npm ci
       - run: npm run build # Automatically run tests because of the `postbuild` script in package.json
 
   coverage:
     name: Coverage Check
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,6 +74,18 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
           node-version: 20
+      
+      # Install and start Ollama for coverage tests
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          
+      - name: Start Ollama and pull model
+        run: |
+          ollama serve &
+          sleep 5
+          ollama pull qwen3:4b
+          
       - run: npm ci
       - run: npm run dereferenceSchemas && npm run generate:types && npm run compile
       - name: Run tests with coverage

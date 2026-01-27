@@ -1,10 +1,10 @@
 const { describe, it, before, after, beforeEach, afterEach } = require("mocha");
-const sinon = require("sinon");
 const { z } = require("zod");
 const aiModule = require("../dist/ai");
 const ollamaModule = require("../dist/ollama");
 
 let expect;
+let ollamaIsAvailable = false;
 
 const {
   generate,
@@ -16,32 +16,37 @@ const {
 
 const {
   MODEL_PULL_TIMEOUT_MS,
+  isOllamaAvailable,
+  ensureModelAvailable,
+  DEFAULT_OLLAMA_MODEL,
 } = ollamaModule;
 
-describe("AI Module", function () {
-  // Increase timeout for real API calls and container setup
-  this.timeout(MODEL_PULL_TIMEOUT_MS + 60000);
+/**
+ * Helper to skip tests that require Ollama when it's not available.
+ * Call at the start of tests that need Ollama.
+ */
+function skipIfNoOllama(context) {
+  if (!ollamaIsAvailable) {
+    context.skip();
+  }
+}
 
-  let ensureOllamaRunningStub;
-  let stopOllamaContainerStub;
-  let isOllamaAvailableStub;
-  let detectProviderStub;
-  let generateStub;
+describe("AI Module", function () {
+  // Increase timeout for real API calls and model setup
+  this.timeout(MODEL_PULL_TIMEOUT_MS + 60000);
 
   before(async function () {
     const chai = await import("chai");
     expect = chai.expect;
 
-    console.log("  Setting up Ollama for tests...");
-    ensureOllamaRunningStub = sinon.stub(ollamaModule, "ensureOllamaRunning").resolves(true);
-    stopOllamaContainerStub = sinon.stub(ollamaModule, "stopOllamaContainer").resolves();
-    isOllamaAvailableStub = sinon.stub(ollamaModule, "isOllamaAvailable").resolves(true);
-  });
-
-  after(async function () {
-    ensureOllamaRunningStub.restore();
-    stopOllamaContainerStub.restore();
-    isOllamaAvailableStub.restore();
+    console.log("  Checking Ollama availability for tests...");
+    ollamaIsAvailable = await isOllamaAvailable();
+    if (!ollamaIsAvailable) {
+      console.log("  WARNING: Ollama is not available. Ollama-dependent tests will be skipped.");
+    } else {
+      console.log("  Ollama is available. Ensuring model is ready...");
+      await ensureModelAvailable({ model: DEFAULT_OLLAMA_MODEL });
+    }
   });
 
   describe("modelMap", function () {
@@ -105,6 +110,7 @@ describe("AI Module", function () {
     });
 
     it("should detect Ollama provider for known Ollama models", async function () {
+      skipIfNoOllama(this);
       const config = {};
       const result = await detectProvider(config, "ollama/qwen3:4b");
       expect(result.provider).to.equal("ollama");
@@ -114,6 +120,7 @@ describe("AI Module", function () {
     });
 
     it("should use custom baseUrl from config for Ollama", async function () {
+      skipIfNoOllama(this);
       const config = { integrations: { ollama: { baseUrl: "http://custom:11434/api" } } };
       const result = await detectProvider(config, "ollama/qwen3:4b");
       expect(result.provider).to.equal("ollama");
@@ -220,6 +227,7 @@ describe("AI Module", function () {
     });
 
     it("should fall back to Ollama as default provider when available", async function () {
+      skipIfNoOllama(this);
       const config = {};
       const result = await detectProvider(config, "unknown-model");
       // Ollama should be preferred when available
@@ -373,6 +381,7 @@ describe("AI Module", function () {
 
     describe("text generation", function () {
       it("should generate text with default model (Ollama)", async function () {
+        skipIfNoOllama(this);
         const result = await generate({ 
           prompt: "Say exactly: Hello World",
           maxTokens: 50,
@@ -385,24 +394,17 @@ describe("AI Module", function () {
       });
 
       it("should generate text with explicit Ollama model", async function () {
-        try {
-          const result = await generate({
-            prompt: "Reply with exactly one word: Yes",
-            model: "ollama/qwen3:4b",
-            maxTokens: 20,
-          });
+        skipIfNoOllama(this);
+        const result = await generate({
+          prompt: "Reply with exactly one word: Yes",
+          model: "ollama/qwen3:4b",
+          maxTokens: 20,
+        });
 
-          expect(result.text).to.be.a("string");
-          expect(result.text.length).to.be.greaterThan(0);
-          expect(result.usage).to.be.an("object");
-          expect(result.finishReason).to.be.a("string");
-        } catch (error) {
-          // Skip if we get an Internal Server Error (model may not be available)
-          if (error.message && error.message.includes("Internal Server Error")) {
-            this.skip();
-          }
-          throw error;
-        }
+        expect(result.text).to.be.a("string");
+        expect(result.text.length).to.be.greaterThan(0);
+        expect(result.usage).to.be.an("object");
+        expect(result.finishReason).to.be.a("string");
       });
 
       it("should generate text with OpenAI model", async function () {
@@ -460,6 +462,7 @@ describe("AI Module", function () {
       });
 
       it("should include system message in generation", async function () {
+        skipIfNoOllama(this);
         const result = await generate({
           prompt: "What is your name?",
           system: "You are a helpful assistant named TestBot. Always respond with your name.",
@@ -489,6 +492,7 @@ describe("AI Module", function () {
       };
 
       it("should generate valid structured output with Zod schema", async function () {
+        skipIfNoOllama(this);
         const result = await generate({
           prompt: "Generate a fictional person named Alice who is 28 years old",
           schema: personSchema,
@@ -505,6 +509,7 @@ describe("AI Module", function () {
       });
 
       it("should generate valid structured output with JSON schema", async function () {
+        skipIfNoOllama(this);
         const result = await generate({
           prompt: "Generate a fictional person named Bob who is 42 years old",
           schema: personJsonSchema,
@@ -521,6 +526,7 @@ describe("AI Module", function () {
       });
 
       it("should validate generated object against Zod schema", async function () {
+        skipIfNoOllama(this);
         const strictSchema = z.object({
           color: z.enum(["red", "green", "blue"]).describe("One of: red, green, blue"),
           count: z.number().int().min(1).max(10).describe("An integer from 1 to 10"),
@@ -540,6 +546,7 @@ describe("AI Module", function () {
       });
 
       it("should validate generated object against JSON schema", async function () {
+        skipIfNoOllama(this);
         const strictJsonSchema = {
           type: "object",
           properties: {
@@ -569,8 +576,9 @@ describe("AI Module", function () {
       const GRID_PNG_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABvUlEQVR4nO3YUW7DQAwD0b3/pZ0jhEjW2rE5LfT3ANGlE0Bda63LQc26kh/dmMMHbHP4gG0OH7DN4QO2OXzANocP2ObwAdscPmCbyy7Ia/McuICfMllzdxSy+c16i7MQmLMQmLMQmLMQmLMQmLMQmLMQmPNSh42fEJizEJizEJizEJizEJizEJizEJizEJizEJg7fpk6v1zqujGHD9jm8AHbHD5gm8MHbHP4gG0OH7DN4QO2OXzANnf8Mv0yu/9rc/p5Hn+p7y/kzHO85ivLQqYWh85CphaHzkKmFofOQqYWh85CphaHzkKmFofOQqYWh66wEPbsLwQ+9Dem8BNyaHHoLGRqcegsZGpx6CxkanHoLGRqcegsZGpx6CxkanHoLGRqcegKC3FQg39j2hw+YJvDB2xz+IBtDh+wzeEDtjl8wDaHD9jm8AHb3PHLlDm7f73U/3Q3FBLmg/9hLOTPB3mLsxCYsxCYsxCYsxCYsxCYsxCYO1mI46XOd35lwZyFwJyFwJyFwJyFwJyFwJyFwJyFwNzJQhzUwN/UPocP2ObwAdscPmCbwwdsc/iAbQ4fsM3hA7Y5fMAq9wGhbdAbu3rjOQAAAABJRU5ErkJggg==";
 
       it("should handle image URL input with multimodal file object", async function () {
-        // Note: Some Ollama models may have issues with remote URLs.
-        // This test validates the multimodal input construction.
+        skipIfNoOllama(this);
+        // Note: Remote URLs may not work with all Ollama models
+        // This test uses a base64 fallback approach for reliability
         try {
           const result = await generate({
             prompt: "What colors do you see in this image? Be brief.",
@@ -586,8 +594,7 @@ describe("AI Module", function () {
           expect(result.text).to.be.a("string");
           expect(result.text.length).to.be.greaterThan(0);
         } catch (error) {
-          // Some Ollama models may not support remote URLs well
-          // Skip if we get a Bad Request error related to image handling
+          // Some Ollama models don't support remote image URLs
           if (error.message && error.message.includes("Bad Request")) {
             this.skip();
           }
@@ -596,128 +603,101 @@ describe("AI Module", function () {
       });
 
       it("should handle base64 image data", async function () {
-        try {
-          const result = await generate({
-            prompt: "Describe what you see in this image. Be brief.",
-            files: [
-              {
-                type: "image",
-                data: GRID_PNG_BASE64,
-                mimeType: "image/png",
-              },
-            ],
-            maxTokens: 100,
-          });
+        skipIfNoOllama(this);
+        const result = await generate({
+          prompt: "Describe what you see in this image. Be brief.",
+          files: [
+            {
+              type: "image",
+              data: GRID_PNG_BASE64,
+              mimeType: "image/png",
+            },
+          ],
+          maxTokens: 100,
+        });
 
-          expect(result.text).to.be.a("string");
-          expect(result.text.length).to.be.greaterThan(0);
-          expect(result.usage).to.be.an("object");
-          expect(result.finishReason).to.be.a("string");
-        } catch (error) {
-          // Some Ollama models may have issues with certain image formats
-          if (error.message && (error.message.includes("Bad Request") || error.message.includes("Internal Server Error"))) {
-            this.skip();
-          }
-          throw error;
-        }
+        expect(result.text).to.be.a("string");
+        expect(result.text.length).to.be.greaterThan(0);
+        expect(result.usage).to.be.an("object");
+        expect(result.finishReason).to.be.a("string");
       });
 
       it("should handle Buffer image data", async function () {
+        skipIfNoOllama(this);
         // Convert base64 to Buffer
         const imageBuffer = Buffer.from(GRID_PNG_BASE64, "base64");
 
-        try {
-          const result = await generate({
-            prompt: "Describe what you see in this image. Be brief.",
-            files: [
-              {
-                type: "image",
-                data: imageBuffer,
-                mimeType: "image/png",
-              },
-            ],
-            maxTokens: 100,
-          });
+        const result = await generate({
+          prompt: "Describe what you see in this image. Be brief.",
+          files: [
+            {
+              type: "image",
+              data: imageBuffer,
+              mimeType: "image/png",
+            },
+          ],
+          maxTokens: 100,
+        });
 
-          expect(result.text).to.be.a("string");
-          expect(result.text.length).to.be.greaterThan(0);
-          expect(result.usage).to.be.an("object");
-          expect(result.finishReason).to.be.a("string");
-        } catch (error) {
-          // Some Ollama models may have issues with certain image formats
-          if (error.message && (error.message.includes("Bad Request") || error.message.includes("Internal Server Error"))) {
-            this.skip();
-          }
-          throw error;
-        }
+        expect(result.text).to.be.a("string");
+        expect(result.text.length).to.be.greaterThan(0);
+        expect(result.usage).to.be.an("object");
+        expect(result.finishReason).to.be.a("string");
       });
 
       it("should handle Uint8Array image data", async function () {
+        skipIfNoOllama(this);
         // Convert base64 to Uint8Array
         const buffer = Buffer.from(GRID_PNG_BASE64, "base64");
         const uint8Array = new Uint8Array(buffer);
 
-        try {
-          const result = await generate({
-            prompt: "Describe what you see in this image. Be brief.",
-            files: [
-              {
-                type: "image",
-                data: uint8Array,
-                mimeType: "image/png",
-              },
-            ],
-            maxTokens: 100,
-          });
+        const result = await generate({
+          prompt: "Describe what you see in this image. Be brief.",
+          files: [
+            {
+              type: "image",
+              data: uint8Array,
+              mimeType: "image/png",
+            },
+          ],
+          maxTokens: 100,
+        });
 
-          expect(result.text).to.be.a("string");
-          expect(result.text.length).to.be.greaterThan(0);
-          expect(result.usage).to.be.an("object");
-          expect(result.finishReason).to.be.a("string");
-        } catch (error) {
-          // Some Ollama models may have issues with certain image formats
-          if (error.message && (error.message.includes("Bad Request") || error.message.includes("Internal Server Error"))) {
-            this.skip();
-          }
-          throw error;
-        }
+        expect(result.text).to.be.a("string");
+        expect(result.text.length).to.be.greaterThan(0);
+        expect(result.usage).to.be.an("object");
+        expect(result.finishReason).to.be.a("string");
       });
 
       it("should handle multiple images with mixed data types", async function () {
+        skipIfNoOllama(this);
         const imageBuffer = Buffer.from(GRID_PNG_BASE64, "base64");
 
-        try {
-          const result = await generate({
-            prompt: "Describe what you see in these images. Be brief.",
-            files: [
-              {
-                type: "image",
-                data: GRID_PNG_BASE64,
-                mimeType: "image/png",
-              },
-              {
-                type: "image",
-                data: imageBuffer,
-                mimeType: "image/png",
-              },
-            ],
-            maxTokens: 100,
-          });
+        const result = await generate({
+          prompt: "Describe what you see in these images. Be brief.",
+          files: [
+            {
+              type: "image",
+              data: GRID_PNG_BASE64,
+              mimeType: "image/png",
+            },
+            {
+              type: "image",
+              data: imageBuffer,
+              mimeType: "image/png",
+            },
+          ],
+          maxTokens: 100,
+        });
 
-          expect(result.text).to.be.a("string");
-          expect(result.text.length).to.be.greaterThan(0);
-        } catch (error) {
-          // Some Ollama models may have issues with certain image formats
-          if (error.message && (error.message.includes("Bad Request") || error.message.includes("Internal Server Error"))) {
-            this.skip();
-          }
-          throw error;
-        }
+        expect(result.text).to.be.a("string");
+        expect(result.text.length).to.be.greaterThan(0);
       });
     });
 
     describe("messages array support", function () {
       it("should handle multi-turn conversation", async function () {
+        skipIfNoOllama(this);
         const result = await generate({
           messages: [
             { role: "user", content: "There were red, blue, and green balls." },
@@ -736,6 +716,7 @@ describe("AI Module", function () {
 
     describe("error handling", function () {
       it("should throw error with invalid API key", async function () {
+        skipIfNoOllama(this);
         try {
           await generate({
             prompt: "Hello",
