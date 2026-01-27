@@ -1,13 +1,18 @@
 const sinon = require("sinon");
-const { expect } = require("chai");
 const fs = require("fs");
 const child_process = require("child_process");
+
+let expect;
 
 describe("ollama", () => {
   let sandbox;
   let ollama;
 
   before(async () => {
+    // Use dynamic import for chai to avoid race condition with other test files
+    const chai = await import("chai");
+    expect = chai.expect;
+
     try {
       ollama = require("../dist/ollama");
     } catch (e) {
