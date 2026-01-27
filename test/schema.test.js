@@ -1,4 +1,4 @@
-const { validate, schemas } = require("../src/index");
+const { validate, schemas } = require("../dist/index");
 const assert = require("assert");
 
 // Loop through JSON schemas

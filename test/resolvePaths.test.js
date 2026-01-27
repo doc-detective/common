@@ -4,7 +4,7 @@ const path = require("path");
 
 (async () => {
   const { expect } = await import("chai");
-  const { resolvePaths } = require("../src/resolvePaths");
+  const { resolvePaths } = require("../dist/resolvePaths");
 
   describe("resolvePaths", function () {
     const mockFilePath = "/home/user/project/config.json";
@@ -435,6 +435,20 @@ const path = require("path");
           expect.fail("Should have thrown an error");
         } catch (error) {
           expect(error.message).to.equal("Object type is required for nested objects.");
+        }
+      });
+
+      it("should throw error for invalid objectType", async function () {
+        const config = { relativePathBase: "file" };
+        const object = {
+          someProp: "value",
+        };
+
+        try {
+          await resolvePaths({ config, object, filePath: mockFilePath, nested: true, objectType: "invalid" });
+          expect.fail("Should have thrown an error");
+        } catch (error) {
+          expect(error.message).to.equal("Invalid objectType");
         }
       });
     });

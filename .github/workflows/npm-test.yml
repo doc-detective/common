@@ -50,7 +50,7 @@ jobs:
           cache-dependency-path: package-lock.json
           node-version: 20
       - run: npm ci
-      - run: npm run dereferenceSchemas
+      - run: npm run dereferenceSchemas && npm run generate:types && npm run compile
       - name: Run tests with coverage
         run: npm run test:coverage
       - name: Check coverage ratchet

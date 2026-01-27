@@ -30,6 +30,36 @@ This package exports the following components:
 - `readFile` - File reading utilities
 - `transformToSchemaKey` - Schema key transformation
 
+### TypeScript Support
+
+Full TypeScript support with exported types:
+
+```typescript
+import { 
+  validate, 
+  ValidateOptions, 
+  ValidateResult,
+  resolvePaths,
+  ResolvePathsOptions
+} from 'doc-detective-common';
+```
+
+**Documentation:**
+- [TypeScript Migration Guide](./docs/typescript-migration.md) - Complete guide for TypeScript users
+- [TypeScript Examples](./docs/typescript-examples.md) - Runnable code examples
+
+### JavaScript Usage
+
+Works seamlessly with JavaScript (CommonJS or ESM):
+
+```javascript
+// CommonJS
+const { validate, schemas } = require('doc-detective-common');
+
+// ESM
+import { validate, schemas } from 'doc-detective-common';
+```
+
 ## 🧪 Development
 
 ```bash

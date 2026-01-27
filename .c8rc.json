@@ -1,7 +1,7 @@
 {
   "all": true,
-  "include": ["src/**/*.js"],
-  "exclude": ["src/schemas/dereferenceSchemas.js"],
+  "include": ["dist/**/*.js"],
+  "exclude": ["dist/types/generated/**/*.js", "dist/**/*.d.ts"],
   "reporter": ["text", "lcov", "json", "json-summary"],
   "report-dir": "coverage",
   "check-coverage": false
