@@ -8587,6 +8587,55 @@
           },
           "title": "Doc Detective Orchestration API"
         },
+        "anthropic": {
+          "type": "object",
+          "description": "Configuration for Anthropic AI integration.",
+          "additionalProperties": false,
+          "properties": {
+            "apiKey": {
+              "type": "string",
+              "description": "API key for authenticating with Anthropic."
+            }
+          },
+          "title": "Anthropic"
+        },
+        "openAi": {
+          "type": "object",
+          "description": "Configuration for OpenAI integration.",
+          "additionalProperties": false,
+          "properties": {
+            "apiKey": {
+              "type": "string",
+              "description": "API key for authenticating with OpenAI."
+            }
+          },
+          "title": "OpenAI"
+        },
+        "ollama": {
+          "type": "object",
+          "description": "Configuration for Ollama integration. Ollama runs locally and doesn't need an API key.",
+          "additionalProperties": false,
+          "properties": {
+            "baseUrl": {
+              "type": "string",
+              "description": "Base URL for the Ollama API.",
+              "default": "http://localhost:11434/api"
+            }
+          },
+          "title": "Ollama"
+        },
+        "google": {
+          "type": "object",
+          "description": "Configuration for Google Gemini AI integration.",
+          "additionalProperties": false,
+          "properties": {
+            "apiKey": {
+              "type": "string",
+              "description": "API key for authenticating with Google Generative AI."
+            }
+          },
+          "title": "Google Gemini"
+        },
         "heretto": {
           "type": "array",
           "description": "Configuration for Heretto CMS integrations. Each entry specifies a Heretto instance and a scenario to build and test.",

@@ -16,9 +16,10 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 5
+    timeout-minutes: 30
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
@@ -36,12 +37,37 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
           node-version: ${{ matrix.node }}
+      
+      # Install Ollama only on Linux (fast installation)
+      # macOS and Windows installations timeout (600MB+ download) and tests
+      # gracefully skip when Ollama is unavailable. Full Ollama coverage
+      # is verified in the Linux-only coverage job.
+      - name: Install Ollama (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          
+      # Start Ollama server and pull model (Linux only)
+      - name: Start Ollama and pull model (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          # Check if Ollama is already running (systemd service may have started it)
+          if ! curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+            # Start Ollama server in background
+            ollama serve &
+            # Wait for server to start
+            sleep 5
+          fi
+          # Pull the default model used in tests
+          ollama pull qwen3:4b
+          
       - run: npm ci
       - run: npm run build # Automatically run tests because of the `postbuild` script in package.json
 
   coverage:
     name: Coverage Check
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,6 +75,18 @@ jobs:
           cache: "npm"
           cache-dependency-path: package-lock.json
           node-version: 20
+      
+      # Install and start Ollama for coverage tests
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          
+      - name: Start Ollama and pull model
+        run: |
+          ollama serve &
+          sleep 5
+          ollama pull qwen3:4b
+          
       - run: npm ci
       - run: npm run dereferenceSchemas && npm run generate:types && npm run compile
       - name: Run tests with coverage

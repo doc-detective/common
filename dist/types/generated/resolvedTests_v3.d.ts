@@ -314,6 +314,10 @@ export interface RunShellCommandDetailed {
 export interface IntegrationsOptions {
     openApi?: (OpenApi & OpenAPIDescriptionTest)[];
     docDetectiveApi?: DocDetectiveOrchestrationAPI;
+    anthropic?: Anthropic;
+    openAi?: OpenAI;
+    ollama?: Ollama;
+    google?: GoogleGemini;
     heretto?: HerettoCMSIntegrations;
 }
 export interface OpenAPIDescriptionTest {
@@ -325,6 +329,42 @@ export interface OpenAPIDescriptionTest {
 export interface DocDetectiveOrchestrationAPI {
     /**
      * API key for authenticating with the Doc Detective Orchestration API.
+     */
+    apiKey?: string;
+}
+/**
+ * Configuration for Anthropic AI integration.
+ */
+export interface Anthropic {
+    /**
+     * API key for authenticating with Anthropic.
+     */
+    apiKey?: string;
+}
+/**
+ * Configuration for OpenAI integration.
+ */
+export interface OpenAI {
+    /**
+     * API key for authenticating with OpenAI.
+     */
+    apiKey?: string;
+}
+/**
+ * Configuration for Ollama integration. Ollama runs locally and doesn't need an API key.
+ */
+export interface Ollama {
+    /**
+     * Base URL for the Ollama API.
+     */
+    baseUrl?: string;
+}
+/**
+ * Configuration for Google Gemini AI integration.
+ */
+export interface GoogleGemini {
+    /**
+     * API key for authenticating with Google Generative AI.
      */
     apiKey?: string;
 }
