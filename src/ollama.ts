@@ -21,22 +21,23 @@ export const OLLAMA_STARTUP_TIMEOUT_MS = 30 * 1000;
  */
 export async function isOllamaAvailable(baseUrl?: string): Promise<boolean> {
   const url = baseUrl || "http://localhost:11434";
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(
-      () => controller.abort(),
-      OLLAMA_AVAILABILITY_TIMEOUT_MS
-    );
+  const controller = new AbortController();
+  const timeoutId = setTimeout(
+    () => controller.abort(),
+    OLLAMA_AVAILABILITY_TIMEOUT_MS
+  );
 
+  try {
     const response = await fetch(url, {
       method: "GET",
       signal: controller.signal,
     });
 
-    clearTimeout(timeoutId);
     return response.ok;
   } catch {
     return false;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -266,11 +267,15 @@ export async function ensureModelAvailable({ model, baseUrl = DEFAULT_OLLAMA_BAS
 
   console.log(`    Pulling model ${model}...`);
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), MODEL_PULL_TIMEOUT_MS);
+
   try {
     const response = await fetch(`${baseUrl}/pull`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model }),
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -373,6 +378,8 @@ export async function ensureModelAvailable({ model, baseUrl = DEFAULT_OLLAMA_BAS
   } catch (error: any) {
     console.error(`\n    Error pulling model: ${error.message}`);
     return false;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -402,6 +409,16 @@ export async function ensureOllamaRunning(model: string = DEFAULT_OLLAMA_MODEL):
     throw new Error("Ollama container started but did not become available");
   }
 
-  await ensureModelAvailable({ model });
+  // Ensure the model is available and propagate any errors
+  try {
+    const modelAvailable = await ensureModelAvailable({ model });
+    if (!modelAvailable) {
+      return false;
+    }
+  } catch (error: any) {
+    console.error(`Failed to ensure model availability: ${error.message}`);
+    return false;
+  }
+  
   return true;
 }

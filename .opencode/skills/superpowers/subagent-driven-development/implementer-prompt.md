@@ -1,1 +1,0 @@
-Implementer Prompt Template

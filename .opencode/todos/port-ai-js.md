@@ -1,8 +1,8 @@
 - [ ] Implement `src/ai.ts` and `test/ai.test.ts`
-    - [ ] Create `test/ai.test.ts` with content from `.opencode/pr_content/test/ai.test.ts` (but corrected paths)
-    - [ ] Create `src/ai.ts` with basic scaffolding
-    - [ ] Implement `detectProvider` logic
-    - [ ] Implement `generate` logic
-    - [ ] Implement `generateWithSchemaValidation` logic
-    - [ ] Implement helpers (`simplifySchemaForOllama`, `fileToImagePart`, etc.)
-    - [ ] Verify with tests
+  - [ ] Create `test/ai.test.ts` with content from `.opencode/pr_content/test/ai.test.ts` (but corrected paths)
+  - [ ] Create `src/ai.ts` with basic scaffolding
+  - [ ] Implement `detectProvider` logic
+  - [ ] Implement `generate` logic
+  - [ ] Implement `generateWithSchemaValidation` logic
+  - [ ] Implement helpers (`simplifySchemaForOllama`, `fileToImagePart`, etc.)
+  - [ ] Verify with tests
