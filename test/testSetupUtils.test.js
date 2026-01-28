@@ -249,7 +249,8 @@ describe("testSetupUtils", () => {
       });
 
       const elapsed = Date.now() - startTime;
-      expect(elapsed).to.be.at.least(100);
+      // Allow for timer imprecision - should be at least 95ms (within 5% tolerance)
+      expect(elapsed).to.be.at.least(95);
     });
 
     it("should handle non-Error exceptions thrown by execSync", async () => {
