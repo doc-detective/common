@@ -3,8 +3,8 @@
  * This file is automatically loaded by Mocha before running tests.
  */
 
-const { execSync } = require("child_process");
 const ollamaModule = require("../dist/ollama");
+const testSetupUtils = require("../dist/testSetupUtils");
 
 const {
   isOllamaAvailable,
@@ -14,64 +14,17 @@ const {
   DEFAULT_OLLAMA_MODEL,
 } = ollamaModule;
 
+const {
+  isOllamaCLIAvailable,
+  startOllamaWithCLI,
+  stopOllamaWithCLI,
+} = testSetupUtils;
+
 // Global state to track Ollama setup
 global.ollamaSetupComplete = false;
 global.ollamaStarted = false;
 global.ollamaStartMethod = null; // Track how Ollama was started: "cli", "docker", or null
 global.ollamaSetupPromise = null;
-
-/**
- * Checks if Ollama CLI is available on the system.
- */
-function isOllamaCLIAvailable() {
-  try {
-    execSync("ollama --version", { stdio: "ignore" });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Attempts to start Ollama using the CLI command.
- */
-async function startOllamaWithCLI() {
-  try {
-    console.log("  Ollama CLI found. Attempting to start Ollama...");
-    execSync("ollama serve", { stdio: "inherit", detached: true });
-    
-    // Wait a bit for the server to start
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Check if it's available
-    if (await isOllamaAvailable()) {
-      console.log("  ✓ Ollama started successfully via CLI");
-      global.ollamaStarted = true;
-      global.ollamaStartMethod = "cli";
-      return true;
-    }
-    
-    console.warn("  ⚠ Ollama CLI command executed but server not responding");
-    return false;
-  } catch (error) {
-    console.warn(`  ⚠ Error starting Ollama via CLI: ${error.message}`);
-    return false;
-  }
-}
-
-/**
- * Attempts to stop Ollama that was started via CLI.
- */
-async function stopOllamaWithCLI() {
-  try {
-    console.log("  Stopping Ollama CLI service...");
-    execSync("killall ollama", { stdio: "ignore" });
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("  ✓ Ollama CLI service stopped");
-  } catch (error) {
-    console.warn(`  ⚠ Error stopping Ollama CLI: ${error.message}`);
-  }
-}
 
 /**
  * Ensures Ollama is available and ready for tests.
@@ -96,9 +49,13 @@ async function ensureOllamaReady() {
 
     // Method 1: Try Ollama CLI
     if (isOllamaCLIAvailable()) {
-      const cliSuccess = await startOllamaWithCLI();
-      if (cliSuccess) {
+      const cliResult = await startOllamaWithCLI({
+        isOllamaAvailable,
+      });
+      if (cliResult.success) {
         global.ollamaSetupComplete = true;
+        global.ollamaStarted = true;
+        global.ollamaStartMethod = "cli";
         return;
       }
     }
@@ -121,6 +78,7 @@ async function ensureOllamaReady() {
       if (success) {
         console.log("  ✓ Ollama started successfully via Docker");
         global.ollamaSetupComplete = true;
+        global.ollamaStarted = true;
         global.ollamaStartMethod = "docker";
       } else {
         console.warn("  ⚠ Failed to start Ollama via Docker");
