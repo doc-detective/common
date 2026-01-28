@@ -33,10 +33,12 @@ describe("AI Module", function () {
     const chai = await import("chai");
     expect = chai.expect;
 
-    // Check if Ollama is available before trying to use it
-    ollamaAvailable = await isOllamaAvailable();
+    // Use the global Ollama setup state from test/setup.js
+    // The setup file ensures Ollama is running (or attempted to start it)
+    ollamaAvailable = global.ollamaSetupComplete;
+    
     if (ollamaAvailable) {
-      console.log("  Ensuring Ollama model is ready for tests...");
+      console.log("  Ollama is available. Ensuring model is ready for tests...");
       await ensureModelAvailable({ model: DEFAULT_OLLAMA_MODEL });
       console.log("  Ollama model ready.");
     } else {
