@@ -830,6 +830,14 @@ describe("ollama", () => {
       const execSyncStub = sandbox.stub(child_process, "execSync");
       execSyncStub.withArgs("docker --version", { stdio: "ignore" }).returns(Buffer.from("Docker version"));
       execSyncStub.withArgs("nvidia-smi", { stdio: "ignore" }).throws(new Error("No GPU")); // CPU mode
+      // Stub the docker run command (CPU mode)
+      execSyncStub.withArgs(
+        sinon.match(/^docker run -d -v ollama:\/root\/\.ollama -p 11434:11434 --name ollama ollama\/ollama$/),
+        { stdio: "inherit" }
+      ).returns(Buffer.from(""));
+      // Stub stopOllamaContainer's docker stop and rm commands
+      execSyncStub.withArgs(sinon.match(/^docker stop ollama$/), { stdio: "ignore" }).returns(Buffer.from(""));
+      execSyncStub.withArgs(sinon.match(/^docker rm ollama$/), { stdio: "ignore" }).returns(Buffer.from(""));
       sandbox.stub(fs, "existsSync").returns(false);
 
       // We need to handle the calls:
@@ -845,12 +853,12 @@ describe("ollama", () => {
       fetchStub.onCall(1).resolves({ ok: true }); 
       
       // ensureModelAvailable calls:
-      // isOllamaAvailable
+      // isOllamaAvailable (check Ollama is available)
       fetchStub.onCall(2).resolves({ ok: true });
-      // isModelAvailable -> let's say it exists to exit early
+      // isModelAvailable (check if model exists) - model already available
       fetchStub.onCall(3).resolves({
         ok: true,
-        json: async () => ({ models: [{ name: "qwen3:4b:latest" }] }) // default model
+        json: async () => ({ models: [{ name: "qwen3:4b" }] }) // default model exists
       });
 
       const result = await ollama.ensureOllamaRunning();

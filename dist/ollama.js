@@ -31,18 +31,20 @@ exports.OLLAMA_STARTUP_TIMEOUT_MS = 30 * 1000;
  */
 async function isOllamaAvailable(baseUrl) {
     const url = baseUrl || "http://localhost:11434";
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), exports.OLLAMA_AVAILABILITY_TIMEOUT_MS);
     try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), exports.OLLAMA_AVAILABILITY_TIMEOUT_MS);
         const response = await fetch(url, {
             method: "GET",
             signal: controller.signal,
         });
-        clearTimeout(timeoutId);
         return response.ok;
     }
     catch {
         return false;
+    }
+    finally {
+        clearTimeout(timeoutId);
     }
 }
 /**
@@ -239,9 +241,11 @@ const renderProgressBar = ({ completed, total, status, barWidth = 40 }) => {
  * Uses the /api/pull endpoint with streaming to display progress.
  */
 async function ensureModelAvailable({ model, baseUrl = exports.DEFAULT_OLLAMA_BASE_URL }) {
-    // First check if Ollama is available
-    if (!await isOllamaAvailable()) {
-        console.error("    Ollama is not available.");
+    // First check if Ollama is available at the specified baseUrl
+    // Extract base URL without /api suffix for availability check
+    const ollamaUrl = baseUrl.replace(/\/api\/?$/, "");
+    if (!await isOllamaAvailable(ollamaUrl)) {
+        console.error(`    Ollama is not available at ${ollamaUrl}.`);
         return false;
     }
     // Check if model is already available
@@ -250,11 +254,14 @@ async function ensureModelAvailable({ model, baseUrl = exports.DEFAULT_OLLAMA_BA
         return true;
     }
     console.log(`    Pulling model ${model}...`);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), exports.MODEL_PULL_TIMEOUT_MS);
     try {
         const response = await fetch(`${baseUrl}/pull`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ model }),
+            signal: controller.signal,
         });
         if (!response.ok) {
             console.error(`\n    Failed to pull model: HTTP ${response.status}`);
@@ -348,6 +355,9 @@ async function ensureModelAvailable({ model, baseUrl = exports.DEFAULT_OLLAMA_BA
         console.error(`\n    Error pulling model: ${error.message}`);
         return false;
     }
+    finally {
+        clearTimeout(timeoutId);
+    }
 }
 /**
  * Ensures Ollama is running, starting a Docker container if needed.
@@ -371,7 +381,17 @@ async function ensureOllamaRunning(model = exports.DEFAULT_OLLAMA_MODEL) {
     if (!available) {
         throw new Error("Ollama container started but did not become available");
     }
-    await ensureModelAvailable({ model });
+    // Ensure the model is available and propagate any errors
+    try {
+        const modelAvailable = await ensureModelAvailable({ model });
+        if (!modelAvailable) {
+            return false;
+        }
+    }
+    catch (error) {
+        console.error(`Failed to ensure model availability: ${error.message}`);
+        return false;
+    }
     return true;
 }
 //# sourceMappingURL=ollama.js.map
