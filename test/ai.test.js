@@ -220,6 +220,7 @@ describe("AI Module", function () {
     });
 
     it("should fall back to Ollama as default provider when available", async function () {
+      if (!ollamaAvailable) this.skip();
       const config = {};
       const result = await detectProvider(config, "unknown-model");
       // Ollama should be preferred when available
