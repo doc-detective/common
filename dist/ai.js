@@ -86,10 +86,16 @@ const detectProvider = async (config, model) => {
         return getDefaultProvider(config);
     if (model.startsWith("ollama/")) {
         const ollamaBaseUrl = config.integrations?.ollama?.baseUrl || ollama_1.DEFAULT_OLLAMA_BASE_URL;
-        await (0, ollama_1.ensureModelAvailable)({
-            model: detectedModel,
-            baseUrl: ollamaBaseUrl,
-        });
+        try {
+            await (0, ollama_1.ensureModelAvailable)({
+                model: detectedModel,
+                baseUrl: ollamaBaseUrl,
+            });
+        }
+        catch (error) {
+            // If ensureModelAvailable fails, fall back to default provider
+            return getDefaultProvider(config);
+        }
         return {
             provider: "ollama",
             model: detectedModel,
@@ -237,8 +243,8 @@ const validateAgainstJsonSchema = (object, schema) => {
     if (valid) {
         return { valid: true, errors: null, object };
     }
-    const errors = validate.errors
-        ?.map((error) => `${error.instancePath || "/"} ${error.message}`)
+    const errors = (validate.errors || [])
+        .map((error) => `${error.instancePath || "/"} ${error.message}`)
         .join(", ");
     return { valid: false, errors, object };
 };
@@ -264,14 +270,19 @@ const toAiSdkSchema = (schema) => {
 /**
  * Dereferences $ref pointers in a schema by inlining the referenced schemas.
  * Supports both JSON Schema style (#/definitions/...) and OpenAPI style (#/components/schemas/...).
+ * Includes visited set to prevent infinite recursion on cyclic $ref graphs.
  */
-const dereferenceSchema = (schema, rootSchema) => {
+const dereferenceSchema = (schema, rootSchema, visited = new Set()) => {
     if (!schema || typeof schema !== "object") {
         return schema;
     }
+    // Check for circular reference
+    if (visited.has(schema)) {
+        return {};
+    }
     // Handle arrays
     if (Array.isArray(schema)) {
-        return schema.map((item) => dereferenceSchema(item, rootSchema));
+        return schema.map((item) => dereferenceSchema(item, rootSchema, visited));
     }
     // Handle $ref
     if (schema.$ref) {
@@ -288,22 +299,29 @@ const dereferenceSchema = (schema, rootSchema) => {
             }
         }
         if (resolved) {
+            // Add current schema to visited set before recursing
+            visited.add(schema);
             // Recursively dereference the resolved schema
-            return dereferenceSchema(resolved, rootSchema);
+            const result = dereferenceSchema(resolved, rootSchema, visited);
+            visited.delete(schema);
+            return result;
         }
         // If we can't resolve, return an empty object
         return {};
     }
+    // Add current schema to visited set before processing properties
+    visited.add(schema);
     // Recursively process all properties
     const result = {};
     for (const [key, value] of Object.entries(schema)) {
         if (typeof value === "object" && value !== null) {
-            result[key] = dereferenceSchema(value, rootSchema);
+            result[key] = dereferenceSchema(value, rootSchema, visited);
         }
         else {
             result[key] = value;
         }
     }
+    visited.delete(schema);
     return result;
 };
 /**
@@ -562,13 +580,21 @@ const generateWithSchemaValidation = async ({ generationOptions, schema, schemaN
             }
         }
         catch (error) {
+            // Normalize error message for non-Error throwables
+            const errorMsg = error instanceof Error && error.message ? error.message : String(error);
             // If it's our validation error and we have retries left, continue
-            if (error.message.includes("Schema validation failed after") ||
+            if (errorMsg.includes("Schema validation failed after") ||
                 attempt === exports.MAX_SCHEMA_VALIDATION_RETRIES) {
-                throw error;
+                // Rethrow appropriately
+                if (error instanceof Error) {
+                    throw error;
+                }
+                else {
+                    throw new Error(errorMsg);
+                }
             }
             // Store the error and retry
-            lastError = error.message;
+            lastError = errorMsg;
             lastObject = null;
         }
     }
@@ -583,18 +609,41 @@ const generate = async ({ prompt, messages, files, model, system, schema, schema
         throw new Error("Either 'prompt' or 'messages' is required.");
     }
     // Determine provider, model, and API key
-    const detected = await (0, exports.detectProvider)(config, model || exports.DEFAULT_MODEL);
-    if (!detected.provider) {
-        throw new Error(`Cannot determine provider for model "${model}". Please specify a 'provider' option ("openai" or "anthropic").`);
+    // If a provider is explicitly passed, use it; otherwise detect from model
+    let resolvedProvider;
+    let resolvedModel;
+    let resolvedApiKey;
+    let resolvedBaseURL;
+    if (provider) {
+        // Use the explicitly specified provider
+        const detectedModel = model ? exports.modelMap[model] || model : null;
+        if (!detectedModel) {
+            throw new Error(`No model specified for provider "${provider}". Please provide a model option.`);
+        }
+        resolvedProvider = provider;
+        resolvedModel = detectedModel;
+        resolvedApiKey = apiKey;
+        resolvedBaseURL = baseURL;
+    }
+    else {
+        // Detect provider based on model (or use default model if none provided)
+        const detected = await (0, exports.detectProvider)(config, model || exports.DEFAULT_MODEL);
+        if (!detected.provider || !detected.model) {
+            throw new Error(`Cannot determine provider for model "${model}". Please specify a 'provider' option ("openai", "anthropic", "google", or "ollama").`);
+        }
+        resolvedProvider = detected.provider;
+        resolvedModel = detected.model;
+        resolvedApiKey = apiKey || detected.apiKey || undefined;
+        resolvedBaseURL = baseURL || detected.baseURL;
     }
     // Create provider instance
     const providerFactory = createProvider({
-        provider: detected.provider,
-        apiKey: apiKey || detected.apiKey,
-        baseURL: baseURL || detected.baseURL,
+        provider: resolvedProvider,
+        apiKey: resolvedApiKey,
+        baseURL: resolvedBaseURL,
     });
     // Get model instance
-    const modelInstance = providerFactory(detected.model);
+    const modelInstance = providerFactory(resolvedModel);
     // Build generation options
     const generationOptions = {
         model: modelInstance,
@@ -654,7 +703,7 @@ const generate = async ({ prompt, messages, files, model, system, schema, schema
             schemaDescription,
             prompt,
             messages,
-            provider: detected.provider,
+            provider: resolvedProvider,
         });
     }
     // Generate text
