@@ -13,7 +13,26 @@ const ajv_formats_1 = __importDefault(require("ajv-formats"));
 const ajv_keywords_1 = __importDefault(require("ajv-keywords"));
 // Ajv custom errors: https://ajv.js.org/packages/ajv-errors.html
 const ajv_errors_1 = __importDefault(require("ajv-errors"));
-const crypto_1 = require("crypto");
+// Browser-compatible UUID function
+function getRandomUUID() {
+    // Try Web Crypto API first (browsers and modern Node.js)
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    // Fallback to Node.js crypto module
+    try {
+        const nodeCrypto = require("crypto");
+        return nodeCrypto.randomUUID();
+    }
+    catch {
+        // Final fallback for older environments
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+}
 // Configure base Ajv
 const ajv = new ajv_1.default({
     strictSchema: false,
@@ -25,7 +44,7 @@ const ajv = new ajv_1.default({
 // Enable `uuid` dynamic default
 // @ts-ignore - ajv-keywords has incomplete types for dynamicDefaults
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
-def.DEFAULTS.uuid = () => crypto_1.randomUUID;
+def.DEFAULTS.uuid = () => getRandomUUID;
 // Enhance Ajv
 (0, ajv_formats_1.default)(ajv);
 (0, ajv_keywords_1.default)(ajv);

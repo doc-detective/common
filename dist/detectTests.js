@@ -5,6 +5,7 @@
  * without dependencies on Node.js file system or path modules.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.detectTests = detectTests;
 exports.parseXmlAttributes = parseXmlAttributes;
 exports.parseObject = parseObject;
 exports.replaceNumericVariables = replaceNumericVariables;
@@ -22,6 +23,38 @@ function generateUUID() {
         const r = Math.random() * 16 | 0;
         const v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
+    });
+}
+/**
+ * Browser-compatible test detection function.
+ * Detects tests from content string using specified file type configuration.
+ *
+ * This is the main entry point for test detection in Common.
+ * It works with content strings rather than file paths, making it browser-compatible.
+ *
+ * @param input - Detection input
+ * @param input.content - Content string to parse for tests
+ * @param input.filePath - File path (for metadata only, not file I/O)
+ * @param input.fileType - File type configuration with parsing rules
+ * @param input.config - Optional configuration
+ * @returns Array of detected tests
+ *
+ * @example
+ * ```typescript
+ * const tests = await detectTests({
+ *   content: markdownContent,
+ *   filePath: 'docs/test.md',
+ *   fileType: { extensions: ['md'], markup: [...] },
+ *   config: { detectSteps: true }
+ * });
+ * ```
+ */
+async function detectTests(input) {
+    return parseContent({
+        config: input.config || {},
+        content: input.content,
+        filePath: input.filePath,
+        fileType: input.fileType,
     });
 }
 /**

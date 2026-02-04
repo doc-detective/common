@@ -6,7 +6,26 @@ import addFormats from "ajv-formats";
 import addKeywords from "ajv-keywords";
 // Ajv custom errors: https://ajv.js.org/packages/ajv-errors.html
 import addErrors from "ajv-errors";
-import { randomUUID } from "crypto";
+
+// Browser-compatible UUID function
+function getRandomUUID(): string {
+  // Try Web Crypto API first (browsers and modern Node.js)
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback to Node.js crypto module
+  try {
+    const nodeCrypto = require("crypto");
+    return nodeCrypto.randomUUID();
+  } catch {
+    // Final fallback for older environments
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+}
 
 // Configure base Ajv
 const ajv = new Ajv({
@@ -20,7 +39,7 @@ const ajv = new Ajv({
 // Enable `uuid` dynamic default
 // @ts-ignore - ajv-keywords has incomplete types for dynamicDefaults
 const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
-def.DEFAULTS.uuid = () => randomUUID;
+def.DEFAULTS.uuid = () => getRandomUUID;
 
 // Enhance Ajv
 addFormats(ajv);
