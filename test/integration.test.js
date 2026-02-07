@@ -52,10 +52,57 @@
         expect(result.object.goTo.url).to.equal("https://example.com");
       });
 
+      it("should export detectTests function via require", function () {
+        const { detectTests } = require("../dist/index.js");
+        expect(typeof detectTests).to.equal("function");
+      });
+
+      it("should export parseContent function via require", function () {
+        const { parseContent } = require("../dist/index.js");
+        expect(typeof parseContent).to.equal("function");
+      });
+
+      it("should export parseObject function via require", function () {
+        const { parseObject } = require("../dist/index.js");
+        expect(typeof parseObject).to.equal("function");
+      });
+
+      it("should export parseXmlAttributes function via require", function () {
+        const { parseXmlAttributes } = require("../dist/index.js");
+        expect(typeof parseXmlAttributes).to.equal("function");
+      });
+
+      it("should export replaceNumericVariables function via require", function () {
+        const { replaceNumericVariables } = require("../dist/index.js");
+        expect(typeof replaceNumericVariables).to.equal("function");
+      });
+
+      it("should export log function via require", function () {
+        const { log } = require("../dist/index.js");
+        expect(typeof log).to.equal("function");
+      });
+
+      it("should detect tests using CJS imports", async function () {
+        const { detectTests } = require("../dist/index.js");
+        const result = await detectTests({
+          content: '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->',
+          filePath: "test.md",
+          fileType: {
+            extensions: ["md"],
+            inlineStatements: {
+              testStart: ["<!-- test (.*?)-->"],
+            },
+          },
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps[0].goTo.url).to.equal("https://example.com");
+      });
+
       it("should work with default export via require", function () {
         const docDetectiveCommon = require("../dist/index.js");
         expect(typeof docDetectiveCommon.validate).to.equal("function");
         expect(typeof docDetectiveCommon.schemas).to.equal("object");
+        expect(typeof docDetectiveCommon.detectTests).to.equal("function");
       });
     });
 
@@ -100,10 +147,57 @@
         expect(result.object.goTo.url).to.equal("https://example.com");
       });
 
+      it("should export detectTests function via ESM import", async function () {
+        const module = await import("../dist/index.mjs");
+        expect(typeof module.detectTests).to.equal("function");
+      });
+
+      it("should export parseContent function via ESM import", async function () {
+        const module = await import("../dist/index.mjs");
+        expect(typeof module.parseContent).to.equal("function");
+      });
+
+      it("should export parseObject function via ESM import", async function () {
+        const module = await import("../dist/index.mjs");
+        expect(typeof module.parseObject).to.equal("function");
+      });
+
+      it("should export parseXmlAttributes function via ESM import", async function () {
+        const module = await import("../dist/index.mjs");
+        expect(typeof module.parseXmlAttributes).to.equal("function");
+      });
+
+      it("should export replaceNumericVariables function via ESM import", async function () {
+        const module = await import("../dist/index.mjs");
+        expect(typeof module.replaceNumericVariables).to.equal("function");
+      });
+
+      it("should export log function via ESM import", async function () {
+        const module = await import("../dist/index.mjs");
+        expect(typeof module.log).to.equal("function");
+      });
+
+      it("should detect tests using ESM imports", async function () {
+        const { detectTests } = await import("../dist/index.mjs");
+        const result = await detectTests({
+          content: '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->',
+          filePath: "test.md",
+          fileType: {
+            extensions: ["md"],
+            inlineStatements: {
+              testStart: ["<!-- test (.*?)-->"],
+            },
+          },
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps[0].goTo.url).to.equal("https://example.com");
+      });
+
       it("should have default export via ESM import", async function () {
         const module = await import("../dist/index.mjs");
         expect(module.default).to.exist;
         expect(typeof module.default.validate).to.equal("function");
+        expect(typeof module.default.detectTests).to.equal("function");
       });
     });
 
@@ -129,6 +223,29 @@
         expect(cjsResult.valid).to.equal(esmResult.valid);
         // Note: stepId is generated with UUID, so we compare other properties
         expect(cjsResult.object.goTo).to.deep.equal(esmResult.object.goTo);
+      });
+
+      it("should produce identical detectTests results from CJS and ESM", async function () {
+        const cjsModule = require("../dist/index.js");
+        const esmModule = await import("../dist/index.mjs");
+
+        const testInput = {
+          content: '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->',
+          filePath: "test.md",
+          fileType: {
+            extensions: ["md"],
+            inlineStatements: {
+              testStart: ["<!-- test (.*?)-->"],
+            },
+          },
+        };
+
+        const cjsResult = await cjsModule.detectTests(testInput);
+        const esmResult = await esmModule.detectTests(testInput);
+
+        expect(cjsResult).to.have.lengthOf(1);
+        expect(esmResult).to.have.lengthOf(1);
+        expect(cjsResult[0].steps[0].goTo.url).to.equal(esmResult[0].steps[0].goTo.url);
       });
 
       it("should have the same schema keys in CJS and ESM exports", async function () {
@@ -165,6 +282,21 @@
         const fs = require("fs");
         const dtsPath = path.join(__dirname, "..", "dist", "resolvePaths.d.ts");
         expect(fs.existsSync(dtsPath)).to.be.true;
+      });
+
+      it("should have type definitions for detectTests module", function () {
+        const fs = require("fs");
+        const dtsPath = path.join(__dirname, "..", "dist", "detectTests.d.ts");
+        expect(fs.existsSync(dtsPath)).to.be.true;
+      });
+
+      it("should export detectTests types in type definitions", function () {
+        const fs = require("fs");
+        const dtsPath = path.join(__dirname, "..", "dist", "detectTests.d.ts");
+        const content = fs.readFileSync(dtsPath, "utf8");
+        expect(content).to.include("detectTests");
+        expect(content).to.include("DetectTestsInput");
+        expect(content).to.include("FileType");
       });
 
       it("should export ValidateOptions interface in type definitions", function () {

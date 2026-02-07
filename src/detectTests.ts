@@ -4,16 +4,16 @@
  * without dependencies on Node.js file system or path modules.
  */
 
+import YAML from "yaml";
 import { validate, transformToSchemaKey } from "./validate";
 import { SchemaKey } from "./schemas";
 
 // Web Crypto API compatible UUID generation
+/* c8 ignore next 10 - crypto.randomUUID always available in Node.js; fallback is for browsers */
 function generateUUID(): string {
-  // Use crypto.randomUUID if available (modern browsers and Node 15+)
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
     return crypto.randomUUID();
   }
-  // Fallback for older environments
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     const r = Math.random() * 16 | 0;
     const v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -201,13 +201,8 @@ export function parseObject({ stringifiedObject }: { stringifiedObject: string }
 
       // Try to parse as YAML
       try {
-        // Note: In browser environment, YAML library must be provided
-        // This is a placeholder - actual implementation would use a YAML library
-        if (typeof (globalThis as any).YAML !== 'undefined') {
-          return (globalThis as any).YAML.parse(stringifiedObject);
-        }
-        console.warn("YAML parser not available in browser environment");
-        return null;
+        const yaml = YAML.parse(stringifiedObject);
+        return yaml;
       } catch (yamlError) {
         return null;
       }
@@ -330,7 +325,7 @@ export async function parseContent({
     });
   });
 
-  if (config.detectSteps !== false && fileType.markup) {
+  if (config.detectSteps && fileType.markup) {
     fileType.markup.forEach((markup) => {
       markup.regex.forEach((pattern) => {
         const regex = new RegExp(pattern, "g");
@@ -372,8 +367,8 @@ export async function parseContent({
       case "testStart":
         statementContent = statement[1] || statement[0];
         const parsedTest = parseObject({ stringifiedObject: statementContent });
-        if (!parsedTest) break;
-        
+        if (!parsedTest || typeof parsedTest !== 'object') break;
+
         test = parsedTest as DetectedTest;
 
         // If v2 schema, convert to v3
@@ -455,6 +450,7 @@ export async function parseContent({
               }
             } else {
               const replacedStep = replaceNumericVariables(action, statement);
+              /* c8 ignore next - typeof string check is defensive; object actions always return objects */
               if (!replacedStep || typeof replacedStep === 'string') return;
               step = replacedStep;
 
@@ -492,8 +488,8 @@ export async function parseContent({
                     }
                   });
                   step.httpRequest.request.headers = headers;
+                /* c8 ignore next 2 - string split/forEach can't throw */
                 } catch (error) {
-                  // Ignore parsing errors
                 }
               }
               if (
@@ -529,7 +525,7 @@ export async function parseContent({
         test = findTest({ tests, testId });
         statementContent = statement[1] || statement[0];
         const parsedStep = parseObject({ stringifiedObject: statementContent });
-        if (!parsedStep) break;
+        if (!parsedStep || typeof parsedStep !== 'object') break;
         
         let step = parsedStep;
         const validation = validate({
@@ -545,6 +541,7 @@ export async function parseContent({
         test.steps.push(step);
         break;
 
+      /* c8 ignore next 2 - all statement types are handled above */
       default:
         break;
     }
@@ -572,6 +569,7 @@ export async function parseContent({
  * Helper function to find which Heretto integration a file belongs to.
  */
 function findHerettoIntegration(config: DetectTestsConfig, filePath: string): string | null {
+  /* c8 ignore next - callers always check _herettoPathMapping before calling */
   if (!config._herettoPathMapping) return null;
 
   // Simple string matching since we don't have path.resolve in browser
