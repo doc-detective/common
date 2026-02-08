@@ -298,7 +298,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
         let statementContent = "";
         let stepsCleanup = false;
         switch (statement.type) {
-            case "testStart":
+            case "testStart": {
                 statementContent = statement[1] || statement[0];
                 const parsedTest = parseObject({ stringifiedObject: statementContent });
                 if (!parsedTest || typeof parsedTest !== 'object')
@@ -337,6 +337,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
                 }
                 tests.push(test);
                 break;
+            }
             case "testEnd":
                 testId = generateUUID();
                 ignore = false;
@@ -348,6 +349,8 @@ async function parseContent({ config, content, filePath, fileType, }) {
                 ignore = false;
                 break;
             case "detectedStep":
+                if (ignore)
+                    break;
                 test = findTest({ tests, testId });
                 if (typeof test.detectSteps !== "undefined" && !test.detectSteps) {
                     break;
@@ -405,7 +408,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
                             }
                         }
                         // Normalize step field formats
-                        if (step.httpRequest) {
+                        if (step.httpRequest?.request) {
                             if (typeof step.httpRequest.request.headers === "string") {
                                 try {
                                     const headers = {};
@@ -443,7 +446,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
                             addDefaults: false,
                         });
                         if (!valid.valid) {
-                            console.warn(`Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
+                            log(config, "warn", `Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
                             return;
                         }
                         step = valid.object;
@@ -451,7 +454,9 @@ async function parseContent({ config, content, filePath, fileType, }) {
                     });
                 }
                 break;
-            case "step":
+            case "step": {
+                if (ignore)
+                    break;
                 test = findTest({ tests, testId });
                 statementContent = statement[1] || statement[0];
                 const parsedStep = parseObject({ stringifiedObject: statementContent });
@@ -464,12 +469,13 @@ async function parseContent({ config, content, filePath, fileType, }) {
                     addDefaults: false,
                 });
                 if (!validation.valid) {
-                    console.warn(`Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
+                    log(config, "warn", `Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
                     return;
                 }
                 step = validation.object;
                 test.steps.push(step);
                 break;
+            }
             /* c8 ignore next 2 - all statement types are handled above */
             default:
                 break;
@@ -484,7 +490,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
             addDefaults: false,
         });
         if (!validation.valid) {
-            console.warn(`Couldn't convert test in ${filePath} to valid test. Skipping.`);
+            log(config, "warn", `Couldn't convert test in ${filePath} to valid test. Skipping.`);
             return;
         }
         validatedTests.push(validation.object);
@@ -512,16 +518,19 @@ function findHerettoIntegration(config, filePath) {
  * Simple browser-compatible logging function.
  */
 function log(config, level, message) {
-    const logLevels = ["silent", "error", "warning", "warn", "info", "debug"];
-    const configLevel = config.logLevel || "info";
+    const logLevels = ["silent", "error", "warn", "info", "debug"];
+    // Normalize 'warning' to 'warn' for both config and message levels
+    const configLevel = (config.logLevel || "info") === "warning" ? "warn" : (config.logLevel || "info");
+    const normalizedLevel = level === "warning" ? "warn" : level;
     const configLevelIndex = logLevels.indexOf(configLevel);
-    const messageLevelIndex = logLevels.indexOf(level);
+    const messageLevelIndex = logLevels.indexOf(normalizedLevel);
     if (configLevelIndex < 0 || messageLevelIndex < 0)
         return;
     if (messageLevelIndex > configLevelIndex)
         return;
-    // Normalize 'warning' to 'warn'
-    const normalizedLevel = level === "warning" ? "warn" : level;
+    // Treat message-level 'silent' as a no-op to avoid calling an undefined console method
+    if (normalizedLevel === "silent")
+        return;
     if (typeof message === "object") {
         console[normalizedLevel](JSON.stringify(message, null, 2));
     }

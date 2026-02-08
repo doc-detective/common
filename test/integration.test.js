@@ -3,10 +3,9 @@
  * These tests verify that the package can be consumed via both module systems.
  */
 
-(async () => {
-  const { expect } = await import("chai");
-  const path = require("path");
-  const { execSync } = require("child_process");
+const { expect } = require("chai");
+const path = require("path");
+const { execSync } = require("child_process");
 
   describe("Module Integration Tests", function () {
     // Increase timeout for spawning node processes
@@ -344,4 +343,4 @@
       });
     });
   });
-})();
+

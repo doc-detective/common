@@ -364,7 +364,7 @@ export async function parseContent({
     let stepsCleanup = false;
 
     switch (statement.type) {
-      case "testStart":
+      case "testStart": {
         statementContent = statement[1] || statement[0];
         const parsedTest = parseObject({ stringifiedObject: statementContent });
         if (!parsedTest || typeof parsedTest !== 'object') break;
@@ -404,6 +404,7 @@ export async function parseContent({
         }
         tests.push(test);
         break;
+      }
 
       case "testEnd":
         testId = generateUUID();
@@ -419,6 +420,7 @@ export async function parseContent({
         break;
 
       case "detectedStep":
+        if (ignore) break;
         test = findTest({ tests, testId });
         if (typeof test.detectSteps !== "undefined" && !test.detectSteps) {
           break;
@@ -474,7 +476,7 @@ export async function parseContent({
             }
 
             // Normalize step field formats
-            if (step.httpRequest) {
+            if (step.httpRequest?.request) {
               if (typeof step.httpRequest.request.headers === "string") {
                 try {
                   const headers: Record<string, string> = {};
@@ -512,7 +514,7 @@ export async function parseContent({
               addDefaults: false,
             });
             if (!valid.valid) {
-              console.warn(`Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
+              log(config, "warn", `Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
               return;
             }
             step = valid.object;
@@ -521,12 +523,13 @@ export async function parseContent({
         }
         break;
 
-      case "step":
+      case "step": {
+        if (ignore) break;
         test = findTest({ tests, testId });
         statementContent = statement[1] || statement[0];
         const parsedStep = parseObject({ stringifiedObject: statementContent });
         if (!parsedStep || typeof parsedStep !== 'object') break;
-        
+
         let step = parsedStep;
         const validation = validate({
           schemaKey: "step_v3" as SchemaKey,
@@ -534,12 +537,13 @@ export async function parseContent({
           addDefaults: false,
         });
         if (!validation.valid) {
-          console.warn(`Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
+          log(config, "warn", `Step ${JSON.stringify(step)} isn't a valid step. Skipping.`);
           return;
         }
         step = validation.object;
         test.steps.push(step);
         break;
+      }
 
       /* c8 ignore next 2 - all statement types are handled above */
       default:
@@ -556,7 +560,7 @@ export async function parseContent({
       addDefaults: false,
     });
     if (!validation.valid) {
-      console.warn(`Couldn't convert test in ${filePath} to valid test. Skipping.`);
+      log(config, "warn", `Couldn't convert test in ${filePath} to valid test. Skipping.`);
       return;
     }
     validatedTests.push(validation.object);
@@ -589,16 +593,20 @@ function findHerettoIntegration(config: DetectTestsConfig, filePath: string): st
  * Simple browser-compatible logging function.
  */
 export function log(config: DetectTestsConfig, level: string, message: any): void {
-  const logLevels = ["silent", "error", "warning", "warn", "info", "debug"];
-  const configLevel = config.logLevel || "info";
+  const logLevels = ["silent", "error", "warn", "info", "debug"];
+
+  // Normalize 'warning' to 'warn' for both config and message levels
+  const configLevel = (config.logLevel || "info") === "warning" ? "warn" : (config.logLevel || "info");
+  const normalizedLevel = level === "warning" ? "warn" : level;
+
   const configLevelIndex = logLevels.indexOf(configLevel);
-  const messageLevelIndex = logLevels.indexOf(level);
+  const messageLevelIndex = logLevels.indexOf(normalizedLevel);
 
   if (configLevelIndex < 0 || messageLevelIndex < 0) return;
   if (messageLevelIndex > configLevelIndex) return;
 
-  // Normalize 'warning' to 'warn'
-  const normalizedLevel = level === "warning" ? "warn" : level;
+  // Treat message-level 'silent' as a no-op to avoid calling an undefined console method
+  if (normalizedLevel === "silent") return;
 
   if (typeof message === "object") {
     console[normalizedLevel as 'error' | 'warn' | 'info' | 'debug'](JSON.stringify(message, null, 2));
