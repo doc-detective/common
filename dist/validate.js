@@ -36,7 +36,7 @@ const ajv = new ajv_1.default({
     coerceTypes: true,
 });
 // Enable `uuid` dynamic default
-dynamicDefaults_1.default.DEFAULTS.uuid = () => getRandomUUID;
+dynamicDefaults_1.default.DEFAULTS.uuid = (_args) => getRandomUUID;
 // Enhance Ajv
 (0, ajv_formats_1.default)(ajv);
 (0, ajv_keywords_1.default)(ajv);

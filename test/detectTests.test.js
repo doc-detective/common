@@ -1,13 +1,12 @@
-(async () => {
-  const { expect } = await import("chai");
-  const {
-    detectTests,
-    parseContent,
-    parseXmlAttributes,
-    parseObject,
-    replaceNumericVariables,
-    log,
-  } = require("../dist/index.js");
+const { expect } = require("chai");
+const {
+  detectTests,
+  parseContent,
+  parseXmlAttributes,
+  parseObject,
+  replaceNumericVariables,
+  log,
+} = require("../dist/index.js");
 
   // Standard markdown file type for testing
   const markdownFileType = {
@@ -1189,8 +1188,6 @@
         expect(result).to.have.lengthOf(1);
         expect(result[0].steps).to.have.lengthOf(1);
       });
-    });
-
       it("should handle markup regex with no capture groups (batchMatches fallback)", async function () {
         // Tests match[1] || match[0] fallback and match[1] ? ... : match.index branches
         const fileType = {
@@ -1369,6 +1366,7 @@
         // The step regex matches the literal string; statement[0] is the full match
         expect(result).to.be.an("array");
       });
+    });
 
     // ========== detectTests ==========
     describe("detectTests", function () {
@@ -1411,4 +1409,3 @@
       });
     });
   });
-})();

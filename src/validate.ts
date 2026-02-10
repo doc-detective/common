@@ -32,7 +32,7 @@ const ajv = new Ajv({
 });
 
 // Enable `uuid` dynamic default
-dynamicDefaultsDef.DEFAULTS.uuid = () => getRandomUUID;
+dynamicDefaultsDef.DEFAULTS.uuid = (_args: any) => getRandomUUID;
 
 // Enhance Ajv
 addFormats(ajv);
