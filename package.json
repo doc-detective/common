@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/doc-detective/doc-detective-common#readme",
   "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^15.1.3",
     "@types/node": "^22.10.5",
     "c8": "^10.1.3",
     "chai": "^6.2.2",
@@ -43,12 +44,10 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^15.1.3",
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.1.0",
-    "axios": "^1.13.2",
     "yaml": "^2.8.2"
   }
 }

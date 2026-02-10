@@ -22,16 +22,6 @@ const { execSync } = require("child_process");
         expect(typeof transformToSchemaKey).to.equal("function");
       });
 
-      it("should export resolvePaths function via require", function () {
-        const { resolvePaths } = require("../dist/index.js");
-        expect(typeof resolvePaths).to.equal("function");
-      });
-
-      it("should export readFile function via require", function () {
-        const { readFile } = require("../dist/index.js");
-        expect(typeof readFile).to.equal("function");
-      });
-
       it("should export schemas object via require", function () {
         const { schemas } = require("../dist/index.js");
         expect(typeof schemas).to.equal("object");
@@ -54,31 +44,6 @@ const { execSync } = require("child_process");
       it("should export detectTests function via require", function () {
         const { detectTests } = require("../dist/index.js");
         expect(typeof detectTests).to.equal("function");
-      });
-
-      it("should export parseContent function via require", function () {
-        const { parseContent } = require("../dist/index.js");
-        expect(typeof parseContent).to.equal("function");
-      });
-
-      it("should export parseObject function via require", function () {
-        const { parseObject } = require("../dist/index.js");
-        expect(typeof parseObject).to.equal("function");
-      });
-
-      it("should export parseXmlAttributes function via require", function () {
-        const { parseXmlAttributes } = require("../dist/index.js");
-        expect(typeof parseXmlAttributes).to.equal("function");
-      });
-
-      it("should export replaceNumericVariables function via require", function () {
-        const { replaceNumericVariables } = require("../dist/index.js");
-        expect(typeof replaceNumericVariables).to.equal("function");
-      });
-
-      it("should export log function via require", function () {
-        const { log } = require("../dist/index.js");
-        expect(typeof log).to.equal("function");
       });
 
       it("should detect tests using CJS imports", async function () {
@@ -117,16 +82,6 @@ const { execSync } = require("child_process");
         expect(typeof module.transformToSchemaKey).to.equal("function");
       });
 
-      it("should export resolvePaths function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.resolvePaths).to.equal("function");
-      });
-
-      it("should export readFile function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.readFile).to.equal("function");
-      });
-
       it("should export schemas object via ESM import", async function () {
         const module = await import("../dist/index.mjs");
         expect(typeof module.schemas).to.equal("object");
@@ -149,31 +104,6 @@ const { execSync } = require("child_process");
       it("should export detectTests function via ESM import", async function () {
         const module = await import("../dist/index.mjs");
         expect(typeof module.detectTests).to.equal("function");
-      });
-
-      it("should export parseContent function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.parseContent).to.equal("function");
-      });
-
-      it("should export parseObject function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.parseObject).to.equal("function");
-      });
-
-      it("should export parseXmlAttributes function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.parseXmlAttributes).to.equal("function");
-      });
-
-      it("should export replaceNumericVariables function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.replaceNumericVariables).to.equal("function");
-      });
-
-      it("should export log function via ESM import", async function () {
-        const module = await import("../dist/index.mjs");
-        expect(typeof module.log).to.equal("function");
       });
 
       it("should detect tests using ESM imports", async function () {
@@ -268,18 +198,6 @@ const { execSync } = require("child_process");
       it("should have type definitions for validate module", function () {
         const fs = require("fs");
         const dtsPath = path.join(__dirname, "..", "dist", "validate.d.ts");
-        expect(fs.existsSync(dtsPath)).to.be.true;
-      });
-
-      it("should have type definitions for files module", function () {
-        const fs = require("fs");
-        const dtsPath = path.join(__dirname, "..", "dist", "files.d.ts");
-        expect(fs.existsSync(dtsPath)).to.be.true;
-      });
-
-      it("should have type definitions for resolvePaths module", function () {
-        const fs = require("fs");
-        const dtsPath = path.join(__dirname, "..", "dist", "resolvePaths.d.ts");
         expect(fs.existsSync(dtsPath)).to.be.true;
       });
 
