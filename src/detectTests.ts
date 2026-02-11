@@ -5,8 +5,8 @@
  */
 
 import YAML from "yaml";
-import { validate, transformToSchemaKey } from "./validate";
-import { SchemaKey } from "./schemas";
+import { validate, transformToSchemaKey } from "./validate.js";
+import { SchemaKey } from "./schemas/index.js";
 
 // Web Crypto API compatible UUID generation
 /* c8 ignore next 10 - crypto.randomUUID always available in Node.js; fallback is for browsers */

@@ -1,8 +1,7 @@
-"use strict";
 /* eslint-disable */
 /**
  * Auto-generated from stopRecord_v3.schema.json
  * Do not edit manually
  */
-Object.defineProperty(exports, "__esModule", { value: true });
+export {};
 //# sourceMappingURL=stopRecord_v3.js.map

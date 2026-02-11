@@ -1,12 +1,12 @@
-const { expect } = require("chai");
-const { detectTests } = require("../dist/index.js");
-const {
+import { expect } from "chai";
+import { detectTests } from "../dist/index.js";
+import {
   parseContent,
   parseXmlAttributes,
   parseObject,
   replaceNumericVariables,
   log,
-} = require("../dist/detectTests.js");
+} from "../dist/detectTests.js";
 
   // Standard markdown file type for testing
   const markdownFileType = {

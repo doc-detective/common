@@ -1,21 +1,10 @@
-"use strict";
 /**
  * Browser-compatible test detection utilities.
  * This module provides pure parsing functionality that works with strings/objects,
  * without dependencies on Node.js file system or path modules.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.detectTests = detectTests;
-exports.parseXmlAttributes = parseXmlAttributes;
-exports.parseObject = parseObject;
-exports.replaceNumericVariables = replaceNumericVariables;
-exports.parseContent = parseContent;
-exports.log = log;
-const yaml_1 = __importDefault(require("yaml"));
-const validate_1 = require("./validate");
+import YAML from "yaml";
+import { validate, transformToSchemaKey } from "./validate.js";
 // Web Crypto API compatible UUID generation
 /* c8 ignore next 10 - crypto.randomUUID always available in Node.js; fallback is for browsers */
 function generateUUID() {
@@ -52,7 +41,7 @@ function generateUUID() {
  * });
  * ```
  */
-async function detectTests(input) {
+export async function detectTests(input) {
     return parseContent({
         config: input.config || {},
         content: input.content,
@@ -66,7 +55,7 @@ async function detectTests(input) {
  * Example: 'testId="myTestId" detectSteps=false' becomes { testId: "myTestId", detectSteps: false }
  * Example: 'httpRequest.url="https://example.com"' becomes { httpRequest: { url: "https://example.com" } }
  */
-function parseXmlAttributes({ stringifiedObject }) {
+export function parseXmlAttributes({ stringifiedObject }) {
     if (typeof stringifiedObject !== "string") {
         return null;
     }
@@ -124,7 +113,7 @@ function parseXmlAttributes({ stringifiedObject }) {
 /**
  * Parses a JSON or YAML object from a string.
  */
-function parseObject({ stringifiedObject }) {
+export function parseObject({ stringifiedObject }) {
     if (typeof stringifiedObject === "string") {
         // First, try to parse as XML attributes
         const xmlAttrs = parseXmlAttributes({ stringifiedObject });
@@ -159,7 +148,7 @@ function parseObject({ stringifiedObject }) {
             }
             // Try to parse as YAML
             try {
-                const yaml = yaml_1.default.parse(stringifiedObject);
+                const yaml = YAML.parse(stringifiedObject);
                 return yaml;
             }
             catch (yamlError) {
@@ -172,7 +161,7 @@ function parseObject({ stringifiedObject }) {
 /**
  * Replaces numeric variables ($0, $1, etc.) in strings and objects with provided values.
  */
-function replaceNumericVariables(stringOrObjectSource, values) {
+export function replaceNumericVariables(stringOrObjectSource, values) {
     let stringOrObject = JSON.parse(JSON.stringify(stringOrObjectSource));
     if (typeof stringOrObject !== "string" && typeof stringOrObject !== "object") {
         throw new Error("Invalid stringOrObject type");
@@ -236,7 +225,7 @@ function replaceNumericVariables(stringOrObjectSource, values) {
  * @param options.fileType - File type definition containing parsing rules
  * @returns Array of parsed and validated test objects
  */
-async function parseContent({ config, content, filePath, fileType, }) {
+export async function parseContent({ config, content, filePath, fileType, }) {
     const statements = [];
     const statementTypes = ["testStart", "testEnd", "ignoreStart", "ignoreEnd", "step"];
     function findTest({ tests, testId }) {
@@ -310,7 +299,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
                         test.steps = [{ action: "goTo", url: "https://doc-detective.com" }];
                         stepsCleanup = true;
                     }
-                    const transformed = (0, validate_1.transformToSchemaKey)({
+                    const transformed = transformToSchemaKey({
                         object: test,
                         currentSchema: "test_v2",
                         targetSchema: "test_v3",
@@ -440,7 +429,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
                             }
                         }
                         // Validate step
-                        const valid = (0, validate_1.validate)({
+                        const valid = validate({
                             schemaKey: "step_v3",
                             object: step,
                             addDefaults: false,
@@ -463,7 +452,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
                 if (!parsedStep || typeof parsedStep !== 'object')
                     break;
                 let step = parsedStep;
-                const validation = (0, validate_1.validate)({
+                const validation = validate({
                     schemaKey: "step_v3",
                     object: step,
                     addDefaults: false,
@@ -484,7 +473,7 @@ async function parseContent({ config, content, filePath, fileType, }) {
     // Validate test objects
     const validatedTests = [];
     tests.forEach((test) => {
-        const validation = (0, validate_1.validate)({
+        const validation = validate({
             schemaKey: "test_v3",
             object: test,
             addDefaults: false,
@@ -517,7 +506,7 @@ function findHerettoIntegration(config, filePath) {
 /**
  * Simple browser-compatible logging function.
  */
-function log(config, level, message) {
+export function log(config, level, message) {
     const logLevels = ["silent", "error", "warn", "info", "debug"];
     // Normalize 'warning' to 'warn' for both config and message levels
     const configLevel = (config.logLevel || "info") === "warning" ? "warn" : (config.logLevel || "info");
