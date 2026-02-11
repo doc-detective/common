@@ -1136,7 +1136,7 @@ import {
 
       it("should skip detected steps inside ignore block", async function () {
         const content =
-          '<!-- test {"steps": []} -->\n' +
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->\n' +
           "<!-- test ignore -->\n" +
           "[Ignored Link](https://ignored.com)\n" +
           "<!-- test ignore end -->";
@@ -1147,12 +1147,14 @@ import {
           fileType: markdownFileType,
         });
         expect(result).to.have.lengthOf(1);
-        expect(result[0].steps).to.have.lengthOf(0);
+        // Only the step from the test definition; the detected link inside ignore block is skipped
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].goTo.url).to.equal("https://example.com");
       });
 
       it("should skip inline steps inside ignore block", async function () {
         const content =
-          '<!-- test {"steps": []} -->\n' +
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->\n' +
           "<!-- test ignore -->\n" +
           '<!-- step {"goTo": {"url": "https://ignored.com"}} -->\n' +
           "<!-- test ignore end -->";
@@ -1163,7 +1165,9 @@ import {
           fileType: markdownFileType,
         });
         expect(result).to.have.lengthOf(1);
-        expect(result[0].steps).to.have.lengthOf(0);
+        // Only the step from the test definition; the inline step inside ignore block is skipped
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].goTo.url).to.equal("https://example.com");
       });
 
       it("should handle ignoreStart and ignoreEnd", async function () {
