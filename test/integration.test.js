@@ -169,8 +169,8 @@ const { execSync } = require("child_process");
           },
         };
 
-        const cjsResult = await cjsModule.detectTests(testInput);
-        const esmResult = await esmModule.detectTests(testInput);
+        const cjsResult = await cjsModule.detectTests(structuredClone(testInput));
+        const esmResult = await esmModule.detectTests(structuredClone(testInput));
 
         expect(cjsResult).to.have.lengthOf(1);
         expect(esmResult).to.have.lengthOf(1);

@@ -358,6 +358,23 @@ const {
         expect(logged).to.equal("warn msg");
       });
 
+      it("should normalize config logLevel 'warning' to 'warn'", function () {
+        let logged = null;
+        console.warn = (msg) => { logged = msg; };
+        log({ logLevel: "warning" }, "warn", "config warning test");
+        expect(logged).to.equal("config warning test");
+      });
+
+      it("should not log when message level is silent", function () {
+        let logged = false;
+        console.error = () => { logged = true; };
+        console.warn = () => { logged = true; };
+        console.info = () => { logged = true; };
+        console.debug = () => { logged = true; };
+        log({ logLevel: "debug" }, "silent", "should not appear");
+        expect(logged).to.be.false;
+      });
+
       it("should return early for invalid config level", function () {
         let logged = false;
         console.info = () => {
@@ -1115,6 +1132,38 @@ const {
         });
         // Should be filtered out by validation
         expect(result).to.be.an("array");
+      });
+
+      it("should skip detected steps inside ignore block", async function () {
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "<!-- test ignore -->\n" +
+          "[Ignored Link](https://ignored.com)\n" +
+          "<!-- test ignore end -->";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType: markdownFileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps).to.have.lengthOf(0);
+      });
+
+      it("should skip inline steps inside ignore block", async function () {
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "<!-- test ignore -->\n" +
+          '<!-- step {"goTo": {"url": "https://ignored.com"}} -->\n' +
+          "<!-- test ignore end -->";
+        const result = await parseContent({
+          config: {},
+          content,
+          filePath: "test.md",
+          fileType: markdownFileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps).to.have.lengthOf(0);
       });
 
       it("should handle ignoreStart and ignoreEnd", async function () {
