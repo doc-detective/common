@@ -93,6 +93,33 @@
             "type": "integer",
             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
             "default": 60000
+          },
+          "scope": {
+            "type": "string",
+            "description": "Named scope for persistent code execution session. Allows reusing the same execution context across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+          },
+          "waitUntil": {
+            "type": "object",
+            "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+            "additionalProperties": false,
+            "properties": {
+              "stdio": {
+                "type": "object",
+                "description": "Standard I/O stream conditions to wait for.",
+                "additionalProperties": false,
+                "properties": {
+                  "stdout": {
+                    "type": "string",
+                    "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                  },
+                  "stderr": {
+                    "type": "string",
+                    "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                  }
+                }
+              }
+            }
           }
         },
         "title": "Run code (detailed)"
@@ -132,6 +159,26 @@
       "directory": "output",
       "maxVariation": 0.1,
       "overwrite": "aboveVariation"
+    },
+    {
+      "language": "python",
+      "code": "import time\nwhile True:\n    print('Running')\n    time.sleep(1)",
+      "scope": "background-process",
+      "waitUntil": {
+        "stdio": {
+          "stdout": "Running"
+        }
+      }
+    },
+    {
+      "language": "javascript",
+      "code": "const http = require('http');\nconst server = http.createServer();\nserver.listen(3000, () => console.log('Server started'));",
+      "scope": "http-server",
+      "waitUntil": {
+        "stdio": {
+          "stdout": "/Server started/"
+        }
+      }
     }
   ]
 }

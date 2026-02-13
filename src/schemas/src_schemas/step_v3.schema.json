@@ -297,6 +297,23 @@
           "$ref": "#/components/schemas/common"
         },
         {
+          "type": "object",
+          "required": ["terminateScope"],
+          "properties": {
+            "terminateScope": {
+              "$ref": "terminateScope_v3.schema.json#"
+            }
+          },
+          "title": "terminateScope"
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/common"
+        },
+        {
           "title": "loadVariables",
           "type": "object",
           "required": ["loadVariables"],

@@ -86,6 +86,33 @@
           "type": "integer",
           "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
           "default": 60000
+        },
+        "scope": {
+          "type": "string",
+          "description": "Named scope for persistent terminal session. Allows reusing the same terminal across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+        },
+        "waitUntil": {
+          "type": "object",
+          "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+          "additionalProperties": false,
+          "properties": {
+            "stdio": {
+              "type": "object",
+              "description": "Standard I/O stream conditions to wait for.",
+              "additionalProperties": false,
+              "properties": {
+                "stdout": {
+                  "type": "string",
+                  "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                },
+                "stderr": {
+                  "type": "string",
+                  "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                }
+              }
+            }
+          }
         }
       },
       "title": "Run shell command (detailed)"
@@ -176,6 +203,33 @@
             "type": "integer",
             "description": "Max time in milliseconds the command is allowed to run. If the command runs longer than this, the step fails.",
             "default": 60000
+          },
+          "scope": {
+            "type": "string",
+            "description": "Named scope for persistent terminal session. Allows reusing the same terminal across multiple steps. Scope names must be alphanumeric with hyphens or underscores (1-64 characters).",
+            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+          },
+          "waitUntil": {
+            "type": "object",
+            "description": "Conditions to wait for before considering the step complete. Waits for patterns to appear in stdout or stderr output. Useful for long-running processes or waiting for specific output.",
+            "additionalProperties": false,
+            "properties": {
+              "stdio": {
+                "type": "object",
+                "description": "Standard I/O stream conditions to wait for.",
+                "additionalProperties": false,
+                "properties": {
+                  "stdout": {
+                    "type": "string",
+                    "description": "Pattern to match in stdout. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                  },
+                  "stderr": {
+                    "type": "string",
+                    "description": "Pattern to match in stderr. Supports strings and regular expressions. To use a regex, the string must start and end with a forward slash, like `/pattern/flags`."
+                  }
+                }
+              }
+            }
           }
         },
         "title": "Run shell command (detailed)"
@@ -231,6 +285,32 @@
       "directory": "output",
       "maxVariation": 0.1,
       "overwrite": "aboveVariation"
+    },
+    {
+      "command": "npm",
+      "args": [
+        "run",
+        "dev"
+      ],
+      "scope": "dev-server",
+      "waitUntil": {
+        "stdio": {
+          "stdout": "Server listening on"
+        }
+      }
+    },
+    {
+      "command": "tail",
+      "args": [
+        "-f",
+        "/var/log/app.log"
+      ],
+      "scope": "log-monitor",
+      "waitUntil": {
+        "stdio": {
+          "stdout": "/ERROR.*critical/"
+        }
+      }
     }
   ]
 }
