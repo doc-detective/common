@@ -258,6 +258,15 @@ import {
         expect(result).to.deep.equal({ outer: { inner: "value" } });
       });
 
+      it("should delete nested object keys when variables don't exist", function () {
+        const result = replaceNumericVariables(
+          { outer: { inner: "$1" }, keep: "$0" },
+          { 0: "found" }
+        );
+        // Inner key is deleted, leaving outer as empty object
+        expect(result).to.deep.equal({ outer: {}, keep: "found" });
+      });
+
       it("should delete object keys when variables don't exist", function () {
         const result = replaceNumericVariables(
           { url: "$0", missing: "$1" },
@@ -1338,6 +1347,43 @@ import {
                     method: "GET",
                     request: {
                       headers: "no-colon-header\nContent-Type: application/json",
+                    },
+                    response: {},
+                    statusCodes: [200],
+                  },
+                },
+              ],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->\n' +
+          "API: https://api.example.com";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+      });
+
+      it("should skip httpRequest headers with empty value after colon", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              regex: ["API:\\s*(\\S+)"],
+              actions: [
+                {
+                  httpRequest: {
+                    url: "$1",
+                    method: "GET",
+                    request: {
+                      headers: "EmptyVal:\nContent-Type: application/json",
                     },
                     response: {},
                     statusCodes: [200],
