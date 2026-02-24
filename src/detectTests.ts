@@ -248,7 +248,12 @@ export function replaceNumericVariables(
   if (typeof stringOrObject === "object") {
     Object.keys(stringOrObject).forEach((key) => {
       if (typeof stringOrObject[key] === "object") {
-        stringOrObject[key] = replaceNumericVariables(stringOrObject[key], values);
+        const result = replaceNumericVariables(stringOrObject[key], values);
+        if (result === null) {
+          delete stringOrObject[key];
+        } else {
+          stringOrObject[key] = result;
+        }
       } else if (typeof stringOrObject[key] === "string") {
         const matches = stringOrObject[key].match(/\$[0-9]+/g);
         if (matches) {
