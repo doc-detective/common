@@ -560,7 +560,8 @@
                       "markdown",
                       "asciidoc",
                       "html",
-                      "dita"
+                      "dita",
+                      "rst"
                     ]
                   },
                   {
@@ -590,7 +591,9 @@
                         "enum": [
                           "markdown",
                           "asciidoc",
-                          "html"
+                          "html",
+                          "dita",
+                          "rst"
                         ]
                       },
                       "extensions": {
@@ -720,10 +723,90 @@
                         "minItems": 1,
                         "items": {
                           "type": "object",
+                          "anyOf": [
+                            {
+                              "required": [
+                                "regex"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "ast"
+                              ]
+                            }
+                          ],
                           "properties": {
                             "name": {
                               "description": "Name of the markup definition",
                               "type": "string"
+                            },
+                            "ast": {
+                              "description": "AST-based node matching. When combined with regex, AST narrows candidates, regex filters content (AND).",
+                              "type": "object",
+                              "properties": {
+                                "nodeType": {
+                                  "description": "AST node type(s) to match.",
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "minItems": 1
+                                    }
+                                  ]
+                                },
+                                "attributes": {
+                                  "description": "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "boolean"
+                                      },
+                                      {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        },
+                                        "minItems": 1
+                                      }
+                                    ]
+                                  }
+                                },
+                                "content": {
+                                  "description": "Match against node text content. Boolean true = any content exists.",
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "boolean"
+                                    }
+                                  ]
+                                },
+                                "children": {
+                                  "description": "Child node matchers (recursive). All must match.",
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                },
+                                "extract": {
+                                  "description": "Map $1/$2 variables to node property paths (e.g., {\"$1\": \"attributes.lang\", \"$2\": \"value\"}).",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "title": "AST node match"
                             },
                             "regex": {
                               "description": "Regular expressions to match the markup type.",
@@ -8821,12 +8904,160 @@
             },
             "title": "Environment details"
           },
+          "astNodeMatch": {
+            "type": "object",
+            "description": "AST node matching criteria.",
+            "properties": {
+              "nodeType": {
+                "description": "AST node type(s) to match.",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                ]
+              },
+              "attributes": {
+                "description": "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1
+                    }
+                  ]
+                }
+              },
+              "content": {
+                "description": "Match against node text content. Boolean true = any content exists.",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "children": {
+                "description": "Child node matchers (recursive). All must match.",
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "extract": {
+                "description": "Map $1/$2 variables to node property paths (e.g., {\"$1\": \"attributes.lang\", \"$2\": \"value\"}).",
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "title": "AST node match"
+          },
           "markupDefinition": {
             "type": "object",
+            "anyOf": [
+              {
+                "required": [
+                  "regex"
+                ]
+              },
+              {
+                "required": [
+                  "ast"
+                ]
+              }
+            ],
             "properties": {
               "name": {
                 "description": "Name of the markup definition",
                 "type": "string"
+              },
+              "ast": {
+                "description": "AST-based node matching. When combined with regex, AST narrows candidates, regex filters content (AND).",
+                "type": "object",
+                "properties": {
+                  "nodeType": {
+                    "description": "AST node type(s) to match.",
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "minItems": 1
+                      }
+                    ]
+                  },
+                  "attributes": {
+                    "description": "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "minItems": 1
+                        }
+                      ]
+                    }
+                  },
+                  "content": {
+                    "description": "Match against node text content. Boolean true = any content exists.",
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "children": {
+                    "description": "Child node matchers (recursive). All must match.",
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "extract": {
+                    "description": "Map $1/$2 variables to node property paths (e.g., {\"$1\": \"attributes.lang\", \"$2\": \"value\"}).",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "title": "AST node match"
               },
               "regex": {
                 "description": "Regular expressions to match the markup type.",
@@ -16377,6 +16608,12 @@
         },
         {
           "fileTypes": [
+            "markdown",
+            "rst"
+          ]
+        },
+        {
+          "fileTypes": [
             {
               "extends": "markdown",
               "extensions": [
@@ -16470,6 +16707,95 @@
         },
         {
           "processDitaMaps": true
+        },
+        {
+          "fileTypes": [
+            {
+              "extends": "rst",
+              "extensions": [
+                "rst",
+                "rest"
+              ]
+            }
+          ]
+        },
+        {
+          "fileTypes": [
+            {
+              "extends": "dita",
+              "extensions": [
+                "dita",
+                "ditamap"
+              ]
+            }
+          ]
+        },
+        {
+          "fileTypes": [
+            {
+              "name": "Markdown with AST",
+              "extensions": [
+                "md"
+              ],
+              "markup": [
+                {
+                  "name": "codeBlock",
+                  "ast": {
+                    "nodeType": "code",
+                    "attributes": {
+                      "lang": [
+                        "bash",
+                        "python",
+                        "javascript"
+                      ]
+                    },
+                    "extract": {
+                      "$1": "attributes.lang",
+                      "$2": "value"
+                    }
+                  },
+                  "actions": [
+                    {
+                      "runCode": {
+                        "language": "$1",
+                        "code": "$2"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "fileTypes": [
+            {
+              "name": "AST and regex combined",
+              "extensions": [
+                "md"
+              ],
+              "markup": [
+                {
+                  "name": "filteredCode",
+                  "ast": {
+                    "nodeType": "code",
+                    "content": true,
+                    "extract": {
+                      "$1": "value"
+                    }
+                  },
+                  "regex": "doc-detective",
+                  "actions": [
+                    {
+                      "runShell": {
+                        "command": "$1"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "integrations": {

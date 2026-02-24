@@ -3,6 +3,7 @@
  * This module provides pure parsing functionality that works with strings/objects,
  * without dependencies on Node.js file system or path modules.
  */
+import type { AstMatchConfig } from "./ast/types.js";
 export interface FileType {
     name?: string;
     extensions: string[];
@@ -14,7 +15,9 @@ export interface FileType {
         step?: string[];
     };
     markup?: Array<{
-        regex: string[];
+        name?: string;
+        regex?: string[];
+        ast?: AstMatchConfig;
         actions?: (string | Record<string, any>)[];
         batchMatches?: boolean;
     }>;

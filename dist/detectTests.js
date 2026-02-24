@@ -5,6 +5,7 @@
  */
 import YAML from "yaml";
 import { validate, transformToSchemaKey } from "./validate.js";
+import { getAstFormat, matchNodes, getNodeTextContent, getOrParseAst } from "./ast/index.js";
 // Web Crypto API compatible UUID generation
 /* c8 ignore next 10 - crypto.randomUUID always available in Node.js; fallback is for browsers */
 function generateUUID() {
@@ -252,28 +253,129 @@ export async function parseContent({ config, content, filePath, fileType, }) {
         });
     });
     if (config.detectSteps && fileType.markup) {
+        // Determine AST format once if any markup has ast config
+        const hasAst = fileType.markup.some((m) => m.ast);
+        let astTree = null;
+        if (hasAst) {
+            // Determine format from file extension
+            const ext = filePath.split(".").pop() || "";
+            const format = getAstFormat(ext);
+            if (format) {
+                astTree = getOrParseAst(content, format, filePath);
+            }
+        }
         fileType.markup.forEach((markup) => {
-            markup.regex.forEach((pattern) => {
-                const regex = new RegExp(pattern, "g");
-                const matches = [...content.matchAll(regex)];
-                if (matches.length > 0 && markup.batchMatches) {
-                    const combinedMatch = {
-                        1: matches.map((match) => match[1] || match[0]).join("\n"),
-                        type: "detectedStep",
-                        markup: markup,
-                        sortIndex: Math.min(...matches.map((match) => match.index)),
-                    };
-                    statements.push(combinedMatch);
-                }
-                else if (matches.length > 0) {
-                    matches.forEach((match) => {
-                        match.type = "detectedStep";
-                        match.markup = markup;
-                        match.sortIndex = match[1] ? match.index + match[1].length : match.index;
+            const hasAstConfig = !!markup.ast;
+            const hasRegexConfig = !!(markup.regex && markup.regex.length > 0);
+            if (hasAstConfig && astTree) {
+                // AST-based matching
+                const astMatches = matchNodes(astTree, markup.ast);
+                if (hasRegexConfig) {
+                    // Case 1: AST + regex (AND) — AST narrows candidates, regex filters content
+                    astMatches.forEach((astMatch) => {
+                        const nodeText = getNodeTextContent(astMatch.node);
+                        // Run each regex against the node's text content
+                        for (const pattern of markup.regex) {
+                            const regex = new RegExp(pattern, "g");
+                            const regexMatches = [...nodeText.matchAll(regex)];
+                            regexMatches.forEach((regexMatch) => {
+                                // Merge: regex captures override AST extracted values
+                                const merged = { ...astMatch.extracted };
+                                for (let i = 0; i < regexMatch.length; i++) {
+                                    if (regexMatch[i] !== undefined) {
+                                        merged[String(i)] = regexMatch[i];
+                                    }
+                                }
+                                const statement = {
+                                    ...merged,
+                                    0: regexMatch[0],
+                                    1: regexMatch[1] || regexMatch[0],
+                                    type: "detectedStep",
+                                    markup: markup,
+                                    sortIndex: astMatch.sortIndex,
+                                };
+                                statements.push(statement);
+                            });
+                        }
                     });
-                    statements.push(...matches);
                 }
-            });
+                else {
+                    // Case 2: AST only
+                    if (astMatches.length > 0 && markup.batchMatches) {
+                        // Batch: combine extracted values into one statement
+                        const batchContent = astMatches
+                            .map((m) => {
+                            // Use $2 if available (commonly the value), else node text
+                            return m.extracted["$2"] || getNodeTextContent(m.node);
+                        })
+                            .join("\n");
+                        // Convert AST extract keys ($1, $2) to numeric indices
+                        const merged = {};
+                        if (astMatches[0]) {
+                            for (const [key, val] of Object.entries(astMatches[0].extracted)) {
+                                const numKey = key.replace("$", "");
+                                merged[numKey] = val;
+                            }
+                        }
+                        merged["1"] = batchContent;
+                        const statement = {
+                            ...merged,
+                            0: batchContent,
+                            1: batchContent,
+                            type: "detectedStep",
+                            markup: markup,
+                            sortIndex: Math.min(...astMatches.map((m) => m.sortIndex)),
+                        };
+                        statements.push(statement);
+                    }
+                    else {
+                        astMatches.forEach((astMatch) => {
+                            // Convert extracted keys ($1, $2) to numeric indices for replaceNumericVariables
+                            const merged = {};
+                            for (const [key, val] of Object.entries(astMatch.extracted)) {
+                                const numKey = key.replace("$", "");
+                                merged[numKey] = val;
+                            }
+                            const nodeText = getNodeTextContent(astMatch.node);
+                            if (!merged["0"])
+                                merged["0"] = nodeText;
+                            if (!merged["1"])
+                                merged["1"] = merged["1"] || nodeText;
+                            const statement = {
+                                ...merged,
+                                type: "detectedStep",
+                                markup: markup,
+                                sortIndex: astMatch.sortIndex,
+                            };
+                            statements.push(statement);
+                        });
+                    }
+                }
+            }
+            else if (hasRegexConfig) {
+                // Case 3: Regex only (existing behavior)
+                markup.regex.forEach((pattern) => {
+                    const regex = new RegExp(pattern, "g");
+                    const matches = [...content.matchAll(regex)];
+                    if (matches.length > 0 && markup.batchMatches) {
+                        const combinedMatch = {
+                            1: matches.map((match) => match[1] || match[0]).join("\n"),
+                            type: "detectedStep",
+                            markup: markup,
+                            sortIndex: Math.min(...matches.map((match) => match.index)),
+                        };
+                        statements.push(combinedMatch);
+                    }
+                    else if (matches.length > 0) {
+                        matches.forEach((match) => {
+                            match.type = "detectedStep";
+                            match.markup = markup;
+                            match.sortIndex = match[1] ? match.index + match[1].length : match.index;
+                        });
+                        statements.push(...matches);
+                    }
+                });
+            }
         });
     }
     // Sort statements by index

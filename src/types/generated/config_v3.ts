@@ -8,7 +8,7 @@
  * Load environment variables from the specified `.env` file.
  */
 export type LoadVariables = string;
-export type FileTypePredefined = "markdown" | "asciidoc" | "html" | "dita";
+export type FileTypePredefined = "markdown" | "asciidoc" | "html" | "dita" | "rst";
 export type FileTypeCustom =
   | {
       [k: string]: unknown;

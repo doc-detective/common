@@ -30,7 +30,12 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // dist/index.js
 var index_exports = {};
 __export(index_exports, {
+  clearAstCache: () => clearAstCache,
   detectTests: () => detectTests,
+  getAstFormat: () => getAstFormat,
+  getNodeTextContent: () => getNodeTextContent,
+  matchNodes: () => matchNodes,
+  parseToAst: () => parseToAst,
   schemas: () => schemas,
   transformToSchemaKey: () => transformToSchemaKey,
   validate: () => validate
@@ -985,7 +990,8 @@ var schemas_default = {
                     "markdown",
                     "asciidoc",
                     "html",
-                    "dita"
+                    "dita",
+                    "rst"
                   ]
                 },
                 {
@@ -1015,7 +1021,9 @@ var schemas_default = {
                       enum: [
                         "markdown",
                         "asciidoc",
-                        "html"
+                        "html",
+                        "dita",
+                        "rst"
                       ]
                     },
                     extensions: {
@@ -1145,10 +1153,90 @@ var schemas_default = {
                       minItems: 1,
                       items: {
                         type: "object",
+                        anyOf: [
+                          {
+                            required: [
+                              "regex"
+                            ]
+                          },
+                          {
+                            required: [
+                              "ast"
+                            ]
+                          }
+                        ],
                         properties: {
                           name: {
                             description: "Name of the markup definition",
                             type: "string"
+                          },
+                          ast: {
+                            description: "AST-based node matching. When combined with regex, AST narrows candidates, regex filters content (AND).",
+                            type: "object",
+                            properties: {
+                              nodeType: {
+                                description: "AST node type(s) to match.",
+                                anyOf: [
+                                  {
+                                    type: "string"
+                                  },
+                                  {
+                                    type: "array",
+                                    items: {
+                                      type: "string"
+                                    },
+                                    minItems: 1
+                                  }
+                                ]
+                              },
+                              attributes: {
+                                description: "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                                type: "object",
+                                additionalProperties: {
+                                  anyOf: [
+                                    {
+                                      type: "string"
+                                    },
+                                    {
+                                      type: "boolean"
+                                    },
+                                    {
+                                      type: "array",
+                                      items: {
+                                        type: "string"
+                                      },
+                                      minItems: 1
+                                    }
+                                  ]
+                                }
+                              },
+                              content: {
+                                description: "Match against node text content. Boolean true = any content exists.",
+                                anyOf: [
+                                  {
+                                    type: "string"
+                                  },
+                                  {
+                                    type: "boolean"
+                                  }
+                                ]
+                              },
+                              children: {
+                                description: "Child node matchers (recursive). All must match.",
+                                type: "array",
+                                items: {
+                                  type: "object"
+                                }
+                              },
+                              extract: {
+                                description: 'Map $1/$2 variables to node property paths (e.g., {"$1": "attributes.lang", "$2": "value"}).',
+                                type: "object",
+                                additionalProperties: {
+                                  type: "string"
+                                }
+                              }
+                            },
+                            title: "AST node match"
                           },
                           regex: {
                             description: "Regular expressions to match the markup type.",
@@ -9246,12 +9334,160 @@ var schemas_default = {
           },
           title: "Environment details"
         },
+        astNodeMatch: {
+          type: "object",
+          description: "AST node matching criteria.",
+          properties: {
+            nodeType: {
+              description: "AST node type(s) to match.",
+              anyOf: [
+                {
+                  type: "string"
+                },
+                {
+                  type: "array",
+                  items: {
+                    type: "string"
+                  },
+                  minItems: 1
+                }
+              ]
+            },
+            attributes: {
+              description: "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+              type: "object",
+              additionalProperties: {
+                anyOf: [
+                  {
+                    type: "string"
+                  },
+                  {
+                    type: "boolean"
+                  },
+                  {
+                    type: "array",
+                    items: {
+                      type: "string"
+                    },
+                    minItems: 1
+                  }
+                ]
+              }
+            },
+            content: {
+              description: "Match against node text content. Boolean true = any content exists.",
+              anyOf: [
+                {
+                  type: "string"
+                },
+                {
+                  type: "boolean"
+                }
+              ]
+            },
+            children: {
+              description: "Child node matchers (recursive). All must match.",
+              type: "array",
+              items: {
+                type: "object"
+              }
+            },
+            extract: {
+              description: 'Map $1/$2 variables to node property paths (e.g., {"$1": "attributes.lang", "$2": "value"}).',
+              type: "object",
+              additionalProperties: {
+                type: "string"
+              }
+            }
+          },
+          title: "AST node match"
+        },
         markupDefinition: {
           type: "object",
+          anyOf: [
+            {
+              required: [
+                "regex"
+              ]
+            },
+            {
+              required: [
+                "ast"
+              ]
+            }
+          ],
           properties: {
             name: {
               description: "Name of the markup definition",
               type: "string"
+            },
+            ast: {
+              description: "AST-based node matching. When combined with regex, AST narrows candidates, regex filters content (AND).",
+              type: "object",
+              properties: {
+                nodeType: {
+                  description: "AST node type(s) to match.",
+                  anyOf: [
+                    {
+                      type: "string"
+                    },
+                    {
+                      type: "array",
+                      items: {
+                        type: "string"
+                      },
+                      minItems: 1
+                    }
+                  ]
+                },
+                attributes: {
+                  description: "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                  type: "object",
+                  additionalProperties: {
+                    anyOf: [
+                      {
+                        type: "string"
+                      },
+                      {
+                        type: "boolean"
+                      },
+                      {
+                        type: "array",
+                        items: {
+                          type: "string"
+                        },
+                        minItems: 1
+                      }
+                    ]
+                  }
+                },
+                content: {
+                  description: "Match against node text content. Boolean true = any content exists.",
+                  anyOf: [
+                    {
+                      type: "string"
+                    },
+                    {
+                      type: "boolean"
+                    }
+                  ]
+                },
+                children: {
+                  description: "Child node matchers (recursive). All must match.",
+                  type: "array",
+                  items: {
+                    type: "object"
+                  }
+                },
+                extract: {
+                  description: 'Map $1/$2 variables to node property paths (e.g., {"$1": "attributes.lang", "$2": "value"}).',
+                  type: "object",
+                  additionalProperties: {
+                    type: "string"
+                  }
+                }
+              },
+              title: "AST node match"
             },
             regex: {
               description: "Regular expressions to match the markup type.",
@@ -16802,6 +17038,12 @@ var schemas_default = {
       },
       {
         fileTypes: [
+          "markdown",
+          "rst"
+        ]
+      },
+      {
+        fileTypes: [
           {
             extends: "markdown",
             extensions: [
@@ -16895,6 +17137,95 @@ var schemas_default = {
       },
       {
         processDitaMaps: true
+      },
+      {
+        fileTypes: [
+          {
+            extends: "rst",
+            extensions: [
+              "rst",
+              "rest"
+            ]
+          }
+        ]
+      },
+      {
+        fileTypes: [
+          {
+            extends: "dita",
+            extensions: [
+              "dita",
+              "ditamap"
+            ]
+          }
+        ]
+      },
+      {
+        fileTypes: [
+          {
+            name: "Markdown with AST",
+            extensions: [
+              "md"
+            ],
+            markup: [
+              {
+                name: "codeBlock",
+                ast: {
+                  nodeType: "code",
+                  attributes: {
+                    lang: [
+                      "bash",
+                      "python",
+                      "javascript"
+                    ]
+                  },
+                  extract: {
+                    $1: "attributes.lang",
+                    $2: "value"
+                  }
+                },
+                actions: [
+                  {
+                    runCode: {
+                      language: "$1",
+                      code: "$2"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        fileTypes: [
+          {
+            name: "AST and regex combined",
+            extensions: [
+              "md"
+            ],
+            markup: [
+              {
+                name: "filteredCode",
+                ast: {
+                  nodeType: "code",
+                  content: true,
+                  extract: {
+                    $1: "value"
+                  }
+                },
+                regex: "doc-detective",
+                actions: [
+                  {
+                    runShell: {
+                      command: "$1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         integrations: {
@@ -21604,7 +21935,8 @@ var schemas_default = {
                         "markdown",
                         "asciidoc",
                         "html",
-                        "dita"
+                        "dita",
+                        "rst"
                       ]
                     },
                     {
@@ -21634,7 +21966,9 @@ var schemas_default = {
                           enum: [
                             "markdown",
                             "asciidoc",
-                            "html"
+                            "html",
+                            "dita",
+                            "rst"
                           ]
                         },
                         extensions: {
@@ -21764,10 +22098,90 @@ var schemas_default = {
                           minItems: 1,
                           items: {
                             type: "object",
+                            anyOf: [
+                              {
+                                required: [
+                                  "regex"
+                                ]
+                              },
+                              {
+                                required: [
+                                  "ast"
+                                ]
+                              }
+                            ],
                             properties: {
                               name: {
                                 description: "Name of the markup definition",
                                 type: "string"
+                              },
+                              ast: {
+                                description: "AST-based node matching. When combined with regex, AST narrows candidates, regex filters content (AND).",
+                                type: "object",
+                                properties: {
+                                  nodeType: {
+                                    description: "AST node type(s) to match.",
+                                    anyOf: [
+                                      {
+                                        type: "string"
+                                      },
+                                      {
+                                        type: "array",
+                                        items: {
+                                          type: "string"
+                                        },
+                                        minItems: 1
+                                      }
+                                    ]
+                                  },
+                                  attributes: {
+                                    description: "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                                    type: "object",
+                                    additionalProperties: {
+                                      anyOf: [
+                                        {
+                                          type: "string"
+                                        },
+                                        {
+                                          type: "boolean"
+                                        },
+                                        {
+                                          type: "array",
+                                          items: {
+                                            type: "string"
+                                          },
+                                          minItems: 1
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  content: {
+                                    description: "Match against node text content. Boolean true = any content exists.",
+                                    anyOf: [
+                                      {
+                                        type: "string"
+                                      },
+                                      {
+                                        type: "boolean"
+                                      }
+                                    ]
+                                  },
+                                  children: {
+                                    description: "Child node matchers (recursive). All must match.",
+                                    type: "array",
+                                    items: {
+                                      type: "object"
+                                    }
+                                  },
+                                  extract: {
+                                    description: 'Map $1/$2 variables to node property paths (e.g., {"$1": "attributes.lang", "$2": "value"}).',
+                                    type: "object",
+                                    additionalProperties: {
+                                      type: "string"
+                                    }
+                                  }
+                                },
+                                title: "AST node match"
                               },
                               regex: {
                                 description: "Regular expressions to match the markup type.",
@@ -29865,12 +30279,160 @@ var schemas_default = {
               },
               title: "Environment details"
             },
+            astNodeMatch: {
+              type: "object",
+              description: "AST node matching criteria.",
+              properties: {
+                nodeType: {
+                  description: "AST node type(s) to match.",
+                  anyOf: [
+                    {
+                      type: "string"
+                    },
+                    {
+                      type: "array",
+                      items: {
+                        type: "string"
+                      },
+                      minItems: 1
+                    }
+                  ]
+                },
+                attributes: {
+                  description: "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                  type: "object",
+                  additionalProperties: {
+                    anyOf: [
+                      {
+                        type: "string"
+                      },
+                      {
+                        type: "boolean"
+                      },
+                      {
+                        type: "array",
+                        items: {
+                          type: "string"
+                        },
+                        minItems: 1
+                      }
+                    ]
+                  }
+                },
+                content: {
+                  description: "Match against node text content. Boolean true = any content exists.",
+                  anyOf: [
+                    {
+                      type: "string"
+                    },
+                    {
+                      type: "boolean"
+                    }
+                  ]
+                },
+                children: {
+                  description: "Child node matchers (recursive). All must match.",
+                  type: "array",
+                  items: {
+                    type: "object"
+                  }
+                },
+                extract: {
+                  description: 'Map $1/$2 variables to node property paths (e.g., {"$1": "attributes.lang", "$2": "value"}).',
+                  type: "object",
+                  additionalProperties: {
+                    type: "string"
+                  }
+                }
+              },
+              title: "AST node match"
+            },
             markupDefinition: {
               type: "object",
+              anyOf: [
+                {
+                  required: [
+                    "regex"
+                  ]
+                },
+                {
+                  required: [
+                    "ast"
+                  ]
+                }
+              ],
               properties: {
                 name: {
                   description: "Name of the markup definition",
                   type: "string"
+                },
+                ast: {
+                  description: "AST-based node matching. When combined with regex, AST narrows candidates, regex filters content (AND).",
+                  type: "object",
+                  properties: {
+                    nodeType: {
+                      description: "AST node type(s) to match.",
+                      anyOf: [
+                        {
+                          type: "string"
+                        },
+                        {
+                          type: "array",
+                          items: {
+                            type: "string"
+                          },
+                          minItems: 1
+                        }
+                      ]
+                    },
+                    attributes: {
+                      description: "Attribute matchers. String for exact match, /pattern/ for regex, array for any-of, boolean for exists-check.",
+                      type: "object",
+                      additionalProperties: {
+                        anyOf: [
+                          {
+                            type: "string"
+                          },
+                          {
+                            type: "boolean"
+                          },
+                          {
+                            type: "array",
+                            items: {
+                              type: "string"
+                            },
+                            minItems: 1
+                          }
+                        ]
+                      }
+                    },
+                    content: {
+                      description: "Match against node text content. Boolean true = any content exists.",
+                      anyOf: [
+                        {
+                          type: "string"
+                        },
+                        {
+                          type: "boolean"
+                        }
+                      ]
+                    },
+                    children: {
+                      description: "Child node matchers (recursive). All must match.",
+                      type: "array",
+                      items: {
+                        type: "object"
+                      }
+                    },
+                    extract: {
+                      description: 'Map $1/$2 variables to node property paths (e.g., {"$1": "attributes.lang", "$2": "value"}).',
+                      type: "object",
+                      additionalProperties: {
+                        type: "string"
+                      }
+                    }
+                  },
+                  title: "AST node match"
                 },
                 regex: {
                   description: "Regular expressions to match the markup type.",
@@ -37421,6 +37983,12 @@ var schemas_default = {
           },
           {
             fileTypes: [
+              "markdown",
+              "rst"
+            ]
+          },
+          {
+            fileTypes: [
               {
                 extends: "markdown",
                 extensions: [
@@ -37514,6 +38082,95 @@ var schemas_default = {
           },
           {
             processDitaMaps: true
+          },
+          {
+            fileTypes: [
+              {
+                extends: "rst",
+                extensions: [
+                  "rst",
+                  "rest"
+                ]
+              }
+            ]
+          },
+          {
+            fileTypes: [
+              {
+                extends: "dita",
+                extensions: [
+                  "dita",
+                  "ditamap"
+                ]
+              }
+            ]
+          },
+          {
+            fileTypes: [
+              {
+                name: "Markdown with AST",
+                extensions: [
+                  "md"
+                ],
+                markup: [
+                  {
+                    name: "codeBlock",
+                    ast: {
+                      nodeType: "code",
+                      attributes: {
+                        lang: [
+                          "bash",
+                          "python",
+                          "javascript"
+                        ]
+                      },
+                      extract: {
+                        $1: "attributes.lang",
+                        $2: "value"
+                      }
+                    },
+                    actions: [
+                      {
+                        runCode: {
+                          language: "$1",
+                          code: "$2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            fileTypes: [
+              {
+                name: "AST and regex combined",
+                extensions: [
+                  "md"
+                ],
+                markup: [
+                  {
+                    name: "filteredCode",
+                    ast: {
+                      nodeType: "code",
+                      content: true,
+                      extract: {
+                        $1: "value"
+                      }
+                    },
+                    regex: "doc-detective",
+                    actions: [
+                      {
+                        runShell: {
+                          command: "$1"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           },
           {
             integrations: {
@@ -121856,6 +122513,555 @@ function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = 
 
 // dist/detectTests.js
 var import_yaml = __toESM(require("yaml"), 1);
+
+// dist/ast/parsers/markdown.js
+var import_unified = require("unified");
+var import_remark_parse = __toESM(require("remark-parse"), 1);
+function normalizeNode(node) {
+  const attributes = {};
+  if (node.lang != null)
+    attributes.lang = node.lang;
+  if (node.meta != null)
+    attributes.meta = node.meta;
+  if (node.url != null)
+    attributes.url = node.url;
+  if (node.title != null)
+    attributes.title = node.title;
+  if (node.alt != null)
+    attributes.alt = node.alt;
+  if (node.depth != null)
+    attributes.depth = node.depth;
+  if (node.ordered != null)
+    attributes.ordered = node.ordered;
+  if (node.identifier != null)
+    attributes.identifier = node.identifier;
+  if (node.label != null)
+    attributes.label = node.label;
+  const result = {
+    type: node.type,
+    attributes
+  };
+  if (node.value != null) {
+    result.value = node.value;
+  }
+  if (node.position) {
+    result.position = {
+      start: {
+        line: node.position.start.line,
+        column: node.position.start.column,
+        offset: node.position.start.offset
+      },
+      end: {
+        line: node.position.end.line,
+        column: node.position.end.column,
+        offset: node.position.end.offset
+      }
+    };
+  }
+  if (node.children && Array.isArray(node.children)) {
+    result.children = node.children.map(normalizeNode);
+  }
+  return result;
+}
+function parseMarkdown(content) {
+  try {
+    const tree = (0, import_unified.unified)().use(import_remark_parse.default).parse(content);
+    return normalizeNode(tree);
+  } catch {
+    return null;
+  }
+}
+
+// dist/ast/parsers/html.js
+var import_unified2 = require("unified");
+var import_rehype_parse = __toESM(require("rehype-parse"), 1);
+function normalizeNode2(node) {
+  const attributes = {};
+  if (node.tagName) {
+    attributes.tagName = node.tagName;
+  }
+  if (node.properties) {
+    for (const [key, value] of Object.entries(node.properties)) {
+      attributes[key] = value;
+    }
+  }
+  const result = {
+    type: node.type,
+    attributes
+  };
+  if (node.value != null) {
+    result.value = node.value;
+  }
+  if (node.position) {
+    result.position = {
+      start: {
+        line: node.position.start.line,
+        column: node.position.start.column,
+        offset: node.position.start.offset
+      },
+      end: {
+        line: node.position.end.line,
+        column: node.position.end.column,
+        offset: node.position.end.offset
+      }
+    };
+  }
+  if (node.children && Array.isArray(node.children)) {
+    result.children = node.children.map(normalizeNode2);
+  }
+  return result;
+}
+function parseHtml(content) {
+  try {
+    const tree = (0, import_unified2.unified)().use(import_rehype_parse.default, { fragment: true }).parse(content);
+    return normalizeNode2(tree);
+  } catch {
+    return null;
+  }
+}
+
+// dist/ast/parsers/xml.js
+var import_xmldom = require("@xmldom/xmldom");
+function domToAst(node) {
+  if (node.nodeType === 1) {
+    const attributes = {};
+    attributes.tagName = node.tagName || node.nodeName;
+    if (node.attributes) {
+      for (let i = 0; i < node.attributes.length; i++) {
+        const attr = node.attributes[i];
+        attributes[attr.name] = attr.value;
+      }
+    }
+    const children = [];
+    if (node.childNodes) {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        const child = domToAst(node.childNodes[i]);
+        if (child)
+          children.push(child);
+      }
+    }
+    const result = {
+      type: "element",
+      attributes
+    };
+    if (children.length > 0) {
+      result.children = children;
+    }
+    return result;
+  }
+  if (node.nodeType === 3) {
+    const text = node.nodeValue || "";
+    if (!text.trim())
+      return null;
+    return {
+      type: "text",
+      attributes: {},
+      value: text
+    };
+  }
+  if (node.nodeType === 7) {
+    return {
+      type: "processing-instruction",
+      attributes: { target: node.target },
+      value: node.data || void 0
+    };
+  }
+  if (node.nodeType === 8) {
+    return {
+      type: "comment",
+      attributes: {},
+      value: node.nodeValue || ""
+    };
+  }
+  if (node.nodeType === 9) {
+    const children = [];
+    if (node.childNodes) {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        const child = domToAst(node.childNodes[i]);
+        if (child)
+          children.push(child);
+      }
+    }
+    if (children.length === 1)
+      return children[0];
+    return {
+      type: "root",
+      attributes: {},
+      children
+    };
+  }
+  return null;
+}
+function parseXml(content) {
+  try {
+    const doc = new import_xmldom.DOMParser().parseFromString(content, "text/xml");
+    return domToAst(doc);
+  } catch {
+    return null;
+  }
+}
+
+// dist/ast/parsers/asciidoc.js
+var import_asciidoctor = __toESM(require("asciidoctor"), 1);
+var Asciidoctor = (0, import_asciidoctor.default)();
+function blockToAst(block) {
+  const context = block.getContext?.() || "unknown";
+  const attributes = {};
+  const title = block.getTitle?.();
+  if (title != null)
+    attributes.title = title;
+  const level = block.getLevel?.();
+  if (level != null)
+    attributes.level = level;
+  const id = block.getId?.();
+  if (id != null)
+    attributes.id = id;
+  const style = block.getStyle?.();
+  if (style != null)
+    attributes.style = style;
+  if (context === "document") {
+    const doctitle = block.getDoctitle?.();
+    if (doctitle != null)
+      attributes.doctitle = doctitle;
+  }
+  if (context === "listing") {
+    const lang = block.getAttribute?.("language");
+    if (lang != null)
+      attributes.language = lang;
+  }
+  if (context === "image") {
+    const target = block.getAttribute?.("target");
+    if (target != null)
+      attributes.target = target;
+    const alt = block.getAttribute?.("alt");
+    if (alt != null)
+      attributes.alt = alt;
+  }
+  const result = {
+    type: context,
+    attributes
+  };
+  const contentModel = block.getContentModel?.();
+  if (contentModel === "verbatim") {
+    const source = block.getSource?.();
+    if (source != null)
+      result.value = source;
+  }
+  const children = [];
+  const blocks = block.getBlocks?.();
+  if (blocks && blocks.length > 0) {
+    for (const child of blocks) {
+      children.push(blockToAst(child));
+    }
+  }
+  if (contentModel === "simple") {
+    const html = block.convert?.();
+    if (html) {
+      const htmlTree = parseHtml(html);
+      if (htmlTree && htmlTree.children) {
+        children.push(...htmlTree.children);
+      }
+    }
+  }
+  if (children.length > 0) {
+    result.children = children;
+  }
+  return result;
+}
+function parseAsciidoc(content) {
+  try {
+    const doc = Asciidoctor.load(content, { safe: "secure" });
+    return blockToAst(doc);
+  } catch {
+    return null;
+  }
+}
+
+// dist/ast/parsers/rst.js
+var import_restructured = __toESM(require("restructured"), 1);
+var rstParse = import_restructured.default.default?.parse ?? import_restructured.default.parse;
+function parseReferenceText(raw) {
+  const match = /^(.*?)\s*<([^>]+)>$/.exec(raw);
+  if (match) {
+    return { text: match[1].trim(), url: match[2] };
+  }
+  return { text: raw, url: raw };
+}
+function normalizeNode3(node) {
+  const type = node.type || "unknown";
+  const attributes = {};
+  if (node.depth != null)
+    attributes.depth = node.depth;
+  if (type === "directive" && node.directive) {
+    return normalizeDirective(node);
+  }
+  if (type === "reference") {
+    return normalizeReference(node);
+  }
+  const result = {
+    type,
+    attributes
+  };
+  if (node.value != null) {
+    result.value = node.value;
+  }
+  if (node.children && node.children.length > 0) {
+    result.children = node.children.map(normalizeNode3);
+  }
+  return result;
+}
+function normalizeDirective(node) {
+  const directive = node.directive;
+  const attributes = {};
+  const children = node.children || [];
+  if (directive === "code-block") {
+    let language;
+    let code = "";
+    for (const child of children) {
+      if (child.type === "text") {
+        if (!language) {
+          language = child.value.trim();
+        } else {
+          code += child.value;
+        }
+      }
+    }
+    if (language)
+      attributes.language = language;
+    const result2 = {
+      type: "code-block",
+      attributes
+    };
+    if (code)
+      result2.value = code;
+    return result2;
+  }
+  if (directive === "image") {
+    for (const child of children) {
+      if (child.type === "text") {
+        const val = child.value.trim();
+        const optMatch = /^:(\w+):\s*(.*)$/.exec(val);
+        if (optMatch) {
+          attributes[optMatch[1]] = optMatch[2].trim();
+        } else if (!attributes.target) {
+          attributes.target = val;
+        }
+      }
+    }
+    return {
+      type: "image",
+      attributes
+    };
+  }
+  attributes.directive = directive;
+  const result = {
+    type: "directive",
+    attributes
+  };
+  if (children.length > 0) {
+    result.children = children.map(normalizeNode3);
+  }
+  return result;
+}
+function normalizeReference(node) {
+  const attributes = {};
+  const children = node.children || [];
+  let rawText = "";
+  for (const child of children) {
+    if (child.type === "text" && child.value) {
+      rawText += child.value;
+    }
+  }
+  const { text, url } = parseReferenceText(rawText);
+  attributes.url = url;
+  const result = {
+    type: "reference",
+    attributes
+  };
+  result.children = [
+    {
+      type: "text",
+      attributes: {},
+      value: text
+    }
+  ];
+  return result;
+}
+function parseRst(content) {
+  try {
+    const tree = rstParse(content);
+    return normalizeNode3(tree);
+  } catch {
+    return null;
+  }
+}
+
+// dist/ast/parsers/index.js
+var parserMap = {
+  markdown: parseMarkdown,
+  html: parseHtml,
+  xml: parseXml,
+  asciidoc: parseAsciidoc,
+  rst: parseRst
+};
+var formatMap = {
+  md: "markdown",
+  markdown: "markdown",
+  mdx: "markdown",
+  html: "html",
+  htm: "html",
+  xml: "xml",
+  dita: "xml",
+  ditamap: "xml",
+  adoc: "asciidoc",
+  asciidoc: "asciidoc",
+  asc: "asciidoc",
+  rst: "rst",
+  rest: "rst"
+};
+function getAstFormat(fileTypeOrExt) {
+  const lower = fileTypeOrExt.toLowerCase().replace(/^\./, "");
+  return formatMap[lower] ?? null;
+}
+function parseToAst(content, format) {
+  const parser = parserMap[format];
+  if (!parser)
+    return null;
+  return parser(content);
+}
+
+// dist/ast/matcher.js
+function matchesPattern(value, pattern) {
+  if (typeof pattern === "boolean") {
+    if (pattern) {
+      return value !== void 0 && value !== null && value !== "";
+    }
+    return value === void 0 || value === null || value === "";
+  }
+  if (Array.isArray(pattern)) {
+    const strValue = String(value ?? "");
+    return pattern.some((p) => matchesPattern(strValue, p));
+  }
+  if (typeof pattern === "string") {
+    const regexMatch = /^\/(.+)\/([gimsuy]*)$/.exec(pattern);
+    if (regexMatch) {
+      const re = new RegExp(regexMatch[1], regexMatch[2]);
+      return re.test(String(value ?? ""));
+    }
+    return String(value ?? "") === pattern;
+  }
+  return false;
+}
+function getNodeTextContent(node) {
+  if (node.value != null)
+    return node.value;
+  if (node.children) {
+    return node.children.map(getNodeTextContent).join("");
+  }
+  return "";
+}
+function nodeMatches(node, config) {
+  if (config.nodeType !== void 0) {
+    if (typeof config.nodeType === "string") {
+      if (node.type !== config.nodeType)
+        return false;
+    } else if (Array.isArray(config.nodeType)) {
+      if (!config.nodeType.includes(node.type))
+        return false;
+    }
+  }
+  if (config.attributes) {
+    for (const [key, pattern] of Object.entries(config.attributes)) {
+      const value = node.attributes[key];
+      if (!matchesPattern(value, pattern))
+        return false;
+    }
+  }
+  if (config.content !== void 0) {
+    const text = getNodeTextContent(node);
+    if (!matchesPattern(text, config.content))
+      return false;
+  }
+  if (config.children && config.children.length > 0) {
+    if (!node.children || node.children.length === 0)
+      return false;
+    for (const childConfig of config.children) {
+      const hasMatch = node.children.some((child) => nodeMatches(child, childConfig));
+      if (!hasMatch)
+        return false;
+    }
+  }
+  return true;
+}
+function getByPath(node, path) {
+  const parts = path.split(".");
+  let current = node;
+  for (const part of parts) {
+    if (current === void 0 || current === null)
+      return void 0;
+    current = current[part];
+  }
+  return current;
+}
+function extractValues(node, extractConfig) {
+  const result = {};
+  for (const [variable, path] of Object.entries(extractConfig)) {
+    const value = getByPath(node, path);
+    if (value !== void 0 && value !== null) {
+      result[variable] = String(value);
+    }
+  }
+  return result;
+}
+function matchNodes(tree, config) {
+  const results = [];
+  function walk(node) {
+    if (nodeMatches(node, config)) {
+      const extracted = config.extract ? extractValues(node, config.extract) : {};
+      results.push({
+        node,
+        position: node.position,
+        extracted,
+        sortIndex: node.position?.start.offset ?? results.length
+      });
+    }
+    if (node.children) {
+      for (const child of node.children) {
+        walk(child);
+      }
+    }
+  }
+  walk(tree);
+  return results;
+}
+
+// dist/ast/cache.js
+function djb2Hash(str) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i) | 0;
+  }
+  return hash.toString(36);
+}
+var cache = /* @__PURE__ */ new Map();
+function getOrParseAst(content, format, cacheKey) {
+  const key = cacheKey ?? format;
+  const contentHash = djb2Hash(content);
+  const existing = cache.get(key);
+  if (existing && existing.contentHash === contentHash) {
+    return existing.tree;
+  }
+  const tree = parseToAst(content, format);
+  if (tree) {
+    cache.set(key, { contentHash, tree });
+  }
+  return tree;
+}
+function clearAstCache() {
+  cache.clear();
+}
+
+// dist/detectTests.js
 function generateUUID() {
   if (typeof crypto !== "undefined" && crypto.randomUUID) {
     return crypto.randomUUID();
@@ -122030,27 +123236,111 @@ async function parseContent({ config, content, filePath, fileType }) {
     });
   });
   if (config.detectSteps && fileType.markup) {
+    const hasAst = fileType.markup.some((m) => m.ast);
+    let astTree = null;
+    if (hasAst) {
+      const ext = filePath.split(".").pop() || "";
+      const format = getAstFormat(ext);
+      if (format) {
+        astTree = getOrParseAst(content, format, filePath);
+      }
+    }
     fileType.markup.forEach((markup) => {
-      markup.regex.forEach((pattern) => {
-        const regex = new RegExp(pattern, "g");
-        const matches = [...content.matchAll(regex)];
-        if (matches.length > 0 && markup.batchMatches) {
-          const combinedMatch = {
-            1: matches.map((match) => match[1] || match[0]).join("\n"),
-            type: "detectedStep",
-            markup,
-            sortIndex: Math.min(...matches.map((match) => match.index))
-          };
-          statements.push(combinedMatch);
-        } else if (matches.length > 0) {
-          matches.forEach((match) => {
-            match.type = "detectedStep";
-            match.markup = markup;
-            match.sortIndex = match[1] ? match.index + match[1].length : match.index;
+      const hasAstConfig = !!markup.ast;
+      const hasRegexConfig = !!(markup.regex && markup.regex.length > 0);
+      if (hasAstConfig && astTree) {
+        const astMatches = matchNodes(astTree, markup.ast);
+        if (hasRegexConfig) {
+          astMatches.forEach((astMatch) => {
+            const nodeText = getNodeTextContent(astMatch.node);
+            for (const pattern of markup.regex) {
+              const regex = new RegExp(pattern, "g");
+              const regexMatches = [...nodeText.matchAll(regex)];
+              regexMatches.forEach((regexMatch) => {
+                const merged = { ...astMatch.extracted };
+                for (let i = 0; i < regexMatch.length; i++) {
+                  if (regexMatch[i] !== void 0) {
+                    merged[String(i)] = regexMatch[i];
+                  }
+                }
+                const statement = {
+                  ...merged,
+                  0: regexMatch[0],
+                  1: regexMatch[1] || regexMatch[0],
+                  type: "detectedStep",
+                  markup,
+                  sortIndex: astMatch.sortIndex
+                };
+                statements.push(statement);
+              });
+            }
           });
-          statements.push(...matches);
+        } else {
+          if (astMatches.length > 0 && markup.batchMatches) {
+            const batchContent = astMatches.map((m) => {
+              return m.extracted["$2"] || getNodeTextContent(m.node);
+            }).join("\n");
+            const merged = {};
+            if (astMatches[0]) {
+              for (const [key, val] of Object.entries(astMatches[0].extracted)) {
+                const numKey = key.replace("$", "");
+                merged[numKey] = val;
+              }
+            }
+            merged["1"] = batchContent;
+            const statement = {
+              ...merged,
+              0: batchContent,
+              1: batchContent,
+              type: "detectedStep",
+              markup,
+              sortIndex: Math.min(...astMatches.map((m) => m.sortIndex))
+            };
+            statements.push(statement);
+          } else {
+            astMatches.forEach((astMatch) => {
+              const merged = {};
+              for (const [key, val] of Object.entries(astMatch.extracted)) {
+                const numKey = key.replace("$", "");
+                merged[numKey] = val;
+              }
+              const nodeText = getNodeTextContent(astMatch.node);
+              if (!merged["0"])
+                merged["0"] = nodeText;
+              if (!merged["1"])
+                merged["1"] = merged["1"] || nodeText;
+              const statement = {
+                ...merged,
+                type: "detectedStep",
+                markup,
+                sortIndex: astMatch.sortIndex
+              };
+              statements.push(statement);
+            });
+          }
         }
-      });
+      } else if (hasRegexConfig) {
+        markup.regex.forEach((pattern) => {
+          const regex = new RegExp(pattern, "g");
+          const matches = [...content.matchAll(regex)];
+          if (matches.length > 0 && markup.batchMatches) {
+            const combinedMatch = {
+              1: matches.map((match) => match[1] || match[0]).join("\n"),
+              type: "detectedStep",
+              markup,
+              sortIndex: Math.min(...matches.map((match) => match.index))
+            };
+            statements.push(combinedMatch);
+          } else if (matches.length > 0) {
+            matches.forEach((match) => {
+              match.type = "detectedStep";
+              match.markup = markup;
+              match.sortIndex = match[1] ? match.index + match[1].length : match.index;
+            });
+            statements.push(...matches);
+          }
+        });
+      }
     });
   }
   statements.sort((a, b) => a.sortIndex - b.sortIndex);
@@ -122276,7 +123566,12 @@ function log(config, level, message) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  clearAstCache,
   detectTests,
+  getAstFormat,
+  getNodeTextContent,
+  matchNodes,
+  parseToAst,
   schemas,
   transformToSchemaKey,
   validate

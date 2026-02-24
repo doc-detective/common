@@ -1421,6 +1421,397 @@ import {
       });
     });
 
+    // ========== AST-based detection ==========
+    describe("AST-based markup detection", function () {
+      it("should detect code blocks using AST-only markup", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "codeBlock",
+              ast: {
+                nodeType: "code",
+                attributes: { lang: ["bash", "python", "javascript"] },
+                extract: { "$1": "attributes.lang", "$2": "value" },
+              },
+              actions: [{ runCode: { language: "$1", code: "$2" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "```bash\necho hello\n```";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].runCode.language).to.equal("bash");
+        expect(result[0].steps[0].runCode.code).to.equal("echo hello");
+      });
+
+      it("should detect AST+regex combined (AND operation)", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "filteredCode",
+              ast: {
+                nodeType: "code",
+                content: true,
+                extract: { "$1": "value" },
+              },
+              regex: ["(doc-detective.*)"],
+              actions: [{ runShell: { command: "$1" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "```bash\ndoc-detective run\n```\n" +
+          "```bash\nls -la\n```";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // Only the code block containing "doc-detective" should match
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].runShell.command).to.equal("doc-detective run");
+      });
+
+      it("should preserve regex-only behavior (regression)", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              regex: ["\\[([^\\]]+)\\]\\(([^)]+)\\)"],
+              actions: [{ checkLink: { url: "$2" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "[Click me](https://example.com)";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps.length).to.be.greaterThan(0);
+        expect(result[0].steps[0].checkLink.url).to.equal("https://example.com");
+      });
+
+      it("should handle AST with batchMatches", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "batchCode",
+              ast: {
+                nodeType: "code",
+                attributes: { lang: "bash" },
+                extract: { "$1": "attributes.lang", "$2": "value" },
+              },
+              batchMatches: true,
+              actions: [{ runShell: { command: "$1" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "```bash\necho one\n```\n" +
+          "```bash\necho two\n```";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // Batch combines into one step
+        expect(result[0].steps).to.have.lengthOf(1);
+        // $1 is overridden to the joined content of all matched nodes
+        expect(result[0].steps[0].runShell.command).to.equal("echo one\necho two");
+      });
+
+      it("should gracefully handle unknown format (no AST parser available)", async function () {
+        const fileType = {
+          extensions: ["txt"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "codeBlock",
+              ast: {
+                nodeType: "code",
+                extract: { "$1": "value" },
+              },
+              actions: [{ runShell: { command: "$1" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->\n' +
+          "some content";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.txt",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // Only the seeded step; AST parsing is skipped for unknown format
+        expect(result[0].steps).to.have.lengthOf(1);
+      });
+
+      it("should skip AST markup when markup has ast but no tree (unsupported format)", async function () {
+        const fileType = {
+          extensions: ["custom"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "astOnly",
+              ast: { nodeType: "code" },
+              actions: [{ runShell: { command: "echo" } }],
+            },
+            {
+              regex: ["\\[([^\\]]+)\\]\\(([^)]+)\\)"],
+              actions: [{ checkLink: { url: "$2" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "[Link](https://example.com)";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.custom",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // Only regex-based markup matches; AST markup skipped
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].checkLink.url).to.equal("https://example.com");
+      });
+
+      it("should handle AST extract mapping to action templates", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "linkDetect",
+              ast: {
+                nodeType: "link",
+                extract: { "$1": "attributes.url" },
+              },
+              actions: [{ checkLink: { url: "$1" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "[Example](https://example.com)";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].checkLink.url).to.equal("https://example.com");
+      });
+
+      it("should skip detected AST steps inside ignore block", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+            ignoreStart: ["<!-- test ignore -->"],
+            ignoreEnd: ["<!-- test ignore end -->"],
+          },
+          markup: [
+            {
+              name: "codeBlock",
+              ast: {
+                nodeType: "code",
+                attributes: { lang: "bash" },
+                extract: { "$1": "attributes.lang", "$2": "value" },
+              },
+              actions: [{ runCode: { language: "$1", code: "$2" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->\n' +
+          "<!-- test ignore -->\n" +
+          "```bash\necho ignored\n```\n" +
+          "<!-- test ignore end -->\n" +
+          "```bash\necho visible\n```";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // Should have the seeded step + the visible code block, not the ignored one
+        expect(result[0].steps).to.have.lengthOf(2);
+        expect(result[0].steps[1].runCode.code).to.equal("echo visible");
+      });
+
+      it("should handle AST markup with no extract (uses node text content)", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "headingDetect",
+              ast: {
+                nodeType: "heading",
+              },
+              actions: [{ find: "$1" }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "# My Heading";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // The heading text should be extracted as $1
+        expect(result[0].steps).to.have.lengthOf(1);
+        expect(result[0].steps[0].find).to.equal("My Heading");
+      });
+
+      it("should handle filePath with no extension gracefully", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "codeBlock",
+              ast: { nodeType: "code" },
+              actions: [{ runShell: { command: "$1" } }],
+            },
+          ],
+        };
+        const content = '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->';
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        // AST is skipped since no format can be determined; only seeded step remains
+        expect(result[0].steps).to.have.lengthOf(1);
+      });
+
+      it("should handle AST+regex where regex has no capture group", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "codeUrlDetect",
+              ast: {
+                nodeType: "code",
+                extract: { "$1": "value" },
+              },
+              regex: ["https://[^ ]+"],
+              actions: [{ checkLink: { url: "$1" } }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "```bash\nhttps://example.com\n```";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps).to.have.lengthOf(1);
+        // $1 from AST extract overrides regex match, but url comes from AST extract
+        expect(result[0].steps[0].checkLink.url).to.equal("https://example.com");
+      });
+
+      it("should handle AST batchMatches without $2 in extract", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              name: "batchHeadings",
+              ast: {
+                nodeType: "heading",
+                extract: { "$1": "attributes.depth" },
+              },
+              batchMatches: true,
+              actions: [{ find: "$1" }],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": []} -->\n' +
+          "# First\n" +
+          "## Second";
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        expect(result).to.have.lengthOf(1);
+        expect(result[0].steps).to.have.lengthOf(1);
+        // $1 is overridden to combined text (no $2 so uses getNodeTextContent)
+        expect(result[0].steps[0].find).to.equal("First\nSecond");
+      });
+    });
+
     // ========== detectTests ==========
     describe("detectTests", function () {
       it("should call parseContent with default config", async function () {
