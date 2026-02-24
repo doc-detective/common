@@ -1,6 +1,5 @@
-(async () => {
-  const { expect } = await import("chai");
-  const { validate, transformToSchemaKey } = require("../dist/validate");
+import { expect } from "chai";
+import { validate, transformToSchemaKey } from "../dist/validate.js";
 
   describe("validate", function () {
     describe("input validation", function () {
@@ -204,7 +203,7 @@
     describe("same schema transformation", function () {
       it("should return object unchanged when currentSchema equals targetSchema", function () {
         const object = { goTo: { url: "https://example.com" } };
-        
+
         const result = transformToSchemaKey({
           currentSchema: "step_v3",
           targetSchema: "step_v3",
@@ -1103,4 +1102,3 @@
       });
     });
   });
-})();

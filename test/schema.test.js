@@ -1,5 +1,5 @@
-const { validate, schemas } = require("../dist/index");
-const assert = require("assert");
+import { validate, schemas } from "../dist/index.js";
+import assert from "assert";
 
 // Loop through JSON schemas
 for (const [key, value] of Object.entries(schemas)) {

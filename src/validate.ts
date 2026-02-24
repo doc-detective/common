@@ -1,4 +1,4 @@
-import { schemas, SchemaKey } from "./schemas";
+import { schemas, SchemaKey } from "./schemas/index.js";
 import Ajv, { ValidateFunction } from "ajv";
 // Ajv extra formats: https://ajv.js.org/packages/ajv-formats.html
 import addFormats from "ajv-formats";
@@ -6,9 +6,23 @@ import addFormats from "ajv-formats";
 import addKeywords from "ajv-keywords";
 // Ajv custom errors: https://ajv.js.org/packages/ajv-errors.html
 import addErrors from "ajv-errors";
-import { randomUUID } from "crypto";
+import dynamicDefaultsDef from "ajv-keywords/dist/definitions/dynamicDefaults.js";
+
+// Browser-compatible UUID function
+/* c8 ignore next 10 - crypto.randomUUID always available in Node.js; fallback is for browsers */
+function getRandomUUID(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 
 // Configure base Ajv
+// @ts-expect-error - CJS/ESM interop: Ajv constructor is callable at runtime
 const ajv = new Ajv({
   strictSchema: false,
   useDefaults: true,
@@ -18,13 +32,15 @@ const ajv = new Ajv({
 });
 
 // Enable `uuid` dynamic default
-// @ts-ignore - ajv-keywords has incomplete types for dynamicDefaults
-const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
-def.DEFAULTS.uuid = () => randomUUID;
+// @ts-expect-error - CJS/ESM interop: dynamicDefaultsDef.DEFAULTS exists at runtime
+dynamicDefaultsDef.DEFAULTS.uuid = (_args: any) => getRandomUUID;
 
 // Enhance Ajv
+// @ts-expect-error - CJS/ESM interop: ajv plugin functions are callable at runtime
 addFormats(ajv);
+// @ts-expect-error - CJS/ESM interop: ajv plugin functions are callable at runtime
 addKeywords(ajv);
+// @ts-expect-error - CJS/ESM interop: ajv plugin functions are callable at runtime
 addErrors(ajv);
 
 // Add all schemas from `schema` object.

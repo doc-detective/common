@@ -1,21 +1,27 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.validate = validate;
-exports.transformToSchemaKey = transformToSchemaKey;
-const schemas_1 = require("./schemas");
-const ajv_1 = __importDefault(require("ajv"));
+import { schemas } from "./schemas/index.js";
+import Ajv from "ajv";
 // Ajv extra formats: https://ajv.js.org/packages/ajv-formats.html
-const ajv_formats_1 = __importDefault(require("ajv-formats"));
+import addFormats from "ajv-formats";
 // Ajv extra keywords: https://ajv.js.org/packages/ajv-keywords.html
-const ajv_keywords_1 = __importDefault(require("ajv-keywords"));
+import addKeywords from "ajv-keywords";
 // Ajv custom errors: https://ajv.js.org/packages/ajv-errors.html
-const ajv_errors_1 = __importDefault(require("ajv-errors"));
-const crypto_1 = require("crypto");
+import addErrors from "ajv-errors";
+import dynamicDefaultsDef from "ajv-keywords/dist/definitions/dynamicDefaults.js";
+// Browser-compatible UUID function
+/* c8 ignore next 10 - crypto.randomUUID always available in Node.js; fallback is for browsers */
+function getRandomUUID() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
 // Configure base Ajv
-const ajv = new ajv_1.default({
+// @ts-expect-error - CJS/ESM interop: Ajv constructor is callable at runtime
+const ajv = new Ajv({
     strictSchema: false,
     useDefaults: true,
     allErrors: true,
@@ -23,15 +29,17 @@ const ajv = new ajv_1.default({
     coerceTypes: true,
 });
 // Enable `uuid` dynamic default
-// @ts-ignore - ajv-keywords has incomplete types for dynamicDefaults
-const def = require("ajv-keywords/dist/definitions/dynamicDefaults");
-def.DEFAULTS.uuid = () => crypto_1.randomUUID;
+// @ts-expect-error - CJS/ESM interop: dynamicDefaultsDef.DEFAULTS exists at runtime
+dynamicDefaultsDef.DEFAULTS.uuid = (_args) => getRandomUUID;
 // Enhance Ajv
-(0, ajv_formats_1.default)(ajv);
-(0, ajv_keywords_1.default)(ajv);
-(0, ajv_errors_1.default)(ajv);
+// @ts-expect-error - CJS/ESM interop: ajv plugin functions are callable at runtime
+addFormats(ajv);
+// @ts-expect-error - CJS/ESM interop: ajv plugin functions are callable at runtime
+addKeywords(ajv);
+// @ts-expect-error - CJS/ESM interop: ajv plugin functions are callable at runtime
+addErrors(ajv);
 // Add all schemas from `schema` object.
-for (const [key, value] of Object.entries(schemas_1.schemas)) {
+for (const [key, value] of Object.entries(schemas)) {
     ajv.addSchema(value, key);
 }
 // Define the specific schemas that have compatibility mappings
@@ -78,7 +86,7 @@ function escapeRegExp(string) {
  *
  * @throws {Error} If {@link schemaKey} or {@link object} is missing.
  */
-function validate({ schemaKey, object, addDefaults = true, }) {
+export function validate({ schemaKey, object, addDefaults = true, }) {
     if (!schemaKey) {
         throw new Error("Schema key is required.");
     }
@@ -166,7 +174,7 @@ function validate({ schemaKey, object, addDefaults = true, }) {
  * @returns The transformed object conforming to the target schema.
  * @throws {Error} If transformation between the specified schemas is not supported or if the transformed object fails validation.
  */
-function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = {}, }) {
+export function transformToSchemaKey({ currentSchema = "", targetSchema = "", object = {}, }) {
     // Check if the current schema is the same as the target schema
     if (currentSchema === targetSchema) {
         return object;
