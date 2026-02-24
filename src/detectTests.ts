@@ -176,6 +176,7 @@ export function parseObject({ stringifiedObject }: { stringifiedObject: string }
     // Try to parse as JSON
     try {
       const json = JSON.parse(stringifiedObject);
+      if (typeof json !== "object" || json === null || Array.isArray(json)) return null;
       return json;
     } catch (jsonError) {
       // JSON parsing failed - check if this looks like escaped JSON
@@ -187,12 +188,16 @@ export function parseObject({ stringifiedObject }: { stringifiedObject: string }
       if (looksLikeEscapedJson) {
         try {
           const stringToParse = JSON.parse('"' + stringifiedObject + '"');
-          return JSON.parse(stringToParse);
+          const result = JSON.parse(stringToParse);
+          if (typeof result !== "object" || result === null || Array.isArray(result)) return null;
+          return result;
         } catch {
           // Fallback to simple quote replacement
           try {
             const unescaped = stringifiedObject.replace(/\\"/g, '"');
-            return JSON.parse(unescaped);
+            const result = JSON.parse(unescaped);
+            if (typeof result !== "object" || result === null || Array.isArray(result)) return null;
+            return result;
           } catch {
             // Continue to YAML parsing
           }
@@ -202,6 +207,7 @@ export function parseObject({ stringifiedObject }: { stringifiedObject: string }
       // Try to parse as YAML
       try {
         const yaml = YAML.parse(stringifiedObject);
+        if (typeof yaml !== "object" || yaml === null || Array.isArray(yaml)) return null;
         return yaml;
       } catch (yamlError) {
         return null;
@@ -321,7 +327,12 @@ export async function parseContent({
       return;
 
     fileType.inlineStatements[statementType as keyof typeof fileType.inlineStatements]!.forEach((statementRegex) => {
-      const regex = new RegExp(statementRegex, "g");
+      let regex: RegExp;
+      try {
+        regex = new RegExp(statementRegex, "g");
+      } catch {
+        return;
+      }
       const matches = [...content.matchAll(regex)];
       matches.forEach((match: any) => {
         match.type = statementType;
@@ -334,7 +345,12 @@ export async function parseContent({
   if (config.detectSteps && fileType.markup) {
     fileType.markup.forEach((markup) => {
       markup.regex.forEach((pattern) => {
-        const regex = new RegExp(pattern, "g");
+        let regex: RegExp;
+        try {
+          regex = new RegExp(pattern, "g");
+        } catch {
+          return;
+        }
         const matches = [...content.matchAll(regex)];
         if (matches.length > 0 && markup.batchMatches) {
           const combinedMatch: any = {

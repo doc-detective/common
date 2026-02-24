@@ -8,6 +8,7 @@ import {
   log,
 } from "../dist/detectTests.js";
 
+  describe("detectTests module", function () {
   // Standard markdown file type for testing
   const markdownFileType = {
     extensions: ["md"],
@@ -30,8 +31,6 @@ import {
   const minimalFileType = {
     extensions: ["txt"],
   };
-
-  describe("detectTests module", function () {
     // ========== parseXmlAttributes ==========
     describe("parseXmlAttributes", function () {
       it("should return null for non-string input", function () {
@@ -171,13 +170,6 @@ import {
         expect(result).to.deep.equal({ key: "value" });
       });
 
-      it("should fallback to simple unescaping for escaped JSON", function () {
-        // This string looks like escaped JSON but double-parse fails
-        const escaped = '{\\"key\\": \\"value\\"}';
-        const result = parseObject({ stringifiedObject: escaped });
-        expect(result).to.not.be.null;
-      });
-
       it("should parse YAML as fallback", function () {
         const result = parseObject({
           stringifiedObject: "goTo:\n  url: https://example.com",
@@ -208,6 +200,21 @@ import {
         expect(result).to.deep.equal({ key: "val\\ue" });
       });
 
+      it("should return null for escaped JSON that double-parses to array", function () {
+        // Input looks like escaped JSON array: [\"a\"]
+        // Double-parse: JSON.parse('"[\"a\"]"') -> '["a"]' -> JSON.parse -> ["a"] (array)
+        const input = '[\\"a\\"]';
+        const result = parseObject({ stringifiedObject: input });
+        expect(result).to.be.null;
+      });
+
+      it("should return null for escaped JSON that simple-unescapes to array", function () {
+        // Input: [\"val\\ue\"] - double parse fails on \u escape, simple unescape yields ["val\\ue"] (array)
+        const input = '[\\"val\\\\ue\\"]';
+        const result = parseObject({ stringifiedObject: input });
+        expect(result).to.be.null;
+      });
+
       it("should handle escaped JSON where both parse attempts fail", function () {
         // Input looks like escaped JSON but neither parse succeeds
         const input = '{\\"broken json\\"}';
@@ -216,9 +223,19 @@ import {
         expect(result).to.not.be.undefined;
       });
 
-      it("should parse JSON array", function () {
+      it("should return null for JSON array", function () {
         const result = parseObject({ stringifiedObject: "[1, 2, 3]" });
-        expect(result).to.deep.equal([1, 2, 3]);
+        expect(result).to.be.null;
+      });
+
+      it("should return null for JSON primitive", function () {
+        const result = parseObject({ stringifiedObject: '"just a string"' });
+        expect(result).to.be.null;
+      });
+
+      it("should return null for YAML array", function () {
+        const result = parseObject({ stringifiedObject: "- item1\n- item2" });
+        expect(result).to.be.null;
       });
     });
 
@@ -1102,7 +1119,7 @@ import {
         expect(result[0].steps).to.have.lengthOf(1);
       });
 
-      it("should skip replaceNumericVariables returning string", async function () {
+      it("should skip invalid string action names", async function () {
         const fileType = {
           extensions: ["md"],
           inlineStatements: {
@@ -1464,6 +1481,51 @@ import {
         });
         // The step regex matches the literal string; statement[0] is the full match
         expect(result).to.be.an("array");
+      });
+
+      it("should handle malformed regex in inlineStatements gracefully", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+            step: ["[invalid(regex"],
+          },
+        };
+        const content =
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->';
+        const result = await parseContent({
+          config: {},
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        // Malformed regex is skipped; test still processes normally
+        expect(result).to.have.lengthOf(1);
+      });
+
+      it("should handle malformed regex in markup gracefully", async function () {
+        const fileType = {
+          extensions: ["md"],
+          inlineStatements: {
+            testStart: ["<!-- test (.*?)-->"],
+          },
+          markup: [
+            {
+              regex: ["[invalid(regex"],
+              actions: ["checkLink"],
+            },
+          ],
+        };
+        const content =
+          '<!-- test {"steps": [{"goTo": {"url": "https://example.com"}}]} -->';
+        const result = await parseContent({
+          config: { detectSteps: true },
+          content,
+          filePath: "test.md",
+          fileType,
+        });
+        // Malformed regex is skipped; test still processes normally
+        expect(result).to.have.lengthOf(1);
       });
     });
 
