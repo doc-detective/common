@@ -742,6 +742,104 @@
                                             }
                                         }
                                     ]
+                                },
+                                "apps": {
+                                    "description": "Native applications to run tests on.",
+                                    "anyOf": [
+                                        {
+                                            "type": "string",
+                                            "description": "Path to the application executable or app identifier."
+                                        },
+                                        {
+                                            "type": "object",
+                                            "description": "Native application configuration.",
+                                            "required": [
+                                                "path"
+                                            ],
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "path": {
+                                                    "type": "string",
+                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                },
+                                                "arguments": {
+                                                    "type": "string",
+                                                    "description": "Command-line arguments to pass to the application."
+                                                },
+                                                "workingDir": {
+                                                    "type": "string",
+                                                    "description": "Working directory for the application."
+                                                },
+                                                "window": {
+                                                    "type": "object",
+                                                    "description": "Application window dimensions.",
+                                                    "additionalProperties": false,
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Width of the window in pixels."
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Height of the window in pixels."
+                                                        }
+                                                    },
+                                                    "title": "App Window"
+                                                }
+                                            },
+                                            "title": "App"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Path to the application executable or app identifier."
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "description": "Native application configuration.",
+                                                        "required": [
+                                                            "path"
+                                                        ],
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "path": {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                            },
+                                                            "arguments": {
+                                                                "type": "string",
+                                                                "description": "Command-line arguments to pass to the application."
+                                                            },
+                                                            "workingDir": {
+                                                                "type": "string",
+                                                                "description": "Working directory for the application."
+                                                            },
+                                                            "window": {
+                                                                "type": "object",
+                                                                "description": "Application window dimensions.",
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "width": {
+                                                                        "type": "integer",
+                                                                        "description": "Width of the window in pixels."
+                                                                    },
+                                                                    "height": {
+                                                                        "type": "integer",
+                                                                        "description": "Height of the window in pixels."
+                                                                    }
+                                                                },
+                                                                "title": "App Window"
+                                                            }
+                                                        },
+                                                        "title": "App"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             "components": {
@@ -823,6 +921,49 @@
                                             }
                                         },
                                         "title": "Browser"
+                                    },
+                                    "appPath": {
+                                        "type": "string",
+                                        "description": "Path to the application executable or app identifier."
+                                    },
+                                    "app": {
+                                        "type": "object",
+                                        "description": "Native application configuration.",
+                                        "required": [
+                                            "path"
+                                        ],
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "path": {
+                                                "type": "string",
+                                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                            },
+                                            "arguments": {
+                                                "type": "string",
+                                                "description": "Command-line arguments to pass to the application."
+                                            },
+                                            "workingDir": {
+                                                "type": "string",
+                                                "description": "Working directory for the application."
+                                            },
+                                            "window": {
+                                                "type": "object",
+                                                "description": "Application window dimensions.",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "width": {
+                                                        "type": "integer",
+                                                        "description": "Width of the window in pixels."
+                                                    },
+                                                    "height": {
+                                                        "type": "integer",
+                                                        "description": "Height of the window in pixels."
+                                                    }
+                                                },
+                                                "title": "App Window"
+                                            }
+                                        },
+                                        "title": "App"
                                     }
                                 }
                             },
@@ -915,6 +1056,19 @@
                                                 "width": 1280,
                                                 "height": 800
                                             }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "platforms": "windows",
+                                    "apps": "C:\\Windows\\notepad.exe"
+                                },
+                                {
+                                    "platforms": "windows",
+                                    "apps": [
+                                        {
+                                            "path": "C:\\Windows\\notepad.exe",
+                                            "arguments": "test.txt"
                                         }
                                     ]
                                 }
@@ -17066,6 +17220,104 @@
                         }
                     }
                 ]
+            },
+            "apps": {
+                "description": "Native applications to run tests on.",
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "description": "Path to the application executable or app identifier."
+                    },
+                    {
+                        "type": "object",
+                        "description": "Native application configuration.",
+                        "required": [
+                            "path"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                            "path": {
+                                "type": "string",
+                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                            },
+                            "arguments": {
+                                "type": "string",
+                                "description": "Command-line arguments to pass to the application."
+                            },
+                            "workingDir": {
+                                "type": "string",
+                                "description": "Working directory for the application."
+                            },
+                            "window": {
+                                "type": "object",
+                                "description": "Application window dimensions.",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "width": {
+                                        "type": "integer",
+                                        "description": "Width of the window in pixels."
+                                    },
+                                    "height": {
+                                        "type": "integer",
+                                        "description": "Height of the window in pixels."
+                                    }
+                                },
+                                "title": "App Window"
+                            }
+                        },
+                        "title": "App"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "description": "Path to the application executable or app identifier."
+                                },
+                                {
+                                    "type": "object",
+                                    "description": "Native application configuration.",
+                                    "required": [
+                                        "path"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "path": {
+                                            "type": "string",
+                                            "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                        },
+                                        "arguments": {
+                                            "type": "string",
+                                            "description": "Command-line arguments to pass to the application."
+                                        },
+                                        "workingDir": {
+                                            "type": "string",
+                                            "description": "Working directory for the application."
+                                        },
+                                        "window": {
+                                            "type": "object",
+                                            "description": "Application window dimensions.",
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "width": {
+                                                    "type": "integer",
+                                                    "description": "Width of the window in pixels."
+                                                },
+                                                "height": {
+                                                    "type": "integer",
+                                                    "description": "Height of the window in pixels."
+                                                }
+                                            },
+                                            "title": "App Window"
+                                        }
+                                    },
+                                    "title": "App"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         },
         "components": {
@@ -17147,6 +17399,49 @@
                         }
                     },
                     "title": "Browser"
+                },
+                "appPath": {
+                    "type": "string",
+                    "description": "Path to the application executable or app identifier."
+                },
+                "app": {
+                    "type": "object",
+                    "description": "Native application configuration.",
+                    "required": [
+                        "path"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                        },
+                        "arguments": {
+                            "type": "string",
+                            "description": "Command-line arguments to pass to the application."
+                        },
+                        "workingDir": {
+                            "type": "string",
+                            "description": "Working directory for the application."
+                        },
+                        "window": {
+                            "type": "object",
+                            "description": "Application window dimensions.",
+                            "additionalProperties": false,
+                            "properties": {
+                                "width": {
+                                    "type": "integer",
+                                    "description": "Width of the window in pixels."
+                                },
+                                "height": {
+                                    "type": "integer",
+                                    "description": "Height of the window in pixels."
+                                }
+                            },
+                            "title": "App Window"
+                        }
+                    },
+                    "title": "App"
                 }
             }
         },
@@ -17239,6 +17534,19 @@
                             "width": 1280,
                             "height": 800
                         }
+                    }
+                ]
+            },
+            {
+                "platforms": "windows",
+                "apps": "C:\\Windows\\notepad.exe"
+            },
+            {
+                "platforms": "windows",
+                "apps": [
+                    {
+                        "path": "C:\\Windows\\notepad.exe",
+                        "arguments": "test.txt"
                     }
                 ]
             }
@@ -21361,6 +21669,104 @@
                                                     }
                                                 }
                                             ]
+                                        },
+                                        "apps": {
+                                            "description": "Native applications to run tests on.",
+                                            "anyOf": [
+                                                {
+                                                    "type": "string",
+                                                    "description": "Path to the application executable or app identifier."
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "description": "Native application configuration.",
+                                                    "required": [
+                                                        "path"
+                                                    ],
+                                                    "additionalProperties": false,
+                                                    "properties": {
+                                                        "path": {
+                                                            "type": "string",
+                                                            "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                        },
+                                                        "arguments": {
+                                                            "type": "string",
+                                                            "description": "Command-line arguments to pass to the application."
+                                                        },
+                                                        "workingDir": {
+                                                            "type": "string",
+                                                            "description": "Working directory for the application."
+                                                        },
+                                                        "window": {
+                                                            "type": "object",
+                                                            "description": "Application window dimensions.",
+                                                            "additionalProperties": false,
+                                                            "properties": {
+                                                                "width": {
+                                                                    "type": "integer",
+                                                                    "description": "Width of the window in pixels."
+                                                                },
+                                                                "height": {
+                                                                    "type": "integer",
+                                                                    "description": "Height of the window in pixels."
+                                                                }
+                                                            },
+                                                            "title": "App Window"
+                                                        }
+                                                    },
+                                                    "title": "App"
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or app identifier."
+                                                            },
+                                                            {
+                                                                "type": "object",
+                                                                "description": "Native application configuration.",
+                                                                "required": [
+                                                                    "path"
+                                                                ],
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "path": {
+                                                                        "type": "string",
+                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                    },
+                                                                    "arguments": {
+                                                                        "type": "string",
+                                                                        "description": "Command-line arguments to pass to the application."
+                                                                    },
+                                                                    "workingDir": {
+                                                                        "type": "string",
+                                                                        "description": "Working directory for the application."
+                                                                    },
+                                                                    "window": {
+                                                                        "type": "object",
+                                                                        "description": "Application window dimensions.",
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "width": {
+                                                                                "type": "integer",
+                                                                                "description": "Width of the window in pixels."
+                                                                            },
+                                                                            "height": {
+                                                                                "type": "integer",
+                                                                                "description": "Height of the window in pixels."
+                                                                            }
+                                                                        },
+                                                                        "title": "App Window"
+                                                                    }
+                                                                },
+                                                                "title": "App"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
                                         }
                                     },
                                     "components": {
@@ -21442,6 +21848,49 @@
                                                     }
                                                 },
                                                 "title": "Browser"
+                                            },
+                                            "appPath": {
+                                                "type": "string",
+                                                "description": "Path to the application executable or app identifier."
+                                            },
+                                            "app": {
+                                                "type": "object",
+                                                "description": "Native application configuration.",
+                                                "required": [
+                                                    "path"
+                                                ],
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "path": {
+                                                        "type": "string",
+                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                    },
+                                                    "arguments": {
+                                                        "type": "string",
+                                                        "description": "Command-line arguments to pass to the application."
+                                                    },
+                                                    "workingDir": {
+                                                        "type": "string",
+                                                        "description": "Working directory for the application."
+                                                    },
+                                                    "window": {
+                                                        "type": "object",
+                                                        "description": "Application window dimensions.",
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "width": {
+                                                                "type": "integer",
+                                                                "description": "Width of the window in pixels."
+                                                            },
+                                                            "height": {
+                                                                "type": "integer",
+                                                                "description": "Height of the window in pixels."
+                                                            }
+                                                        },
+                                                        "title": "App Window"
+                                                    }
+                                                },
+                                                "title": "App"
                                             }
                                         }
                                     },
@@ -21534,6 +21983,19 @@
                                                         "width": 1280,
                                                         "height": 800
                                                     }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "platforms": "windows",
+                                            "apps": "C:\\Windows\\notepad.exe"
+                                        },
+                                        {
+                                            "platforms": "windows",
+                                            "apps": [
+                                                {
+                                                    "path": "C:\\Windows\\notepad.exe",
+                                                    "arguments": "test.txt"
                                                 }
                                             ]
                                         }
@@ -37727,6 +38189,104 @@
                                                                 }
                                                             }
                                                         ]
+                                                    },
+                                                    "apps": {
+                                                        "description": "Native applications to run tests on.",
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or app identifier."
+                                                            },
+                                                            {
+                                                                "type": "object",
+                                                                "description": "Native application configuration.",
+                                                                "required": [
+                                                                    "path"
+                                                                ],
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "path": {
+                                                                        "type": "string",
+                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                    },
+                                                                    "arguments": {
+                                                                        "type": "string",
+                                                                        "description": "Command-line arguments to pass to the application."
+                                                                    },
+                                                                    "workingDir": {
+                                                                        "type": "string",
+                                                                        "description": "Working directory for the application."
+                                                                    },
+                                                                    "window": {
+                                                                        "type": "object",
+                                                                        "description": "Application window dimensions.",
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "width": {
+                                                                                "type": "integer",
+                                                                                "description": "Width of the window in pixels."
+                                                                            },
+                                                                            "height": {
+                                                                                "type": "integer",
+                                                                                "description": "Height of the window in pixels."
+                                                                            }
+                                                                        },
+                                                                        "title": "App Window"
+                                                                    }
+                                                                },
+                                                                "title": "App"
+                                                            },
+                                                            {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "anyOf": [
+                                                                        {
+                                                                            "type": "string",
+                                                                            "description": "Path to the application executable or app identifier."
+                                                                        },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "description": "Native application configuration.",
+                                                                            "required": [
+                                                                                "path"
+                                                                            ],
+                                                                            "additionalProperties": false,
+                                                                            "properties": {
+                                                                                "path": {
+                                                                                    "type": "string",
+                                                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                },
+                                                                                "arguments": {
+                                                                                    "type": "string",
+                                                                                    "description": "Command-line arguments to pass to the application."
+                                                                                },
+                                                                                "workingDir": {
+                                                                                    "type": "string",
+                                                                                    "description": "Working directory for the application."
+                                                                                },
+                                                                                "window": {
+                                                                                    "type": "object",
+                                                                                    "description": "Application window dimensions.",
+                                                                                    "additionalProperties": false,
+                                                                                    "properties": {
+                                                                                        "width": {
+                                                                                            "type": "integer",
+                                                                                            "description": "Width of the window in pixels."
+                                                                                        },
+                                                                                        "height": {
+                                                                                            "type": "integer",
+                                                                                            "description": "Height of the window in pixels."
+                                                                                        }
+                                                                                    },
+                                                                                    "title": "App Window"
+                                                                                }
+                                                                            },
+                                                                            "title": "App"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
                                                     }
                                                 },
                                                 "components": {
@@ -37808,6 +38368,49 @@
                                                                 }
                                                             },
                                                             "title": "Browser"
+                                                        },
+                                                        "appPath": {
+                                                            "type": "string",
+                                                            "description": "Path to the application executable or app identifier."
+                                                        },
+                                                        "app": {
+                                                            "type": "object",
+                                                            "description": "Native application configuration.",
+                                                            "required": [
+                                                                "path"
+                                                            ],
+                                                            "additionalProperties": false,
+                                                            "properties": {
+                                                                "path": {
+                                                                    "type": "string",
+                                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                },
+                                                                "arguments": {
+                                                                    "type": "string",
+                                                                    "description": "Command-line arguments to pass to the application."
+                                                                },
+                                                                "workingDir": {
+                                                                    "type": "string",
+                                                                    "description": "Working directory for the application."
+                                                                },
+                                                                "window": {
+                                                                    "type": "object",
+                                                                    "description": "Application window dimensions.",
+                                                                    "additionalProperties": false,
+                                                                    "properties": {
+                                                                        "width": {
+                                                                            "type": "integer",
+                                                                            "description": "Width of the window in pixels."
+                                                                        },
+                                                                        "height": {
+                                                                            "type": "integer",
+                                                                            "description": "Height of the window in pixels."
+                                                                        }
+                                                                    },
+                                                                    "title": "App Window"
+                                                                }
+                                                            },
+                                                            "title": "App"
                                                         }
                                                     }
                                                 },
@@ -37900,6 +38503,19 @@
                                                                     "width": 1280,
                                                                     "height": 800
                                                                 }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "platforms": "windows",
+                                                        "apps": "C:\\Windows\\notepad.exe"
+                                                    },
+                                                    {
+                                                        "platforms": "windows",
+                                                        "apps": [
+                                                            {
+                                                                "path": "C:\\Windows\\notepad.exe",
+                                                                "arguments": "test.txt"
                                                             }
                                                         ]
                                                     }
@@ -38320,6 +38936,104 @@
                                                                                     }
                                                                                 }
                                                                             ]
+                                                                        },
+                                                                        "apps": {
+                                                                            "description": "Native applications to run tests on.",
+                                                                            "anyOf": [
+                                                                                {
+                                                                                    "type": "string",
+                                                                                    "description": "Path to the application executable or app identifier."
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "description": "Native application configuration.",
+                                                                                    "required": [
+                                                                                        "path"
+                                                                                    ],
+                                                                                    "additionalProperties": false,
+                                                                                    "properties": {
+                                                                                        "path": {
+                                                                                            "type": "string",
+                                                                                            "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                        },
+                                                                                        "arguments": {
+                                                                                            "type": "string",
+                                                                                            "description": "Command-line arguments to pass to the application."
+                                                                                        },
+                                                                                        "workingDir": {
+                                                                                            "type": "string",
+                                                                                            "description": "Working directory for the application."
+                                                                                        },
+                                                                                        "window": {
+                                                                                            "type": "object",
+                                                                                            "description": "Application window dimensions.",
+                                                                                            "additionalProperties": false,
+                                                                                            "properties": {
+                                                                                                "width": {
+                                                                                                    "type": "integer",
+                                                                                                    "description": "Width of the window in pixels."
+                                                                                                },
+                                                                                                "height": {
+                                                                                                    "type": "integer",
+                                                                                                    "description": "Height of the window in pixels."
+                                                                                                }
+                                                                                            },
+                                                                                            "title": "App Window"
+                                                                                        }
+                                                                                    },
+                                                                                    "title": "App"
+                                                                                },
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "anyOf": [
+                                                                                            {
+                                                                                                "type": "string",
+                                                                                                "description": "Path to the application executable or app identifier."
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "object",
+                                                                                                "description": "Native application configuration.",
+                                                                                                "required": [
+                                                                                                    "path"
+                                                                                                ],
+                                                                                                "additionalProperties": false,
+                                                                                                "properties": {
+                                                                                                    "path": {
+                                                                                                        "type": "string",
+                                                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                                    },
+                                                                                                    "arguments": {
+                                                                                                        "type": "string",
+                                                                                                        "description": "Command-line arguments to pass to the application."
+                                                                                                    },
+                                                                                                    "workingDir": {
+                                                                                                        "type": "string",
+                                                                                                        "description": "Working directory for the application."
+                                                                                                    },
+                                                                                                    "window": {
+                                                                                                        "type": "object",
+                                                                                                        "description": "Application window dimensions.",
+                                                                                                        "additionalProperties": false,
+                                                                                                        "properties": {
+                                                                                                            "width": {
+                                                                                                                "type": "integer",
+                                                                                                                "description": "Width of the window in pixels."
+                                                                                                            },
+                                                                                                            "height": {
+                                                                                                                "type": "integer",
+                                                                                                                "description": "Height of the window in pixels."
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "title": "App Window"
+                                                                                                    }
+                                                                                                },
+                                                                                                "title": "App"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            ]
                                                                         }
                                                                     },
                                                                     "components": {
@@ -38401,6 +39115,49 @@
                                                                                     }
                                                                                 },
                                                                                 "title": "Browser"
+                                                                            },
+                                                                            "appPath": {
+                                                                                "type": "string",
+                                                                                "description": "Path to the application executable or app identifier."
+                                                                            },
+                                                                            "app": {
+                                                                                "type": "object",
+                                                                                "description": "Native application configuration.",
+                                                                                "required": [
+                                                                                    "path"
+                                                                                ],
+                                                                                "additionalProperties": false,
+                                                                                "properties": {
+                                                                                    "path": {
+                                                                                        "type": "string",
+                                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                    },
+                                                                                    "arguments": {
+                                                                                        "type": "string",
+                                                                                        "description": "Command-line arguments to pass to the application."
+                                                                                    },
+                                                                                    "workingDir": {
+                                                                                        "type": "string",
+                                                                                        "description": "Working directory for the application."
+                                                                                    },
+                                                                                    "window": {
+                                                                                        "type": "object",
+                                                                                        "description": "Application window dimensions.",
+                                                                                        "additionalProperties": false,
+                                                                                        "properties": {
+                                                                                            "width": {
+                                                                                                "type": "integer",
+                                                                                                "description": "Width of the window in pixels."
+                                                                                            },
+                                                                                            "height": {
+                                                                                                "type": "integer",
+                                                                                                "description": "Height of the window in pixels."
+                                                                                            }
+                                                                                        },
+                                                                                        "title": "App Window"
+                                                                                    }
+                                                                                },
+                                                                                "title": "App"
                                                                             }
                                                                         }
                                                                     },
@@ -38493,6 +39250,19 @@
                                                                                         "width": 1280,
                                                                                         "height": 800
                                                                                     }
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "platforms": "windows",
+                                                                            "apps": "C:\\Windows\\notepad.exe"
+                                                                        },
+                                                                        {
+                                                                            "platforms": "windows",
+                                                                            "apps": [
+                                                                                {
+                                                                                    "path": "C:\\Windows\\notepad.exe",
+                                                                                    "arguments": "test.txt"
                                                                                 }
                                                                             ]
                                                                         }
@@ -54591,6 +55361,104 @@
                                                                 }
                                                             }
                                                         ]
+                                                    },
+                                                    "apps": {
+                                                        "description": "Native applications to run tests on.",
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or app identifier."
+                                                            },
+                                                            {
+                                                                "type": "object",
+                                                                "description": "Native application configuration.",
+                                                                "required": [
+                                                                    "path"
+                                                                ],
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "path": {
+                                                                        "type": "string",
+                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                    },
+                                                                    "arguments": {
+                                                                        "type": "string",
+                                                                        "description": "Command-line arguments to pass to the application."
+                                                                    },
+                                                                    "workingDir": {
+                                                                        "type": "string",
+                                                                        "description": "Working directory for the application."
+                                                                    },
+                                                                    "window": {
+                                                                        "type": "object",
+                                                                        "description": "Application window dimensions.",
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "width": {
+                                                                                "type": "integer",
+                                                                                "description": "Width of the window in pixels."
+                                                                            },
+                                                                            "height": {
+                                                                                "type": "integer",
+                                                                                "description": "Height of the window in pixels."
+                                                                            }
+                                                                        },
+                                                                        "title": "App Window"
+                                                                    }
+                                                                },
+                                                                "title": "App"
+                                                            },
+                                                            {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "anyOf": [
+                                                                        {
+                                                                            "type": "string",
+                                                                            "description": "Path to the application executable or app identifier."
+                                                                        },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "description": "Native application configuration.",
+                                                                            "required": [
+                                                                                "path"
+                                                                            ],
+                                                                            "additionalProperties": false,
+                                                                            "properties": {
+                                                                                "path": {
+                                                                                    "type": "string",
+                                                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                },
+                                                                                "arguments": {
+                                                                                    "type": "string",
+                                                                                    "description": "Command-line arguments to pass to the application."
+                                                                                },
+                                                                                "workingDir": {
+                                                                                    "type": "string",
+                                                                                    "description": "Working directory for the application."
+                                                                                },
+                                                                                "window": {
+                                                                                    "type": "object",
+                                                                                    "description": "Application window dimensions.",
+                                                                                    "additionalProperties": false,
+                                                                                    "properties": {
+                                                                                        "width": {
+                                                                                            "type": "integer",
+                                                                                            "description": "Width of the window in pixels."
+                                                                                        },
+                                                                                        "height": {
+                                                                                            "type": "integer",
+                                                                                            "description": "Height of the window in pixels."
+                                                                                        }
+                                                                                    },
+                                                                                    "title": "App Window"
+                                                                                }
+                                                                            },
+                                                                            "title": "App"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
                                                     }
                                                 },
                                                 "components": {
@@ -54672,6 +55540,49 @@
                                                                 }
                                                             },
                                                             "title": "Browser"
+                                                        },
+                                                        "appPath": {
+                                                            "type": "string",
+                                                            "description": "Path to the application executable or app identifier."
+                                                        },
+                                                        "app": {
+                                                            "type": "object",
+                                                            "description": "Native application configuration.",
+                                                            "required": [
+                                                                "path"
+                                                            ],
+                                                            "additionalProperties": false,
+                                                            "properties": {
+                                                                "path": {
+                                                                    "type": "string",
+                                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                },
+                                                                "arguments": {
+                                                                    "type": "string",
+                                                                    "description": "Command-line arguments to pass to the application."
+                                                                },
+                                                                "workingDir": {
+                                                                    "type": "string",
+                                                                    "description": "Working directory for the application."
+                                                                },
+                                                                "window": {
+                                                                    "type": "object",
+                                                                    "description": "Application window dimensions.",
+                                                                    "additionalProperties": false,
+                                                                    "properties": {
+                                                                        "width": {
+                                                                            "type": "integer",
+                                                                            "description": "Width of the window in pixels."
+                                                                        },
+                                                                        "height": {
+                                                                            "type": "integer",
+                                                                            "description": "Height of the window in pixels."
+                                                                        }
+                                                                    },
+                                                                    "title": "App Window"
+                                                                }
+                                                            },
+                                                            "title": "App"
                                                         }
                                                     }
                                                 },
@@ -54764,6 +55675,19 @@
                                                                     "width": 1280,
                                                                     "height": 800
                                                                 }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "platforms": "windows",
+                                                        "apps": "C:\\Windows\\notepad.exe"
+                                                    },
+                                                    {
+                                                        "platforms": "windows",
+                                                        "apps": [
+                                                            {
+                                                                "path": "C:\\Windows\\notepad.exe",
+                                                                "arguments": "test.txt"
                                                             }
                                                         ]
                                                     }
@@ -55184,6 +56108,104 @@
                                                                                     }
                                                                                 }
                                                                             ]
+                                                                        },
+                                                                        "apps": {
+                                                                            "description": "Native applications to run tests on.",
+                                                                            "anyOf": [
+                                                                                {
+                                                                                    "type": "string",
+                                                                                    "description": "Path to the application executable or app identifier."
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "description": "Native application configuration.",
+                                                                                    "required": [
+                                                                                        "path"
+                                                                                    ],
+                                                                                    "additionalProperties": false,
+                                                                                    "properties": {
+                                                                                        "path": {
+                                                                                            "type": "string",
+                                                                                            "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                        },
+                                                                                        "arguments": {
+                                                                                            "type": "string",
+                                                                                            "description": "Command-line arguments to pass to the application."
+                                                                                        },
+                                                                                        "workingDir": {
+                                                                                            "type": "string",
+                                                                                            "description": "Working directory for the application."
+                                                                                        },
+                                                                                        "window": {
+                                                                                            "type": "object",
+                                                                                            "description": "Application window dimensions.",
+                                                                                            "additionalProperties": false,
+                                                                                            "properties": {
+                                                                                                "width": {
+                                                                                                    "type": "integer",
+                                                                                                    "description": "Width of the window in pixels."
+                                                                                                },
+                                                                                                "height": {
+                                                                                                    "type": "integer",
+                                                                                                    "description": "Height of the window in pixels."
+                                                                                                }
+                                                                                            },
+                                                                                            "title": "App Window"
+                                                                                        }
+                                                                                    },
+                                                                                    "title": "App"
+                                                                                },
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "anyOf": [
+                                                                                            {
+                                                                                                "type": "string",
+                                                                                                "description": "Path to the application executable or app identifier."
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "object",
+                                                                                                "description": "Native application configuration.",
+                                                                                                "required": [
+                                                                                                    "path"
+                                                                                                ],
+                                                                                                "additionalProperties": false,
+                                                                                                "properties": {
+                                                                                                    "path": {
+                                                                                                        "type": "string",
+                                                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                                    },
+                                                                                                    "arguments": {
+                                                                                                        "type": "string",
+                                                                                                        "description": "Command-line arguments to pass to the application."
+                                                                                                    },
+                                                                                                    "workingDir": {
+                                                                                                        "type": "string",
+                                                                                                        "description": "Working directory for the application."
+                                                                                                    },
+                                                                                                    "window": {
+                                                                                                        "type": "object",
+                                                                                                        "description": "Application window dimensions.",
+                                                                                                        "additionalProperties": false,
+                                                                                                        "properties": {
+                                                                                                            "width": {
+                                                                                                                "type": "integer",
+                                                                                                                "description": "Width of the window in pixels."
+                                                                                                            },
+                                                                                                            "height": {
+                                                                                                                "type": "integer",
+                                                                                                                "description": "Height of the window in pixels."
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "title": "App Window"
+                                                                                                    }
+                                                                                                },
+                                                                                                "title": "App"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            ]
                                                                         }
                                                                     },
                                                                     "components": {
@@ -55265,6 +56287,49 @@
                                                                                     }
                                                                                 },
                                                                                 "title": "Browser"
+                                                                            },
+                                                                            "appPath": {
+                                                                                "type": "string",
+                                                                                "description": "Path to the application executable or app identifier."
+                                                                            },
+                                                                            "app": {
+                                                                                "type": "object",
+                                                                                "description": "Native application configuration.",
+                                                                                "required": [
+                                                                                    "path"
+                                                                                ],
+                                                                                "additionalProperties": false,
+                                                                                "properties": {
+                                                                                    "path": {
+                                                                                        "type": "string",
+                                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                    },
+                                                                                    "arguments": {
+                                                                                        "type": "string",
+                                                                                        "description": "Command-line arguments to pass to the application."
+                                                                                    },
+                                                                                    "workingDir": {
+                                                                                        "type": "string",
+                                                                                        "description": "Working directory for the application."
+                                                                                    },
+                                                                                    "window": {
+                                                                                        "type": "object",
+                                                                                        "description": "Application window dimensions.",
+                                                                                        "additionalProperties": false,
+                                                                                        "properties": {
+                                                                                            "width": {
+                                                                                                "type": "integer",
+                                                                                                "description": "Width of the window in pixels."
+                                                                                            },
+                                                                                            "height": {
+                                                                                                "type": "integer",
+                                                                                                "description": "Height of the window in pixels."
+                                                                                            }
+                                                                                        },
+                                                                                        "title": "App Window"
+                                                                                    }
+                                                                                },
+                                                                                "title": "App"
                                                                             }
                                                                         }
                                                                     },
@@ -55357,6 +56422,19 @@
                                                                                         "width": 1280,
                                                                                         "height": 800
                                                                                     }
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "platforms": "windows",
+                                                                            "apps": "C:\\Windows\\notepad.exe"
+                                                                        },
+                                                                        {
+                                                                            "platforms": "windows",
+                                                                            "apps": [
+                                                                                {
+                                                                                    "path": "C:\\Windows\\notepad.exe",
+                                                                                    "arguments": "test.txt"
                                                                                 }
                                                                             ]
                                                                         }
@@ -72837,6 +73915,104 @@
                                             }
                                         }
                                     ]
+                                },
+                                "apps": {
+                                    "description": "Native applications to run tests on.",
+                                    "anyOf": [
+                                        {
+                                            "type": "string",
+                                            "description": "Path to the application executable or app identifier."
+                                        },
+                                        {
+                                            "type": "object",
+                                            "description": "Native application configuration.",
+                                            "required": [
+                                                "path"
+                                            ],
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "path": {
+                                                    "type": "string",
+                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                },
+                                                "arguments": {
+                                                    "type": "string",
+                                                    "description": "Command-line arguments to pass to the application."
+                                                },
+                                                "workingDir": {
+                                                    "type": "string",
+                                                    "description": "Working directory for the application."
+                                                },
+                                                "window": {
+                                                    "type": "object",
+                                                    "description": "Application window dimensions.",
+                                                    "additionalProperties": false,
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Width of the window in pixels."
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Height of the window in pixels."
+                                                        }
+                                                    },
+                                                    "title": "App Window"
+                                                }
+                                            },
+                                            "title": "App"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Path to the application executable or app identifier."
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "description": "Native application configuration.",
+                                                        "required": [
+                                                            "path"
+                                                        ],
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "path": {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                            },
+                                                            "arguments": {
+                                                                "type": "string",
+                                                                "description": "Command-line arguments to pass to the application."
+                                                            },
+                                                            "workingDir": {
+                                                                "type": "string",
+                                                                "description": "Working directory for the application."
+                                                            },
+                                                            "window": {
+                                                                "type": "object",
+                                                                "description": "Application window dimensions.",
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "width": {
+                                                                        "type": "integer",
+                                                                        "description": "Width of the window in pixels."
+                                                                    },
+                                                                    "height": {
+                                                                        "type": "integer",
+                                                                        "description": "Height of the window in pixels."
+                                                                    }
+                                                                },
+                                                                "title": "App Window"
+                                                            }
+                                                        },
+                                                        "title": "App"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             "components": {
@@ -72918,6 +74094,49 @@
                                             }
                                         },
                                         "title": "Browser"
+                                    },
+                                    "appPath": {
+                                        "type": "string",
+                                        "description": "Path to the application executable or app identifier."
+                                    },
+                                    "app": {
+                                        "type": "object",
+                                        "description": "Native application configuration.",
+                                        "required": [
+                                            "path"
+                                        ],
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "path": {
+                                                "type": "string",
+                                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                            },
+                                            "arguments": {
+                                                "type": "string",
+                                                "description": "Command-line arguments to pass to the application."
+                                            },
+                                            "workingDir": {
+                                                "type": "string",
+                                                "description": "Working directory for the application."
+                                            },
+                                            "window": {
+                                                "type": "object",
+                                                "description": "Application window dimensions.",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "width": {
+                                                        "type": "integer",
+                                                        "description": "Width of the window in pixels."
+                                                    },
+                                                    "height": {
+                                                        "type": "integer",
+                                                        "description": "Height of the window in pixels."
+                                                    }
+                                                },
+                                                "title": "App Window"
+                                            }
+                                        },
+                                        "title": "App"
                                     }
                                 }
                             },
@@ -73010,6 +74229,19 @@
                                                 "width": 1280,
                                                 "height": 800
                                             }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "platforms": "windows",
+                                    "apps": "C:\\Windows\\notepad.exe"
+                                },
+                                {
+                                    "platforms": "windows",
+                                    "apps": [
+                                        {
+                                            "path": "C:\\Windows\\notepad.exe",
+                                            "arguments": "test.txt"
                                         }
                                     ]
                                 }
@@ -73430,6 +74662,104 @@
                                                                 }
                                                             }
                                                         ]
+                                                    },
+                                                    "apps": {
+                                                        "description": "Native applications to run tests on.",
+                                                        "anyOf": [
+                                                            {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or app identifier."
+                                                            },
+                                                            {
+                                                                "type": "object",
+                                                                "description": "Native application configuration.",
+                                                                "required": [
+                                                                    "path"
+                                                                ],
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "path": {
+                                                                        "type": "string",
+                                                                        "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                    },
+                                                                    "arguments": {
+                                                                        "type": "string",
+                                                                        "description": "Command-line arguments to pass to the application."
+                                                                    },
+                                                                    "workingDir": {
+                                                                        "type": "string",
+                                                                        "description": "Working directory for the application."
+                                                                    },
+                                                                    "window": {
+                                                                        "type": "object",
+                                                                        "description": "Application window dimensions.",
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "width": {
+                                                                                "type": "integer",
+                                                                                "description": "Width of the window in pixels."
+                                                                            },
+                                                                            "height": {
+                                                                                "type": "integer",
+                                                                                "description": "Height of the window in pixels."
+                                                                            }
+                                                                        },
+                                                                        "title": "App Window"
+                                                                    }
+                                                                },
+                                                                "title": "App"
+                                                            },
+                                                            {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "anyOf": [
+                                                                        {
+                                                                            "type": "string",
+                                                                            "description": "Path to the application executable or app identifier."
+                                                                        },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "description": "Native application configuration.",
+                                                                            "required": [
+                                                                                "path"
+                                                                            ],
+                                                                            "additionalProperties": false,
+                                                                            "properties": {
+                                                                                "path": {
+                                                                                    "type": "string",
+                                                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                                },
+                                                                                "arguments": {
+                                                                                    "type": "string",
+                                                                                    "description": "Command-line arguments to pass to the application."
+                                                                                },
+                                                                                "workingDir": {
+                                                                                    "type": "string",
+                                                                                    "description": "Working directory for the application."
+                                                                                },
+                                                                                "window": {
+                                                                                    "type": "object",
+                                                                                    "description": "Application window dimensions.",
+                                                                                    "additionalProperties": false,
+                                                                                    "properties": {
+                                                                                        "width": {
+                                                                                            "type": "integer",
+                                                                                            "description": "Width of the window in pixels."
+                                                                                        },
+                                                                                        "height": {
+                                                                                            "type": "integer",
+                                                                                            "description": "Height of the window in pixels."
+                                                                                        }
+                                                                                    },
+                                                                                    "title": "App Window"
+                                                                                }
+                                                                            },
+                                                                            "title": "App"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        ]
                                                     }
                                                 },
                                                 "components": {
@@ -73511,6 +74841,49 @@
                                                                 }
                                                             },
                                                             "title": "Browser"
+                                                        },
+                                                        "appPath": {
+                                                            "type": "string",
+                                                            "description": "Path to the application executable or app identifier."
+                                                        },
+                                                        "app": {
+                                                            "type": "object",
+                                                            "description": "Native application configuration.",
+                                                            "required": [
+                                                                "path"
+                                                            ],
+                                                            "additionalProperties": false,
+                                                            "properties": {
+                                                                "path": {
+                                                                    "type": "string",
+                                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                                },
+                                                                "arguments": {
+                                                                    "type": "string",
+                                                                    "description": "Command-line arguments to pass to the application."
+                                                                },
+                                                                "workingDir": {
+                                                                    "type": "string",
+                                                                    "description": "Working directory for the application."
+                                                                },
+                                                                "window": {
+                                                                    "type": "object",
+                                                                    "description": "Application window dimensions.",
+                                                                    "additionalProperties": false,
+                                                                    "properties": {
+                                                                        "width": {
+                                                                            "type": "integer",
+                                                                            "description": "Width of the window in pixels."
+                                                                        },
+                                                                        "height": {
+                                                                            "type": "integer",
+                                                                            "description": "Height of the window in pixels."
+                                                                        }
+                                                                    },
+                                                                    "title": "App Window"
+                                                                }
+                                                            },
+                                                            "title": "App"
                                                         }
                                                     }
                                                 },
@@ -73603,6 +74976,19 @@
                                                                     "width": 1280,
                                                                     "height": 800
                                                                 }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "platforms": "windows",
+                                                        "apps": "C:\\Windows\\notepad.exe"
+                                                    },
+                                                    {
+                                                        "platforms": "windows",
+                                                        "apps": [
+                                                            {
+                                                                "path": "C:\\Windows\\notepad.exe",
+                                                                "arguments": "test.txt"
                                                             }
                                                         ]
                                                     }
@@ -96796,6 +98182,104 @@
                                             }
                                         }
                                     ]
+                                },
+                                "apps": {
+                                    "description": "Native applications to run tests on.",
+                                    "anyOf": [
+                                        {
+                                            "type": "string",
+                                            "description": "Path to the application executable or app identifier."
+                                        },
+                                        {
+                                            "type": "object",
+                                            "description": "Native application configuration.",
+                                            "required": [
+                                                "path"
+                                            ],
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "path": {
+                                                    "type": "string",
+                                                    "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                },
+                                                "arguments": {
+                                                    "type": "string",
+                                                    "description": "Command-line arguments to pass to the application."
+                                                },
+                                                "workingDir": {
+                                                    "type": "string",
+                                                    "description": "Working directory for the application."
+                                                },
+                                                "window": {
+                                                    "type": "object",
+                                                    "description": "Application window dimensions.",
+                                                    "additionalProperties": false,
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Width of the window in pixels."
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Height of the window in pixels."
+                                                        }
+                                                    },
+                                                    "title": "App Window"
+                                                }
+                                            },
+                                            "title": "App"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string",
+                                                        "description": "Path to the application executable or app identifier."
+                                                    },
+                                                    {
+                                                        "type": "object",
+                                                        "description": "Native application configuration.",
+                                                        "required": [
+                                                            "path"
+                                                        ],
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "path": {
+                                                                "type": "string",
+                                                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                                            },
+                                                            "arguments": {
+                                                                "type": "string",
+                                                                "description": "Command-line arguments to pass to the application."
+                                                            },
+                                                            "workingDir": {
+                                                                "type": "string",
+                                                                "description": "Working directory for the application."
+                                                            },
+                                                            "window": {
+                                                                "type": "object",
+                                                                "description": "Application window dimensions.",
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "width": {
+                                                                        "type": "integer",
+                                                                        "description": "Width of the window in pixels."
+                                                                    },
+                                                                    "height": {
+                                                                        "type": "integer",
+                                                                        "description": "Height of the window in pixels."
+                                                                    }
+                                                                },
+                                                                "title": "App Window"
+                                                            }
+                                                        },
+                                                        "title": "App"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             "components": {
@@ -96877,6 +98361,49 @@
                                             }
                                         },
                                         "title": "Browser"
+                                    },
+                                    "appPath": {
+                                        "type": "string",
+                                        "description": "Path to the application executable or app identifier."
+                                    },
+                                    "app": {
+                                        "type": "object",
+                                        "description": "Native application configuration.",
+                                        "required": [
+                                            "path"
+                                        ],
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "path": {
+                                                "type": "string",
+                                                "description": "Path to the application executable or UWP app identifier (e.g., 'C:\\\\Windows\\\\notepad.exe' or 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App')."
+                                            },
+                                            "arguments": {
+                                                "type": "string",
+                                                "description": "Command-line arguments to pass to the application."
+                                            },
+                                            "workingDir": {
+                                                "type": "string",
+                                                "description": "Working directory for the application."
+                                            },
+                                            "window": {
+                                                "type": "object",
+                                                "description": "Application window dimensions.",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "width": {
+                                                        "type": "integer",
+                                                        "description": "Width of the window in pixels."
+                                                    },
+                                                    "height": {
+                                                        "type": "integer",
+                                                        "description": "Height of the window in pixels."
+                                                    }
+                                                },
+                                                "title": "App Window"
+                                            }
+                                        },
+                                        "title": "App"
                                     }
                                 }
                             },
@@ -96969,6 +98496,19 @@
                                                 "width": 1280,
                                                 "height": 800
                                             }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "platforms": "windows",
+                                    "apps": "C:\\Windows\\notepad.exe"
+                                },
+                                {
+                                    "platforms": "windows",
+                                    "apps": [
+                                        {
+                                            "path": "C:\\Windows\\notepad.exe",
+                                            "arguments": "test.txt"
                                         }
                                     ]
                                 }
