@@ -35,6 +35,18 @@
     "openApi": {
       "$ref": "test_v3.schema.json#/properties/openApi"
     },
+    "debug": {
+      "description": "Enable debugging mode for this specification. Overrides the debug setting from config level. `true` allows pausing on breakpoints, waiting for user input before continuing. `stepThrough` pauses at every step, waiting for user input before continuing. `false` disables all debugging for this specification.",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "enum": ["stepThrough"]
+        }
+      ]
+    },
     "tests": {
       "description": "[Tests](test) to perform.",
       "type": "array",
@@ -203,6 +215,53 @@
                 "overwrite": "aboveVariation"
               },
               "variables": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "specId": "debug-spec-basic",
+      "description": "Specification with debug mode enabled",
+      "debug": true,
+      "tests": [
+        {
+          "steps": [
+            {
+              "checkLink": "https://www.google.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "specId": "debug-spec-step-through",
+      "description": "Specification with step-through debug mode",
+      "debug": "stepThrough",
+      "tests": [
+        {
+          "steps": [
+            {
+              "goTo": "https://www.google.com"
+            },
+            {
+              "find": {
+                "selector": "[name='q']"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "specId": "debug-spec-disabled",
+      "description": "Specification with debug mode explicitly disabled",
+      "debug": false,
+      "tests": [
+        {
+          "steps": [
+            {
+              "checkLink": "https://www.google.com"
             }
           ]
         }
